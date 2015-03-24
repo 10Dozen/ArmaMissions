@@ -153,6 +153,15 @@
 		
 		<define name="RECON_CAR" type="ARRAY">List of ReconCars classnames</define>
 		...
+		<define name="TRUCK_AMMO" type="ARRAY">List of Ammo truck classnames</define>
+		
+		<define name="VEHICLE_EMPTY_KIT" type="ARRAY">List of classnames with "empty" kit</define>
+		<define name="VEHICLE_COMBAT_KIT" type="ARRAY">List of classnames with "combat" kit - weapons and ammo</define>
+		<define name="VEHICLE_AMMOBOX_KIT" type="ARRAY">List of classnames with "ammobox" kit - weapons and ammo</define>
+		<define name="VEHICLE_MEDIBOX_KIT" type="ARRAY">List of classnames with "medicbox" kit -medical gear</define>
+		
+		<define name="SERVICE_GROUND" type="SCRIPT">Function call to spawn Ground Service</define>
+		
 		
 		<define name="LOCATIONS_BLACKLIST" type="ARRAY">List of locations blacklisted from random picking</define>
 		
