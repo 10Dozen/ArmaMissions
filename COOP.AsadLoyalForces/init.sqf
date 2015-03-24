@@ -3,7 +3,7 @@ if (isServer || isDedicated) then {
 	dzn_rallypoint = "Land_Rugbyball_01_F" createVehicle [0,0,0];
 	dzn_rallypoint allowDamage false;
 	
-	[] execVM "missionFlow/serverMissionFlow.sqf";
+	[] execVM "missionFlow\serverMissionFlow.sqf";
 };
 
 if !(isDedicated) then {
