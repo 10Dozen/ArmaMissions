@@ -8,7 +8,7 @@ if (isServer || isDedicated) then {
 
 if !(isDedicated) then {
 	
-	waitUntil {!isNil {player getVariable "dzn_gear" && time > 30};
+	waitUntil {!isNil {player getVariable "dzn_gear"} && time > 30};
 	taskOperator setVariable [str(vehicle player), player getVariable "dzn_gear", true];
 };
 
