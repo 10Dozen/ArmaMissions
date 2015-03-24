@@ -1,8 +1,10 @@
 <editorObjects>
-	<base id=1>
+	<!-- FOBs -->
+	<base id=0 type="GameLogic">
 		<name>FOB_0</name>
 		<info>Northern FOB</info>
 		<synhronizedWith>
+			<!-- Vehicles (ground) -->
 			<obj type="GameLogic">RECON_CAR</obj>
 			<obj type="GameLogic">RECON_CAR</obj>
 			<obj type="GameLogic">TRUCK_CARGO</obj>
@@ -14,18 +16,159 @@
 			<obj type="GameLogic">APC</obj>
 			<obj type="GameLogic">TANK</obj>
 			<obj type="GameLogic">TANK</obj>
+			<!-- Vehicles (Air) -->
+			<obj type="GameLogic">CARGO_HELI</obj>
+			<!-- Vehicles (Supply) -->
+			<obj type="GameLogic">TRUCK_REPAIR</obj>
+			<obj type="GameLogic">TRUCK_FUEL</obj>
+			<obj type="GameLogic">TRUCK_AMMO</obj>
+			<!-- Static supplies -->
+			<obj type="GameLogic">BOX_AMMO</obj>
+			<obj type="GameLogic">BOX_MEDIC</obj>
+		</synhronizedWith>
+	</base>
+	<base id=1 type="GameLogic">
+		<name>FOB_1</name>
+		<info>Southern FOB</info>
+		<synhronizedWith>
+			<!-- Vehicles (ground) -->
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">APC</obj>
+			<obj type="GameLogic">APC</obj>
 			<obj type="GameLogic">TANK</obj>
 			<obj type="GameLogic">TANK</obj>
+			<!-- Vehicles (Air) -->
+			<obj type="GameLogic">CARGO_HELI</obj>
+			<!-- Vehicles (Supply) -->
+			<obj type="GameLogic">TRUCK_REPAIR</obj>
+			<obj type="GameLogic">TRUCK_FUEL</obj>
+			<obj type="GameLogic">TRUCK_AMMO</obj>
+			<!-- Static supplies -->
+			<obj type="GameLogic">BOX_AMMO</obj>
+			<obj type="GameLogic">BOX_AMMO</obj>
+			<obj type="GameLogic">BOX_MEDIC</obj>
+			<obj type="GameLogic">BOX_MEDIC</obj>
+			<obj type="GameLogic">SERVICE_GROUND</obj>
+		</synhronizedWith>
+	</base>
+	
+	<!-- Outposts -->
+	<base id=2 type="GameLogic">
+		<name>Outpost_0</name>
+		<info>Central Outpost</info>
+		<synhronizedWith>
+			<!-- Vehicles (ground) -->
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<!-- Static supplies -->
+			<obj type="GameLogic">BOX_AMMO</obj>
+			<obj type="GameLogic">BOX_MEDIC</obj>
+			<obj type="GameLogic">SERVICE_GROUND</obj>
+		</synhronizedWith>
+	</base>
+	<base id=3 type="GameLogic">
+		<name>Outpost_1</name>
+		<info>Western Outpost</info>
+		<synhronizedWith>
+			<!-- Vehicles (ground) -->
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<!-- Static supplies -->
+			<obj type="GameLogic">BOX_AMMO</obj>
+			<obj type="GameLogic">BOX_MEDIC</obj>
+			<obj type="GameLogic">SERVICE_GROUND</obj>
+		</synhronizedWith>
+	</base>
+	<base id=2 type="GameLogic">
+		<name>Outpost_2</name>
+		<info>Eastern Outpost</info>
+		<synhronizedWith>
+			<!-- Vehicles (ground) -->
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<!-- Static supplies -->
+			<obj type="GameLogic">BOX_AMMO</obj>
+			<obj type="GameLogic">BOX_MEDIC</obj>
+			<obj type="GameLogic">SERVICE_GROUND</obj>
 		</synhronizedWith>
 	</base>
 
+	<!-- Zones for dzn_dynai-->
+	<zone id=0 type="SpawnAIModule">
+		<name>hostileZone_0</name>
+		<info>Zone of enemy precense</info>
+		<synhronizedWith>
+			<obj type="GameLogic">dzn_dynai_wp</obj>
+			<obj type="GameLogic">dzn_dynai_area</obj>
+				<trigger type="None">Area for zone</trigger>
+		<synhronizedWith>	
+	</zone>
+	...
+	<zone id=0 type="SpawnAIModule">
+		<name>reinforcementZone_0</name>
+		<info>Zone of enemy reinforcement for hostileZone</info>
+		<synhronizedWith>
+			<obj type="GameLogic">dzn_dynai_wp</obj>
+				<waypoints>Waypoint in hostileZone area</waypoints>
+			<obj type="GameLogic">dzn_dynai_area</obj>
+				<trigger type="None">Area for zone</trigger>
+		<synhronizedWith>	
+	</zone>
 	
-
-	<BASES>
-		<base id=1>FOB North</base>
-		<base id=2>FOB South</base>
-		<base id=3>Outpost West</base>
-		<base id=4>Outpost Central</base>
-		<base id=5>Outpost East</base>
-	</BASES>
+	
+	
+	<!-- Playable units -->
+	<unit id=0 side="OPFOR" type="Man">
+		<name></name>
+		<synhronizedWith>
+			<obj type="GameLogic">dzn_gear_%kitname%</obj>
+		</synhronizedWith>
+	</unit>
+	
 </editorObjects>
+
+
+<scripts>
+	<defines>
+		<var name="dzn_base_fobs" type="ARRAY">List of FOBs</var>
+		<var name="dzn_base_outposts" type="ARRAY">List of outposts</var>
+		
+		<define name="RECON_CAR" type="ARRAY">List of ReconCars classnames</define>
+		...
+		
+		<define name="LOCATIONS_BLACKLIST" type="ARRAY">List of locations blacklisted from random picking</define>
+		
+		<var name="dzn_base_guardmanClass" type="STRING">Class of guardsman</var>
+		<var name="dzn_base_guardmanKit" type="STRING">Kit of guardman</var>
+		
+		
+	</defines>
+	
+	
+	<dzn_gear>
+		
+	</dzn_gear>
+	
+	
+	<dzn_dynai>
+		
+	</dzn_dynai>
+</scripts>
