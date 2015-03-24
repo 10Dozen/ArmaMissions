@@ -155,10 +155,10 @@
 		...
 		<define name="TRUCK_AMMO" type="ARRAY">List of Ammo truck classnames</define>
 		
-		<define name="VEHICLE_EMPTY_KIT" type="ARRAY">List of classnames with "empty" kit</define>
-		<define name="VEHICLE_COMBAT_KIT" type="ARRAY">List of classnames with "combat" kit - weapons and ammo</define>
-		<define name="VEHICLE_AMMOBOX_KIT" type="ARRAY">List of classnames with "ammobox" kit - weapons and ammo</define>
-		<define name="VEHICLE_MEDIBOX_KIT" type="ARRAY">List of classnames with "medicbox" kit -medical gear</define>
+		<define name="VEHICLES_EMPTY_KIT" type="ARRAY">List of classnames with "empty" kit</define>
+		<define name="VEHICLES_COMBAT_KIT" type="ARRAY">List of classnames with "combat" kit - weapons and ammo</define>
+		<define name="VEHICLES_AMMOBOX_KIT" type="ARRAY">List of classnames with "ammobox" kit - weapons and ammo</define>
+		<define name="VEHICLES_MEDICBOX_KIT" type="ARRAY">List of classnames with "medicbox" kit -medical gear</define>
 		
 		<define name="SERVICE_GROUND" type="SCRIPT">Function call to spawn Ground Service</define>
 		
@@ -173,7 +173,14 @@
 	
 	
 	<dzn_gear>
+		<kit purpose="gear" type="" name=""></kit>
 		
+		<kit purpose="gear" type="random" name="insergentSquadKit">Kits for insurgents</kit>
+		
+		<kit purpose="gear_box" type="simple" name="vehicleEmptyKit">"Empty" kit for vehicles</kit>
+		<kit purpose="gear_box" type="simple" name="vehicleCombatKit">"Combat" kit for vehicles</kit>
+		<kit purpose="gear_box" type="simple" name="vehicleAmmoboxKit">"Ammobox" kit for vehicles</kit>
+		<kit purpose="gear_box" type="simple" name="vehicleMedicboxKit">"Medicbox" kit for vehicles</kit>
 	</dzn_gear>
 	
 	
