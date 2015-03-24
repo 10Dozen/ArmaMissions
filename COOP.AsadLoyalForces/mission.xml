@@ -1,1 +1,31 @@
+<editorObjects>
+	<base id=1>
+		<name>FOB_0</name>
+		<info>Northern FOB</info>
+		<synhronizedWith>
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">RECON_CAR</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">TRUCK_CARGO</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">ARMED_CAR</obj>
+			<obj type="GameLogic">APC</obj>
+			<obj type="GameLogic">APC</obj>
+			<obj type="GameLogic">TANK</obj>
+			<obj type="GameLogic">TANK</obj>
+			<obj type="GameLogic">TANK</obj>
+			<obj type="GameLogic">TANK</obj>
+		</synhronizedWith>
+	</base>
 
+	
+
+	<BASES>
+		<base id=1>FOB North</base>
+		<base id=2>FOB South</base>
+		<base id=3>Outpost West</base>
+		<base id=4>Outpost Central</base>
+		<base id=5>Outpost East</base>
+	</BASES>
+</editorObjects>
