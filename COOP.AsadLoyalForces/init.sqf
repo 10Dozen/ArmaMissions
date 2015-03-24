@@ -9,7 +9,7 @@ if (isServer || isDedicated) then {
 if !(isDedicated) then {
 	
 	waitUntil {!isNil {player getVariable "dzn_gear" && time > 30};
-	taskOperator setVariable [format ["player_%1", str(vehicle player)], player getVariable "dzn_gear", true];
+	taskOperator setVariable [str(vehicle player), player getVariable "dzn_gear", true];
 };
 
 // DZN_GEAR
