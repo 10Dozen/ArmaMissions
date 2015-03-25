@@ -48,6 +48,10 @@
 	
 	dzn_loc_hiddenSeize = dzn_loc_recon call BIS_fnc_selectRandom;
 	
+	publicVariable "dzn_loc_seize";
+	publicVariable "dzn_loc_recon";
+	publicVariable "dzn_loc_hiddenSeize";
+	
 	//	Locations:
 	//	Seize:	2 location SEIZE + 1 location HIDDEN seize
 	//	Recon:	3 location RECON  (1 of it == hiden seize)
