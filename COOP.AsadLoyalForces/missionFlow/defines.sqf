@@ -49,4 +49,4 @@ dzn_locs_blacklist =			["Feruz Abad","Bastam","Jilavur","Rasman","Garmsar","Loy 
 // Decorations
 // *******************
 dzn_base_guardmanClass =		"O_Soldier_F";
-dzn_base_guardmanKit 			"";
+dzn_base_guardmanKit =			"";
