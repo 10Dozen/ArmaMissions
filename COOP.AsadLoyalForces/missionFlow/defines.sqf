@@ -12,7 +12,7 @@ dzn_base_outposts = 		[];
 dzn_base_RECON_CAR =		"O_G_Offroad_01_F";
 dzn_base_TRUCK_CARGO = 		["O_Truck_02_covered_F","O_Truck_03_covered_F","O_Truck_03_transport_F","O_Truck_02_transport_F"];
 dzn_base_ARMED_CAR =		"O_MRAP_02_gmg_F";
-dzn_base_IFV 				"O_APC_Wheeled_02_rcws_F";
+dzn_base_IFV =				"O_APC_Wheeled_02_rcws_F";
 dzn_base_APC =				"O_APC_Tracked_02_cannon_F";
 dzn_base_TANK =				"O_MBT_02_cannon_F";
 
