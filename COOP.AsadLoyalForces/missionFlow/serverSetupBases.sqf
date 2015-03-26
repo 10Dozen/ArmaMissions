@@ -10,7 +10,7 @@ _bases = dzn_base_fobs + dzn_base_outposts;
 	_base = _x;
 	_spots = synchronizedObjects _x;
 	{
-		_spotItem = "";
+		_spotItem = objNull;
 		_kitAssigned = "";
 		
 		#define	checkSpotType(MARK)	([MARK, str(_x), false] call BIS_fnc_inString)
@@ -34,7 +34,7 @@ _bases = dzn_base_fobs + dzn_base_outposts;
 			assignClassAndKit("BOX_MEDIC")
 		};
 		
-		if (_spotItem != "") then {
+		if (typename _spotItem != "OBJECT") then {
 			switch (true) do {
 				case (typename _spotItem == "CODE"): {
 					// Script given
