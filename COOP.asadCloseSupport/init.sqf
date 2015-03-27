@@ -1,4 +1,5 @@
 enableSaving [false,false];
+RHSDecalsOff = true;
 
 // Add to init.sqf
 // 0: true or false - Edit mode activation, 1: true/false - is Server-side only
