@@ -55,6 +55,30 @@
 	//	Locations:
 	//	Seize:	2 location SEIZE + 1 location HIDDEN seize
 	//	Recon:	3 location RECON  (1 of it == hiden seize)
+	
+		//	**********************************************
+	//	Spawn tasks, zones, etc.
+	//	**********************************************
+
+	// Tasks
+	{
+		_mrk = createMarker [format ["mrk_seize_%1", _forEachIndex], position _x ];
+		_mrk setMarkerShape "ICON";
+		_mrk setMarkerType "mil_warning";
+		_mrk setMarkerColor "ColorRed";
+	} forEach dzn_loc_seize;
+
+	{
+		_mrk = createMarker [format ["mrk_recon_%1", _forEachIndex], position _x ];
+		_mrk setMarkerShape "ICON";
+		_mrk setMarkerType "mil_unknown";
+		_mrk setMarkerColor "ColorRed";
+	} forEach dzn_loc_recon + [dzn_loc_hiddenSeize];
+	
+	
+	
+	
+	
 };
 
 //	**********************************************
@@ -62,22 +86,3 @@
 //	**********************************************
 
 #include "serverSetupBases.sqf";
-
-//	**********************************************
-//	Spawn tasks, zones, etc.
-//	**********************************************
-
-// Tasks
-{
-	_mrk = createMarker [format ["mrk_seize_%1", _forEachIndex], position _x ];
-	_mrk setMarkerShape "ICON";
-	_mrk setMarkerType "hd_warning";
-	_mrk setMarkerColor "ColorRed";
-} forEach dzn_loc_seize;
-
-{
-	_mrk = createMarker [format ["mrk_recon_%1", _forEachIndex], position _x ];
-	_mrk setMarkerShape "ICON";
-	_mrk setMarkerType "hd_unknown";
-	_mrk setMarkerColor "ColorRed";
-} forEach (dzn_loc_recon + dzn_loc_hiddenSeize);
