@@ -13,7 +13,7 @@
 	dzn_fnc_loc_filter = {
 		// [location list, blacklist] call dzn_fnc_loc_filter
 		private ["_output"];
-		
+		_output = [];
 		{
 			if !(text _x in (_this select 1)) then {
 				_output = _output + [_x];
