@@ -2,8 +2,8 @@
 // Bases
 // *******************
 
-dzn_base_fobs = 			[FOB_0];
-dzn_base_outposts = 		[];
+dzn_base_fobs = 			[FOB_north,FOB_south];
+dzn_base_outposts = 		[outpost_west,outpost_east,outpost_central];
 
 // *******************
 // Bases - spot items classnames and scripts
@@ -41,7 +41,7 @@ dzn_base_SERVICE_GROUND	=	{ /*["SERVICE_GROUND", _this] spawn dzn_servicePoint_c
 // *******************
 // Locations
 // *******************
-dzn_locs_blacklist =			["Feruz Abad","Bastam","Jilavur","Rasman","Garmsar","Loy Manara","Falar"];
+dzn_locs_blacklist =			["Feruz Abad","Bastam","Jilavur","Rasman","Garmsar","Loy Manara","Falar","Anar"];
 
 // *******************
 // DYNAI Zones
