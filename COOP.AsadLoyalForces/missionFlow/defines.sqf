@@ -43,7 +43,13 @@ dzn_base_SERVICE_GROUND	=	{ /*["SERVICE_GROUND", _this] spawn dzn_servicePoint_c
 // *******************
 dzn_locs_blacklist =			["Feruz Abad","Bastam","Jilavur","Rasman","Garmsar","Loy Manara","Falar"];
 
-
+// *******************
+// DYNAI Zones
+// *******************
+dzn_zones_seize = [];
+dzn_zones_reinforcement = [];
+//dzn_zones_seize =				[dzn_zone_seize1, dzn_zone_seize2, dzn_zone_seize3];
+//dzn_zones_reinforcement = 		[dzn_zone_reinf1, dzn_zone_reinf2, dzn_zone_reinf3];
 
 // *******************
 // Decorations
