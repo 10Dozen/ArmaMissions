@@ -79,21 +79,20 @@
 	} forEach dzn_loc_recon + [dzn_loc_hiddenSeize];
 	
 	// Wait until DYNAI itnitilized
+	waitUntil { !isNil {dzn_dynai_afterInitTimeout} };
 	waitUntil { time > dzn_dynai_afterInitTimeout + 3 };
-	
+	sleep 1;
 	dzn_getNearestCamp = {
 		// [camps, zone] call dzn_getNearestCamp
 		private ["_minDistance","_nearest","_distance"];
 		_minDistance = 10000;
 		_nearest = objNull;
 		{
-			if (!isNil { _x getVariable "id" }) then {
-				_distance = _x distance (_this select 1);
-				if (_distance < _minDistance) then {
-					_minDistance = _distance;
-					_nearest = _x;
-				};		
-			};	
+			_distance = _x distance (_this select 1);
+			if (_distance < _minDistance) then {
+				_minDistance = _distance;
+				_nearest = _x;
+			};
 		} forEach (_this select 0);
 		_nearest
 	};
@@ -101,14 +100,15 @@
 	_camps = entities "LocationCamp_F";
 	{
 		// Move zone
-		[str(_x), locationPosition (dzn_loc_seize select _forEachIndex)] call dzn_fnc_dynai_moveZone;
+		//[str(_x), locationPosition (dzn_loc_seize select _forEachIndex)] call dzn_fnc_dynai_moveZone;
 		
 		// Move reinforcement
 		_camp = [_camps, locationPosition _x] call dzn_getNearestCamp;
-		[
-			str(dzn_zones_reinforcement select _forEachIndex), 
-			locationPosition _camp
-		] call dzn_fnc_dynai_moveZone;
+		// [
+			// str(dzn_zones_reinforcement select _forEachIndex), 
+			// locationPosition _camp
+		// ] call dzn_fnc_dynai_moveZone;
+		
 		
 		if (DEBUG) then {
 			_mrk = createMarkerLocal [
@@ -119,7 +119,7 @@
 			_mrk setMarkerTypeLocal "mil_warning";
 			_mrk setMarkerColorLocal "ColorGREEN";	
 		};
-	} forEach dzn_zones_seize + [dzn_loc_hiddenSeize];
+	} forEach dzn_loc_seize + [dzn_loc_hiddenSeize];
 };
 
 //	**********************************************
