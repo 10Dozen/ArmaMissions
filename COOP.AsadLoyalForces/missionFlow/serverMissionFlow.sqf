@@ -75,7 +75,8 @@
 		_mrk setMarkerColor "ColorRed";
 	} forEach dzn_loc_recon + [dzn_loc_hiddenSeize];
 	
-	
+	// Wait until DYNAI itnitilized
+	waitUntil {};
 	
 	
 	
