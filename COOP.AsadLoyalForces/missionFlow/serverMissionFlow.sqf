@@ -57,9 +57,6 @@
 	//	Recon:	3 location RECON  (1 of it == hiden seize)
 };
 
-dzn_reconToSeizeLocation = dzn_reconLocations call BIS_fnc_selectRandom;
-dzn_reconLocations = dzn_reconLocations - [dzn_reconToSeizeLocation];
-
 //	**********************************************
 //	Spawn of vehicles, gear, service points at bases
 //	**********************************************
