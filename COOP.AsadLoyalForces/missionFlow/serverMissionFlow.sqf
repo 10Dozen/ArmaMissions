@@ -76,10 +76,13 @@
 	} forEach dzn_loc_recon + [dzn_loc_hiddenSeize];
 	
 	// Wait until DYNAI itnitilized
-	waitUntil {};
+	waitUntil { time > dzn_dynai_afterInitTimeout + 3 };
 	
+	{
+		[str(_x), position (dzn_loc_seize select _forEachIndex)] call dzn_fnc_dynai_moveZone;
+	} forEach dzn_zones_seize;
 	
-	
+	// Get neared reinfoce position and move reinforcement zone to it
 };
 
 //	**********************************************
