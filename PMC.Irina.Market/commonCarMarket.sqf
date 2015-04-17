@@ -58,8 +58,15 @@ dzn_getVehicleDisplayName = {
 				_name,_cost
 			]
 			,{	
-				hint parseText format ["<t color='#99CC00'>Buyed</t> %1 <t color='#99CC00'>for</t> %2$"];
+				_name = _this select 3 select 0;
+				_cost = _this select 3 select 1;
+				
+				hint parseText format [
+					"<t color='#99CC00'>Buyed</t> %1 <t color='#99CC00'>for</t> %2$",
+					_name, _cost
+				];
 				(_this select 0) lock 0;
+		// ??		((-1) * _cost) call dzn_pmc_updateCash;
 			}
 			,[_name,_cost],6,false,true,"","(_this distance _target < 8)"
 		]
