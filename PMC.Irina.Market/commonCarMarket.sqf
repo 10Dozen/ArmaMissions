@@ -29,8 +29,8 @@ dzn_getVehicleDisplayName = {
 		if (isServer || isDedicated) then {
 			_veh = (_car select 0) createVehicle (getPos _x);
 			_veh setDir (getDir _x);
+			_veh lock 2;
 			_x setVariable ["vehicle", [_veh, _car select 0, (_car select 0) call dzn_getVehicleDisplayName, _car select 1], true];
-			
 		};
 	};
 	
@@ -54,13 +54,14 @@ dzn_getVehicleDisplayName = {
 		format["act_marketBox_Ammo_%1", _forEachIndex]
 			,_veh addAction [
 			format [
-				"<t color='#99CC00'>Buy</t> %1 <t color='#99CC00'>[%2$, %3 left]</t>", 
+				"<t color='#99CC00'>Buy</t> %1 <t color='#99CC00'>for %2$</t>", 
 				_name,_cost
 			]
 			,{	
-				hint "Buyed";
+				hint parseText format ["<t color='#99CC00'>Buyed</t> %1 <t color='#99CC00'>for</t> %2$"];
+				(_this select 0) lock 0;
 			}
-			,[],6,false,true,"","(_this distance _target < 8)"
+			,[_name,_cost],6,false,true,"","(_this distance _target < 8)"
 		]
 	];
 	
