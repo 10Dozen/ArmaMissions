@@ -23,7 +23,7 @@ dzn_getVehicleDisplayName = {
 ["carMarketLoop", "onEachFrame", {
 	if (round(time) % 10 == 0) then {
 		{
-			if (isNil {_x getVariable "vehicle"}) then {
+			if (isNil {_x getVariable "vehicle"} /* AND NO NEARBY PLAYERS */) then {
 				if (isServer || isDedicated) then {
 					_car = _carList call BIS_fnc_selectRandom;
 					_veh = (_car select 0) createVehicle (getPos _x);
