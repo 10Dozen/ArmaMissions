@@ -51,7 +51,7 @@ dzn_getVehicleDisplayName = {
 	];
 	
 	_veh setVariable [
-		format["act_marketBox_Ammo_%1", _forEachIndex]
+		format["act_marketCar_%1", _forEachIndex]
 			,_veh addAction [
 			format [
 				"<t color='#99CC00'>Buy</t> %1 <t color='#99CC00'>for %2$</t>", 
