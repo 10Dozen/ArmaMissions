@@ -20,20 +20,25 @@ dzn_getVehicleDisplayName = {
 	_output
 };
 
+["carMarketLoop", "onEachFrame", {
+	if (round(time) % 10 == 0) then {
+		{
+			if (isServer || isDedicated) then {
+				if (isNil {_x getVariable "vehicle"}) then {
+					_car = _carList call BIS_fnc_selectRandom;
+					_veh = (_car select 0) createVehicle (getPos _x);
+					_veh setDir (getDir _x);
+					_veh lock 2;
+					_x setVariable ["vehicle", [_veh, _car select 0, (_car select 0) call dzn_getVehicleDisplayName, _car select 1], true];
+				};
+			};
+		} forEach (synchronizedObjects carMarket);
+	};
+}] call BIS_fnc_addStackedEventHandler;
+
+
 
 {
-	
-	if (isNil {_x getVariable "vehicle"}) then {
-		_car = _carList call BIS_fnc_selectRandom;	
-		
-		if (isServer || isDedicated) then {
-			_veh = (_car select 0) createVehicle (getPos _x);
-			_veh setDir (getDir _x);
-			_veh lock 2;
-			_x setVariable ["vehicle", [_veh, _car select 0, (_car select 0) call dzn_getVehicleDisplayName, _car select 1], true];
-		};
-	};
-	
 	waitUntil { !isNil {_x getVariable "vehicle"} };
 	_veh = (_x getVariable "vehicle") select 0;
 	_name = (_x getVariable "vehicle") select 2;
