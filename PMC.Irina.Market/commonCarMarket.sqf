@@ -90,6 +90,8 @@ dzn_getVehicleDisplayName = {
 				
 					};
 					
+				} else {
+					_veh setVariable ["onSale", nil, true];
 				};
 			};
 		} forEach (synchronizedObjects carMarket);
