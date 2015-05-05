@@ -1,0 +1,184 @@
+/*%FSM<COMPILE "D:\GMZ\BI Toolz\FSM Editor Personal Edition\scriptedFSM.cfg, agressiveBehaviorLoop">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-50.000000,-1475.000000,50.000000,-1425.000000,0.000000,"Start"};
+item1[] = {"true",4,218,-50.000000,-1400.000000,50.000000,-1350.000000,0.000000,"true"};
+item2[] = {"Renew_AO_s",2,250,-50.000000,-1325.000000,50.000000,-1275.000000,0.000000,"Renew AO's"};
+item3[] = {"timeLoop",4,218,-125.000000,-1250.000000,-25.000000,-1200.000000,0.000000,"timeLoop"};
+item4[] = {"Call_check_zone",2,250,-50.000000,-1175.000000,50.000000,-1125.000000,0.000000,"Call check zone"};
+item5[] = {"timeLoop2",4,218,25.000000,-1250.000000,125.000000,-1200.000000,0.000000,"timeLoop2"};
+item6[] = {"to_Neutral",4,218,-200.000000,-1175.000000,-100.000000,-1125.000000,0.000000,"to Neutral"};
+item7[] = {"to_Aggresive",4,218,100.000000,-1175.000000,200.000000,-1125.000000,0.000000,"to Aggresive"};
+item8[] = {"to_Neutral",2,250,-200.000000,-1400.000000,-100.000000,-1350.000000,0.000000,"to Neutral"};
+item9[] = {"to_Agressive",2,4346,100.000000,-1400.000000,200.000000,-1350.000000,0.000000,"to Agressive"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,5};
+link5[] = {4,6};
+link6[] = {4,7};
+link7[] = {5,2};
+link8[] = {6,8};
+link9[] = {7,9};
+link10[] = {8,1};
+link11[] = {9,1};
+globals[] = {25.000000,1,0,0,16777215,640,480,1,266,6316128,1,-292.527832,290.166748,-900.522095,-1665.369873,595,781,1};
+window[] = {0,-1,-1,-1,-1,926,650,1730,0,1,613};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "agressiveBehaviorLoop";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"player sideChat ""AGRESSIVE BEHAVIOR INT!"";" \n
+       "" \n
+       "private [""_aZones"",""_cZones""];" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Renew_AO_s";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Renew_AO_s">*/
+    class Renew_AO_s
+    {
+      name = "Renew_AO_s";
+      init = /*%FSM<STATEINIT""">*/"// Get all active AOs" \n
+       "_aZones = player getVariable ""aZones"";" \n
+       "_cZones = player getVariable ""cZones"";" \n
+       "" \n
+       "_timer = time + 2;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "timeLoop">*/
+        class timeLoop
+        {
+          priority = 0.000000;
+          to="Call_check_zone";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Call_check_zone">*/
+    class Call_check_zone
+    {
+      name = "Call_check_zone";
+      init = /*%FSM<STATEINIT""">*/"_isTrespassing = [_aZones, _cZones, player] call dzn_fnc_isTrespassing;" \n
+       "_isTresspased = player getVariable ""isTrespassed"";" \n
+       "" \n
+       "_timer = time + 2;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "to_Neutral">*/
+        class to_Neutral
+        {
+          priority = 0.000000;
+          to="to_Neutral";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(_isTresspased)" \n
+           "	&& !(_isTrespassing select 0)" \n
+           "	&& !(_isTrespassing select 1)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "to_Aggresive">*/
+        class to_Aggresive
+        {
+          priority = 0.000000;
+          to="to_Agressive";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!(_isTresspased)" \n
+           "	&& (_isTrespassing select 0)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "timeLoop2">*/
+        class timeLoop2
+        {
+          priority = 0.000000;
+          to="Renew_AO_s";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "to_Neutral">*/
+    class to_Neutral
+    {
+      name = "to_Neutral";
+      init = /*%FSM<STATEINIT""">*/"[1000, player] call dzn_fnc_setRating;" \n
+       "player setVariable [""isTrespassed"",false,true]; " \n
+       "" \n
+       "hint 'Cooldowned';"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Renew_AO_s";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "to_Agressive">*/
+    class to_Agressive
+    {
+      name = "to_Agressive";
+      init = /*%FSM<STATEINIT""">*/"[-15000, player] call dzn_fnc_setRating;" \n
+       "player setVariable [""isTrespassed"",true,true]; " \n
+       "" \n
+       "hint 'Trespassed';"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Renew_AO_s";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/
