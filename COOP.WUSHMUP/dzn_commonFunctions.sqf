@@ -43,9 +43,10 @@ dzn_fnc_getMissionParametes = {
 	}; 
 };
 
-
 dzn_fnc_setWeather = {
 	// this call dzn_fnc_setWeather
+	if !(isServer || isDedicated) exitWith {};
+	
 	if (_this > 0) then {
 		{
 			if (_this == _x select 0) exitWith {
@@ -55,6 +56,13 @@ dzn_fnc_setWeather = {
 	} else {
 		0 setOvercast ( (dzn_weatherSettingsMapping call BIS_fnc_selectRandom) select 1 );
 	};
+	
+	switch (_this) do {
+		case 4: { 0 setRain 0.5; };
+		case 5: { 0 setRain 1; };
+	};
+	
+	forceWeatherChange
 };
 
 dzn_fnc_setFog = {
