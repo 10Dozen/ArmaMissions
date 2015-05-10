@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<Project ID="Arma3">
+  <Package ID="Missions">
+	 <Container ID="">
+<!-- ********* Mission ********* -->
+		<Key ID='STR_onLoadMission'>
+			<Original>Разомнись и приготвься к драке!</Original>
+			<Russian>Разомнись и приготвься к драке!</Russian>	
+			<English>Warm Up and prerpare to fight!</English>			
+		</Key>	
+	
+<!-- ********* Task ********* -->	
+		<Key ID='STR_taskTitle'>
+			<Original>Захватить и Удержать</Original>
+			<Russian>Захватить и Удержать</Russian>	
+			<English>Capture and Hold</English>			
+		</Key>	
+		
+		<Key ID='STR_taskDescription'>
+			<Original>Захватите &lt;marker name='mrk_task'&gt;точку&lt;/marker&gt; и удерживайте ее до окончания отсчета времени.</Original>
+			<Russian>Захватите &lt;marker name='mrk_task'&gt;точку&lt;/marker&gt; и удерживайте ее до окончания отсчета времени.</Russian>	
+			<English>Capture &lt;marker name='mrk_task'&gt;marked point&lt;/marker&gt; and then hold it until countdown will end.</English>
+		</Key>
+		
+		<Key ID='STR_markerText'>
+			<Original>Захватить и Удержать</Original>
+			<Russian>Захватить и Удержать</Russian>
+			<English>Capture and Hold</English>			
+		</Key>	
+		
+	
+	
+	
+
+<!-- *********** Mission Params ************* -->	
+<!-- Mission Conditions -->
+		<Key ID='STR_delimi_misCond'>
+			<Original> :: Условия Миссии ::</Original>
+			<Russian> :: Условия Миссии ::</Russian>
+			<English> :: Mission Conditions ::</English>
+		</Key>
+		<Key ID='STR_par_endTime'>
+			<Original> Время на выполнение</Original>
+			<Russian> Время на выполнение</Russian>
+			<English> Mission End Timer</English>
+		</Key>
+
+<!-- Enviroment Conditions -->
+		<Key ID='STR_delimi_envCond'>
+			<Original> :: Условия Окружения ::</Original>
+			<Russian> :: Условия Окружения ::</Russian>
+			<English> :: Enviroment Conditions ::</English>
+		</Key>
+				
+		<Key ID='STR_par_optionRandom'>
+			<Original>Случайно</Original>
+			<Russian>Случайно</Russian>
+			<English>Random</English>
+		</Key>
+		
+<!-- Weather -->
+		<Key ID='STR_par_weather'>
+			<Original> Погода</Original>
+			<Russian> Погода</Russian>
+			<English> Weather</English>
+		</Key>
+		
+		<Key ID='STR_par_weatherOption1'>
+			<Original>Ясно</Original>
+			<Russian>Ясно</Russian>
+			<English>Clear</English>
+		</Key>
+		<Key ID='STR_par_weatherOption2'>
+			<Original>Облачно</Original>
+			<Russian>Облачно</Russian>
+			<English>Cloudy</English>
+		</Key>
+		<Key ID='STR_par_weatherOption3'>
+			<Original>Пасмурно</Original>
+			<Russian>Пасмурно</Russian>
+			<English>Overcast</English>
+		</Key>
+		<Key ID='STR_par_weatherOption4'>
+			<Original>Дождь</Original>
+			<Russian>Дождь</Russian>
+			<English>Rain</English>
+		</Key>
+		<Key ID='STR_par_weatherOption5'>
+			<Original>Гроза</Original>
+			<Russian>Гроза</Russian>
+			<English>Strom</English>
+		</Key>
+		
+<!-- Fog -->		
+		<Key ID='STR_par_fog'>
+			<Original> Туман</Original>
+			<Russian> Туман</Russian>
+			<English> Fog</English>
+		</Key>
+		
+		<Key ID='STR_par_fogOption1'>
+			<Original>Нет</Original>
+			<Russian>Нет</Russian>
+			<English>No</English>
+		</Key>
+		<Key ID='STR_par_fogOption2'>
+			<Original>Легкий</Original>
+			<Russian>Легкий</Russian>
+			<English>Light</English>
+		</Key>
+		<Key ID='STR_par_fogOption3'>
+			<Original>Густой</Original>
+			<Russian>Густой</Russian>
+			<English>Heavy</English>
+		</Key>
+		
+<!-- Daytime -->
+
+		<Key ID='STR_par_daytime'>
+			<Original> Время дня</Original>
+			<Russian> Время дня</Russian>
+			<English> Daytime</English>
+		</Key>
+	
+<!-- Months -->
+		<Key ID='STR_par_month'>
+			<Original> Месяц</Original>
+			<Russian> Месяц</Russian>
+			<English> Month</English>
+		</Key>
+
+		<Key ID="STR_par_month1">
+			<Original>Январь</Original>
+			<Russian>Январь</Russian>
+			<English>January</English>	
+		</Key> <Key ID="STR_par_month2">
+			<Original>Февраль</Original>
+			<Russian>Февраль</Russian>
+			<English>February</English>	
+		</Key> <Key ID="STR_par_month3">
+			<Original>Март</Original>
+			<Russian>Март</Russian>
+			<English>March</English>	
+		</Key> <Key ID="STR_par_month4">
+			<Original>Апрель</Original>
+			<Russian>Апрель</Russian>
+			<English>April</English>	
+		</Key> <Key ID="STR_par_month5">
+			<Original>Май</Original>
+			<Russian>Май</Russian>
+			<English>May</English>	
+		</Key> <Key ID="STR_par_month6">
+			<Original>Июнь</Original>
+			<Russian>Июнь</Russian>
+			<English>June</English>	
+		</Key> <Key ID="STR_par_month7">
+			<Original>Июль</Original>
+			<Russian>Июль</Russian>
+			<English>July</English>	
+		</Key> <Key ID="STR_par_month8">
+			<Original>Август</Original>
+			<Russian>Август</Russian>
+			<English>August</English>	
+		</Key> <Key ID="STR_par_month9">
+			<Original>Сентябрь</Original>
+			<Russian>Сентябрь</Russian>
+			<English>September</English>	
+		</Key> <Key ID="STR_par_month10">
+			<Original>Октябрь</Original>
+			<Russian>Октябрь</Russian>
+			<English>October</English>	
+		</Key> <Key ID="STR_par_month11">
+			<Original>Ноябрь</Original>
+			<Russian>Ноябрь</Russian>
+			<English>November</English>	
+		</Key> <Key ID="STR_par_month12">
+			<Original>Декабрь</Original>
+			<Russian>Декабрь</Russian>
+			<English>December</English>				
+		</Key>
+		
+<!-- Year -->
+		<Key ID='STR_par_year'>
+			<Original> Год</Original>
+			<Russian> Год</Russian>
+			<English> Year</English>
+		</Key>
+
+<!-- Factions -->
+		<Key ID='STR_delimi_faction'>
+			<Original> :: Фракция ::</Original>
+			<Russian> :: Фракция ::</Russian>
+			<English> :: Faction :: </English>
+		</Key>
+
+
+		<Key ID="STR_par_faction">
+			<Original> Фракция</Original>
+			<Russian> Фракция</Russian>
+			<English> Faction</English>   
+		</Key>
+		
+		<Key ID='STR_delimi_hostileFaction'>
+			<Original> :: Фракция Противника ::</Original>
+			<Russian> :: Фракция Противника ::</Russian>
+			<English> :: Hostile Faction :: </English>
+		</Key>
+
+		
+		<Key ID="STR_par_hostileFaction">
+			<Original> Фракция Противника</Original>
+			<Russian> Фракция  Противника</Russian>
+			<English> Hostile Faction</English>   
+		</Key>
+		
+		<Key ID="STR_par_faction1">
+			<Original>NATO</Original>
+			<Russian>NATO</Russian>
+			<English>NATO</English>   
+		</Key>
+		<Key ID="STR_par_faction2">
+			<Original>CSAT</Original>
+			<Russian>CSAT</Russian>
+			<English>CSAT</English>   
+		</Key>
+		<Key ID="STR_par_faction3">
+			<Original>AAF</Original>
+			<Russian>AAF</Russian>
+			<English>AAF</English>   
+		</Key>
+
+<!-- Hostile skill -->
+		<Key ID="STR_par_hostileSkill">
+			<Original> Фракция Противника - Навык</Original>
+			<Russian> Фракция  Противника - Навык</Russian>
+			<English> Hostile Faction - Skill</English>   
+		</Key>
+		
+		<Key ID="STR_par_hostileSkill1">
+			<Original>Новичок</Original>
+			<Russian>Новичок</Russian>
+			<English>Newbie</English>	
+		</Key>
+		</Key> <Key ID="STR_par_hostileSkill2">
+			<Original>Обычный</Original>
+			<Russian>Обычный</Russian>
+			<English>Average</English>	
+		</Key> 
+		</Key> <Key ID="STR_par_hostileSkill3">
+			<Original>Умелый</Original>
+			<Russian>Умелый</Russian>
+			<English>Skilled</English>	
+		</Key>
+
+<!-- Hostile Amount -->
+		<Key ID="STR_par_hostileAmount">
+			<Original> Фракция Противника - Количество сил</Original>
+			<Russian> Фракция  Противника - Количество сил</Russian>
+			<English> Hostile Faction - Amount</English>   
+		</Key>
+		
+		<Key ID="STR_par_hostileAmount1">
+			<Original>Немного</Original>
+			<Russian>Немного</Russian>
+			<English>Few</English>	
+		</Key>
+		<Key ID="STR_par_hostileAmount2">
+			<Original>Мало</Original>
+			<Russian>Мало</Russian>
+			<English>Small</English>	
+		</Key>
+		<Key ID="STR_par_hostileAmount3">
+			<Original>Средне</Original>
+			<Russian>Средне</Russian>
+			<English>Normal</English>	
+		</Key>
+		<Key ID="STR_par_hostileAmount4">
+			<Original>Много</Original>
+			<Russian>Много</Russian>
+			<English>Many</English>	
+		</Key>
+		<Key ID="STR_par_hostileAmount5">
+			<Original>Значительно</Original>
+			<Russian>Значительно</Russian>
+			<English>Large</English>	
+		</Key> 
+
+<!-- Hostile Vehicles -->
+		<Key ID="STR_par_hostileVehicles">
+			<Original> Фракция Противника - Техника</Original>
+			<Russian> Фракция  Противника - Техника</Russian>
+			<English> Hostile Faction - Vehicles</English>   
+		</Key>
+
+		<Key ID="STR_par_hostileVehicles1">
+			<Original>Нет</Original>
+			<Russian>Нет</Russian>
+			<English>No</English>	
+		</Key>
+		<Key ID="STR_par_hostileVehicles2">
+			<Original>Технички</Original>
+			<Russian>Технички</Russian>
+			<English>Technicans</English>	
+		</Key>
+		<Key ID="STR_par_hostileVehicles3">
+			<Original>Легкая броня (машины и БТР)</Original>
+			<Russian>Легкая броня (машины и БТР)</Russian>
+			<English>Light armor (armored cars and APC)</English>	
+		</Key>
+		<Key ID="STR_par_hostileVehicles4">
+			<Original>Средняя броня (БТР и БМП)</Original>
+			<Russian>Средняя броня (БТР и БМП)</Russian>
+			<English>Medium Armor (APC, IFV)</English>	
+		</Key>
+		<Key ID="STR_par_hostileVehicles5">
+			<Original>Тяжелая броня (танки, БМП и БТР)</Original>
+			<Russian>Тяжелая броня (танки, БМП и БТР)</Russian>
+			<English>Heavy Armor (tanks, APC, IFV)</English>   
+		</Key>
+
+<!-- Caching -->
+		<Key ID='STR_delimi_caching'>
+			<Original> :: Кеширование AI ::</Original>
+			<Russian> :: Кеширование AI ::</Russian>
+			<English> :: AI Caching ::</English>
+		</Key>
+
+		<Key ID='STR_par_caching'>
+			<Original>Кеширование AI юнитов вне дальности (м)</Original>
+			<Russian>Кеширование AI юнитов вне дальности (м)</Russian>
+			<English>Cache AI outside distance (m)</English>
+		</Key>
+	 </Container>
+  </Package>
+</Project>
