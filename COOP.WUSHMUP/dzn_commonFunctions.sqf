@@ -45,11 +45,31 @@ dzn_fnc_getMissionParametes = {
 
 
 dzn_fnc_setWeather = {
-
+	// this call dzn_fnc_setWeather
+	if (_this > 0) then {
+		{
+			if (_this == _x select 0) exitWith {
+				0 setOvercast (_x select 1);
+			};
+		} forEach dzn_weatherSettingsMapping;
+	} else {
+		0 setOvercast ( (dzn_weatherSettingsMapping call BIS_fnc_selectRandom) select 1 );
+	};
 };
 
 dzn_fnc_setFog = {
-
+	// _this call dzn_fnc_setFog
+	if !(isServer || isDedicated) exitWith {};
+	
+	if (_this > 0) then {
+		{
+			if (_this == _x select 0) exitWith {
+				0 setFog [_x select 1];
+			};
+		} forEach dzn_fogSettingsMapping;
+	} else {
+		0 setFog [ (dzn_fogSettingsMapping call BIS_fnc_selectRandom) select 1 ];
+	};
 };
 
 dzn_fnc_setDateTime = {
