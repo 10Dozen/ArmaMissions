@@ -3,11 +3,14 @@ enableSentences false;
 
 #include "dzn_defines.sqf";
 #include "dzn_commonFunctions.sqf";
+#include "dzn_displayFunctions.sqf";
 
 call dzn_fnc_getMissionParametes;
 par_weather call dzn_fnc_setWeather;
 par_fog call dzn_fnc_setFog;
 [par_daytime, par_month, par_year] call dzn_fnc_setDateTime;
+
+
 
 [] execVM "taskController\tcInit.sqf";
 
