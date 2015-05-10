@@ -81,7 +81,18 @@ dzn_fnc_setFog = {
 };
 
 dzn_fnc_setDateTime = {
+	//[par_daytime, par_month, par_year] call dzn_fnc_setDateTime
+	private["_time","_day","_month","_year"];
+	
+	_time = _this select 0;
+	_month = _this select 1;
+	_year = _this select 2;
+	_day = round(random 28);
+	
+	if (_time == 0) then { _time = floor(random 23); };
+	if (_month == 0) then { _month = 1 + floor(random 12); };
 
+	setDate [_year, _month, _day, _time, 0];
 };
 
 dzn_fnc_cache = {};
