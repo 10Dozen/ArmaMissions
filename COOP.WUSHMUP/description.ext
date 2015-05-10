@@ -227,4 +227,94 @@ class CfgDebriefing
 	};
 };
 
+class RscTitles
+{
+	class assignementTopTitle
+	{
+		idd = -1;
+		duration = 5;
+		onLoad = "_this call onAssignmentTitleLoad"; 
+		class controls
+		{			
+			class assignmentBlackControl
+			{    
+				idc = 1000;				
+				type = 0;				
+				style = 0;
+				x = -1.0; 	
+				y = -1.0;
+				w = 5;		
+				h = 5;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0,0,0,1};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+			
+			class assignmentTopControl
+			{    
+				idc = 1001;
+				type = 0;
+				style = 2;				
+				x = 0;
+				y = 0;
+				w = 1;
+				h = 0.12;				
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.1;
+				colorBackground[] = {0,0,0,1};
+				colorText[] = {.87,.835,.807,1};
+				text = $STR_assignmentDisplay; //"Your Assignment is";
+			}; 
+			
+			class assignmentPicControl
+			{    
+				idc = 1002;
+				type = 0;
+				style = 2192;
+				x = 0.325;
+				y = 0.16;
+				w = 0.35;
+				h = 0.48;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.1;
+				colorBackground[] = {0,.8,.8,1};
+				colorText[] = {1,1,1,1};
+				text = "img\sl.jpg";
+			}; 
+			
+			class assignmentMidControl
+			{    
+				idc = 1003;
+				type = 0;
+				style = 2;
+				x = -4.47035e-008;
+				y = 0.68;
+				w = 1;
+				h = 0.16;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.12;
+				colorBackground[] = {0,0,0,1};
+				colorText[] = {.968,.745,.161,1};
+				text =  $STR_assignmentBravo; // "ALPHA";
+			}; 
 
+			class assignmentLowControl
+			{    
+				idc = 1004;
+				type = 0;
+				style = 2;
+				x = 0;
+				y = 0.88;
+				w = 1;
+				h = 0.12;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.08;
+				colorBackground[] = {0,0,0,1};
+				colorText[] = {.87,.835,.807,1};
+				text = $STR_assignmentRole_Rifleman; // "Squad Leader";
+			}; 
+		};
+	};
+};
