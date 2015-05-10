@@ -30,7 +30,35 @@
 		</Key>	
 		
 	
-	
+<!-- *********** Displayes ************* -->	
+		<Key ID='STR_assignmentDisplay'>
+			<Original>Ваше Назначение</Original>
+			<Russian>Ваше Назначение</Russian>	
+			<English>Your Assignment is</English>			
+		</Key>
+		
+		<Key ID='STR_assignmentHQ'>
+			<Original>Штаб</Original>
+			<Russian>Штаб</Russian>	
+			<English>F.H.Q.</English>			
+		</Key>
+		
+		<Key ID='STR_assignmentAlpha'>
+			<Original>АЛЬФА</Original>
+			<Russian>АЛЬФА</Russian>	
+			<English>ALPHA</English>			
+		</Key>
+		<Key ID='STR_assignmentBravo'>
+			<Original>БРАВО</Original>
+			<Russian>БРАВО</Russian>		
+			<English>BRAVO</English>			
+		</Key>
+		
+		<Key ID='STR_assignmentRole_Rifleman'>
+			<Original>Стрелок</Original>
+			<Russian>Стрелок</Russian>	
+			<English>Rifleman</English>			
+		</Key>
 	
 
 <!-- *********** Mission Params ************* -->	
