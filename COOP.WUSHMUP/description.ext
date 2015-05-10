@@ -1,0 +1,274 @@
+class Header
+{
+	gameType = Coop;
+	minPlayers = 1;
+	maxPlayers = 70;
+};
+
+onLoadName = "WarmUp Shoot'Em Up!";
+onLoadMission = $STR_onLoadMission; //"Warm Up and prerpare to fight!";
+author = "10Dozen [MFOR]";
+//loadScreen = "loadLogo.jpg";
+//overviewPicture = "overviewLogo.jpg";
+
+enableDebugConsole = 2;
+respawn = 0;
+
+// ============================================================================================
+
+class Params
+{
+	class paramEmptyDelimiter0 
+	{
+		title = " :: Mission Conditions :: ";
+	}	
+
+	class par_weather	
+	{
+		title = "$STR_f_param_weather";
+		values[] = {0,1,2,3,4,5,6,7,8};
+		texts[] = {
+			$STR_f_param_weather_Option0,
+			$STR_f_param_weather_Option1,
+			$STR_f_param_weather_Option2,
+			$STR_f_param_weather_Option3,
+			$STR_f_param_weather_Option4,
+			$STR_f_param_weather_Option5,
+			$STR_f_param_weather_Option6,
+			$STR_f_param_weather_Option7,
+			$STR_f_param_weather_Option8
+		};
+		default = 0;		
+	};
+
+	class par_fog
+	{
+		title = "Fog";
+		values[] = {0,1,2};
+		texts[] = {
+			"None",
+			"Light",
+			"Heavy"
+		};
+		default = 0;		
+	};
+	
+	class par_month
+	{
+		title = "$STR_f_param_timeOfDay";
+		values[] = {1,2,3,4,5,6,7,8,9,10,11,12};
+		texts[] = {
+			$STR_par_month1,
+			$STR_par_month2,
+			$STR_par_month3,
+			$STR_par_month4,
+			$STR_par_month5,
+			$STR_par_month6,
+			$STR_par_month7,
+			$STR_par_month8,
+			$STR_par_month9,
+			$STR_par_month10,
+			$STR_par_month11,
+			$STR_par_month12
+		};
+		default = 6; 		
+	};
+
+	class par_year
+	{
+		title = "$STR_f_param_timeOfDay";
+		values[] = {2015,2016,2017,2018,2019,2020};
+		texts[] = {2015,2016,2017};
+		default = 2015;
+	};
+	
+	class par_timeOfDay
+	{
+		title = "$STR_f_param_timeOfDay";
+		values[] = {0,1,2,3,4,5,6,7};
+		texts[] = {$STR_f_param_timeOfDay_Option0,$STR_f_param_timeOfDay_Option1,$STR_f_param_timeOfDay_Option2,$STR_f_param_timeOfDay_Option3,$STR_f_param_timeOfDay_Option4,$STR_f_param_timeOfDay_Option5,$STR_f_param_timeOfDay_Option6,$STR_f_param_timeOfDay_Option7};
+		default = 4;
+	};
+
+	class paramEmptyDelimiter3 
+	{
+		title = " :: Faction :: ";
+	}	
+	
+	class par_playableFaction
+	{
+		title = "Playable Faction";
+		values[] = {0,1,2};
+		texts[] = {
+			$STR_par_faction1,
+			$STR_par_faction2,
+			$STR_par_faction3
+		};
+		default = 0;
+	}
+
+	class paramEmptyDelimiter4 
+	{
+		title = " :: Hostile Faction :: ";
+	}	
+	
+	class f_param_hostileFaction
+	{
+		title = "Hostile Faction";
+		values[] = {0,1,2};
+		texts[] = {
+			$STR_par_faction1,
+			$STR_par_faction2,
+			$STR_par_faction3
+		};
+		default = 1;
+	}
+	class par_hostileSkill
+	{
+		title = "Hostile Faction - Skill";
+		values[] = {0,1,2};
+		texts[] = {
+			$STR_par_hostileSkill1,
+			$STR_par_hostileSkill2,
+			$STR_par_hostileSkill3
+		};
+		default = 1;
+	}
+	class par_hostileAmount
+	{
+		title = "Hostile Faction - Amount";
+		values[] = {0,1,2,3,4};
+		texts[] = {
+			$STR_par_hostileAmount1,
+			$STR_par_hostileAmount2,
+			$STR_par_hostileAmount3,
+			$STR_par_hostileAmount4,
+			$STR_par_hostileAmount5
+		};
+		default = 2;
+	}
+	class par_hostileVehicles
+	{
+		title = "Hostile Faction - Vehicles";
+		values[] = {0,1,2,3,4};
+		texts[] = {
+			$STR_par_hostileVehicles1,
+			$STR_par_hostileVehicles2,
+			$STR_par_hostileVehicles3,
+			$STR_par_hostileVehicles4,
+			$STR_par_hostileVehicles5
+		};
+		default = 1;
+	}
+	
+		class paramEmptyDelimiter2
+	{
+		title = " :: Caching :: ";
+	}	
+
+	class par_caching
+	{
+		title = "Cache AI outside distance (m)";
+		values[] = {0,600,800,1000,1500,2000};
+		default = 800;
+	};
+
+};
+
+
+// ============================================================================================
+
+// F3 - Briefing Template
+// Credits: BIS - Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
+
+class CfgDebriefing
+{
+	class End1
+	{
+		title = "Ending #1";
+		subtitle = "";
+		description = "*** Insert debriefing #1 here. ***";
+		// pictureBackground = "";
+		// picture = "";
+		// pictureColor[] = {0.0,0.3,0.6,1};
+	};
+
+	class End2
+	{
+		title = "Ending #2";
+		subtitle = "";
+		description = "*** Insert debriefing #2 here. ***";
+		// pictureBackground = "";
+		// picture = "";
+		// pictureColor[] = {0.0,0.3,0.6,1};
+	};
+
+	class End3
+	{
+		title = "Ending #3";
+		subtitle = "";
+		description = "*** Insert debriefing #3 here. ***";
+		// pictureBackground = "";
+		// picture = "";
+		// pictureColor[] = {0.0,0.3,0.6,1};
+	};
+};
+
+
+// ============================================================================================
+// F3 - Menu components
+// DO NOT REMOVE OR DISABLE THIS BLOCK OF CODE
+
+// Menu components for the JIP Menu
+#include "f\JIP\f_JIP_kitpicker.h"
+#include "f\JIP\f_JIP_grppicker.h"
+// ============================================================================================
+
+// F3 - Functions
+// DO NOT REMOVE OR DISABLE THIS BLOCK OF CODE
+
+class CfgFunctions
+{
+	class F // Defines the "owner"
+	{
+		class common // category
+		{
+			file = "f\common";
+			// Defines the function to preInit (the paramArray dosent seem to be constructed at preInit stage).
+			class processParamsArray
+			{
+				preInit = 1;
+				postInit = 1;
+			};
+
+			class nearPlayer{};
+		};
+		class mpEnd
+		{
+			file = "f\mpEnd";
+			class mpEnd{};
+			class mpEndReceiver{};
+		};
+		class missionConditions
+		{
+			file = "f\missionConditions";
+			class SetTime{};
+			class SetFog{};
+			class SetWeather{};
+		};
+		class cache
+		{
+			file = "f\cache";
+			class cInit {};
+			class cTracker {};
+			class gCache {};
+			class gUncache {};
+		};	
+		class mapClickTeleport
+		{
+			file = "f\mapClickTeleport";
+			class mapClickTeleportUnit{};
+			class mapClickTeleportGroup{};
+		};
+	};
+};
