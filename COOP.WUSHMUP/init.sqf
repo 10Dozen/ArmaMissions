@@ -7,7 +7,7 @@ enableSentences false;
 call dzn_fnc_getMissionParametes;
 par_weather call dzn_fnc_setWeather;
 par_fog call dzn_fnc_setFog;
-[par_daytime, par_month, par_year] call dzn_setDateTime;
+[par_daytime, par_month, par_year] call dzn_fnc_setDateTime;
 
 [] execVM "taskController\tcInit.sqf";
 
