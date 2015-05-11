@@ -33,5 +33,5 @@ onAssignmentTitleLoad = {
 dzn_fnc_showAssignment = {
 	waitUntil {!isNil {player getVariable "raPic"} && !isNil {player getVariable "raSquad"} && !isNil {player getVariable "raRole"}};
 	
-	cutRsc ["","PLAIN"];
+	cutRsc ["assignementTopTitle","PLAIN"];
 };
