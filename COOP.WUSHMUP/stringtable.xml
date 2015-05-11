@@ -38,7 +38,7 @@
 		</Key>
 		
 	<!-- Squads -->
-		<Key ID='STR_assignmentHQ'>
+		<Key ID='STR_assignmentCO'>
 			<Original>ШТАБ</Original>
 			<Russian>ШТАБ</Russian>
 			<English>HQ</English>
@@ -70,7 +70,7 @@
 		</Key>
 	
 	<!-- Role -->	
-		<Key ID='STR_assignmentRole_HQ'>
+		<Key ID='STR_assignmentRole_CO'>
 			<Original>Командир стороны</Original>
 			<Russian>Командир стороны</Russian>
 			<English>Commanding officer</English>
