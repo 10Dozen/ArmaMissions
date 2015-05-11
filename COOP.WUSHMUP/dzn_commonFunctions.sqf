@@ -57,8 +57,6 @@ dzn_fnc_getValueByKey = {
 	_output = _default;
 	
 	{
-		player sideChat str[_this select 1, _x select 0, [_this select 1, _x select 0] call BIS_fnc_areEqual];
-		
 		if ( [_this select 1, _x select 0] call BIS_fnc_areEqual ) exitWith { _output = _x select 1; };
 	} forEach (_this select 0);
 	
