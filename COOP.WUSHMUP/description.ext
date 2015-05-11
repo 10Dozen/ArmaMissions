@@ -233,7 +233,7 @@ class RscTitles
 	{
 		idd = -1;
 		duration = 5;
-		onLoad = "_this call onAssignmentTitleLoad"; 
+		onLoad = "_this call dzn_fnc_onAssignmentTitleLoad"; 
 		class controls
 		{			
 			class assignmentBlackControl
