@@ -6,116 +6,97 @@ if !(isServer || isDedicated) exitWith {};
 
 // Get all players
 dzn_allPlayers = [];
-_assignedPlayers = [];
-
-//["All", _assignedPlayers] call dzn_fnc_getAllPlayers;
-/*
-{
-	if (isPlayer _x) then	{
-		dzn_allPlayers pushBack _x;
-	};
-} forEach playableUnits;
-
-// for SP test
-{
-	if ( (isPlayer _x) && !(_x in dzn_allPlayers) ) then	{
-		dzn_allPlayers pushBack _x;
-	};
-} forEach switchableUnits;
-*/
+dzn_assignedPlayers = [];
 
 // ********* Wait for players to come ********
-waitUntil { ["All", _assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlayers > 0};
-private["_unit"];
+waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlayers > 0};
+private["_unit","_squadCount","_squad"];
+_unit = objNull;
 
+#define SET_SQUAD_VAR(X,Y)	X setVariable ["raSquadId", Y, true]; X setVariable ["raSquad", [dzn_squadsMapping, Y] call dzn_fnc_getValueByKey, true];
+#define SET_ROLE_VAR(X,Y)	X setVariable ["raRole", [dzn_roleMapping, Y] call dzn_fnc_getValueByKey, true]; X setVariable ["raPic", [dzn_rolePicMapping, Y] call dzn_fnc_getValueByKey, true];
+
+#define	ASSIGN_SQUADLEADER	DZN_SELECT_RANDOM(_unit,dzn_allPlayers,true) SET_SQUAD_VAR(_unit,_i) SET_ROLE_VAR(_unit,10)
+#define ASSIGN_SQUADMEMBER	DZN_SELECT_RANDOM(_unit,dzn_allPlayers,true) SET_SQUAD_VAR(_unit,_i) SET_ROLE_VAR(_unit,100 + _j)
+#define ADD_UNIT_TO_SQUAD	_squad pushBack _unit;
 
 // ********* Choosing HQ *********************
-_unit = objNull;
-dzn_selectRandom(_unit,dzn_allPlayers,true)  //_unit = dzn_allPlayers call BIS_fnc_selectRandom;_allPlayer = dzn_allPlayers - [_unit];
-_unit setVariable ["raSquad", [dzn_squadsMapping, "HQ"] call dzn_fnc_getValueByKey, true];
-_unit setVariable ["raRole", [dzn_roleMapping, 0] call dzn_fnc_getValueByKey, true];
-_unit setVariable ["raPic", [dzn_rolePicMapping, 0] call dzn_fnc_getValueByKey, true];
+
+DZN_SELECT_RANDOM(_unit,dzn_allPlayers,true)
+SET_SQUAD_VAR(_unit,"HQ")
+SET_ROLE_VAR(_unit,0)
 
 dzn_ra_hq = _unit;
 publicVariable "dzn_ra_hq";
 
-
-
 // ********* Choosing SLs and SquadMembers **********
+
 _squadCount = 0;
 dzn_assignedSquads = [];
 
 waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
-
-#define	ASSIGN_SQUADLEADE(X)	dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raSquadId", _i, true]; _unit setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];  _unit setVariable ["raPic", [dzn_rolePicMapping, 10] call dzn_fnc_getValueByKey, true];
-#define ASSIGN_SQUADMEMBE(X)	dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raSquadId", _i, true]; _unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raPic", [dzn_rolePicMapping, 100 + _j] call dzn_fnc_getValueByKey, true];
-
-
 switch (true) do {
 	case (dzn_allPlayers % 10 == 0): {
 		for "_i" from 0 to _squadCount do {
 			_squad = [];
+			
 			ASSIGN_SQUADLEADER
-			_squad = _squad + [_unit]; //_unit == sl
+			ADD_UNIT_TO_SQUAD //_unit == sl
+			
 			for "_j" from 0 to 9 do {
 				ASSIGN_SQUADMEMBER
-				_squad = _squad + [_unit]; //_unit == smember
+				ADD_UNIT_TO_SQUAD //_unit == smember
 			};
+			
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
-	
-	
 	case (dzn_allPlayers % 10 > 4): {
 		for "_i" from 0 to _squadCount do {
-			ASSIGN_SQUAD
+			_squad = [];
+			
 			ASSIGN_SQUADLEADER
+			ADD_UNIT_TO_SQUAD //_unit == sl
+			
 			if (_i != _squadCount) then {
-				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to 9 do { 
+					ASSIGN_SQUADMEMBER 
+					ADD_UNIT_TO_SQUAD
+				};
 			} else {
-				for "_j" from 0 to (dzn_allPlayers % 10 - 1) do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to (dzn_allPlayers % 10 - 1) do { 
+					ASSIGN_SQUADMEMBER 
+					ADD_UNIT_TO_SQUAD
+				};
 			};
+			
+			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
 	case (dzn_allPlayers % 10 < 5): {
 		for "_i" from 0 to _squadCount do {
-			ASSIGN_SQUAD
+			_squad = [];
+			
 			ASSIGN_SQUADLEADER
+			ADD_UNIT_TO_SQUAD //_unit == sl
+			
 			if !(_i in [_squadCount - 1, _squadCount]) then {
-				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to 9 do { 
+					ASSIGN_SQUADMEMBER
+					ADD_UNIT_TO_SQUAD
+				};
 			} else {
-				for "_j" from 0 to floor ((9 + dzn_allPlayers % 10)/2) do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to floor ((9 + dzn_allPlayers % 10)/2) do { 
+					ASSIGN_SQUADMEMBER
+					ADD_UNIT_TO_SQUAD
+				};
 			};
+			
+			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
 };
-	
-/*	
-	for "_i" from 0 to _squadCount do {
-		if (dzn_allPlayers % 10 == 0) then {
-			ASSIGN_SQUADLEADER
-			for "_j" from 0 to 9 do {
-				ASSIGN_SQUADMEMBER
-			};
-		} else {
-			
-		
-			if (_i == _squadCount && dzn_allPlayers % 10 > 4) then {
-				for "_j" from 0 to (dzn_allPlayers % 10) do {
-					ASSIGN_SQUADMEMBER
-				};
-			}
-			
-			if ( (_i == _squadCount || _i == _squadCount - 1) && dzn_allPlayers % 10 < 4) then {
-				// All squads and for 2 last squads - people will be shared between
-				
-				for "_j" from 0 to (10 + dzn_allPlayers % 10)/2 do {
-					ASSIGN_SQUADMEMBER
-				};
-			};
-		};
-	};
-*/	
+
 
 
 // ********* End Of Role Assignement ************
