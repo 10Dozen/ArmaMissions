@@ -1,4 +1,4 @@
-// waitUntil { time > 30 };
+waitUntil { time > 30 };
 if (isPlayer player) then { [] spawn dzn_fnc_showAssignment; };
 
 
@@ -24,12 +24,12 @@ _unit = objNull;
 
 // ********* Choosing HQ *********************
 
-// DZN_SELECT_RANDOM(_unit,dzn_allPlayers,true)
-// SET_SQUAD_VAR(_unit,"CO")
-// SET_ROLE_VAR(_unit,0)
+DZN_SELECT_RANDOM(_unit,dzn_allPlayers,true)
+SET_SQUAD_VAR(_unit,"CO")
+SET_ROLE_VAR(_unit,0)
 
-// dzn_ra_hq = _unit;
-// publicVariable "dzn_ra_hq";
+dzn_ra_hq = _unit;
+publicVariable "dzn_ra_hq";
 
 // ********* Choosing SLs and SquadMembers **********
 
