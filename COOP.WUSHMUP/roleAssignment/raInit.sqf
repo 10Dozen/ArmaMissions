@@ -40,18 +40,19 @@ _unit = objNull;
 waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
 // ********* Choosing CO *********************
 
-// PULL_RANDOM_PLAYER(_unit,true)	
-// [_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
+if ((count dzn_allPlayers) > 4) then {
+	PULL_RANDOM_PLAYER(_unit,true)	
+	[_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
 
-// dzn_ra_co = _unit;
-// publicVariable "dzn_ra_co";	// Initiate Notification about CO
-
+	dzn_ra_co = _unit;
+	publicVariable "dzn_ra_co";	// Initiate Notification about CO
+};
 
 // ********* Choosing SLs and SquadMembers **********
 
-dzn_allPlayers = [man, man_1,player];
+dzn_allPlayers = [man, man_1,man_3,player];
 
-dzn_squadCount = (count dzn_allPlayers) - 1;
+dzn_squadCount = floor(count dzn_allPlayers)/10;
 dzn_assignedSquads = [];
 
 
@@ -92,11 +93,16 @@ switch (true) do {
 			EXIT_IF_NO_UNITS
 			
 			player sideChat format ["I: %1", _i];
+			_unitsLeft = count dzn_allPlayers - 1;
 			
 			if !(_i in [dzn_squadCount - 1, dzn_squadCount]) then {
-				for "_j" from 0 to 9 do { 
-				player sideChat format ["(@1) I: %1 :: J: %2", _i, _j];
-				ASSIGN_SQUADMEMBER };
+				
+				for "_j" from 0 to _unitsLeft do { 
+				ASSIGN_SQUADMEMBER 
+				player sideChat format ["(@1) I: %1 :: J: %2 :: ROLE: %3 :: UNIT: %4", _i, _j,[dzn_roleMapping, dzn_ra_roleID_SQ + _j] call dzn_fnc_getValueByKey, _unit];
+				
+				
+				};
 			} else {
 				for "_j" from 0 to floor ((9 + (count dzn_allPlayers) % 10)/2) do { 
 				player sideChat format ["(@2) I: %1 :: J: %2", _i, _j];
