@@ -13,6 +13,7 @@ waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlay
 private["_unit","_squadCount","_squad"];
 _unit = objNull;
 
+#define DZN_SELECT_RANDOM(X,Y,Z)	X = Y call BIS_fnc_selectRandom; if (Z) then {Y = Y - [X];};
 #define SET_SQUAD_VAR(X,Y)	X setVariable ["raSquadId", Y, true]; X setVariable ["raSquad", [dzn_squadsMapping, Y] call dzn_fnc_getValueByKey, true];
 #define SET_ROLE_VAR(X,Y)	X setVariable ["raRole", [dzn_roleMapping, Y] call dzn_fnc_getValueByKey, true]; X setVariable ["raPic", [dzn_rolePicMapping, Y] call dzn_fnc_getValueByKey, true];
 
