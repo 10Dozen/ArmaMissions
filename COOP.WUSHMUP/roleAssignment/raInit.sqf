@@ -24,7 +24,7 @@ _unit = objNull;
 // ********* Choosing HQ *********************
 
 DZN_SELECT_RANDOM(_unit,dzn_allPlayers,true)
-SET_SQUAD_VAR(_unit,"HQ")
+SET_SQUAD_VAR(_unit,"CO")
 SET_ROLE_VAR(_unit,0)
 
 dzn_ra_hq = _unit;
