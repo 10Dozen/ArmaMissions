@@ -1,6 +1,8 @@
-dzn_ra_initTimer = 30;
+waitUntil { time > 30 };
+if (isPlayer player) then { spawn dzn_fnc_showAssignment; };
 
-waitUntil { time > dzn_ra_initTimer };
+
+if !(isServer || isDedicated) exitWith {};
 
 // Get all players
 dzn_allPlayers = [];
@@ -24,18 +26,21 @@ _assignedPlayers = [];
 
 // ********* Wait for players to come ********
 waitUntil { ["All", _assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlayers > 0};
+private["_unit"];
 
 // ********* Choosing HQ *********************
-dzn_selectRandom(_hq,dzn_allPlayers,true)  //_hq = dzn_allPlayers call BIS_fnc_selectRandom;_allPlayer = dzn_allPlayers - [_hq];
-_hq setVariable ["raSquad", [dzn_squadsMapping, "HQ"] call dzn_fnc_getValueByKey, true];
-_hq setVariable ["raRole", [dzn_roleMapping, 0] call dzn_fnc_getValueByKey, true];
+_unit = objNull;
+dzn_selectRandom(_unit,dzn_allPlayers,true)  //_unit = dzn_allPlayers call BIS_fnc_selectRandom;_allPlayer = dzn_allPlayers - [_unit];
+_unit setVariable ["raSquad", [dzn_squadsMapping, "HQ"] call dzn_fnc_getValueByKey, true];
+_unit setVariable ["raRole", [dzn_roleMapping, 0] call dzn_fnc_getValueByKey, true];
+_unit setVariable ["raPic", [dzn_rolePicMapping, 0] call dzn_fnc_getValueByKey, true];
 
-// ********* Choosing SLs **********
+// ********* Choosing SLs and SquadMembers **********
 _squadCount = 0;
 waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
 
-#define	ASSIGN_SQUADLEADER dzn_selectRandom(_sl,dzn_allPlayers,true); _sl setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _sl setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];
-#define ASSIGN_SQUADMEMBER dzn_selectRandom(_unit, dzn_allPlayers, true);_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+#define	ASSIGN_SQUADLEADER dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];  _unit setVariable ["raPic", [dzn_rolePicMapping, 10] call dzn_fnc_getValueByKey, true];
+#define ASSIGN_SQUADMEMBER dzn_selectRandom(_unit, dzn_allPlayers, true);_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raPic", [dzn_rolePicMapping, 100 + _j] call dzn_fnc_getValueByKey, true];
 	
 switch (true) do {
 	case (dzn_allPlayers % 10 == 0): {
