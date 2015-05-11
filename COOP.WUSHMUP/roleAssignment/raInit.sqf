@@ -1,5 +1,7 @@
 dzn_ra_initTimer = 30;
 
+waitUntil { time > dzn_ra_initTimer };
+
 // Get all players
 _allPlayers = [];
 
@@ -15,10 +17,6 @@ _allPlayers = [];
 		_allPlayers pushBack _x;
 	};
 } forEach switchableUnits;
-
-
-
-waitUntil { time > dzn_ra_initTimer };
 
 // ********* Choosing HQ ************
 dzn_selectRandom(_hq,_allPlayers,true)  //_hq = _allPlayers call BIS_fnc_selectRandom;_allPlayer = _allPlayers - [_hq];
