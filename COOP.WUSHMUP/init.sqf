@@ -1,26 +1,29 @@
-enableSaving [false, false];
-enableSentences false;
+dzn_fnc_onAssignmentTitleLoad = {
+	private ["_display", "_idc", "_ctrl"];
+	_display = _this select 0;
 
-#include "dzn_defines.sqf";
-#include "dzn_commonFunctions.sqf";
-#include "dzn_displayFunctions.sqf";
+	// ***** Pic ******
+	_idc = 1002;
+	_ctrl = _display displayCtrl _idc;
+	_ctrl ctrlSetText (player getVariable "raPic");
+	_ctrl ctrlCommit 0;
+	
+	// **** Squad *****
+	_idc = 1003;
+	_ctrl = _display displayCtrl _idc;
+	_ctrl ctrlSetText (player getVariable "raSquad");
+	_ctrl ctrlCommit 0;
+	
+	// **** Role ******
+	_idc = 1004;
+	_ctrl = _display displayCtrl _idc;
+	_ctrl ctrlSetText (player getVariable "raRole");
+	_ctrl ctrlCommit 0;
+};
 
-call dzn_fnc_getMissionParametes;
-par_weather call dzn_fnc_setWeather;
-par_fog call dzn_fnc_setFog;
-[par_daytime, par_month, par_year] call dzn_fnc_setDateTime;
-
-
-
-[] execVM "taskController\tcInit.sqf";
-
-
-
-// ********************* F3 ***********************************************************
-// [30] spawn f_fnc_cInit;
-
-// Note: Caching aggressiveness is set using the f_var_cachingAggressiveness variable; possible values:
-// 1 - cache only non-leaders and non-drivers
-// 2 - cache all non-moving units, always exclude vehicle drivers
-// 3 - cache all units, incl. group leaders and vehicle drivers
-// f_var_cachingAggressiveness = 2;
+dzn_fnc_showAssignment = {
+	waitUntil {!isNil {player getVariable "raPic"} && !isNil {player getVariable "raSquad"} && !isNil {player getVariable "raRole"}};
+	
+	1000 cutRsc ["assignementBlackTitle", "PLAIN"];
+	1001 cutRsc ["assignementTopTitle","PLAIN"];
+};
