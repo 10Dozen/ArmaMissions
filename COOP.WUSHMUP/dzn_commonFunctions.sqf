@@ -69,6 +69,26 @@ dzn_fnc_getValueByKey = {
 };
 
 
+dzn_fnc_getAllPlayers = {
+	// [@SP/MP/Both, (ExcludeArray)] call dzn_fnc_getAllPlayers
+	// Output: dzn_allPlayers:ARRAY
+	private["_type","_exclude","_code"];
+	_type = _this select 0;
+	_exclude = if (isNil {_this select 1}) then { [] } else { _this select 1 };
+	
+	_code = "{
+		if((isPlayer _x) && !(_x in dzn_allPlayers) && !(_x in _exclude)) then {dzn_allPlayers pushBack _x;};
+	} forEach %1;";
+	
+	switch (_type) do {
+		case "SP": {call compile format [_code, "switchableUnits"];};
+		case "MP": {call compile format [_code, "playableUnits"];};
+		case "All": {
+			call compile format [_code, "switchableUnits"];
+			call compile format [_code, "playableUnits"];
+		};
+	};
+};
 
 
 
