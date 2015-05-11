@@ -70,19 +70,38 @@
 		</Key>
 	
 	<!-- Role -->	
-		<Key ID='STR_assignmentRole_Rifleman'>
-			<Original>Стрелок</Original>
-			<Russian>Стрелок</Russian>	
-			<English>Rifleman</English>			
+		<Key ID='STR_assignmentRole_HQ'>
+			<Original>Командир стороны</Original>
+			<Russian>Командир стороны</Russian>
+			<English>Commanding officer</English>
 		</Key>
-	
-
-
-
-
-
-
-
+		<Key ID='STR_assignmentRole_SL'>
+			<Original>Командир отделения</Original>
+			<Russian>Командир отделения</Russian>
+			<English>Squad Leader</English>
+		</Key>
+		<Key ID='STR_assignmentRole_M'>
+			<Original>Медик</Original>
+			<Russian>Медик</Russian>
+			<English>Medic</English>
+		</Key>
+		<Key ID='STR_assignmentRole_FTL_R'>
+			<Original>Лидер звена (Красный)</Original>
+			<Russian>Лидер звена (Красный)</Russian>
+			<English>Fireteam Leader (Red)</English>
+		</Key>
+		<Key ID='STR_assignmentRole_AR_R'>
+			<Original>Пулеметчик (Красный)</Original>
+			<Russian>Пулеметчик (Красный)</Russian>
+			<English>Automatic Rifleman (Red)</English>
+		</Key>
+		<Key ID='STR_assignmentRole_AAR_R'>
+			<Original>Помощник пулеметчика (Красный)</Original>
+			<Russian>Помощник пулеметчика (Красный)</Russian>
+			<English>Assistant Automatic Rifleman (Red)</English>
+		</Key>
+		
+		
 
 
 
