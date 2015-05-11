@@ -43,7 +43,7 @@ dzn_fnc_getMissionParametes = {
 	}; 
 };
 
-#define DZN_SELECT_RANDOM(X,Y,Z)	X = Y call BIS_fnc_selectRandom; if (Z) then {Y = Y - [X];};
+
 
 // dzn_selectRandom(_hq,_allPlayers,true) ->
 // _hq = _allPlayer call BIS_fnc_selectRandom; if (true) then {_allPlayer = _allPlayer - [_hq];};
