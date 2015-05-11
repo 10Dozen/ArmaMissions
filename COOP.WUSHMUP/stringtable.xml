@@ -37,23 +37,39 @@
 			<English>Your Assignment is</English>			
 		</Key>
 		
+	<!-- Squads -->
 		<Key ID='STR_assignmentHQ'>
-			<Original>Штаб</Original>
-			<Russian>Штаб</Russian>	
-			<English>F.H.Q.</English>			
+			<Original>ШТАБ</Original>
+			<Russian>ШТАБ</Russian>
+			<English>HQ</English>
 		</Key>
-		
 		<Key ID='STR_assignmentAlpha'>
 			<Original>АЛЬФА</Original>
-			<Russian>АЛЬФА</Russian>	
-			<English>ALPHA</English>			
+			<Russian>АЛЬФА</Russian>
+			<English>ALPHA</English>
 		</Key>
 		<Key ID='STR_assignmentBravo'>
 			<Original>БРАВО</Original>
-			<Russian>БРАВО</Russian>		
-			<English>BRAVO</English>			
+			<Russian>БРАВО</Russian>
+			<English>BRAVO</English>
 		</Key>
-		
+		<Key ID='STR_assignmentCharlie'>
+			<Original>ЧАРЛИ</Original>
+			<Russian>ЧАРЛИ</Russian>
+			<English>CHARLIE</English>
+		</Key>
+		<Key ID='STR_assignmentDelta'>
+			<Original>ДЕЛЬТА</Original>
+			<Russian>ДЕЛЬТА</Russian>
+			<English>DELTA</English>
+		</Key>
+		<Key ID='STR_assignmentFoxtrot'>
+			<Original>ФОКСТРОТ</Original>
+			<Russian>ФОКСТРОТ</Russian>
+			<English>FOXTROT</English>
+		</Key>
+	
+	<!-- Role -->	
 		<Key ID='STR_assignmentRole_Rifleman'>
 			<Original>Стрелок</Original>
 			<Russian>Стрелок</Russian>	
