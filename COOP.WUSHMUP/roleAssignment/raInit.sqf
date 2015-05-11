@@ -34,19 +34,30 @@ _hq setVariable ["raRole", [dzn_roleMapping, 0] call dzn_fnc_getValueByKey, true
 _squadCount = 0;
 waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
 
-if (dzn_allPlayers % 10 == 0) then {
+
 	for "_i" from 0 to _squadCount do {
 		dzn_selectRandom(_sl,dzn_allPlayers,true)  //_sl = dzn_allPlayers call BIS_fnc_
 		_sl setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
 		_sl setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];
-		
-		for "_j" from 0 to 9 do {
-			dzn_selectRandom(_unit, dzn_allPlayers, true); // _unit = 
-			_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
-			_unit setVariable ["raRole, [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+		if (dzn_allPlayers % 10 == 0) then {
+			for "_j" from 0 to 9 do {
+				dzn_selectRandom(_unit, dzn_allPlayers, true); // _unit = 
+				_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
+				_unit setVariable ["raRole, [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+			};
+		} else {
+			if (_i == _squadCount && dzn_allPlayers % 10 > 4) then {
+				for "_j" from 0 to (dzn_allPlayers % 10) do {
+					dzn_selectRandom(_unit, dzn_allPlayers, true); // _unit = 
+					_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
+					_unit setVariable ["raRole, [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+				};
+			} else {
+				// All squads and for 2 last squads - people will be shared between
+				
+			};
 		};
 	};
-} else {
 	
-};
+
 
