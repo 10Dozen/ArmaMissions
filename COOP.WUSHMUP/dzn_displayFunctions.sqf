@@ -1,5 +1,5 @@
 dzn_fnc_onAssignmentTitleLoad = {
-	private ["_display", "_idc", "_ctrl", "_color", "_text"];
+	private ["_display", "_idc", "_ctrl"];
 	_display = _this select 0;
 
 	// ***** Pic ******
