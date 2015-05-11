@@ -50,9 +50,19 @@ if ((count dzn_allPlayers) > 4) then {
 
 // ********* Choosing SLs and SquadMembers **********
 
-dzn_allPlayers = [man, man_1,man_3,player];
+dzn_allPlayers = [
+	man, man_1,man_2,man_3,
+	man_4,man_5,man_6, 
+	man_7,man_8,man_9,
+	man_10,man_11,man_12,
+	man_13,man_14,man_15,
+	man_16,man_17,man_18,
+	man_19,man_20,
+	player
+];
+dzn_debug = dzn_allPlayers;
 
-dzn_squadCount = floor(count dzn_allPlayers)/10;
+dzn_squadCount = floor ((count dzn_allPlayers)/10);
 dzn_assignedSquads = [];
 
 
@@ -64,7 +74,7 @@ switch (true) do {
 			ASSIGN_SQUADLEADER
 			EXIT_IF_NO_UNITS
 			
-			for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
+			for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };
 			
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
@@ -77,7 +87,7 @@ switch (true) do {
 			EXIT_IF_NO_UNITS
 			
 			if (_i != dzn_squadCount) then {
-				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };
 			} else {
 				for "_j" from 0 to ((count dzn_allPlayers) % 10 - 1) do { ASSIGN_SQUADMEMBER };
 			};
@@ -91,22 +101,20 @@ switch (true) do {
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
 			EXIT_IF_NO_UNITS
-			
-			player sideChat format ["I: %1", _i];
-			_unitsLeft = count dzn_allPlayers - 1;
-			
-			if !(_i in [dzn_squadCount - 1, dzn_squadCount]) then {
-				
-				for "_j" from 0 to _unitsLeft do { 
-				ASSIGN_SQUADMEMBER 
-				player sideChat format ["(@1) I: %1 :: J: %2 :: ROLE: %3 :: UNIT: %4", _i, _j,[dzn_roleMapping, dzn_ra_roleID_SQ + _j] call dzn_fnc_getValueByKey, _unit];
-				
-				
+
+			if (_i == dzn_squadCount) then {
+				_unitsLeft = count dzn_allPlayers - 1;				
+				for "_j" from 0 to _unitsLeft do {ASSIGN_SQUADMEMBER 
+					player sideChat format ["(@1) I: %1 :: J: %2 :: ROLE: %3 :: UNIT: %4", _i, _j,[dzn_roleMapping, dzn_ra_roleID_SQ + _j] call dzn_fnc_getValueByKey, _unit];
 				};
 			} else {
-				for "_j" from 0 to floor ((9 + (count dzn_allPlayers) % 10)/2) do { 
-				player sideChat format ["(@2) I: %1 :: J: %2", _i, _j];
-				ASSIGN_SQUADMEMBER };
+				if (_i == dzn_squadCount - 1) then {	
+					for "_j" from 0 to floor ((8 + (count dzn_allPlayers) % 10)/2) do { 
+					player sideChat format ["(@2) I: %1 :: J: %2", _i, _j];
+					ASSIGN_SQUADMEMBER };
+				} else {
+					for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };				
+				};
 			};
 			
 			dzn_assignedSquads pushBack [_i, _squad];
