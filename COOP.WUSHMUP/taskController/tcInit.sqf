@@ -55,8 +55,19 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 
 // ********* Get Positions For Squad Deployment ***
 tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
+tc_deploymentAssignment = [];
 
 waitUntil { !isNil "dzn_ra_assignmentComplete" };
 
-
+switch (true) do {
+	case (count dzn_assignedSquads < 4): {
+		{
+			tc_deploymentAssignment pushBack [_x, tc_deploymentPoints select _forEachIndex];
+			// So it will be like: [ [0, object0], [1, object1] ... ]
+		} forEach dzn_assignedSquads;
+	};
+	case (count dzn_assignedSquads > 3): {
+	
+	};
+};
 
