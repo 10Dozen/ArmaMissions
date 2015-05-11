@@ -37,14 +37,17 @@ _unit setVariable ["raPic", [dzn_rolePicMapping, 0] call dzn_fnc_getValueByKey, 
 
 // ********* Choosing SLs and SquadMembers **********
 _squadCount = 0;
+dzn_assignedSquads = [];
 waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
 
-#define	ASSIGN_SQUADLEADER dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];  _unit setVariable ["raPic", [dzn_rolePicMapping, 10] call dzn_fnc_getValueByKey, true];
-#define ASSIGN_SQUADMEMBER dzn_selectRandom(_unit, dzn_allPlayers, true);_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raPic", [dzn_rolePicMapping, 100 + _j] call dzn_fnc_getValueByKey, true];
-	
+#define	ASSIGN_SQUADLEADE	dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];  _unit setVariable ["raPic", [dzn_rolePicMapping, 10] call dzn_fnc_getValueByKey, true];
+#define ASSIGN_SQUADMEMBE	dzn_selectRandom(_unit, dzn_allPlayers, true);_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raPic", [dzn_rolePicMapping, 100 + _j] call dzn_fnc_getValueByKey, true];
+#define ASSIGN_SQUAD		dzn_assignedSquads pushBack ([dzn_squadsMapping, _i] call dzn_fnc_getValueByKey);
+
 switch (true) do {
 	case (dzn_allPlayers % 10 == 0): {
 		for "_i" from 0 to _squadCount do {
+			ASSIGN_SQUAD
 			ASSIGN_SQUADLEADER
 			for "_j" from 0 to 9 do {
 				ASSIGN_SQUADMEMBER
@@ -53,6 +56,7 @@ switch (true) do {
 	};
 	case (dzn_allPlayers % 10 > 4): {
 		for "_i" from 0 to _squadCount do {
+			ASSIGN_SQUAD
 			ASSIGN_SQUADLEADER
 			if (_i != _squadCount) then {
 				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
@@ -63,6 +67,7 @@ switch (true) do {
 	};
 	case (dzn_allPlayers % 10 < 5): {
 		for "_i" from 0 to _squadCount do {
+			ASSIGN_SQUAD
 			ASSIGN_SQUADLEADER
 			if !(_i in [_squadCount - 1, _squadCount]) then {
 				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
@@ -101,3 +106,5 @@ switch (true) do {
 */	
 
 
+// ********* End Of Role Assignement ************
+dzn_ra_assignmentComplete = true;
