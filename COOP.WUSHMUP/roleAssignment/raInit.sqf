@@ -6,7 +6,7 @@ waitUntil { time > dzn_ra_initTimer };
 dzn_allPlayers = [];
 _assignedPlayers = [];
 
-["All", _assignedPlayers] call dzn_fnc_getAllPlayers;
+//["All", _assignedPlayers] call dzn_fnc_getAllPlayers;
 /*
 {
 	if (isPlayer _x) then	{
@@ -22,15 +22,17 @@ _assignedPlayers = [];
 } forEach switchableUnits;
 */
 
+// ********* Wait for players to come ********
+waitUntil { ["All", _assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlayers > 0};
 
-// ********* Choosing HQ ************
+// ********* Choosing HQ *********************
 dzn_selectRandom(_hq,dzn_allPlayers,true)  //_hq = dzn_allPlayers call BIS_fnc_selectRandom;_allPlayer = dzn_allPlayers - [_hq];
 _hq setVariable ["raSquad", [dzn_squadsMapping, "HQ"] call dzn_fnc_getValueByKey, true];
 _hq setVariable ["raRole", [dzn_roleMapping, 0] call dzn_fnc_getValueByKey, true];
 
 // ********* Choosing SLs **********
+_squadCount = 0;
 waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
-_squadCount = floor(dzn_allPlayers / 10);
 
 if (dzn_allPlayers % 10 == 0) then {
 	for "_i" from 0 to _squadCount do {
