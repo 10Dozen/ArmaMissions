@@ -55,6 +55,11 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 
 // ********* Get Positions For Squad Deployment ***
 tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
+{
+	if (_x isKindOf "ModuleTaskCreate_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
+} forEach tc_deploymentPoints;
+
+
 tc_deploymentAssignment = [];
 
 waitUntil { !isNil "dzn_ra_assignmentComplete" };
@@ -70,4 +75,3 @@ switch (true) do {
 	
 	};
 };
-
