@@ -28,12 +28,18 @@ _assignedPlayers = [];
 waitUntil { ["All", _assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlayers > 0};
 private["_unit"];
 
+
 // ********* Choosing HQ *********************
 _unit = objNull;
 dzn_selectRandom(_unit,dzn_allPlayers,true)  //_unit = dzn_allPlayers call BIS_fnc_selectRandom;_allPlayer = dzn_allPlayers - [_unit];
 _unit setVariable ["raSquad", [dzn_squadsMapping, "HQ"] call dzn_fnc_getValueByKey, true];
 _unit setVariable ["raRole", [dzn_roleMapping, 0] call dzn_fnc_getValueByKey, true];
 _unit setVariable ["raPic", [dzn_rolePicMapping, 0] call dzn_fnc_getValueByKey, true];
+
+dzn_ra_hq = _unit;
+publicVariable "dzn_ra_hq";
+
+
 
 // ********* Choosing SLs and SquadMembers **********
 _squadCount = 0;
