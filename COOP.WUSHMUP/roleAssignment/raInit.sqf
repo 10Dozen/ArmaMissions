@@ -1,5 +1,5 @@
 waitUntil { time > 30 };
-if (isPlayer player) then { spawn dzn_fnc_showAssignment; };
+if (isPlayer player) then { [] spawn dzn_fnc_showAssignment; };
 
 
 if !(isServer || isDedicated) exitWith {};
