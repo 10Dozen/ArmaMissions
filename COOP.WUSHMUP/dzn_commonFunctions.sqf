@@ -49,6 +49,33 @@ dzn_fnc_getMissionParametes = {
 // _hq = _allPlayer call BIS_fnc_selectRandom; if (true) then {_allPlayer = _allPlayer - [_hq];};
 
 
+
+dzn_fnc_getValueByKey = {
+	// [@Array, @Key] call dzn_fnc_getValueByKey
+	private["_output"];
+	_output = "@Wrong key";
+	
+	{
+		if (_this select 1 == _x select 0) exitWith { _output = _x select 1; };
+	} forEach (_this select 0);
+	
+	if (_output == "@Wrong key") then { 
+		hintSilent format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
+		diag_log foramt ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
+		_output = false;
+	};
+	
+	_output
+};
+
+
+
+
+
+
+
+
+
 dzn_fnc_setWeather = {
 	// this call dzn_fnc_setWeather
 	if !(isServer || isDedicated) exitWith {};
