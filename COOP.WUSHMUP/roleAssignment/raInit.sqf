@@ -1,4 +1,4 @@
-waitUntil { time > 30 };
+// waitUntil { time > 30 };
 if (isPlayer player) then { [] spawn dzn_fnc_showAssignment; };
 
 
@@ -9,7 +9,7 @@ dzn_allPlayers = [];
 dzn_assignedPlayers = [];
 
 // ********* Wait for players to come ********
-waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; dzn_allPlayers > 0};
+waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
 private["_unit","_squadCount","_squad"];
 _unit = objNull;
 
@@ -35,7 +35,7 @@ publicVariable "dzn_ra_hq";
 _squadCount = 0;
 dzn_assignedSquads = [];
 
-waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
+waitUntil { _squadCount = floor(dzn_allPlayers / 10); count _squadCount > 0 };
 switch (true) do {
 	case (dzn_allPlayers % 10 == 0): {
 		for "_i" from 0 to _squadCount do {
