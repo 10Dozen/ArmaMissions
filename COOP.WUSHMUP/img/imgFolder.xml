@@ -1,5 +1,5 @@
 <!-- There should be stored pictures for Role Assignment Display -->
-<!-- Pictures should be named according to mapping:
+<!-- Pictures should be named and colored according to mapping:
 
 dzn_rolePicMapping = [
 	[0, "img\HQ.jpg"],
