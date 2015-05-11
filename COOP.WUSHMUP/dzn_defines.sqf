@@ -29,13 +29,30 @@ dzn_roleMapping = [
 	[10, localize "$STR_assignmentRole_SL"],
 	[100, localize "$STR_assignmentRole_M"],
 	
-	[101, localize "$STR_assignmentRole_FTL"],
-	[102, localize "$STR_assignmentRole_AR"],
-	[103, localize "$STR_assignmentRole_AAR"],
-	[104, localize "$STR_assignmentRole_G"],
+	[101, localize "$STR_assignmentRole_FTL_R"],
+	[102, localize "$STR_assignmentRole_AR_R"],
+	[103, localize "$STR_assignmentRole_AAR_R"],
+	[104, localize "$STR_assignmentRole_G_R"],
 	
-	[105, localize "$STR_assignmentRole_FTL"],
-	[106, localize "$STR_assignmentRole_AR"],
-	[107, localize "$STR_assignmentRole_AAR"],
-	[108, localize "$STR_assignmentRole_AT"]
+	[105, localize "$STR_assignmentRole_FTL_B"],
+	[106, localize "$STR_assignmentRole_AR_B"],
+	[107, localize "$STR_assignmentRole_AAR_B"],
+	[108, localize "$STR_assignmentRole_AT_b"]
+];
+
+dzn_rolePicMapping = [
+	[0, "img\HQ.jpg"],
+	
+	[10, "img\SL.jpg"],
+	[100, "img\M.jpg"],
+	
+	[101, "img\FTL_R.jpg"],
+	[102, "img\AR_R.jpg"],
+	[103, "img\AAR_R.jpg"],
+	[104, "img\G_R.jpg"],
+	
+	[105, "img\FTL_B.jpg"],
+	[106, "img\AR_B.jpg"],
+	[107, "img\AAR_B.jpg"],
+	[108, "img\AT_B.jpg"]
 ];
