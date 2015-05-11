@@ -44,17 +44,31 @@ switch (true) do {
 			for "_j" from 0 to 9 do {
 				ASSIGN_SQUADMEMBER
 			};
-		}
+		};
 	};
 	case (dzn_allPlayers % 10 > 4): {
-	
+		for "_i" from 0 to _squadCount do {
+			ASSIGN_SQUADLEADER
+			if (_i != _squadCount) then {
+				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
+			} else {
+				for "_j" from 0 to (dzn_allPlayers % 10) do { ASSIGN_SQUADMEMBER };
+			};
+		};
 	};
 	case (dzn_allPlayers % 10 < 5): {
-	
+		for "_i" from 0 to _squadCount do {
+			ASSIGN_SQUADLEADER
+			if !(_i in [_squadCount - 1, _squadCount]) then {
+				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
+			} else {
+				for "_j" from 0 to ((10 + dzn_allPlayers % 10)/2) do { ASSIGN_SQUADMEMBER };
+			};
+		};
 	};
 };
 	
-	
+/*	
 	for "_i" from 0 to _squadCount do {
 		if (dzn_allPlayers % 10 == 0) then {
 			ASSIGN_SQUADLEADER
@@ -79,6 +93,6 @@ switch (true) do {
 			};
 		};
 	};
-	
+*/	
 
 
