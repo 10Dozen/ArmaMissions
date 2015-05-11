@@ -44,22 +44,28 @@ publicVariable "dzn_ra_hq";
 // ********* Choosing SLs and SquadMembers **********
 _squadCount = 0;
 dzn_assignedSquads = [];
+
 waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
 
-#define	ASSIGN_SQUADLEADE	dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];  _unit setVariable ["raPic", [dzn_rolePicMapping, 10] call dzn_fnc_getValueByKey, true];
-#define ASSIGN_SQUADMEMBE	dzn_selectRandom(_unit, dzn_allPlayers, true);_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raPic", [dzn_rolePicMapping, 100 + _j] call dzn_fnc_getValueByKey, true];
-#define ASSIGN_SQUAD		dzn_assignedSquads pushBack ([dzn_squadsMapping, _i] call dzn_fnc_getValueByKey);
+#define	ASSIGN_SQUADLEADE(X)	dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raSquadId", _i, true]; _unit setVariable ["raRole", [dzn_roleMapping, 10] call dzn_fnc_getValueByKey, true];  _unit setVariable ["raPic", [dzn_rolePicMapping, 10] call dzn_fnc_getValueByKey, true];
+#define ASSIGN_SQUADMEMBE(X)	dzn_selectRandom(_unit,dzn_allPlayers,true); _unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raSquadId", _i, true]; _unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true]; _unit setVariable ["raPic", [dzn_rolePicMapping, 100 + _j] call dzn_fnc_getValueByKey, true];
+
 
 switch (true) do {
 	case (dzn_allPlayers % 10 == 0): {
 		for "_i" from 0 to _squadCount do {
-			ASSIGN_SQUAD
+			_squad = [];
 			ASSIGN_SQUADLEADER
+			_squad = _squad + [_unit]; //_unit == sl
 			for "_j" from 0 to 9 do {
 				ASSIGN_SQUADMEMBER
+				_squad = _squad + [_unit]; //_unit == smember
 			};
+			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
+	
+	
 	case (dzn_allPlayers % 10 > 4): {
 		for "_i" from 0 to _squadCount do {
 			ASSIGN_SQUAD
