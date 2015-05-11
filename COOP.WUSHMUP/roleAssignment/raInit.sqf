@@ -52,7 +52,7 @@ switch (true) do {
 			if (_i != _squadCount) then {
 				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
 			} else {
-				for "_j" from 0 to (dzn_allPlayers % 10) do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to (dzn_allPlayers % 10 - 1) do { ASSIGN_SQUADMEMBER };
 			};
 		};
 	};
@@ -62,7 +62,7 @@ switch (true) do {
 			if !(_i in [_squadCount - 1, _squadCount]) then {
 				for "_j" from 0 to 9 do { ASSIGN_SQUADMEMBER };
 			} else {
-				for "_j" from 0 to ((10 + dzn_allPlayers % 10)/2) do { ASSIGN_SQUADMEMBER };
+				for "_j" from 0 to floor ((9 + dzn_allPlayers % 10)/2) do { ASSIGN_SQUADMEMBER };
 			};
 		};
 	};
