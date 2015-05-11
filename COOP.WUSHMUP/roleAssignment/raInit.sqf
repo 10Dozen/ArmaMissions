@@ -43,7 +43,7 @@ waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
 			for "_j" from 0 to 9 do {
 				dzn_selectRandom(_unit, dzn_allPlayers, true); // _unit = 
 				_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
-				_unit setVariable ["raRole, [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+				_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
 			};
 		} else {
 			if (_i == _squadCount && dzn_allPlayers % 10 > 4) then {
