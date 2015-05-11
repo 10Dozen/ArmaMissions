@@ -50,11 +50,17 @@ waitUntil { _squadCount = floor(dzn_allPlayers / 10); _squadCount > 0 };
 				for "_j" from 0 to (dzn_allPlayers % 10) do {
 					dzn_selectRandom(_unit, dzn_allPlayers, true); // _unit = 
 					_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
-					_unit setVariable ["raRole, [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+					_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
 				};
-			} else {
+			}
+			
+			if ( (_i == _squadCount || _i == _squadCount - 1) && dzn_allPlayers % 10 < 4) then {
 				// All squads and for 2 last squads - people will be shared between
-				
+				for "_j" from 0 to (10 + dzn_allPlayers % 10)/2 do {
+					dzn_selectRandom(_unit, dzn_allPlayers, true); // _unit = 
+					_unit setVariable ["raSquad", [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, true];
+					_unit setVariable ["raRole", [dzn_roleMapping,100 + _j] call dzn_fnc_getValueByKey, true];
+				};
 			};
 		};
 	};
