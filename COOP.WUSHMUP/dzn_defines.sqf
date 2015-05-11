@@ -14,34 +14,34 @@ dzn_fogSettingsMapping = [
 
 
 dzn_squadsMapping = [
-	["HQ", localize "$STR_assignmentHQ"],
-	[0, localize "$STR_assignmentAlpha"],
-	[1, localize "$STR_assignmentBravo"],
-	[2, localize "$STR_assignmentCharlie"],
-	[3, localize "$STR_assignmentDelta"],
-	[4, localize "$STR_assignmentFoxtrot"],
-	[5, localize "$STR_assignmentEcho"]
+	["CO", localize "STR_assignmentCO"],
+	[0, localize "STR_assignmentAlpha"],
+	[1, localize "STR_assignmentBravo"],
+	[2, localize "STR_assignmentCharlie"],
+	[3, localize "STR_assignmentDelta"],
+	[4, localize "STR_assignmentFoxtrot"],
+	[5, localize "STR_assignmentEcho"]
 ];
 
 dzn_roleMapping = [
-	[0, localize "$STR_assignmentRole_HQ"],
+	[0, localize "STR_assignmentRole_CO"],
 	
-	[10, localize "$STR_assignmentRole_SL"],
-	[100, localize "$STR_assignmentRole_M"],
+	[10, localize "STR_assignmentRole_SL"],
+	[100, localize "STR_assignmentRole_M"],
 	
-	[101, localize "$STR_assignmentRole_FTL_R"],
-	[102, localize "$STR_assignmentRole_AR_R"],
-	[103, localize "$STR_assignmentRole_AAR_R"],
-	[104, localize "$STR_assignmentRole_G_R"],
+	[101, localize "STR_assignmentRole_FTL_R"],
+	[102, localize "STR_assignmentRole_AR_R"],
+	[103, localize "STR_assignmentRole_AAR_R"],
+	[104, localize "STR_assignmentRole_G_R"],
 	
-	[105, localize "$STR_assignmentRole_FTL_B"],
-	[106, localize "$STR_assignmentRole_AR_B"],
-	[107, localize "$STR_assignmentRole_AAR_B"],
-	[108, localize "$STR_assignmentRole_AT_B"]
+	[105, localize "STR_assignmentRole_FTL_B"],
+	[106, localize "STR_assignmentRole_AR_B"],
+	[107, localize "STR_assignmentRole_AAR_B"],
+	[108, localize "STR_assignmentRole_AT_B"]
 ];
 
 dzn_rolePicMapping = [
-	[0, "img\HQ.jpg"],
+	[0, "img\CO.jpg"],
 	
 	[10, "img\SL.jpg"],
 	[100, "img\M.jpg"],
