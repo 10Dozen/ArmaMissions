@@ -16,17 +16,25 @@ _allPlayers = [];
 	};
 } forEach switchableUnits;
 
+
+
 waitUntil { time > dzn_ra_initTimer };
 
 // ********* Choosing HQ ************
-_hq = _allPlayers call BIS_fnc_selectRandom;
-_allPlayer = _allPlayers - [_hq];
+dzn_selectRandom(_hq,_allPlayers,true)
+
+//_hq = _allPlayers call BIS_fnc_selectRandom;
+//_allPlayer = _allPlayers - [_hq];
 _hq setVariable ["raSquad", "HQ", true];
 _hq setVariable ["raRole", "HQ", true];
 
 // ********* Choosing SLs **********
+_squadCount = _allPlayers % 12;
 if (_allPlayers % 12 == 0) then {
-
+	for "_i" from 0 to _squadCount do {
+		dzn_selectRandom(_sl,_allPlayers,true)
+	//	_sl = _allPlayers call BIS_fnc_
+	};
 } else {
 
 };
