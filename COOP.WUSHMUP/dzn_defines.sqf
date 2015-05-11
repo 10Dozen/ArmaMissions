@@ -37,7 +37,7 @@ dzn_roleMapping = [
 	[105, localize "$STR_assignmentRole_FTL_B"],
 	[106, localize "$STR_assignmentRole_AR_B"],
 	[107, localize "$STR_assignmentRole_AAR_B"],
-	[108, localize "$STR_assignmentRole_AT_b"]
+	[108, localize "$STR_assignmentRole_AT_B"]
 ];
 
 dzn_rolePicMapping = [
