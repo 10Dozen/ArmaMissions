@@ -10,7 +10,8 @@ if (isServer || isDedicated) then {
 	_taskList = entities "ModuleTaskCreate_F";
 
 	tc_activeTaskModule = _taskList call BIS_fnc_selectRandom;
-	tc_completeArea = [(synchronizedObjects tc_activeTaskModule select 0), false] call dzn_fnc_convertTriggerToLocation;	
+	tc_activeTaskTrigger = synchronizedObjects tc_activeTaskModule select 0;
+	tc_completeArea = [tc_activeTaskTrigger, false] call dzn_fnc_convertTriggerToLocation;	
 	
 	tc_activeTask = [
 		"activeTask", 
@@ -42,6 +43,8 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 
 "mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
 "mrk_taskArea" setMarkerDir (direction tc_completeArea);
+
+
 // ********* Task Completion *************
 {
 	if (getPosASL player in tc_completeArea) then {
@@ -49,7 +52,10 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 	};
 } call KK_fnc_onEachFrame;
 
-[] spawn {
-	
-};
+
+// ********* Get Positions For Squad Deployment ***
+tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
+
+
+
 
