@@ -52,16 +52,19 @@ dzn_fnc_getMissionParametes = {
 
 dzn_fnc_getValueByKey = {
 	// [@Array, @Key] call dzn_fnc_getValueByKey
-	private["_output"];
-	_output = "@Wrong key";
+	private["_output","_default"];
+	_default = "@Wrong key";
+	_output = _default;
 	
 	{
-		if (_this select 1 == _x select 0) exitWith { _output = _x select 1; };
+		player sideChat str[_this select 1, _x select 0, [_this select 1, _x select 0] call BIS_fnc_areEqual];
+		
+		if ( [_this select 1, _x select 0] call BIS_fnc_areEqual ) exitWith { _output = _x select 1; };
 	} forEach (_this select 0);
 	
-	if (_output == "@Wrong key") then { 
+	if (typename _output == typename _default && {_output == _default}) then { 
 		hintSilent format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
-		diag_log foramt ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
+		diag_log format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
 		_output = false;
 	};
 	
@@ -76,6 +79,8 @@ dzn_fnc_getAllPlayers = {
 	_type = _this select 0;
 	_exclude = if (isNil {_this select 1}) then { [] } else { _this select 1 };
 	
+	dzn_allPlayers = [];
+	
 	_code = "{
 		if((isPlayer _x) && !(_x in dzn_allPlayers) && !(_x in _exclude)) then {dzn_allPlayers pushBack _x;};
 	} forEach %1;";
@@ -89,11 +94,6 @@ dzn_fnc_getAllPlayers = {
 		};
 	};
 };
-
-
-
-
-
 
 
 dzn_fnc_setWeather = {
@@ -123,13 +123,9 @@ dzn_fnc_setFog = {
 	if !(isServer || isDedicated) exitWith {};
 	
 	if (_this > 0) then {
-		{
-			if (_this == _x select 0) exitWith {
-				0 setFog [_x select 1];
-			};
-		} forEach dzn_fogSettingsMapping;
+		0 setFog ([dzn_fogSettingsMapping, _this] call dzn_fnc_getValueByKey);
 	} else {
-		0 setFog [ (dzn_fogSettingsMapping call BIS_fnc_selectRandom) select 1 ];
+		0 setFog ((dzn_fogSettingsMapping call BIS_fnc_selectRandom) select 1);
 	};
 };
 
