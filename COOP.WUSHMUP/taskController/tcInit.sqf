@@ -56,6 +56,7 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 // ********* Get Positions For Squad Deployment ***
 tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
 
+waitUntil { !isNil "dzn_ra_assignmentComplete" };
 
 
 
