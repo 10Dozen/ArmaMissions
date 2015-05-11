@@ -1,8 +1,11 @@
 <!-- There should be stored pictures for Role Assignment Display -->
 <!-- Pictures should be named and colored according to mapping:
 
+Acrhived URL: https://drive.google.com/open?id=0B40JJJQ6mcKeR0pSVGJUZkh5U28&authuser=0
+
+
 dzn_rolePicMapping = [
-	[0, "img\HQ.jpg"],
+	[0, "img\CO.jpg"],
 	
 	[10, "img\SL.jpg"],
 	[100, "img\M.jpg"],
@@ -17,5 +20,6 @@ dzn_rolePicMapping = [
 	[107, "img\AAR_B.jpg"],
 	[108, "img\AT_B.jpg"]
 ];
+
 
 -->
