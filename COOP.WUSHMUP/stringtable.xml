@@ -68,6 +68,11 @@
 			<Russian>ФОКСТРОТ</Russian>
 			<English>FOXTROT</English>
 		</Key>
+		<Key ID='STR_assignmentEcho'>
+			<Original>ЭХО</Original>
+			<Russian>ЭХО</Russian>
+			<English>ECHO</English>
+		</Key>
 	
 	<!-- Role -->	
 		<Key ID='STR_assignmentRole_CO'>
@@ -100,11 +105,31 @@
 			<Russian>Помощник пулеметчика (Красный)</Russian>
 			<English>Assistant Automatic Rifleman (Red)</English>
 		</Key>
-		
-		
-
-
-
+		<Key ID='STR_assignmentRole_G_R'>
+			<Original>Гренадер (Красный)</Original>
+			<Russian>Гренадер (Красный)</Russian>
+			<English>Grenadier (Red)</English>
+		</Key>
+		<Key ID='STR_assignmentRole_FTL_B'>
+			<Original>Лидер звена (Синий)</Original>
+			<Russian>Лидер звена (Синий)</Russian>
+			<English>Fireteam Leader (Blue)</English>
+		</Key>
+		<Key ID='STR_assignmentRole_AR_B'>
+			<Original>Пулеметчик (Синий)</Original>
+			<Russian>Пулеметчик (Синий)</Russian>
+			<English>Automatic Rifleman (Blue)</English>
+		</Key>
+		<Key ID='STR_assignmentRole_AAR_B'>
+			<Original>Помощник пулеметчика (Синий)</Original>
+			<Russian>Помощник пулеметчика (Синий)</Russian>
+			<English>Assistant Automatic Rifleman (Blue)</English>
+		</Key>
+		<Key ID='STR_assignmentRole_AT_B'>
+			<Original>Гранатометчик (Синий)</Original>
+			<Russian>Гранатометчик (Синий)</Russian>
+			<English>Rifleman AT (Blue)</English>
+		</Key>
 
 <!-- *********** Mission Params ************* -->	
 <!-- Mission Conditions -->
