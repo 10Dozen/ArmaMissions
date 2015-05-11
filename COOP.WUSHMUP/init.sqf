@@ -13,7 +13,7 @@ par_fog call dzn_fnc_setFog;
 
 
 [] execVM "taskController\tcInit.sqf";
-
+[] execVM "roleAssignment\raInit.sqf";
 
 
 // ********************* F3 ***********************************************************
