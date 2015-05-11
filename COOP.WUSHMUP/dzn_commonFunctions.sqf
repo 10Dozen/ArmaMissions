@@ -61,7 +61,7 @@ dzn_fnc_getValueByKey = {
 	
 	if (_output == "@Wrong key") then { 
 		hintSilent format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
-		diag_log foramt ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
+		diag_log format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
 		_output = false;
 	};
 	
