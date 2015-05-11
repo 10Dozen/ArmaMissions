@@ -43,6 +43,12 @@ dzn_fnc_getMissionParametes = {
 	}; 
 };
 
+#define dzn_selectRandom(X,Y,Z)		X = Y call BIS_fnc_selectRandom; if (Z) then {Y = Y - [X];};
+
+// dzn_selectRandom(_hq,_allPlayers,true) ->
+// _hq = _allPlayer call BIS_fnc_selectRandom; if (true) then {_allPlayer = _allPlayer - [_hq];};
+
+
 dzn_fnc_setWeather = {
 	// this call dzn_fnc_setWeather
 	if !(isServer || isDedicated) exitWith {};
