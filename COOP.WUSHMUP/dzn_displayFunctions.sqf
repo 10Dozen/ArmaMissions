@@ -1,16 +1,7 @@
 dzn_fnc_onAssignmentTitleLoad = {
-	private ["_display", "_idc", "_ctrl", "_color", "_text"];
+	private ["_display", "_idc", "_ctrl"];
 	_display = _this select 0;
-	
-/*	
-	//1002 assignmentPicControl
-	//1003 assignmentMidControl
-	//1004 assignmentLowControl
-	_idc = 1003;	
-	_ctrl = _display displayCtrl _idc;	
-	_ctrl ctrlSetText _squadName;
-	_ctrl ctrlCommit 0;
-*/	
+
 	// ***** Pic ******
 	_idc = 1002;
 	_ctrl = _display displayCtrl _idc;
@@ -33,5 +24,6 @@ dzn_fnc_onAssignmentTitleLoad = {
 dzn_fnc_showAssignment = {
 	waitUntil {!isNil {player getVariable "raPic"} && !isNil {player getVariable "raSquad"} && !isNil {player getVariable "raRole"}};
 	
-	cutRsc ["assignementTopTitle","PLAIN"];
+	1000 cutRsc ["assignementBlackTitle", "PLAIN"];
+	1001 cutRsc ["assignementTopTitle","PLAIN"];
 };
