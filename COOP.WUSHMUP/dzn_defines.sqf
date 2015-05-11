@@ -41,7 +41,7 @@ dzn_roleMapping = [
 ];
 
 dzn_rolePicMapping = [
-	[0, "img\HQ.jpg"],
+	[0, "img\CO.jpg"],
 	
 	[10, "img\SL.jpg"],
 	[100, "img\M.jpg"],
