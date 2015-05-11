@@ -43,7 +43,7 @@ dzn_fnc_getMissionParametes = {
 	}; 
 };
 
-
+#define DZN_SELECT_RANDOM(X,Y,Z)	X = Y call BIS_fnc_selectRandom; if (Z) then {Y = Y - [X];};
 
 // dzn_selectRandom(_hq,_allPlayers,true) ->
 // _hq = _allPlayer call BIS_fnc_selectRandom; if (true) then {_allPlayer = _allPlayer - [_hq];};
@@ -57,7 +57,9 @@ dzn_fnc_getValueByKey = {
 	_output = _default;
 	
 	{
-		if (_this select 1 == _x select 0) exitWith { _output = _x select 1; };
+		player sideChat str[_this select 1, _x select 0, [_this select 1, _x select 0] call BIS_fnc_areEqual];
+		
+		if ( [_this select 1, _x select 0] call BIS_fnc_areEqual ) exitWith { _output = _x select 1; };
 	} forEach (_this select 0);
 	
 	if (typename _output == typename _default && {_output == _default}) then { 
