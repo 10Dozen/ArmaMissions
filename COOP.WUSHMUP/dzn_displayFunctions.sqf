@@ -1,4 +1,4 @@
-onAssignmentTitleLoad = {
+dzn_fnc_onAssignmentTitleLoad = {
 	private ["_display", "_idc", "_ctrl", "_color", "_text"];
 	_display = _this select 0;
 	
