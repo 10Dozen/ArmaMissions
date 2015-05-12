@@ -38,7 +38,11 @@
 			<English>Deployment of</English>			
 		</Key>
 
-
+		<Key ID='STR_marker_deploymentAndText'>
+			<Original>и</Original>
+			<Russian>и</Russian>
+			<English>and</English>			
+		</Key>
 	
 <!-- *********** Displays ************* -->	
 		<Key ID='STR_assignmentDisplay'>
