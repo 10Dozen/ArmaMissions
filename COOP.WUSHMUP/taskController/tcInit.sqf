@@ -60,18 +60,41 @@ tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
 } forEach tc_deploymentPoints;
 
 
-tc_deploymentAssignment = [];
-
+// *********** Assigning Squads for Points ******
 waitUntil { !isNil "dzn_ra_assignmentComplete" };
 
+if (dzn_assignedSquads isEqualTo []) exitWith {};
+
+private["_toExecute","_posASL","_squadStep","_unitPosASL","_deploymentPoint"];
+
+
+tc_deploymentAssignment = [];
+_toExecute = "";
 switch (true) do {
-	case (count dzn_assignedSquads < 4): {
-		{
-			tc_deploymentAssignment pushBack [_x, tc_deploymentPoints select _forEachIndex];
-			// So it will be like: [ [0, object0], [1, object1] ... ]
-		} forEach dzn_assignedSquads;
-	};
-	case (count dzn_assignedSquads > 3): {
-	
-	};
+	case (count dzn_assignedSquads < 4): { _toExecute = "tc_deploymentPoints select _forEachIndex"; };
+	case (count dzn_assignedSquads > 3): { _toExecute = "tc_deploymentPoints select (floor (_forEachIndex / 2))"; };
 };
+
+{
+	call compile format [
+		"_deploymentPoint = %1;"
+		_toExecute
+	];
+	
+	// Assign deployment point for [squadId, object]
+	tc_deploymentAssignment pushBack [_x select 0, _deploymentPoint];
+	
+	// Move units to point
+	_posASL = getPosASL _deploymentPoint;
+	_squadStep = if (_forEachIndex % 2 == 0) then { 8 } else { 0 };
+	
+	{
+		_unitPosASL = [
+			(_posASL select 0) + _forEachIndex*1.2,
+			(_posASL select 1) - _squadStep,
+			_posASL select 2
+		];
+		_x setPosASL _unitPosASL;
+		_x setVelocity [0,0,0];
+	} forEach (_x select 1);
+} forEach dzn_assignedSquads;
