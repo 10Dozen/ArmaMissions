@@ -85,6 +85,12 @@ switch (true) do {
 	_posASL = getPosASL _deploymentPoint;
 	_squadStep = if (_forEachIndex % 2 == 0) then { 8 } else { 0 };
 	
+	call compile format [ 
+		"'mrk_startPos_%1' setMarkerPos _posASL;
+		'mrk_startPos_%1' setMarkerText 'Pos %1';",
+		floor(_forEachIndex / 2)
+	];
+	
 	{
 		_unitPosASL = [
 			(_posASL select 0) + _forEachIndex*1.2,
