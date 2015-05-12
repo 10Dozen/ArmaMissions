@@ -50,16 +50,12 @@ if ((count dzn_allPlayers) > 4) then {
 
 // ********* Choosing SLs and SquadMembers **********
 
-dzn_allPlayers = [
-	man, man_1,man_2,man_3,
-	man_4,man_5,man_6, 
-	man_7,man_8,man_9,
-	man_10,man_11,man_12,
-	man_13,man_14,man_15,
-	man_16,man_17,man_18,
-	man_19,man_20,
-	player
-];
+dzn_allPlayers pushBack player;
+
+for "_i" from 0 to 3 do {
+	call compile format ["dzn_allPlayers pushBack man_%1",_i];
+};
+
 dzn_debug = dzn_allPlayers;
 
 dzn_squadCount = floor ((count dzn_allPlayers)/10);
