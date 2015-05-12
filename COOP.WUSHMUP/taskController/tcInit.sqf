@@ -59,62 +59,93 @@ tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
 	if (_x isKindOf "ModuleTaskCreate_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
 } forEach tc_deploymentPoints;
 
+if (tc_deploymentPoints isEqualTo []) exitWith { hint "tcIit: No deployment points found!"; };
 
 // *********** Assigning Squads for Points ******
 waitUntil { !isNil "dzn_ra_assignmentComplete" };
+sleep 2;
 
 if (dzn_assignedSquads isEqualTo []) exitWith {};
 
 private["_getMarkerText","_getPoint","_markerText","_posASL","_squadStep","_unitPosASL","_deploymentPoint"];
 
-
 tc_deploymentAssignment = [];
 _getMarkerText = "";
 _getPoint = "";
+_getMarkerId = 0;
 
 switch (true) do {
 	case (count dzn_assignedSquads < 4): { 
 		_getPoint = "tc_deploymentPoints select _forEachIndex"; 
-		_getMarkerText = format [
-			"%1 %2",
-			localize "STR_marker_deploymentText",
-			[dzn_squadsMapping, _forEachIndex] call dzn_fnc_getValueByKey
-		];
+		_getMarkerText = {
+			format [
+				"%1 %2",
+				localize "STR_marker_deploymentText",
+				[dzn_squadsMapping, _this] call dzn_fnc_getValueByKey
+			];
+		};
+		_getMarkerId = {_this};
 	};
 	case (count dzn_assignedSquads > 3): { 
 		_getPoint = "tc_deploymentPoints select (floor (_forEachIndex / 2))";
-		_getMarkerText = format [
-			"%1 %2 %3 %4",
-			localize "STR_marker_deploymentText",
-			[dzn_squadsMapping, floor (_forEachIndex / 2)] call dzn_fnc_getValueByKey
-			localize "STR_marker_deploymentAndText",
-			[dzn_squadsMapping, floor (_forEachIndex / 2) + 1] call dzn_fnc_getValueByKey
-		];
+		_getMarkerText = {
+			format [
+				"%1 %2 %3 %4",
+				localize "STR_marker_deploymentText",
+				[
+					dzn_squadsMapping,
+					_this call {
+						switch (true) do {
+							case (_this in [0,1]): { 0 };
+							case (_this in [2,3]): { 2 };
+							case (_this in [4,5]): { 4 };
+						};
+					}
+				] call dzn_fnc_getValueByKey,
+				localize "STR_marker_deploymentAndText",
+				[
+					dzn_squadsMapping,
+					_this call {
+						switch (true) do {
+							case (_this in [0,1]): { 1 };
+							case (_this in [2,3]): { 3 };
+							case (_this in [4,5]): { 5 };
+						};
+					}
+				] call dzn_fnc_getValueByKey
+			];
+		};
+		_getMarkerId = call {
+			switch (true) do {
+				case (_this in [0,1]): { 0 };
+				case (_this in [2,3]): { 1 };
+				case (_this in [4,5]): { 2 };
+			};
+		},
 	};
 };
 
-{
-	_deploymentPoint = call compile _getPoint;
-	_markerText = call compile _getMarkerText;
-	
-	call compile format [ 
-		"'mrk_startPos_%1' setMarkerPos _posASL;
-		'mrk_startPos_%1' setMarkerText '%2';",
-		floor(_forEachIndex / 2),
-		_markerText
-	];
-	
+{	
 	// Assign deployment point for [squadId, object]
+	_deploymentPoint = call compile _getPoint;	
 	tc_deploymentAssignment pushBack [_x select 0, _deploymentPoint];
 	
 	// Move units to point
 	_posASL = getPosASL _deploymentPoint;
-	_squadStep = if (_forEachIndex % 2 == 0) then { 8 } else { 0 };
+	_squadStep = if (_forEachIndex % 2 == 0) then { 8 } else { 0 };	
+	
+	_markerText = _forEachIndex call _getMarkerText;
+	call compile format [ 
+		"'mrk_startPos_%1' setMarkerPos _posASL;
+		'mrk_startPos_%1' setMarkerText '%2';",
+		_forEachIndex call _getMarkerId,
+		_markerText
+	];
 	
 	{
 		_unitPosASL = [
 			(_posASL select 0) + _forEachIndex*1.2,
-			(_posASL select 1) - _squadStep - (_forEachIndex call {if (_this > 2) then { 2.5 } else { 0 }}),
+			(_posASL select 1) - _squadStep - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
 			_posASL select 2
 		];
 		_x setPosASL _unitPosASL;
