@@ -76,10 +76,7 @@ switch (true) do {
 };
 
 {
-	call compile format [
-		"_deploymentPoint = %1;"
-		_toExecute
-	];
+	_deploymentPoint = call compile _toExecute;
 	
 	// Assign deployment point for [squadId, object]
 	tc_deploymentAssignment pushBack [_x select 0, _deploymentPoint];
