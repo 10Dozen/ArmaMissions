@@ -23,14 +23,24 @@
 			<English>Capture &lt;marker name='mrk_task'&gt;marked point&lt;/marker&gt; and then hold it until countdown will end.</English>
 		</Key>
 		
-		<Key ID='STR_markerText'>
+		
+		
+<!-- *********** Markers ************* -->
+		<Key ID='STR_marker_taskText'>
 			<Original>Захватить и Удержать</Original>
 			<Russian>Захватить и Удержать</Russian>
 			<English>Capture and Hold</English>			
-		</Key>	
+		</Key>
 		
+		<Key ID='STR_marker_deploymentText'>
+			<Original>Позиция</Original>
+			<Russian>Позиция</Russian>
+			<English>Deployment of</English>			
+		</Key>
+
+
 	
-<!-- *********** Displayes ************* -->	
+<!-- *********** Displays ************* -->	
 		<Key ID='STR_assignmentDisplay'>
 			<Original>Ваше Назначение</Original>
 			<Russian>Ваше Назначение</Russian>	
@@ -130,6 +140,16 @@
 			<Russian>Гранатометчик (Синий)</Russian>
 			<English>Rifleman AT (Blue)</English>
 		</Key>
+
+
+
+
+
+
+
+
+
+
 
 <!-- *********** Mission Params ************* -->	
 <!-- Mission Conditions -->
