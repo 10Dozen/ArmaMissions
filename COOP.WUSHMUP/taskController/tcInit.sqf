@@ -39,7 +39,7 @@ if (isServer || isDedicated) then {
 waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 
 "mrk_task" setMarkerPosLocal (position tc_completeArea);
-"mrk_task" setMarkerText (localize "STR_markerText");
+"mrk_task" setMarkerText (localize "STR_marker_taskText");
 
 "mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
 "mrk_taskArea" setMarkerDir (direction tc_completeArea);
@@ -65,18 +65,44 @@ waitUntil { !isNil "dzn_ra_assignmentComplete" };
 
 if (dzn_assignedSquads isEqualTo []) exitWith {};
 
-private["_toExecute","_posASL","_squadStep","_unitPosASL","_deploymentPoint"];
+private["_getMarkerText","_getPoint","_markerText","_posASL","_squadStep","_unitPosASL","_deploymentPoint"];
 
 
 tc_deploymentAssignment = [];
-_toExecute = "";
+_getMarkerText = "";
+_getPoint = "";
+
 switch (true) do {
-	case (count dzn_assignedSquads < 4): { _toExecute = "tc_deploymentPoints select _forEachIndex"; };
-	case (count dzn_assignedSquads > 3): { _toExecute = "tc_deploymentPoints select (floor (_forEachIndex / 2))"; };
+	case (count dzn_assignedSquads < 4): { 
+		_getPoint = "tc_deploymentPoints select _forEachIndex"; 
+		_getMarkerText = format [
+			"%1 %2",
+			localize "STR_marker_deploymentText",
+			[dzn_squadsMapping, _forEachIndex] call dzn_fnc_getValueByKey
+		];
+	};
+	case (count dzn_assignedSquads > 3): { 
+		_getPoint = "tc_deploymentPoints select (floor (_forEachIndex / 2))";
+		_getMarkerText = format [
+			"%1 %2 %3 %4",
+			localize "STR_marker_deploymentText",
+			[dzn_squadsMapping, floor (_forEachIndex / 2)] call dzn_fnc_getValueByKey
+			localize "STR_marker_deploymentAndText",
+			[dzn_squadsMapping, floor (_forEachIndex / 2) + 1] call dzn_fnc_getValueByKey
+		];
+	};
 };
 
 {
-	_deploymentPoint = call compile _toExecute;
+	_deploymentPoint = call compile _getPoint;
+	_markerText = call compile _getMarkerText;
+	
+	call compile format [ 
+		"'mrk_startPos_%1' setMarkerPos _posASL;
+		'mrk_startPos_%1' setMarkerText '%2';",
+		floor(_forEachIndex / 2),
+		_markerText
+	];
 	
 	// Assign deployment point for [squadId, object]
 	tc_deploymentAssignment pushBack [_x select 0, _deploymentPoint];
@@ -84,12 +110,6 @@ switch (true) do {
 	// Move units to point
 	_posASL = getPosASL _deploymentPoint;
 	_squadStep = if (_forEachIndex % 2 == 0) then { 8 } else { 0 };
-	
-	call compile format [ 
-		"'mrk_startPos_%1' setMarkerPos _posASL;
-		'mrk_startPos_%1' setMarkerText 'Pos %1';",
-		floor(_forEachIndex / 2)
-	];
 	
 	{
 		_unitPosASL = [
