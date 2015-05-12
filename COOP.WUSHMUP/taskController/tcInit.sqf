@@ -88,7 +88,7 @@ switch (true) do {
 	{
 		_unitPosASL = [
 			(_posASL select 0) + _forEachIndex*1.2,
-			(_posASL select 1) - _squadStep,
+			(_posASL select 1) - _squadStep - (_forEachIndex call {if (_this > 2) then { 2.5 } else { 0 }}),
 			_posASL select 2
 		];
 		_x setPosASL _unitPosASL;
