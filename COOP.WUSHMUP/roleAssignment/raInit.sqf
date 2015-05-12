@@ -49,10 +49,9 @@ if ((count dzn_allPlayers) > 4) then {
 };
 
 // ********* Choosing SLs and SquadMembers **********
-
 dzn_allPlayers pushBack player;
 
-for "_i" from 0 to 3 do {
+for "_i" from 1 to 8 do {
 	call compile format ["dzn_allPlayers pushBack man_%1",_i];
 };
 
@@ -65,6 +64,8 @@ dzn_assignedSquads = [];
 waitUntil { count dzn_allPlayers > 0 };
 switch (true) do {
 	case ( (count dzn_allPlayers) % 10 == 0): {
+		hint "%10 == 0 Case";
+		player sideChat "%10 == 0 Case";
 		for "_i" from 0 to dzn_squadCount do {
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
@@ -77,6 +78,10 @@ switch (true) do {
 
 	};
 	case ( (count dzn_allPlayers) % 10 > 4): {
+			hint "%10 >4 Case";
+		player sideChat "%10 >4 Case";
+	
+	
 		for "_i" from 0 to dzn_squadCount do {
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
@@ -91,8 +96,10 @@ switch (true) do {
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
-	case ( (count dzn_allPlayers) % 10 < 5): {
+	case ( (count dzn_allPlayers) % 10 < 5 && (count dzn_allPlayers) % 10 != 0 ): {
+	
 		hint "%10 < 5 Case";
+		player sideChat "%10 < 5 Case";
 		for "_i" from 0 to dzn_squadCount do {
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
