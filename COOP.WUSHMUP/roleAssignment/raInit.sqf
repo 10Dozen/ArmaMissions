@@ -105,12 +105,12 @@ switch (true) do {
 			if (_i == dzn_squadCount) then {
 				_unitsLeft = count dzn_allPlayers - 1;				
 				for "_j" from 0 to _unitsLeft do {ASSIGN_SQUADMEMBER 
-					player sideChat format ["(@1) I: %1 :: J: %2 :: ROLE: %3 :: UNIT: %4", _i, _j,[dzn_roleMapping, dzn_ra_roleID_SQ + _j] call dzn_fnc_getValueByKey, _unit];
+					// player sideChat format ["(@1) I: %1 :: J: %2 :: ROLE: %3 :: UNIT: %4", _i, _j,[dzn_roleMapping, dzn_ra_roleID_SQ + _j] call dzn_fnc_getValueByKey, _unit];
 				};
 			} else {
 				if (_i == dzn_squadCount - 1) then {	
 					for "_j" from 0 to floor ((8 + (count dzn_allPlayers) % 10)/2) do { 
-					player sideChat format ["(@2) I: %1 :: J: %2", _i, _j];
+					// player sideChat format ["(@2) I: %1 :: J: %2", _i, _j];
 					ASSIGN_SQUADMEMBER };
 				} else {
 					for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };				
