@@ -115,7 +115,7 @@ switch (true) do {
 				] call dzn_fnc_getValueByKey
 			];
 		};
-		_getMarkerId = call {
+		_getMarkerId = {
 			switch (true) do {
 				case (_this in [0,1]): { 0 };
 				case (_this in [2,3]): { 1 };
@@ -145,7 +145,7 @@ switch (true) do {
 	{
 		_unitPosASL = [
 			(_posASL select 0) + _forEachIndex*1.2,
-			(_posASL select 1) - _squadStep - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
+			(_posASL select 1) + _squadStep - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
 			_posASL select 2
 		];
 		_x setPosASL _unitPosASL;
