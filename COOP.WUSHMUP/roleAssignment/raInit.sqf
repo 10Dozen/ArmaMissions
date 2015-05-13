@@ -13,7 +13,7 @@ dzn_ra_roleID_SQ = 100;
 #define EXIT_IF_NO_UNITS		if (dzn_allPlayers isEqualTo []) exitWith {};
 #define ADD_UNIT_TO_CURRENT_SQUAD	_squad pushBack _unit;
 
-#define ASSIGN_SQUADLEADER		PULL_RANDOM_PLAYER(_unit,true) ADD_UNIT_TO_CURRENT_SQUAD [_unit, _i, dzn_ra_roleId_SL] call dzn_ra_fnc_setRoleAttributes;				
+#define ASSIGN_SQUADLEADER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleId_SL] call dzn_ra_fnc_setRoleAttributes;	ADD_UNIT_TO_CURRENT_SQUAD			
 #define	ASSIGN_SQUADMEMBER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleID_SQ + _j] call dzn_ra_fnc_setRoleAttributes; ADD_UNIT_TO_CURRENT_SQUAD
 #define NEW_SQUAD			_squad = [];
 
@@ -40,18 +40,18 @@ _unit = objNull;
 waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
 // ********* Choosing CO *********************
 
-if ((count dzn_allPlayers) > 4) then {
-	PULL_RANDOM_PLAYER(_unit,true)	
-	[_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
+// if ((count dzn_allPlayers) > 4) then {
+	// PULL_RANDOM_PLAYER(_unit,true)	
+	// [_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
 
-	dzn_ra_co = _unit;
-	publicVariable "dzn_ra_co";	// Initiate Notification about CO
-};
+	// dzn_ra_co = _unit;
+	// publicVariable "dzn_ra_co";	// Initiate Notification about CO
+// };
 
 // ********* Choosing SLs and SquadMembers **********
-dzn_allPlayers pushBack player;
+// dzn_allPlayers pushBack player;
 
-for "_i" from 1 to 8 do {
+for "_i" from 1 to 16 do {
 	call compile format ["dzn_allPlayers pushBack man_%1",_i];
 };
 
@@ -66,27 +66,35 @@ switch (true) do {
 	case ( (count dzn_allPlayers) % 10 == 0): {
 		hint "%10 == 0 Case";
 		player sideChat "%10 == 0 Case";
+		
+		
 		for "_i" from 0 to dzn_squadCount do {
-			NEW_SQUAD
-			ASSIGN_SQUADLEADER
 			EXIT_IF_NO_UNITS
+			NEW_SQUAD
+			ASSIGN_SQUADLEADER			
 			
-			for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };
+			EXIT_IF_NO_UNITS
+			for "_j" from 0 to 8 do {
+				ASSIGN_SQUADMEMBER			
+			};
 			
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 
 	};
+	
+	
 	case ( (count dzn_allPlayers) % 10 > 4): {
 			hint "%10 >4 Case";
 		player sideChat "%10 >4 Case";
 	
 	
 		for "_i" from 0 to dzn_squadCount do {
+			EXIT_IF_NO_UNITS
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
-			EXIT_IF_NO_UNITS
 			
+			EXIT_IF_NO_UNITS			
 			if (_i != dzn_squadCount) then {
 				for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };
 			} else {
@@ -96,25 +104,25 @@ switch (true) do {
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
+	
+	
 	case ( (count dzn_allPlayers) % 10 < 5 && (count dzn_allPlayers) % 10 != 0 ): {
 	
 		hint "%10 < 5 Case";
 		player sideChat "%10 < 5 Case";
 		for "_i" from 0 to dzn_squadCount do {
+			EXIT_IF_NO_UNITS
+			
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
 			EXIT_IF_NO_UNITS
 
 			if (_i == dzn_squadCount) then {
 				_unitsLeft = count dzn_allPlayers - 1;				
-				for "_j" from 0 to _unitsLeft do {ASSIGN_SQUADMEMBER 
-					// player sideChat format ["(@1) I: %1 :: J: %2 :: ROLE: %3 :: UNIT: %4", _i, _j,[dzn_roleMapping, dzn_ra_roleID_SQ + _j] call dzn_fnc_getValueByKey, _unit];
-				};
+				for "_j" from 0 to _unitsLeft do { ASSIGN_SQUADMEMBER };
 			} else {
 				if (_i == dzn_squadCount - 1) then {	
-					for "_j" from 0 to floor ((8 + (count dzn_allPlayers) % 10)/2) do { 
-					// player sideChat format ["(@2) I: %1 :: J: %2", _i, _j];
-					ASSIGN_SQUADMEMBER };
+					for "_j" from 0 to floor ((8 + (count dzn_allPlayers) % 10)/2) do { ASSIGN_SQUADMEMBER };
 				} else {
 					for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };				
 				};
