@@ -3,7 +3,7 @@ if (isPlayer player) then { [] spawn dzn_fnc_showAssignment; };
 
 
 if !(isServer || isDedicated) exitWith {};
-private["_unit","_squad","_i","_j"];
+private["_unit","_squad","_group","_i","_j"];
 
 dzn_ra_roleId_CO = 0;
 dzn_ra_roleId_SL = 10;
