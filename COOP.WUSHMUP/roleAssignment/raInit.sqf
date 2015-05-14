@@ -16,6 +16,8 @@ dzn_ra_roleID_SQ = 100;
 #define ASSIGN_SQUADLEADER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleId_SL] call dzn_ra_fnc_setRoleAttributes;	ADD_UNIT_TO_CURRENT_SQUAD			
 #define	ASSIGN_SQUADMEMBER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleID_SQ + _j] call dzn_ra_fnc_setRoleAttributes; ADD_UNIT_TO_CURRENT_SQUAD
 #define NEW_SQUAD			_squad = [];
+#define CREATE_NEW_GRPOUP		_group = group _unit;
+#define JOIN_UNITS_TO_GROUP		_squad joinSilent _group;
 
 dzn_ra_fnc_setRoleAttributes = {
 	// [@Unit, @SquadID, @RoleID] call dzn_ra_fnc_setRoleAttributes
@@ -71,13 +73,15 @@ switch (true) do {
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
-			ASSIGN_SQUADLEADER			
+			ASSIGN_SQUADLEADER
 			
+			CREATE_NEW_GRPOUP
 			EXIT_IF_NO_UNITS
 			for "_j" from 0 to 8 do {
 				ASSIGN_SQUADMEMBER			
 			};
 			
+			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 
@@ -94,6 +98,7 @@ switch (true) do {
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
 			
+			CREATE_NEW_GRPOUP
 			EXIT_IF_NO_UNITS			
 			if (_i != dzn_squadCount) then {
 				for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };
@@ -101,6 +106,7 @@ switch (true) do {
 				for "_j" from 0 to ((count dzn_allPlayers) % 10 - 1) do { ASSIGN_SQUADMEMBER };
 			};
 			
+			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
@@ -115,6 +121,8 @@ switch (true) do {
 			
 			NEW_SQUAD
 			ASSIGN_SQUADLEADER
+			
+			CREATE_NEW_GRPOUP
 			EXIT_IF_NO_UNITS
 
 			if (_i == dzn_squadCount) then {
@@ -128,6 +136,7 @@ switch (true) do {
 				};
 			};
 			
+			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
