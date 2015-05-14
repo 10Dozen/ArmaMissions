@@ -40,17 +40,9 @@ _unit = objNull;
 
 
 waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
-// ********* Choosing CO *********************
 
-// if ((count dzn_allPlayers) > 4) then {
-	// PULL_RANDOM_PLAYER(_unit,true)	
-	// [_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
 
-	// dzn_ra_co = _unit;
-	// publicVariable "dzn_ra_co";	// Initiate Notification about CO
-// };
-
-// ********* Choosing SLs and SquadMembers **********
+// ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
 
 for "_i" from 1 to 44 do {
@@ -62,8 +54,16 @@ dzn_debug = dzn_allPlayers;
 dzn_squadCount = floor ((count dzn_allPlayers)/10);
 dzn_assignedSquads = [];
 
+// ********* Choosing CO *********************
+// if ((count dzn_allPlayers) > 14 && (dzn_squadCount > 2) ) then {
+	// PULL_RANDOM_PLAYER(_unit,true)	
+	// [_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
 
-waitUntil { count dzn_allPlayers > 0 };
+	// dzn_ra_co = _unit;
+	// publicVariable "dzn_ra_co";	// Initiate Notification about CO
+// };
+
+// ********* Choosing SLs and SquadMembers **********
 switch (true) do {
 	case ( (count dzn_allPlayers) % 10 == 0): {
 		hint "%10 == 0 Case";
