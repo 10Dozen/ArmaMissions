@@ -141,3 +141,5 @@ switch (true) do {
 		_x setVelocity [0,0,0];
 	} forEach (_x select 1);
 } forEach dzn_assignedSquads;
+
+if (!isNil "dzn_ra_co") then { dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0]; };
