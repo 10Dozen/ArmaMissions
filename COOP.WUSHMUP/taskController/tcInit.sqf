@@ -89,31 +89,49 @@ switch (true) do {
 	case (count dzn_assignedSquads > 3): { 
 		_getPoint = "tc_deploymentPoints select (floor (_forEachIndex / 2))";
 		_getMarkerText = {
-			format [
-				"%1 %2 %3 %4",
-				localize "STR_marker_deploymentText",
-				[
-					dzn_squadsMapping,
-					_this call {
-						switch (true) do {
-							case (_this in [0,1]): { 0 };
-							case (_this in [2,3]): { 2 };
-							case (_this in [4,5]): { 4 };
-						};
-					}
-				] call dzn_fnc_getValueByKey,
-				localize "STR_marker_deploymentAndText",
-				[
-					dzn_squadsMapping,
-					_this call {
-						switch (true) do {
-							case (_this in [0,1]): { 1 };
-							case (_this in [2,3]): { 3 };
-							case (_this in [4,5]): { 5 };
-						};
-					}
-				] call dzn_fnc_getValueByKey
-			];
+			if (count dzn_assignedSquads > 5) then {
+				// When all 6 squads exists: 3 markers - Deployment A and B
+				format [
+					"%1 %2 %3 %4",
+					localize "STR_marker_deploymentText",
+					[
+						dzn_squadsMapping,
+						_this call {
+							switch (true) do {
+								case (_this in [0,1]): { 0 };
+								case (_this in [2,3]): { 2 };
+								case (_this in [4,5]): { 4 };
+							};
+						}
+					] call dzn_fnc_getValueByKey,
+					localize "STR_marker_deploymentAndText",
+					[
+						dzn_squadsMapping,
+						_this call {
+							switch (true) do {
+								case (_this in [0,1]): { 1 };
+								case (_this in [2,3]): { 3 };
+								case (_this in [4,5]): { 5 };
+							};
+						}
+					] call dzn_fnc_getValueByKey
+				];
+			} else {
+				format [
+					"%1 %2",
+					localize "STR_marker_deploymentText",
+					[
+						dzn_squadsMapping,
+						_this call {
+							switch (true) do {
+								case (_this in [0,1]): { 0 };
+								case (_this in [2,3]): { 2 };
+								case (_this in [4,5]): { 4 };
+							};
+						}
+					] call dzn_fnc_getValueByKey
+				];
+			};
 		};
 		_getMarkerId = {
 			switch (true) do {
@@ -124,6 +142,7 @@ switch (true) do {
 		},
 	};
 };
+
 
 {	
 	// Assign deployment point for [squadId, object]
@@ -136,8 +155,10 @@ switch (true) do {
 	
 	_markerText = _forEachIndex call _getMarkerText;
 	call compile format [ 
-		"'mrk_startPos_%1' setMarkerPos _posASL;
-		'mrk_startPos_%1' setMarkerText '%2';",
+		"if (markerText 'mrk_startPos_%1' -= '') then {
+			'mrk_startPos_%1' setMarkerPos _posASL;
+			'mrk_startPos_%1' setMarkerText '%2';
+		};",
 		_forEachIndex call _getMarkerId,
 		_markerText
 	];
