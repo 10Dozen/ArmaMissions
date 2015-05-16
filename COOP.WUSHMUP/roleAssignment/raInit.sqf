@@ -1,5 +1,10 @@
 waitUntil { time > 1 };
-if (isPlayer player) then { [] spawn dzn_fnc_showAssignment; };
+if (isPlayer player) then { 
+	[] spawn dzn_fnc_showAssignment; 
+	waitUntil { !isNil {player getVariable "initGrp" };
+	deleteGroup (player getVariable "initGrp");
+	player setVariable ["initGrp", nil, true];
+};
 
 
 if !(isServer || isDedicated) exitWith {};
@@ -17,7 +22,7 @@ dzn_ra_roleID_SQ = 100;
 #define	ASSIGN_SQUADMEMBER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleID_SQ + _j] call dzn_ra_fnc_setRoleAttributes; ADD_UNIT_TO_CURRENT_SQUAD
 #define NEW_SQUAD			_squad = [];
 #define CREATE_NEW_GRPOUP		_group = group _unit;
-#define JOIN_UNITS_TO_GROUP		_squad joinSilent _group;
+#define JOIN_UNITS_TO_GROUP		_unit setVariable ["initGrp", group _unit, true]; _squad joinSilent _group;
 
 dzn_ra_fnc_setRoleAttributes = {
 	// [@Unit, @SquadID, @RoleID] call dzn_ra_fnc_setRoleAttributes
@@ -45,7 +50,7 @@ waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_a
 // ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
 
-for "_i" from 1 to 44 do {
+for "_i" from 1 to 55 do {
 	call compile format ["dzn_allPlayers pushBack man_%1",_i];
 };
 
