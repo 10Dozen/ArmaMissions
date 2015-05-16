@@ -1,5 +1,20 @@
 waitUntil { time > 1 };
-if (isPlayer player) then { [] spawn dzn_fnc_showAssignment; };
+if (isPlayer player) then { 
+	[] spawn dzn_fnc_showAssignment;
+	[] spawn {
+		waitUntil { !isNil {player getVariable "raRoleId"} };
+		sleep 1;
+		[
+			player,
+			format [
+				"kit_%1_%2",
+				[dzn_factionMapping, par_playableFaction] call dzn_fnc_getValueByKey,
+				[dzn_kitToRoleMapping, player getVariable "raRoleId"] call dzn_fnc_getValueByKey
+			],
+			false
+		] call dzn_fnc_gear_assignKit;		
+	};	
+};
 
 
 if !(isServer || isDedicated) exitWith {};
@@ -29,6 +44,7 @@ dzn_ra_fnc_setRoleAttributes = {
 	
 	_unit setVariable ["raSquadId", _squadId, true];
 	_unit setVariable ["raSquad", [dzn_squadsMapping, _squadId] call dzn_fnc_getValueByKey, true];
+	_unit setVariable ["raRoleId", _roleId, true];
 	_unit setVariable ["raRole", [dzn_roleMapping, _roleId] call dzn_fnc_getValueByKey, true];
 	_unit setVariable ["raPic", [dzn_rolePicMapping, _roleId] call dzn_fnc_getValueByKey, true];
 };
@@ -80,7 +96,7 @@ switch (true) do {
 			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
-	};
+	};	
 	case ( (count dzn_allPlayers) % 10 > 4): {
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
@@ -98,7 +114,7 @@ switch (true) do {
 			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
-	};
+	};	
 	case ( (count dzn_allPlayers) % 10 < 5 && (count dzn_allPlayers) % 10 != 0 ): {
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
