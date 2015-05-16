@@ -45,7 +45,7 @@ waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_a
 // ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
 
-for "_i" from 1 to 44 do {
+for "_i" from 1 to 15 do {
 	call compile format ["dzn_allPlayers pushBack man_%1",_i];
 };
 
@@ -55,21 +55,17 @@ dzn_squadCount = floor ((count dzn_allPlayers)/10);
 dzn_assignedSquads = [];
 
 // ********* Choosing CO *********************
-// if ((count dzn_allPlayers) > 14 && (dzn_squadCount > 2) ) then {
-	// PULL_RANDOM_PLAYER(_unit,true)	
-	// [_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
+if ((count dzn_allPlayers) > 14) then {
+	PULL_RANDOM_PLAYER(_unit,true)	
+	[_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
 
-	// dzn_ra_co = _unit;
-	// publicVariable "dzn_ra_co";	// Initiate Notification about CO
-// };
+	dzn_ra_co = _unit;
+	publicVariable "dzn_ra_co";	// Initiate Notification about CO
+};
 
 // ********* Choosing SLs and SquadMembers **********
 switch (true) do {
 	case ( (count dzn_allPlayers) % 10 == 0): {
-		hint "%10 == 0 Case";
-		player sideChat "%10 == 0 Case";
-		
-		
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
@@ -84,15 +80,8 @@ switch (true) do {
 			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
-
 	};
-	
-	
 	case ( (count dzn_allPlayers) % 10 > 4): {
-			hint "%10 >4 Case";
-		player sideChat "%10 >4 Case";
-	
-	
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
@@ -110,12 +99,7 @@ switch (true) do {
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
-	
-	
 	case ( (count dzn_allPlayers) % 10 < 5 && (count dzn_allPlayers) % 10 != 0 ): {
-	
-		hint "%10 < 5 Case";
-		player sideChat "%10 < 5 Case";
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			
