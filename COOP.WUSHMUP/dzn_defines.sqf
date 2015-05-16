@@ -56,3 +56,28 @@ dzn_rolePicMapping = [
 	[107, "img\AAR_B.jpg"],
 	[108, "img\AT_B.jpg"]
 ];
+
+dzn_factionMapping = [
+	[0,	localize "STR_par_faction1"],
+	[1,	localize "$STR_par_faction2"],
+	[2,	localize "$STR_par_faction3"]
+];
+
+dzn_kitToRoleMapping = [
+	[0, "CO"],
+	
+	[10, "SL"],
+	[100, "M"],
+	
+	[101, "FTL"],
+	[102, "AR"],
+	[103, "AAR"],
+	[104, "G"],
+	
+	[105, "FTL"],
+	[106, "AR"],
+	[107, "AAR"],
+	[108, "RAT"]
+];
+
+
