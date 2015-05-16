@@ -66,10 +66,6 @@ if ((count dzn_allPlayers) > 14) then {
 // ********* Choosing SLs and SquadMembers **********
 switch (true) do {
 	case ( (count dzn_allPlayers) % 10 == 0): {
-		hint "%10 == 0 Case";
-		player sideChat "%10 == 0 Case";
-		
-		
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
@@ -84,15 +80,8 @@ switch (true) do {
 			JOIN_UNITS_TO_GROUP
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
-
 	};
-	
-	
 	case ( (count dzn_allPlayers) % 10 > 4): {
-			hint "%10 >4 Case";
-		player sideChat "%10 >4 Case";
-	
-	
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
@@ -110,12 +99,7 @@ switch (true) do {
 			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};
-	
-	
 	case ( (count dzn_allPlayers) % 10 < 5 && (count dzn_allPlayers) % 10 != 0 ): {
-	
-		hint "%10 < 5 Case";
-		player sideChat "%10 < 5 Case";
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			
