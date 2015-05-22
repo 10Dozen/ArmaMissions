@@ -33,9 +33,27 @@ dzn_fnc_showAssignment = {
 
 
 // Notification 2: Commanding Struff Display
-dzn_fnc_onCommandingStaffTitleLoad = {};
+dzn_fnc_onCommandingStaffTitleLoad = {
+	private ["_display", "_idc", "_ctrl"];
+	_display = _this select 0;
+	
+	// **** CO Header ****
+	{
+		// _idc = 1002;
+		// _ctrl = _display displayCtrl _idc;
+		// _ctrl ctrlSetText (player getVariable "raPic");
+		// _ctrl ctrlCommit 0;
+	} forEach x;
+	
+	
+	
+};
 
-dzn_fnc_showCommandingStaff = {};
+dzn_fnc_showCommandingStaff = {
+	waitUntil { !isNil "dzn_ra_assignmentComplete" && { dzn_ra_assignmentComplete } };
+	
+
+};
 
 
 // Notification 3: Commanding Stuff Hint
