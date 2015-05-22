@@ -1,3 +1,4 @@
+// Notification 1: My Assignement
 dzn_fnc_onAssignmentTitleLoad = {
 	private ["_display", "_idc", "_ctrl"];
 	_display = _this select 0;
@@ -21,6 +22,7 @@ dzn_fnc_onAssignmentTitleLoad = {
 	_ctrl ctrlCommit 0;
 };
 
+
 dzn_fnc_showAssignment = {
 	waitUntil {!isNil {player getVariable "raPic"} && !isNil {player getVariable "raSquad"} && !isNil {player getVariable "raRole"}};
 	
@@ -28,3 +30,13 @@ dzn_fnc_showAssignment = {
 	sleep 1;
 	1001 cutRsc ["assignementTopTitle","PLAIN"];
 };
+
+
+// Notification 2: Commanding Struff Display
+
+
+// Notification 3: Commanding Stuff Hint
+
+
+
+// Notification 4: ORBAT 
