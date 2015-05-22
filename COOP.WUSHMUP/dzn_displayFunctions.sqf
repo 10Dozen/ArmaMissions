@@ -33,10 +33,16 @@ dzn_fnc_showAssignment = {
 
 
 // Notification 2: Commanding Struff Display
+dzn_fnc_onCommandingStaffTitleLoad = {};
+
+dzn_fnc_showCommandingStaff = {};
 
 
 // Notification 3: Commanding Stuff Hint
-
-
+dzn_fnc_showCommandingStaffHint = {};
 
 // Notification 4: ORBAT 
+dzn_fnc_showORBAT = {};
+
+
+
