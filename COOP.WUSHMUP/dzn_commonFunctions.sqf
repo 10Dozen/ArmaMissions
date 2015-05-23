@@ -143,3 +143,24 @@ dzn_fnc_setDateTime = {
 };
 
 dzn_fnc_cache = {};
+
+
+
+dzn_fnc_ra_getSquadLeader = {
+	// "squadId" call dzn_fnc_ra_getUnitWithRole
+	if (isNil "dzn_assignedSquads") exitWith {
+		player globalChat "dzn_fnc_ra_getSquadLeader: dzn_assignedSquads is not initialized!";
+	};
+
+	private["_squad"];
+	
+	_squad = [dzn_assignedSquads, _this] call dzn_fnc_getValueByKey;
+	if (typename _squad != "ARRAY") exitWith { 
+		player globalChat format ["dzn_fnc_ra_getSquadLeader: There is no unit for squad with ID %1", _this];
+		objNull
+	};
+	
+	if (isNil {_squad select 0}) exitWith { player globalChat "dzn_fnc_ra_getSquadLeader: No squad leader"; objNull };
+	
+	_squad select 0
+};
