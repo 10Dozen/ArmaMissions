@@ -57,6 +57,11 @@
 			<Russian>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Russian>
 			<English>SHOW COMMAND PERSONNEL</English>
 		</Key>
+		<Key ID='STR_assignment_showORBAT'>
+			<Original>SHOW ORBAT</Original>
+			<Russian>SHOW ORBAT</Russian>
+			<English>SHOW ORBAT</English>
+		</Key>
 	<!-- Squads -->
 		<Key ID='STR_assignment_CommandPersonnel'>
 			<Original>КОМАНДНЫЙ СОСТАВ</Original>
