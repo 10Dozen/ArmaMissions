@@ -51,6 +51,12 @@
 			<English>Your Assignment is</English>			
 		</Key>
 		
+	<!-- Diary and Hints -->	
+		<Key ID='STR_assignment_showCommandPersonnel'>
+			<Original>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Original>
+			<Russian>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Russian>
+			<English>SHOW COMMAND PERSONNEL</English>
+		</Key>
 	<!-- Squads -->
 		<Key ID='STR_assignment_CommandPersonnel'>
 			<Original>КОМАНДНЫЙ СОСТАВ</Original>
