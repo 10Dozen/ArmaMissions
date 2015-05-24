@@ -11,3 +11,6 @@ if (player == leader group player) then {
 };
 
 hint parseText format ["<t size='1.25' color='#CC3300'>MEDICAL INSURANCE</t><br/>Issued in the name %1.<br/><br/>Cost $ 3000.", name(player)]; 
+
+
+player setVariable ["isTrespassed",false,true];
