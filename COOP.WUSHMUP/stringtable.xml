@@ -52,6 +52,11 @@
 		</Key>
 		
 	<!-- Squads -->
+		<Key ID='STR_assignment_CommandPersonnel'>
+			<Original>КОМАНДНЫЙ СОСТАВ</Original>
+			<Russian>КОМАНДНЫЙ СОСТАВ</Russian>
+			<English>COMMAND PERSONNEL</English>
+		</Key>
 		<Key ID='STR_assignmentCO'>
 			<Original>ШТАБ</Original>
 			<Russian>ШТАБ</Russian>
