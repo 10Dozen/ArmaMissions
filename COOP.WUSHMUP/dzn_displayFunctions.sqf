@@ -19,6 +19,7 @@ dzn_fnc_onAssignmentTitleLoad = {
 	];
 };
 
+
 dzn_fnc_showAssignment = {
 	waitUntil {!isNil {player getVariable "raPic"} && !isNil {player getVariable "raSquad"} && !isNil {player getVariable "raRole"}};
 	
@@ -29,6 +30,7 @@ dzn_fnc_showAssignment = {
 
 
 // Notification 2: Commanding Struff Display
+/*
 dzn_fnc_onCommandingStaffTitleLoad = {
 	private ["_display", "_idc", "_ctrl"];
 	_display = _this select 0;
@@ -58,13 +60,29 @@ dzn_fnc_showCommandingStaff = {
 	waitUntil { !isNil "dzn_ra_assignmentComplete" && { dzn_ra_assignmentComplete } };
 	
 
-};
+};*/
 
 
-// Notification 3: Commanding Stuff Hint
 // Notification 3: Commanding Stuff Hint
 // Add action to Diary
+dzn_fnc_addCommandPersonnelSubject = {
+	private ["_topic"];
+	
+	_topic = localize "STR_assignment_CommandPersonnel";
 
+	player createDiarySubject [_topic,_topic];
+	player createDiaryRecord [
+		_topic,
+		[
+			"",
+			format [
+				"<execute expression='call dzn_fnc_showCommandingStaffHint'>%1</execute>"
+				, localize "STR_assignment_showCommandPersonnel"
+			]
+		]
+	];
+};
+	
 // Show structured hint
 dzn_fnc_showCommandingStaffHint = {
 	/*
