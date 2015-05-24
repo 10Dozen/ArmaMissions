@@ -17,26 +17,7 @@ dzn_fnc_onAssignmentTitleLoad = {
 		[1003, "raSquad"],
 		[1004, "raRole"]
 	];
-	
-	// ***** Pic ******
-	// _idc = 1002;
-	// _ctrl = _display displayCtrl _idc;
-	// _ctrl ctrlSetText (player getVariable "raPic");
-	// _ctrl ctrlCommit 0;
-	
-	// **** Squad *****
-	// _idc = 1003;
-	// _ctrl = _display displayCtrl _idc;
-	// _ctrl ctrlSetText (player getVariable "raSquad");
-	// _ctrl ctrlCommit 0;
-	
-	// **** Role ******
-	// _idc = 1004;
-	// _ctrl = _display displayCtrl _idc;
-	// _ctrl ctrlSetText (player getVariable "raRole");
-	// _ctrl ctrlCommit 0;
 };
-
 
 dzn_fnc_showAssignment = {
 	waitUntil {!isNil {player getVariable "raPic"} && !isNil {player getVariable "raSquad"} && !isNil {player getVariable "raRole"}};
@@ -81,7 +62,48 @@ dzn_fnc_showCommandingStaff = {
 
 
 // Notification 3: Commanding Stuff Hint
-dzn_fnc_showCommandingStaffHint = {};
+// Notification 3: Commanding Stuff Hint
+// Add action to Diary
+
+// Show structured hint
+dzn_fnc_showCommandingStaffHint = {
+	/*
+		call dzn_fnc_showCommandingStaffHint
+		Show hint with structured text of commanding stuff
+	*/
+	private["_strText_CO_H","_strText_CO","_strText_SL","_strText_mySL","_stringsToShow","_sl","_i"];
+	
+	_strText_CO_H	= "<t color='#ffffff' size='1.25' align='center'>%1</t>";
+	_strText_CO		= "<t color='#ffffff' size='1.25' align='center'>%1</t>";
+	
+	_strText_SL 	= "<t color='#ff00ff' size='1.15' align='left'>%1</t><t color='#666666' size='1.15' align='right>%2</t>";
+	_strText_mySL 	= "<t color='#999999' size='1.15' align='left'>%1</t><t color='#999999' size='1.15' align='right>%2</t>";
+
+	_stringsToShow = [
+		parseText (format ["<t color='#FFFFFF' size='1.5' align='center'>%1</t>", localize "STR_assignment_CommandPersonnel"])
+	];
+	
+	if (!isNil "dzn_ra_co") then {
+		_stringsToShow = _stringsToShow + [
+			lineBreak
+			,parseText (format [_strText_CO_H, [dzn_squadsMapping, "CO"] call dzn_fnc_getValueByKey])
+			,parseText (format [_strText_CO, name dzn_ra_co])
+		];	
+	};
+	
+	for "_i" from 0 to 5 do {
+		_sl = _i call dzn_fnc_ra_getSquadLeader;
+		if (!isNull _sl) then {
+			_stringsToShow = _stringsToShow + [
+				lineBreak
+				,parseText (format [
+					if (leader group player == _sl) then {_strText_SL} else {_strText_mySL}, [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, name _sl])
+			];
+		};	
+	};
+	
+	hintSilent (composeText _stringsToShow);
+};
 
 // Notification 4: ORBAT 
 dzn_fnc_showORBAT = {};
