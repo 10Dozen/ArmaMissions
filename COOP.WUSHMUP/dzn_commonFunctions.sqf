@@ -147,7 +147,7 @@ dzn_fnc_cache = {};
 
 
 dzn_fnc_ra_getSquadLeader = {
-	// "squadId" call dzn_fnc_ra_getUnitWithRole
+	// "squadId" call dzn_fnc_ra_getSquadLeader
 	if (isNil "dzn_assignedSquads") exitWith {
 		player globalChat "dzn_fnc_ra_getSquadLeader: dzn_assignedSquads is not initialized!";
 	};
