@@ -68,15 +68,16 @@ dzn_fnc_showCommandingStaff = {
 dzn_fnc_addCommandPersonnelSubject = {
 	private ["_topic"];
 	
-	_topic = localize "STR_assignment_CommandPersonnel";
-
+	// _topic = localize "STR_assignment_CommandPersonnel";
+	_topic = localize "STR_assignment_ORBAT";
+	
 	player createDiarySubject [_topic,_topic];
 	player createDiaryRecord [
 		_topic,
 		[
-			"",
+			_topic,
 			format [
-				"<execute expression='call dzn_fnc_showCommandingStaffHint'>%1</execute>"
+				"<font color='#B0E84F'><execute expression='call dzn_fnc_showCommandingStaffHint'>%1</execute></font>"
 				, localize "STR_assignment_showCommandPersonnel"
 			]
 		]
@@ -91,35 +92,40 @@ dzn_fnc_showCommandingStaffHint = {
 	*/
 	private["_strText_CO_H","_strText_CO","_strText_SL","_strText_mySL","_stringsToShow","_sl","_i"];
 	
-	_strText_CO_H	= "<t color='#ffffff' size='1.25' align='center'>%1</t>";
-	_strText_CO		= "<t color='#ffffff' size='1.25' align='center'>%1</t>";
+	_strText_CO_H	= "<t color='#EDB81A' size='1.25' align='center'>%1</t>";
+	_strText_CO		= "<t color='#FFFFFF' size='1.25' align='center'>%1</t>";
 	
-	_strText_SL 	= "<t color='#ff00ff' size='1.15' align='left'>%1</t><t color='#666666' size='1.15' align='right>%2</t>";
-	_strText_mySL 	= "<t color='#999999' size='1.15' align='left'>%1</t><t color='#999999' size='1.15' align='right>%2</t>";
+	_strText_SL 	= "<t color='#AAAAAA' size='1.15' align='left'>%1</t><t color='#FFFFFF' size='1.15' align='right'>%2</t>";
+	_strText_mySL 	= "<t color='#FFCC00' size='1.2' align='left'>%1</t><t color='#FFFFFF' size='1.2' align='right'>%2</t>";
 
 	_stringsToShow = [
-		parseText (format ["<t color='#FFFFFF' size='1.5' align='center'>%1</t>", localize "STR_assignment_CommandPersonnel"])
+		parseText (format ["<t color='#FFFFFF' size='1.5' align='center'>%1</t>", localize "STR_assignment_CommandPersonnelUpCase"])
+		,lineBreak
 	];
 	
 	if (!isNil "dzn_ra_co") then {
 		_stringsToShow = _stringsToShow + [
 			lineBreak
 			,parseText (format [_strText_CO_H, [dzn_squadsMapping, "CO"] call dzn_fnc_getValueByKey])
+			,lineBreak
 			,parseText (format [_strText_CO, name dzn_ra_co])
+			,lineBreak
 		];	
 	};
 	
-	for "_i" from 0 to 5 do {
-		_sl = _i call dzn_fnc_ra_getSquadLeader;
+	{
+		_sl = _forEachIndex call dzn_fnc_ra_getSquadLeader;
 		if (!isNull _sl) then {
 			_stringsToShow = _stringsToShow + [
 				lineBreak
 				,parseText (format [
-					if (leader group player == _sl) then {_strText_SL} else {_strText_mySL}, [dzn_squadsMapping, _i] call dzn_fnc_getValueByKey, name _sl
+					if (leader group player == _sl) then {_strText_mySL} else {_strText_SL}, 
+					[dzn_squadsMapping, _forEachIndex] call dzn_fnc_getValueByKey, 
+					name _sl
 				])
 			];
-		};	
-	};
+		};
+	} forEach dzn_assignedSquads;
 	
 	hintSilent (composeText _stringsToShow);
 };
@@ -129,36 +135,21 @@ dzn_fnc_showCommandingStaffHint = {
 dzn_fnc_addORBATSubject = {
 	private ["_topic"];
 	
-	_topic =  localize "STR_assignment_ORBAT";
+	_topic = localize "STR_assignment_ORBAT";
 
 	player createDiarySubject [_topic,_topic];
 	player createDiaryRecord [
 		_topic,
 		[
-			"",
+			_topic,
 			format [
-				"<execute expression='call dzn_fnc_showORBATHint'>%1</execute>"
+				"<font color='#B0E84F'><execute expression='call dzn_fnc_showORBATHint'>%1</execute></font>"
 				, localize "STR_assignment_showORBAT"
 			]
 		]
 	];
 };
 
-
-
-CO - <COName> [Or Not Displayed]
-| <SQUAD> - <SLName>
-|| Medic - <Name>  [Or Not Displayed]
-|| Red Team - <FTL Name>  [Or Not Displayed]
-||| AR - <AR Name>  [Or Not Displayed]
-||| AAR - <>  [Or Not Displayed]
-||| Grenadier - <>  [Or Not Displayed]
-|| Blue Team - <FTL Name>  [Or Not Displayed]
-||| AR - <AR>  [Or Not Displayed]
-||| AAR - <AAR>  [Or Not Displayed]
-||| Rifleman AT - <RAT>  [Or Not Displayed]
-
-	
 // Show structured hint
 dzn_fnc_showORBATHint = {
 	/*
@@ -170,16 +161,17 @@ dzn_fnc_showORBATHint = {
 		"_strText_color_base","_strText_line","_squadUnits","_squadName","_roleName"
 	];
 	
-	_strText_color_CO = "#ffffff";
-	_strText_color_SL = "#ffffff";
-	_strText_color_RT = "#ffffff";
-	_strText_color_BT = "#ffffff";
-	_strText_color_base = "#ffffff";
+	_strText_color_CO = "#EDB81A";
+	_strText_color_SL = "#FFCC00";
+	_strText_color_RT = "#E33636";
+	_strText_color_BT = "#368DE3";
+	_strText_color_base = "#AAAAAA";
 	
-	_strText_line = "<t color='%1' size='1.15' align='left'>%3</t><t color='%2' size='1.15' align='right'>%4</t>";	
+	_strText_line = "<t color='%1' size='%5' align='left'>%3</t><t color='%2' size='%5' align='right'>%4</t>";	
 	
 	_stringsToShow = [
 		parseText (format ["<t color='#FFFFFF' size='1.5' align='center'>%1</t>", localize "STR_assignment_ORBAT"])
+		,lineBreak
 	];
 	
 	if (!isNil "dzn_ra_co") then {
@@ -188,16 +180,23 @@ dzn_fnc_showORBATHint = {
 			,parseText (format [
 				_strText_line, 
 				_strText_color_CO, _strText_color_base,
-				[dzn_roleMapping, 0] call dzn_fnc_getValueByKey, name dzn_ra_co
+				[dzn_roleMappingShort, 0] call dzn_fnc_getValueByKey, name dzn_ra_co,
+				"1.18"
 			])			
 		];
 	};
 	
-	_squadUnits = [dzn_assignedSquads, player getVariable "raSquadId"] call dzn_fnc_getValueByKey;
+	
+	_squadUnits = if (!isNil "dzn_ra_co" && { player == dzn_ra_co }) then {
+		[]
+	} else {
+		[dzn_assignedSquads, player getVariable "raSquadId"] call dzn_fnc_getValueByKey
+	};
 	_squadName = [dzn_squadsMapping,  player getVariable "raSquadId"] call dzn_fnc_getValueByKey;
 	
 	_stringsToShow = _stringsToShow + [
 		lineBreak
+		,lineBreak
 		,parseText (format [
 			"<t color='%1' size='1.15' align='center'>%2</t>",
 			_strText_color_SL,
@@ -206,21 +205,19 @@ dzn_fnc_showORBATHint = {
 	];
 	
 	{
-		_roleName = [dzn_roleMapping, _x getVariable "raRoleId"] call dzn_fnc_getValueByKey;
+		_roleName = [dzn_roleMappingShort, _x getVariable "raRoleId"] call dzn_fnc_getValueByKey;
 		_stringsToShow = _stringsToShow + [
 			lineBreak
 			,parseText (format [
 				_strText_line,
 				if (_forEachIndex in [0,1]) then { _strText_color_SL } else { if (_forEachIndex in [2,3,4,5]) then { _strText_color_RT } else { _strText_color_BT }},
-				_strText_color_base,
+				if (_x == player) then {"#FFFFFF" } else {_strText_color_base},
 				_roleName,
-				name _x
+				name _x,
+				if (_x == player) then { "1.2" } else { "1.15" }
 			])
 		];
 	} forEach _squadUnits;	
 	
 	hintSilent (composeText _stringsToShow);
 };
-
-
-
