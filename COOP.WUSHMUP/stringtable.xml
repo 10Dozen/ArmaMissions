@@ -51,7 +51,35 @@
 			<English>Your Assignment is</English>			
 		</Key>
 		
+	<!-- Diary and Hints -->
+		<Key ID='STR_assignment_CommandPersonnelUpCase'>
+			<Original>КОМАНДНЫЙ СОСТАВ</Original>
+			<Russian>КОМАНДНЫЙ СОСТАВ</Russian>
+			<English>COMMAND PERSONNEL</English>
+		</Key>
+		<Key ID='STR_assignment_CommandPersonnel'>
+			<Original>Комсостав</Original>
+			<Russian>Комсостав</Russian>
+			<English>Command Personnel</English>
+		</Key>
+		<Key ID='STR_assignment_showCommandPersonnel'>
+			<Original>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Original>
+			<Russian>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Russian>
+			<English>SHOW COMMAND PERSONNEL</English>
+		</Key>
+		<Key ID='STR_assignment_showORBAT'>
+			<Original>SHOW ORBAT</Original>
+			<Russian>SHOW ORBAT</Russian>
+			<English>SHOW ORBAT</English>
+		</Key>
+		<Key ID='STR_assignment_ORBAT'>
+			<Original>ORBAT</Original>
+			<Russian>ORBAT</Russian>
+			<English>ORBAT</English>
+		</Key>
+		
 	<!-- Squads -->
+		
 		<Key ID='STR_assignmentCO'>
 			<Original>ШТАБ</Original>
 			<Russian>ШТАБ</Russian>

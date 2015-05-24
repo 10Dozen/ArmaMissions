@@ -40,6 +40,23 @@ dzn_roleMapping = [
 	[108, localize "STR_assignmentRole_AT_B"]
 ];
 
+dzn_roleMappingShort = [
+	[0, "CO"],
+	
+	[10, "SL"],
+	[100, "Medic"],
+	
+	[101, "FTL"],
+	[102, "AR"],
+	[103, "AAR"],
+	[104, "GR"],
+	
+	[105, "FTL"],
+	[106, "AR"],
+	[107, "AAR"],
+	[108, "RAT"]
+];
+
 dzn_rolePicMapping = [
 	[0, "img\CO.jpg"],
 	

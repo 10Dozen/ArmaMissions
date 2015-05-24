@@ -319,7 +319,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12714.478,69.777618,16558.15};
+					position[]={12704.572,64.487534,16548.158};
 					class args
 					{
 						items=5;
@@ -374,7 +374,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12715.139,65.319267,16541.285};
+					position[]={12705.233,59.90546,16531.295};
 					id=13;
 					side="LOGIC";
 					vehicle="Logic";
@@ -682,7 +682,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12589.106,33.780132,16445.693};
+					position[]={12603.993,33.929111,16405.828};
 					class args
 					{
 						items=7;
@@ -735,6 +735,7 @@ class Mission
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
+					text="Cleansweep1";
 					syncId=22;
 					synchronizations[]={23,48};
 				};
@@ -748,7 +749,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12589.245,34.050804,16433.047};
+					position[]={12604.132,33.919998,16393.184};
 					class args
 					{
 						items=1;
@@ -1013,7 +1014,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12673.435,34.25489,16389.092};
+					position[]={12663.529,34.288857,16379.102};
 					azimut=135;
 					id=33;
 					side="GUER";
@@ -1227,22 +1228,14 @@ class Mission
 	};
 	class Markers
 	{
-		items=4;
+		items=3;
 		class Item0
-		{
-			position[]={12682.162,34.35955,16342.597};
-			name="x1";
-			text="CleanSweep 1";
-			type="mil_warning";
-			colorName="ColorGreen";
-		};
-		class Item1
 		{
 			position[]={11853.764,12.480039,13819.327};
 			name="respawn_west";
 			type="Empty";
 		};
-		class Item2
+		class Item1
 		{
 			position[]={11819.584,10.803992,13638.391};
 			name="bm";
@@ -1250,7 +1243,7 @@ class Mission
 			type="hd_warning";
 			colorName="ColorKhaki";
 		};
-		class Item3
+		class Item2
 		{
 			position[]={11754.768,11.016722,13610.04};
 			name="bm_1";
@@ -1264,10 +1257,10 @@ class Mission
 		items=13;
 		class Item0
 		{
-			position[]={12625.956,33.868969,16422.254};
-			a=200;
+			position[]={12646.359,33.993332,16384.445};
+			a=140;
 			b=90;
-			angle=36.868809;
+			angle=36.868801;
 			rectangular=1;
 			interruptable=1;
 			age="UNKNOWN";
@@ -1338,8 +1331,8 @@ class Mission
 		};
 		class Item5
 		{
-			position[]={12618.126,33.898895,16422.885};
-			a=200;
+			position[]={12640.614,33.915848,16391.85};
+			a=150;
 			b=90;
 			angle=36.868801;
 			rectangular=1;
@@ -1348,7 +1341,7 @@ class Mission
 			interruptable=1;
 			age="UNKNOWN";
 			expCond="this && time > 30";
-			expActiv="task_cs1 = true;";
+			expActiv="[ ""Cleansweep1"", ""completed"" ] call dzn_taskControl_fnc_updateTaskStatus;  ";
 			class Effects
 			{
 			};
@@ -1435,15 +1428,15 @@ class Mission
 		};
 		class Item11
 		{
-			position[]={12596.717,33.641342,16447.375};
+			position[]={12612.482,33.919998,16406.793};
 			a=125;
-			b=220;
+			b=180;
 			angle=126.786;
 			rectangular=1;
 			interruptable=1;
 			age="UNKNOWN";
 			text="Trespassing Area";
-			expCond="true";
+			expCond="[""Cleansweep1"", ""accepted""] call dzn_taskControl_fnc_checkTaskStatus";
 			class Effects
 			{
 			};

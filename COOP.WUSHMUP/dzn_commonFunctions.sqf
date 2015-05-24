@@ -5,7 +5,7 @@ dzn_fnc_convertTriggerToLocation = {
 	_deleteTrg = if ( isNil {_this select 1} ) then { true } else { _this select 1 };
 	
 	_trgArea = triggerArea _trg; // result is [200, 120, 45, false]
-	hint str[_trgArea];
+
 	_loc = createLocation ["Name", getPosATL _trg, _trgArea select 0, _trgArea select 1];
 	_loc setDirection (_trgArea select 2);
 	_loc setRectangular (_trgArea select 3);
@@ -143,3 +143,24 @@ dzn_fnc_setDateTime = {
 };
 
 dzn_fnc_cache = {};
+
+
+
+dzn_fnc_ra_getSquadLeader = {
+	// "squadId" call dzn_fnc_ra_getSquadLeader
+	if (isNil "dzn_assignedSquads") exitWith {
+		player globalChat "dzn_fnc_ra_getSquadLeader: dzn_assignedSquads is not initialized!";
+	};
+
+	private["_squad"];
+	
+	_squad = [dzn_assignedSquads, _this] call dzn_fnc_getValueByKey;
+	if (typename _squad != "ARRAY") exitWith { 
+		player globalChat format ["dzn_fnc_ra_getSquadLeader: There is no unit for squad with ID %1", _this];
+		objNull
+	};
+	
+	if (isNil {_squad select 0}) exitWith { player globalChat "dzn_fnc_ra_getSquadLeader: No squad leader"; objNull };
+	
+	_squad select 0
+};
