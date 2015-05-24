@@ -13,7 +13,20 @@ if (isPlayer player) then {
 			],
 			false
 		] call dzn_fnc_gear_assignKit;		
-	};	
+	};
+	
+	[] spawn {
+		waitUntil { !isNil "dzn_ra_assignmentComplete" };
+		
+		call dzn_fnc_addORBATSubject;		
+		call dzn_fnc_addCommandPersonnelSubject;
+		
+		sleep 4;
+		call dzn_fnc_showCommandingStaffHint;
+		sleep 6;		
+		call dzn_fnc_showORBATHint;
+	};
+	
 };
 
 
@@ -61,7 +74,7 @@ waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_a
 // ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
 
-for "_i" from 1 to 15 do {
+for "_i" from 1 to 39 do {
 	call compile format ["dzn_allPlayers pushBack man_%1",_i];
 };
 
