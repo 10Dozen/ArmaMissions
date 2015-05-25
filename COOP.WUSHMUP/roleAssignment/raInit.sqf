@@ -8,7 +8,7 @@ if (isPlayer player) then {
 			player,
 			format [
 				"kit_%1_%2",
-				[dzn_factionMapping, par_playableFaction] call dzn_fnc_getValueByKey,
+				[dzn_kitToFactionMapping, par_playableFaction] call dzn_fnc_getValueByKey,
 				[dzn_kitToRoleMapping, player getVariable "raRoleId"] call dzn_fnc_getValueByKey
 			],
 			false
