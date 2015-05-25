@@ -1,7 +1,7 @@
 //	************** DZN_DYNAI PARAMETERS ******************
 
 // Condition of initialization
-#define	dzn_dynai_CONDITION_BEFORE_INIT	true
+#define	dzn_dynai_CONDITION_BEFORE_INIT	(!isNil "dzn_dynaiZonesSetUp")
 
 // Delay before and after zones initializations
 dzn_dynai_preInitTimeout			=	3;
