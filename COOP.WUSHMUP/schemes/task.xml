@@ -2,15 +2,16 @@
 	<task id="0">
 		<taskModule synchro="trigger"></taskModule>
 			<trigger synchro="taskModule">
+				<!-- Players deploment positions -->
 				<respawnPoints>
-				<point id="0"/>
-				<point id="1"/>
-				<point id="2"/>
-		    </respawnPoints>
+					<point id="0"/>
+					<point id="1"/>
+					<point id="2"/>
+				</respawnPoints>
 		    <dynaiZones>
-				<camp/>
-				<resuply id="A"/>
-				<resuply id="B"/>
+				<camp/> <!-- Indoor zone -->
+				<resuply id="A"/> <!-- Reinforcement A -->
+				<resuply id="B"/> <!-- Reinforcement B -->
 		    </dynaiZones>
 		</trigger>
 	</task>
