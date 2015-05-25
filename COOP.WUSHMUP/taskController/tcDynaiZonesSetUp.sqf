@@ -268,7 +268,7 @@ sleep 8;
 hostile_indoorArea call dzn_fnc_dynai_activateZone;
 
 [] spawn {
-	waitUntil { {_x distance tc_activeTaskModule < 600 } count (call bis_fnc_listPlayers) };
+	waitUntil { sleep 5; {_x distance tc_activeTaskModule < 600 } count (call bis_fnc_listPlayers) };
 	
 	[hostile_reinfAArea, [ getPos tc_activeTaskModule ]] call dzn_fnc_dynai_setZoneKeypoints;
 	hostile_reinfAArea call dzn_fnc_dynai_activateZone;
