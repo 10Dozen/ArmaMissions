@@ -16,13 +16,14 @@ private["_vehicleGroups"];
 // Defines
 // ******************
 dzn_hostileInfantryClassname = "O_Soldier_F";
-waitUntil { !isNil "dzn_hostileInfantryKit" };
 
 dzn_hostileVehicle_class_Tech = "";
 dzn_hostileVehicle_class_Light = "";
 dzn_hostileVehicle_class_Medium = "";
 dzn_hostileVehicle_class_Heavy = "";
-waitUntil { !isNil "dzn_hostileVehicle_gearKit" };
+
+dzn_hostileInfantryKit = format ["kit_%1_Random", [dzn_kitToFactionMapping ,par_hostileFaction] call dzn_fnc_getValueByKey];
+dzn_hostileVehicle_gearKit = "";
 
 dzn_vehicleClasses = switch (par_hostileVehicles) do {
 	case 0: { [] };
