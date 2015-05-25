@@ -1,1 +1,17 @@
-<tasks></tasks>
+<tasks>
+	<task id="0">
+		<taskModule synchro="trigger"></taskModule>
+			<trigger synchro="taskModule">
+				<respawnPoints>
+				<point id="0"/>
+				<point id="1"/>
+				<point id="2"/>
+		    </respawnPoints>
+		    <dynaiZones>
+				<camp/>
+				<resuply id="A"/>
+				<resuply id="B"/>
+		    </dynaiZones>
+		</trigger>
+	</task>
+</tasks>
