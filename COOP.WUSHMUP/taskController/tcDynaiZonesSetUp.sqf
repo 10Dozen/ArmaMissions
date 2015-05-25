@@ -75,7 +75,7 @@ dzn_fnc_formatVehicleDynaiVehicleGroups = {
 	};	
 	
 	_output
-}
+};
 
 // ******************
 //  Zones Settings
@@ -86,7 +86,7 @@ dzn_fnc_formatVehicleDynaiVehicleGroups = {
 // ******************
 
 // Infantries
-dzn_mainAreaGroups_inf_count = switch (par_hostileAmount) then {
+dzn_mainAreaGroups_inf_count = switch (par_hostileAmount) do {
 	case 0; case 1: { 1 };
 	case 2: { 2 }; 
 	case 3: { 3 }; 
@@ -116,7 +116,7 @@ dzn_mainAreaGroups = [
 
 // Vehicles
 if (par_hostileVehicles != 0) then {	
-	dzn_mainAreaGroups_veh_count = switch (par_hostileAmount) then {
+	dzn_mainAreaGroups_veh_count = switch (par_hostileAmount) do {
 		case 0; case 1: { 1 }; 
 		case 2: { 3 }; 
 		case 3: { 4 }; 
@@ -131,7 +131,7 @@ if (par_hostileVehicles != 0) then {
 // Indoor area 
 // ******************
 
-dzn_indoorAreaGroups_count = switch (par_hostileAmount) then {
+dzn_indoorAreaGroups_count = switch (par_hostileAmount) do {
 	case 0; case 1: { 1 }; case 2; case 3: { 2 }; case 4: { 3 }
 };
 
@@ -152,7 +152,7 @@ dzn_indoorAreaGroups =  [
 // ******************
 
 // Infantries
-dzn_reinfAAreaGroups_inf_count = switch (par_hostileAmount) then {
+dzn_reinfAAreaGroups_inf_count = switch (par_hostileAmount) do {
 	case 0; case 1; case 2: { 1 }; 
 	case 3; case 4: { 2 }
 };
@@ -180,7 +180,7 @@ dzn_reinfAAreaGroups = [
 
 // Vehicles
 if (par_hostileVehicles != 0) then {	
-	dzn_reinfAAreaGroups_veh_count = switch (par_hostileAmount) then {
+	dzn_reinfAAreaGroups_veh_count = switch (par_hostileAmount) do {
 		case 0; case 1; case 2; case 3: { 1 }; case 4: { 2 }
 	};
 	
@@ -192,7 +192,7 @@ if (par_hostileVehicles != 0) then {
 // ******************
 
 // Infantries
-dzn_reinfBAreaGroups_inf_count = switch (par_hostileAmount) then {
+dzn_reinfBAreaGroups_inf_count = switch (par_hostileAmount) do {
 	case 0; case 1; case 2: { 1 }; 
 	case 3; case 4: { 2 }
 };
@@ -220,7 +220,7 @@ dzn_reinfBAreaGroups = [
 
 // Vehicles
 if (par_hostileVehicles != 0) then {	
-	dzn_reinfBAreaGroups_veh_count = switch (par_hostileAmount) then {
+	dzn_reinfBAreaGroups_veh_count = switch (par_hostileAmount) do {
 		case 0: { 0 };
 		case 1; case 2; case 3; case 4: { 1 }
 	};	
