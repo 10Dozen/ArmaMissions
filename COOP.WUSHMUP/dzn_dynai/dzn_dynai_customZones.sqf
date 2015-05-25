@@ -21,16 +21,6 @@ dzn_dynai_zoneProperties = [
 	],
 	
 	[
-		"hostile_indoorArea",
-		"EAST",false,[],[],
-		/* Groups: */
-		[
-			dzn_reinfAAreaGroups
-	  	],
-	  	["LIMITED","SAFE","RED","COLUMN"]
-	],
-	
-	[
 		"hostile_reinfBArea",
 		"EAST",false,[],[],
 		/* Groups: */
