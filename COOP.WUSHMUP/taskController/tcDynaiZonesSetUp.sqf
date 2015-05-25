@@ -17,10 +17,10 @@ private["_vehicleGroups"];
 // ******************
 dzn_hostileInfantryClassname = "O_Soldier_F";
 
-dzn_hostileVehicle_class_Tech = "";
-dzn_hostileVehicle_class_Light = "";
-dzn_hostileVehicle_class_Medium = "";
-dzn_hostileVehicle_class_Heavy = "";
+dzn_hostileVehicle_class_Tech = "O_G_Offroad_01_armed_F";
+dzn_hostileVehicle_class_Light = "O_MRAP_02_hmg_F";
+dzn_hostileVehicle_class_Medium = "O_APC_Wheeled_02_rcws_F";
+dzn_hostileVehicle_class_Heavy = "O_MBT_02_cannon_F";
 
 dzn_hostileInfantryKit = format ["kit_%1_Random", [dzn_kitToFactionMapping ,par_hostileFaction] call dzn_fnc_getValueByKey];
 dzn_hostileVehicle_gearKit = "";
@@ -36,40 +36,25 @@ dzn_vehicleClasses = switch (par_hostileVehicles) do {
 dzn_fnc_formatVehicleDynaiVehicleGroups = {
 	// veh_count call dzn_fnc_formatVehicleDynaiVehicleGroups
 	// RETURN: list of vehicles formatted
-	private["_output","_vehicleType","_vehicleUnit","_crewUnits"];
+	private["_output","_vehicleType","_squad"];
 	
 	_output = [];
 	
 	for "_i" from 1 to _this do {		
 		_vehicleType = dzn_vehicleClasses call BIS_fnc_selectRandom;
 		
-		_vehicleUnit = format ["['%1', 'isVehicle', '%2']", _vehicleType, dzn_hostileVehicle_gearKit];
-		_crewUnits = switch (_vehicleType) do {
-			case dzn_hostileVehicle_class_Tech; 
-			case dzn_hostileVehicle_class_Light: { 
-				format [
-					"['%1',[0,'gunner'],'%2'], ['%1',[0,'driver'],'%2']", 
-					dzn_hostileInfantryClassname, 
-					dzn_hostileInfantryKit
-				]
-			};			
-			case dzn_hostileVehicle_class_Medium; 
-			case dzn_hostileVehicle_class_Heavy: { 
-				format [
-					"['%1',[0,'commander'],'%2'], ['%1',[0,'gunner'],'%2'],['%1',[0,'driver'],'%2']", 
-					dzn_hostileInfantryClassname, 
-					dzn_hostileInfantryKit
-				]
-			};		
-		};
+		_squad = [ [_vehicleType, "isVehicle", dzn_hostileVehicle_gearKit] ];
+		{
+			_squad  = _squad  + [ [dzn_hostileInfantryClassname, [0, _x], dzn_hostileInfantryKit] ];
+		} forEach ( switch (_vehicleType) do {
+			case dzn_hostileVehicle_class_Tech; case dzn_hostileVehicle_class_Light: { ["gunner","driver"] };
+			case dzn_hostileVehicle_class_Medium; case dzn_hostileVehicle_class_Heavy: { ["commander","gunner","driver"] };
+		} );
 		
 		_output = _output + [
 			[
 				1,
-				[
-					_vehicleUnit,
-					_crewUnits
-				]
+				_squad
 			]
 		];
 	};	
