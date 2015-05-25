@@ -243,22 +243,22 @@ tc_areasPositions = synchronizedObjects tc_activeTaskTrigger;
 
 // Moving zones
 [hostile_mainArea, getPos tc_activeTaskModule] call dzn_fnc_dynai_moveZone;
-[hostile_indoorArea, tc_indoorsPosition] call dzn_fnc_dynai_moveZone;
-[hostile_reinfAArea, tc_reinfPositions select 0] call dzn_fnc_dynai_moveZone;
-[hostile_reinfBArea, tc_reinfPositions select 1] call dzn_fnc_dynai_moveZone;
+// [hostile_indoorArea, tc_indoorsPosition] call dzn_fnc_dynai_moveZone;
+// [hostile_reinfAArea, tc_reinfPositions select 0] call dzn_fnc_dynai_moveZone;
+// [hostile_reinfBArea, tc_reinfPositions select 1] call dzn_fnc_dynai_moveZone;
 
 // Activating zones
 hostile_mainArea call dzn_fnc_dynai_activateZone;
-sleep 8;
-hostile_indoorArea call dzn_fnc_dynai_activateZone;
+// sleep 8;
+// hostile_indoorArea call dzn_fnc_dynai_activateZone;
 
-[] spawn {
-	waitUntil { sleep 5; {_x distance tc_activeTaskModule < 600 } count (call bis_fnc_listPlayers) };
+// [] spawn {
+	// waitUntil { sleep 5; {_x distance tc_activeTaskModule < 600 } count (call bis_fnc_listPlayers) };
 	
-	[hostile_reinfAArea, [ getPos tc_activeTaskModule ]] call dzn_fnc_dynai_setZoneKeypoints;
-	hostile_reinfAArea call dzn_fnc_dynai_activateZone;
+	// [hostile_reinfAArea, [ getPos tc_activeTaskModule ]] call dzn_fnc_dynai_setZoneKeypoints;
+	// hostile_reinfAArea call dzn_fnc_dynai_activateZone;
 	
-	sleep 6;
-	[hostile_reinfBArea, [ getPos tc_activeTaskModule ]] call dzn_fnc_dynai_setZoneKeypoints;
-	hostile_reinfBArea call dzn_fnc_dynai_activateZone;
-};
+	// sleep 6;
+	// [hostile_reinfBArea, [ getPos tc_activeTaskModule ]] call dzn_fnc_dynai_setZoneKeypoints;
+	// hostile_reinfBArea call dzn_fnc_dynai_activateZone;
+// };
