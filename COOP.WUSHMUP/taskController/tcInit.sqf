@@ -31,7 +31,7 @@ if (isServer || isDedicated) then {
 	publicVariable "tc_completeArea";
 	
 	// Selecting all DYNAI zones
-	[] execVM "tcDynaiZonesSetUp.sqf";
+	[] execVM "taskController\tcDynaiZonesSetUp.sqf";
 };
 
 // ********** Set Marker *****************
