@@ -21,7 +21,7 @@ dzn_dynai_zoneProperties = [
 	],
 	
 	[
-		"hostile_reinfBArea",
+		"hostile_reinfAArea",
 		"EAST",false,[],[],
 		/* Groups: */
 		[
@@ -31,7 +31,7 @@ dzn_dynai_zoneProperties = [
 	],
 	
 	[
-		"hostile_reinfAArea",
+		"hostile_reinfBArea",
 		"EAST",false,[],[],
 		/* Groups: */
 		[
