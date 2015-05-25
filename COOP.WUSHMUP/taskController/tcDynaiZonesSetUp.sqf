@@ -228,13 +228,27 @@ if (par_hostileVehicles != 0) then {
 };
 
 // ****************
+// End of Settings
+// ****************
+dzn_dynaiZonesSetUp = true;
+
+
+// ****************
 // Dynai Zones Set Up
 // ****************
 
+waitUntil { 
+	!isNil {hostile_mainArea getVariable "initialized"} 
+	&& !isNil {hostile_indoorArea getVariable "initialized"}  
+};
+
+/*
+	Each task has 
+*/
+[hostile_mainArea, getPos tc_activeTaskModule] call dzn_fnc_dynai_moveZone;
+[hostile_indoorArea, getPos tc_activeTaskModule] call dzn_fnc_dynai_moveZone;
 
 
-// ****************
-// End of Set Up
-// ****************
 
-dzn_dynaiZonesSetUp = true;
+
+
