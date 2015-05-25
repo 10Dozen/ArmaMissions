@@ -4,8 +4,8 @@
 #define	dzn_dynai_CONDITION_BEFORE_INIT	(!isNil "dzn_dynaiZonesSetUp")
 
 // Delay before and after zones initializations
-dzn_dynai_preInitTimeout			=	3;
-dzn_dynai_afterInitTimeout			=	3;
+dzn_dynai_preInitTimeout			=	5;
+dzn_dynai_afterInitTimeout			=	10;
 
 // Default simple skill of units
 dzn_dynai_complexSkill				=	false;
@@ -28,7 +28,11 @@ dzn_dynai_skill = if (dzn_dynai_complexSkill) then {
 	]
 } else {
 	/* 	Simple Skill Level */
-	0.5	
+	switch (par_hostileSkill) do {
+		case 0: { 0.3 };
+		case 1: { 0.6 };
+		case 2: { 0.9 };
+	};
 };
 dzn_dynai_complexSkill = [ dzn_dynai_complexSkill, dzn_dynai_skill ];
 
