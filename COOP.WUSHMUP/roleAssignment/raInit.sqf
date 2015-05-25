@@ -74,7 +74,7 @@ waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_a
 // ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
 
-for "_i" from 1 to 39 do {
+for "_i" from 1 to 16 do {
 	call compile format ["dzn_allPlayers pushBack man_%1",_i];
 };
 
