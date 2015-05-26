@@ -103,13 +103,32 @@ dzn_kitToRoleMapping = [
 	[108, "RAT"]
 ];
 
-/*
-	title = "$STR_par_hostileVehicles";
-	values[] = {0,1,2,3,4};
-*/
-dzn_vehicleMapping = [
-
-
+dzn_vehicleToFactionMapping = [
+	[
+		0,	
+		[
+			[/*Tech*/ "B_G_Offroad_01_armed_F"],
+			[/*Light*/ "B_MRAP_01_hmg_F" ],
+			[/*Medium*/ "B_APC_Wheeled_01_cannon_F"],
+			[/*Heavy*/ "B_MBT_01_cannon_F" ]
+		]
+	],
+	[
+		1,	
+		[
+			[/*Tech*/ "O_G_Offroad_01_armed_F"],
+			[/*Light*/ "O_MRAP_02_hmg_F"],
+			[/*Medium*/ "O_APC_Wheeled_02_rcws_F"],
+			[/*Heavy*/ "O_MBT_02_cannon_F"]
+		]
+	],
+	[
+		2,	
+		[
+			[/*Tech*/ "I_G_Offroad_01_armed_F"],
+			[/*Light*/ "I_MRAP_03_hmg_F"],
+			[/*Medium*/ "I_APC_Wheeled_03_cannon_F"],
+			[/*Heavy*/ "I_MBT_03_cannon_F"]
+		]
+	]
 ];
-
-
