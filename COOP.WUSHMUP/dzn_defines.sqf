@@ -80,6 +80,12 @@ dzn_factionMapping = [
 	[2,	localize "$STR_par_faction3"]
 ];
 
+dzn_kitToFactionMapping = [
+	[0,	"NATO"],
+	[1,	"CSAT"],
+	[2,	"AAF"]
+];
+
 dzn_kitToRoleMapping = [
 	[0, "CO"],
 	

@@ -80,7 +80,7 @@ class Params
 	
 	class par_month
 	{
-		title = "$STR_f_param_timeOfDay";
+		title = "$STR_par_month";
 		values[] = {0,1,2,3,4,5,6,7,8,9,10,11,12};
 		texts[] = {
 			$STR_par_optionRandom,
@@ -102,7 +102,7 @@ class Params
 
 	class par_year
 	{
-		title = "$STR_f_param_timeOfDay";
+		title = "$STR_par_year";
 		values[] = {2015,2016,2017,2018,2019,2020};
 		default = 2015;
 	};
@@ -232,7 +232,7 @@ class RscTitles
 	class assignementBlackTitle
 	{
 		idd = -1;
-		duration = 9;
+		duration = 2;
 		class controls
 		{			
 			class assignmentBlackControl
@@ -256,7 +256,7 @@ class RscTitles
 	class assignementTopTitle
 	{
 		idd = -1;
-		duration = 5;
+		duration = 1;
 		onLoad = "_this call dzn_fnc_onAssignmentTitleLoad"; 
 		class controls
 		{			
@@ -289,7 +289,7 @@ class RscTitles
 				sizeEx = 0.1;
 				colorBackground[] = {0,0,0,1};
 				colorText[] = {.87,.835,.807,1};
-				text = $STR_assignmentDisplay; //"Your Assignment is";
+				text = "";
 			}; 
 			
 			class assignmentPicControl
@@ -321,7 +321,7 @@ class RscTitles
 				sizeEx = 0.12;
 				colorBackground[] = {0,0,0,1};
 				colorText[] = {.968,.745,.161,1};
-				text =  $STR_assignmentBravo; // "ALPHA";
+				text =  "";
 			}; 
 
 			class assignmentLowControl
@@ -337,7 +337,7 @@ class RscTitles
 				sizeEx = 0.08;
 				colorBackground[] = {0,0,0,1};
 				colorText[] = {.87,.835,.807,1};
-				text = $STR_assignmentRole_Rifleman; // "Squad Leader";
+				text = "";
 			}; 
 		};
 	};
