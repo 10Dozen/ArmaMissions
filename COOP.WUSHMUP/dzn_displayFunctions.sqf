@@ -221,3 +221,16 @@ dzn_fnc_showORBATHint = {
 	
 	hintSilent (composeText _stringsToShow);
 };
+
+// **********************
+// Show Mission End timer
+//  Is able to watch from diary
+//  At 1/2 and last 5 mins will be notification.
+// **********************
+
+
+// **********************
+// Show Capture timer
+// (maybe Display?)
+// **********************
+
