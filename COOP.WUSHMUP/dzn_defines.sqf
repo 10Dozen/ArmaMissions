@@ -103,4 +103,13 @@ dzn_kitToRoleMapping = [
 	[108, "RAT"]
 ];
 
+/*
+	title = "$STR_par_hostileVehicles";
+	values[] = {0,1,2,3,4};
+*/
+dzn_vehicleMapping = [
+
+
+];
+
 
