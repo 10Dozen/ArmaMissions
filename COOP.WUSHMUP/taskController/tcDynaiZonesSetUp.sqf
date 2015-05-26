@@ -16,11 +16,12 @@ private["_vehicleGroups"];
 // Defines
 // ******************
 dzn_hostileInfantryClassname = "O_Soldier_F";
+dzn_hstileVehicle_classes = [dzn_vehicleToFactionMapping, par_hostileFaction] call dzn_fnc_getValueByKey;
 
-dzn_hostileVehicle_class_Tech = "O_G_Offroad_01_armed_F";
-dzn_hostileVehicle_class_Light = "O_MRAP_02_hmg_F";
-dzn_hostileVehicle_class_Medium = "O_APC_Wheeled_02_rcws_F";
-dzn_hostileVehicle_class_Heavy = "O_MBT_02_cannon_F";
+dzn_hostileVehicle_class_Tech = dzn_hstileVehicle_classes select 0;
+dzn_hostileVehicle_class_Light =  dzn_hstileVehicle_classes select 1;
+dzn_hostileVehicle_class_Medium =  dzn_hstileVehicle_classes select 2;
+dzn_hostileVehicle_class_Heavy =  dzn_hstileVehicle_classes select 3;
 
 dzn_hostileInfantryKit = format ["kit_%1_Random", [dzn_kitToFactionMapping ,par_hostileFaction] call dzn_fnc_getValueByKey];
 dzn_hostileVehicle_gearKit = "";
