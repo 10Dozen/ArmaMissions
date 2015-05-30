@@ -81,6 +81,7 @@ for "_i" from 0 to 2 do {
 	_markersInitialPositions = _markersInitialPositions + [ call compile format ["getMarkerPos 'mrk_startPos_%1'",_i] ];
 };
 
+
 switch (true) do {
 	case (count dzn_assignedSquads < 4): { 
 		_getPoint = "tc_deploymentPoints select _forEachIndex"; 		
@@ -150,14 +151,14 @@ switch (true) do {
 } forEach dzn_assignedSquads;
 
 // Hide unused markers
-{
+for "_i" from 0 to 2 do {
 	call compile format [
-		"if (_x != getMarkerPos 'mrk_startPos_%1') then {
+		"if ((getMarkerPos 'mrk_startPos_%1') in _markersInitialPositions) then {
 			'mrk_startPos_%1' setMarkerAlpha 0;
 		}
 		"
-		,_forEachIndex
+		,_i
 	]
-} forEach _markersInitialPositions;
+};
 
 if (!isNil "dzn_ra_co") then { dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0]; };
