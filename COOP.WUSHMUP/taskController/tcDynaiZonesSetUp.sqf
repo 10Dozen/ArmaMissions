@@ -34,23 +34,28 @@ dzn_vehicleClasses = switch (par_hostileVehicles) do {
 	case 4: { [ dzn_hostileVehicle_class_Tech, dzn_hostileVehicle_class_Light, dzn_hostileVehicle_class_Medium, dzn_hostileVehicle_class_Heavy ] };
 };
 
-dzn_fnc_formatVehicleDynaiVehicleGroups = {
-	// veh_count call dzn_fnc_formatVehicleDynaiVehicleGroups
+dzn_fnc_formatDynaiVehicleGroups = {
+	// veh_count call dzn_fnc_formatDynaiVehicleGroups
 	// RETURN: list of vehicles formatted
 	private["_output","_vehicleType","_squad"];
 	
 	_output = [];
 	
 	for "_i" from 1 to _this do {		
-		_vehicleType = dzn_vehicleClasses call BIS_fnc_selectRandom;
+		_vehicleType = (dzn_vehicleClasses call BIS_fnc_selectRandom) call BIS_fnc_selectRandom;		
 		
-		_squad = [ [_vehicleType, "isVehicle", dzn_hostileVehicle_gearKit] ];
+		_crew  = switch (true) do {
+			case (_vehicleType in dzn_hostileVehicle_class_Tech); 
+			case (_vehicleType in dzn_hostileVehicle_class_Light): { ["gunner","driver"] };
+			case (_vehicleType in dzn_hostileVehicle_class_Medium); 
+			case (_vehicleType in dzn_hostileVehicle_class_Heavy): { ["commander","gunner","driver"] };
+		};
+		
+		te = _crew;
+		_squad = [ [_vehicleType, "Vehicle Hold", dzn_hostileVehicle_gearKit] ];
 		{
 			_squad  = _squad  + [ [dzn_hostileInfantryClassname, [0, _x], dzn_hostileInfantryKit] ];
-		} forEach ( switch (_vehicleType) do {
-			case dzn_hostileVehicle_class_Tech; case dzn_hostileVehicle_class_Light: { ["gunner","driver"] };
-			case dzn_hostileVehicle_class_Medium; case dzn_hostileVehicle_class_Heavy: { ["commander","gunner","driver"] };
-		} );
+		} forEach _crew;
 		
 		_output = _output + [
 			[
@@ -109,7 +114,7 @@ if (par_hostileVehicles != 0) then {
 		case 4: { 5 }
 	};
 	
-	dzn_mainAreaGroups = dzn_mainAreaGroups + (dzn_mainAreaGroups_veh_count call dzn_fnc_formatVehicleDynaiVehicleGroups);
+	dzn_mainAreaGroups = dzn_mainAreaGroups + (dzn_mainAreaGroups_veh_count call dzn_fnc_formatDynaiVehicleGroups);
 };
 
 
@@ -170,7 +175,7 @@ if (par_hostileVehicles != 0) then {
 		case 0; case 1; case 2; case 3: { 1 }; case 4: { 2 }
 	};
 	
-	dzn_reinfAAreaGroups = dzn_reinfAAreaGroups + (dzn_reinfAAreaGroups_veh_count call dzn_fnc_formatVehicleDynaiVehicleGroups);	
+	dzn_reinfAAreaGroups = dzn_reinfAAreaGroups + (dzn_reinfAAreaGroups_veh_count call dzn_fnc_formatDynaiVehicleGroups);	
 };
 
 // ******************
@@ -211,7 +216,7 @@ if (par_hostileVehicles != 0) then {
 		case 1; case 2; case 3; case 4: { 1 }
 	};	
 	
-	dzn_reinfBAreaGroups = dzn_reinfBAreaGroups + (dzn_reinfBAreaGroups_veh_count call dzn_fnc_formatVehicleDynaiVehicleGroups);	
+	dzn_reinfBAreaGroups = dzn_reinfBAreaGroups + (dzn_reinfBAreaGroups_veh_count call dzn_fnc_formatDynaiVehicleGroups);	
 };
 
 // ****************
@@ -244,14 +249,14 @@ tc_areasPositions = synchronizedObjects tc_activeTaskTrigger;
 
 // Moving zones
 [hostile_mainArea, getPos tc_activeTaskModule] call dzn_fnc_dynai_moveZone;
-// [hostile_indoorArea, tc_indoorsPosition] call dzn_fnc_dynai_moveZone;
+[hostile_indoorArea, tc_indoorsPosition] call dzn_fnc_dynai_moveZone;
 // [hostile_reinfAArea, tc_reinfPositions select 0] call dzn_fnc_dynai_moveZone;
 // [hostile_reinfBArea, tc_reinfPositions select 1] call dzn_fnc_dynai_moveZone;
 
 // Activating zones
 hostile_mainArea call dzn_fnc_dynai_activateZone;
-// sleep 8;
-// hostile_indoorArea call dzn_fnc_dynai_activateZone;
+sleep 8;
+hostile_indoorArea call dzn_fnc_dynai_activateZone;
 
 // [] spawn {
 	// waitUntil { sleep 5; {_x distance tc_activeTaskModule < 600 } count (call bis_fnc_listPlayers) };
