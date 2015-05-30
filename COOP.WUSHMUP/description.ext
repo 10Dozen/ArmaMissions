@@ -341,4 +341,111 @@ class RscTitles
 			}; 
 		};
 	};
+	
+	class endTimerLayerTitle
+	{
+		idd = -1;
+		duration = 1;
+		onLoad = "_this call dzn_fnc_onEndTimerLayerTitleLoad"; 
+		class controls
+		{
+			class endTimerLayerTextContrl
+			{    
+				idc = 1010;				
+				type = 0;				
+				style = 2;
+				x = 0; 	
+				y = 0;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0.6,0,0,1};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+			
+			class endTimerLayerTimeControl
+			{    
+				idc = 1011;				
+				type = 0;				
+				style = 2;
+				x = 0; 	
+				y = 0.04;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0,0,0,.4};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+		};		
+	};
+	
+	class endTimerTitle
+	{
+		idd = -1;
+		duration = 1;
+		onLoad = "_this call dzn_fnc_onEndTimerTitleLoad"; 
+		class controls
+		{			
+			class endTimerControl
+			{    
+				idc = 1012;				
+				type = 0;				
+				style = 2;
+				x = 0; 	
+				y = 0.04;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0,0,0,0};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+		};		
+	};
+	
+	class winTimerLayerTitle
+	{
+		idd = -1;
+		duration = 1;
+		onLoad = "_this call dzn_fnc_onWinTimerTitleLoad"; 
+		class controls
+		{
+			class winTimerLayerTextContrl
+			{    
+				idc = 1012;				
+				type = 0;				
+				style = 2;
+				x = 0.175; 	
+				y = 0;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0.3,0.6,0,1};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+			
+			class winTimerTimeControl
+			{    
+				idc = 1013;				
+				type = 0;				
+				style = 2;
+				x = 0.175; 	
+				y = 0.04;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0,0,0,.4};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+		};		
+	};
 };
