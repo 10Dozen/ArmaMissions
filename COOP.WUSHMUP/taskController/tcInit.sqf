@@ -67,12 +67,20 @@ sleep 2;
 
 if (dzn_assignedSquads isEqualTo []) exitWith {};
 
-private["_getMarkerText","_getPoint","_markerId","_markerText","_posASL","_squadStep","_unitPosASL","_deploymentPoint"];
+private[
+	"_getMarkerText","_getPoint","_markerId","_markerText","_markersInitialPositions",
+	"_posASL","_squadStep","_unitPosASL","_deploymentPoint"
+];
 
 tc_deploymentAssignment = [];
 _getMarkerText = "";
 _getPoint = "";
 _getMarkerId = 0;
+_markersInitialPositions = [];
+for "_i" from 0 to 2 do {
+	_markersInitialPositions = _markersInitialPositions + [ call compile format ["getMarkerPos 'mrk_startPos_%1'",_i] ];
+};
+
 
 switch (true) do {
 	case (count dzn_assignedSquads < 4): { 
@@ -141,5 +149,16 @@ switch (true) do {
 		_x setVelocity [0,0,0];
 	} forEach (_x select 1);
 } forEach dzn_assignedSquads;
+
+// Hide unused markers
+for "_i" from 0 to 2 do {
+	call compile format [
+		"if ((getMarkerPos 'mrk_startPos_%1') in _markersInitialPositions) then {
+			'mrk_startPos_%1' setMarkerAlpha 0;
+		}
+		"
+		,_i
+	]
+};
 
 if (!isNil "dzn_ra_co") then { dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0]; };
