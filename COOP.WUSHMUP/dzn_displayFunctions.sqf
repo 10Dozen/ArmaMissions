@@ -202,7 +202,7 @@ dzn_fnc_onEndTimerTitleLoad = {
 	
 	_ctrl = _display displayCtrl 1010;
 	_ctrl ctrlSetBackgroundColor (
-		if (time > (par_endTime - 1)*60) then { [0.6,0,0,1] } else { [0,0,0,1] }
+		if (time > (par_endTime - dzn_endTimerLimitValue)*60) then { [0.6,0,0,1] } else { [0,0,0,1] }
 	);
 	_ctrl ctrlCommit 0;
 	
@@ -221,7 +221,7 @@ dzn_fnc_onEndTimerTitleLoad = {
 
 dzn_fnc_showEndTimer = {
 	1010 cutRsc ["endTimerTitle", "PLAIN",0];	
-	if (typename _this != "ARRAY") then {
+	if (typename _this != "ARRAY" && (time < (par_endTime - dzn_endTimerLimitValue)*60)) then {
 		private ["_timer"];
 		_timer = time + _this;
 		waitUntil { time > _timer };
@@ -229,6 +229,23 @@ dzn_fnc_showEndTimer = {
 	};
 };
 
+dzn_fnc_addEndTimerSubject = {
+	private ["_topic"];
+	
+	_topic = localize "STR_assignment_endTimerTopic";
+
+	player createDiarySubject [_topic,_topic];
+	player createDiaryRecord [
+		_topic,
+		[
+			_topic,
+			format [
+				"<font color='#B0E84F'><execute expression='10 spawn dzn_fnc_showEndTimer'>%1</execute></font>"
+				, localize "STR_assignment_showEndTimer"
+			]
+		]
+	];
+};
 
 
 // **********************
