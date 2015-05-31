@@ -161,7 +161,7 @@ for "_i" from 0 to 2 do {
 
 // Moving CO to the first start pos
 if (!isNil "dzn_ra_co") then {
-	if (isServer || isDedicated || (isPlayer && {player == dzn_ra_co} )) then {
+	if (isServer || isDedicated || (hasInterface && {player == dzn_ra_co} )) then {
 		dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0];
 	};
 };
