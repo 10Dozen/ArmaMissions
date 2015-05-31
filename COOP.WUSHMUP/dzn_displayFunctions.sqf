@@ -229,14 +229,7 @@ dzn_fnc_showEndTimer = {
 	};
 };
 
-// end Timer Handler
-[] spawn {
-	waitUntil { time > (par_endTime*60)/2 };
-	20 spawn dzn_fnc_showEndTimer;
-	
-	waitUntil { time > (par_endTime - 1)*60 };
-	[] spawn dzn_fnc_showEndTimer;	
-};
+
 
 // **********************
 // Show Capture timer
@@ -270,19 +263,4 @@ dzn_fnc_showWinTimer = {
 	1015 cutRsc ["winTimerTitle", "PLAIN"];
 };
 
-// win Timer Handler
-[] spawn {
-	waitUntil { !isNil "dzn_captureTimer" && !isNil "dzn_inCapture" };
-	dzn_winTimerIsShown = false;	
-	{
-		if (dzn_inCapture) then {
-			if !(dzn_winTimerIsShown) then {
-				call dzn_fnc_showWinTimer;
-				dzn_winTimerIsShown = true;
-			};
-		} else {
-			1015 cutText ["","PLAIN"];
-			dzn_winTimerIsShown = false;
-		};	
-	} call KK_fnc_onEachFrame;
-};
+
