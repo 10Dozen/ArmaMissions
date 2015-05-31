@@ -195,54 +195,58 @@ dzn_fnc_showORBATHint = {
 //  Is able to watch from diary
 //  At 1/2 and last 5 mins will be notification.
 // **********************
-dzn_fnc_onEndTimerLayerTitleLoad = {
+dzn_fnc_onEndTimerTitleLoad = {
 	private ["_display", "_idc", "_ctrl"];
-	_display = _this select 0;
+	disableSerialization;
+	_display = _this select 0;	
 	
 	{
 		call compile format [
 			"_idc = %1;
 			_ctrl = _display displayCtrl _idc;
 			_ctrl ctrlSetText '%2';
+			_ctrl ctrlSetBackgroundColor (
+				if (time > (par_endTime - 1)*60) then { [0.6,0,0,1] } else { [0,0,0,1] });
 			_ctrl ctrlCommit 0;",
 			_x select 0,
 			_x select 1
 		];
 	} forEach [
 		[1010, localize "STR_timer_end"]		
-	];
-};
-
-dzn_fnc_showEndTimerLayer = {
-	1010 cutRsc ["endTimerLayerTitle", "PLAIN",0];
-};
-
-dzn_fnc_onEndTimerTitleLoad = {
-	private ["_display", "_idc", "_ctrl"];
-	_display = _this select 0;
+	];	
 	
-	{
-		call compile format [
-			"_idc = %1;
-			_ctrl = _display displayCtrl _idc;
-			_ctrl ctrlSetText '%2';
-			_ctrl ctrlCommit 0;",
-			_x select 0,
-			_x select 1
-		];
-	} forEach [
-		[1012, (round(par_endTime*60 - time)) call dzn_fnc_convertToTimestring]		
-	];
-};
-
-dzn_fnc_showEndTimer = {
-	private["_i"];
-	for "_i" from 0 to _this do {
-		1012 cutText ["","PLAIN",0];
-		1012 cutRsc ["endTimerTitle", "PLAIN", _this];
+	while { true } do {
+		_ctrl = _display displayCtrl 1011;
+		if (par_endTime*60 - time > 0) then {		
+			_ctrl ctrlSetText ((round(par_endTime*60 - time)) call dzn_fnc_convertToTimestring);
+		} else {
+			_ctrl ctrlSetText "00:00:00";
+			_ctrl ctrlSetBackgroundColor [0.6,0,0,0.4];
+		};
+		_ctrl ctrlCommit 0;	
 		sleep 1;
 	};
 };
+
+dzn_fnc_showEndTimer = {
+	1010 cutRsc ["endTimerTitle", "PLAIN",0];	
+	if (typename _this != "ARRAY") then {
+		private ["_timer"];
+		_timer = time + _this;
+		waitUntil { time > _timer };
+		1010 cutText ["","PLAIN"];
+	};
+};
+
+dzn_fnc_endTimerHandler = {
+	waitUntil { time > (par_endTime*60)/2 };
+	20 spawn dzn_fnc_showEndTimer;
+	
+	waitUntil { time > (par_endTime - 1)*60 };
+	[] spawn dzn_fnc_showEndTimer;	
+};
+
+
 
 // **********************
 // Show Capture timer
@@ -272,15 +276,5 @@ dzn_fnc_showWinTimer = {
 	1010 cutRsc ["winTimerTitle", "PLAIN"];
 };
 
-dzn_endTimerHandler = {
-	waitUntil { time > (par_endTime*60)/2 };
-	call dzn_fnc_showEndTimerLayer;
-	5 spawn dzn_fnc_showEndTimer;
-	
-	sleep 5;
-	1012 cutText ["","PLAIN"];
-	1010 cutText ["","PLAIN"];
 
-	
-};
 
