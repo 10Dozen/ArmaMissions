@@ -196,24 +196,15 @@ dzn_fnc_showORBATHint = {
 //  At 1/2 and last 5 mins will be notification.
 // **********************
 dzn_fnc_onEndTimerTitleLoad = {
-	private ["_display", "_idc", "_ctrl"];
+	private ["_display", "_ctrl"];
 	disableSerialization;
 	_display = _this select 0;	
 	
-	{
-		call compile format [
-			"_idc = %1;
-			_ctrl = _display displayCtrl _idc;
-			_ctrl ctrlSetText '%2';
-			_ctrl ctrlSetBackgroundColor (
-				if (time > (par_endTime - 1)*60) then { [0.6,0,0,1] } else { [0,0,0,1] });
-			_ctrl ctrlCommit 0;",
-			_x select 0,
-			_x select 1
-		];
-	} forEach [
-		[1010, localize "STR_timer_end"]		
-	];	
+	_ctrl = _display displayCtrl 1010;
+	_ctrl ctrlSetBackgroundColor (
+		if (time > (par_endTime - 1)*60) then { [0.6,0,0,1] } else { [0,0,0,1] }
+	);
+	_ctrl ctrlCommit 0;
 	
 	while { true } do {
 		_ctrl = _display displayCtrl 1011;
@@ -238,7 +229,8 @@ dzn_fnc_showEndTimer = {
 	};
 };
 
-dzn_fnc_endTimerHandler = {
+// end Timer Handler
+[] spawn {
 	waitUntil { time > (par_endTime*60)/2 };
 	20 spawn dzn_fnc_showEndTimer;
 	
@@ -246,35 +238,51 @@ dzn_fnc_endTimerHandler = {
 	[] spawn dzn_fnc_showEndTimer;	
 };
 
-
-
 // **********************
 // Show Capture timer
 // (maybe Display?)
 // **********************
 
 dzn_fnc_onWinTimerTitleLoad = {
-	private ["_display", "_idc", "_ctrl"];
-	_display = _this select 0;
+	private ["_display", "_ctrl"];
+	disableSerialization;
+	_display = _this select 0;	
 	
-	{
-		call compile format [
-			"_idc = %1;
-			_ctrl = _display displayCtrl _idc;
-			_ctrl ctrlSetText '%2';
-			_ctrl ctrlCommit 0;",
-			_x select 0,
-			_x select 1
-		];
-	} forEach [
-		[1010, localize "STR_timer_captureIn"],
-		[1011, "00:03:02"]
-	];
-
+	// _ctrl = _display displayCtrl 1012;
+	// _ctrl ctrlSetText localize "STR_timer_captureIn";
+	// _ctrl ctrlSetBackgroundColor [0,0.6,0,1];	
+	// _ctrl ctrlCommit 0;
+	
+	while { true } do {
+		_ctrl = _display displayCtrl 1013;
+		if ( dzn_captureTimer > 0 ) then {		
+			_ctrl ctrlSetText ((dzn_captureTimer) call dzn_fnc_convertToTimestring);
+		} else {
+			_ctrl ctrlSetText "00:00:00";
+			_ctrl ctrlSetBackgroundColor [0.0,0.6,0,0.4];
+		};
+		_ctrl ctrlCommit 0;	
+		sleep 1;
+	};
 };
+
 dzn_fnc_showWinTimer = {
-	1010 cutRsc ["winTimerTitle", "PLAIN"];
+	1015 cutRsc ["winTimerTitle", "PLAIN"];
 };
 
-
-
+// win Timer Handler
+[] spawn {
+	waitUntil { !isNil "dzn_captureTimer" && !isNil "dzn_inCapture" };
+	dzn_winTimerIsShown = false;	
+	{
+		if (dzn_inCapture) then {
+			if !(dzn_winTimerIsShown) then {
+				call dzn_fnc_showWinTimer;
+				dzn_winTimerIsShown = true;
+			};
+		} else {
+			1015 cutText ["","PLAIN"];
+			dzn_winTimerIsShown = false;
+		};	
+	} call KK_fnc_onEachFrame;
+};
