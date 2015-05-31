@@ -64,7 +64,7 @@
 		waitUntil { time > (par_endTime - 1)*60 };
 		[] spawn dzn_fnc_showEndTimer;	
 		
-		waitUntil { time > par_endTime };
+		waitUntil { time > par_endTime*60 };
 		[tc_activeTask, "Failed"] call BIS_fnc_taskSetState;
 		// ["TaskFailed",["",localize "STR_taskTitle"]] call BIS_fnc_showNotification;
 	};
