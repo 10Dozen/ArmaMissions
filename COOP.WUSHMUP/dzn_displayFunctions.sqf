@@ -29,39 +29,7 @@ dzn_fnc_showAssignment = {
 };
 
 
-// Notification 2: Commanding Struff Display
-/*
-dzn_fnc_onCommandingStaffTitleLoad = {
-	private ["_display", "_idc", "_ctrl"];
-	_display = _this select 0;
-	
-	{
-		call compile format [
-			"_idc = %1;
-			_ctrl = _display displayCtrl _idc;
-			_ctrl ctrlSetText (player getVariable '%2');
-			_ctrl ctrlCommit 0;",
-			_x select 0,
-			_x select 1
-		];
-	} forEach [
-		if (!isNil "dzn_ra_co") then { [1002, localize "STR_assignmentRole_CO"]	},
-		if (!isNil "dzn_ra_co") then { [1003, name dzn_ra_co] }
-		if (!isNull (0 call dzn_fnc_ra_getSquadLeader)) then { [1004, localize "STR_assignmentRole_CO"] },
-		if (!isNull (0 call dzn_fnc_ra_getSquadLeader)) then { [1005, name (0 call dzn_fnc_ra_getSquadLeader)] },
-		
-		if (!isNull (1 call dzn_fnc_ra_getSquadLeader)) then { [1006, name (1 call dzn_fnc_ra_getSquadLeader)] },
-		
-	];
-	
-};
-
-dzn_fnc_showCommandingStaff = {
-	waitUntil { !isNil "dzn_ra_assignmentComplete" && { dzn_ra_assignmentComplete } };
-	
-
-};*/
-
+// Notification 2: Deprecated
 
 // Notification 3: Commanding Stuff Hint
 // Add action to Diary
@@ -227,10 +195,94 @@ dzn_fnc_showORBATHint = {
 //  Is able to watch from diary
 //  At 1/2 and last 5 mins will be notification.
 // **********************
+dzn_fnc_onEndTimerTitleLoad = {
+	private ["_display", "_ctrl"];
+	disableSerialization;
+	_display = _this select 0;	
+	
+	_ctrl = _display displayCtrl 1010;
+	_ctrl ctrlSetBackgroundColor (
+		if (time > (par_endTime - 1)*60) then { [0.6,0,0,1] } else { [0,0,0,1] }
+	);
+	_ctrl ctrlCommit 0;
+	
+	while { true } do {
+		_ctrl = _display displayCtrl 1011;
+		if (par_endTime*60 - time > 0) then {		
+			_ctrl ctrlSetText ((round(par_endTime*60 - time)) call dzn_fnc_convertToTimestring);
+		} else {
+			_ctrl ctrlSetText "00:00:00";
+			_ctrl ctrlSetBackgroundColor [0.6,0,0,0.4];
+		};
+		_ctrl ctrlCommit 0;	
+		sleep 1;
+	};
+};
 
+dzn_fnc_showEndTimer = {
+	1010 cutRsc ["endTimerTitle", "PLAIN",0];	
+	if (typename _this != "ARRAY") then {
+		private ["_timer"];
+		_timer = time + _this;
+		waitUntil { time > _timer };
+		1010 cutText ["","PLAIN"];
+	};
+};
+
+// end Timer Handler
+[] spawn {
+	waitUntil { time > (par_endTime*60)/2 };
+	20 spawn dzn_fnc_showEndTimer;
+	
+	waitUntil { time > (par_endTime - 1)*60 };
+	[] spawn dzn_fnc_showEndTimer;	
+};
 
 // **********************
 // Show Capture timer
 // (maybe Display?)
 // **********************
 
+dzn_fnc_onWinTimerTitleLoad = {
+	private ["_display", "_ctrl"];
+	disableSerialization;
+	_display = _this select 0;	
+	
+	// _ctrl = _display displayCtrl 1012;
+	// _ctrl ctrlSetText localize "STR_timer_captureIn";
+	// _ctrl ctrlSetBackgroundColor [0,0.6,0,1];	
+	// _ctrl ctrlCommit 0;
+	
+	while { true } do {
+		_ctrl = _display displayCtrl 1013;
+		if ( dzn_captureTimer > 0 ) then {		
+			_ctrl ctrlSetText ((dzn_captureTimer) call dzn_fnc_convertToTimestring);
+		} else {
+			_ctrl ctrlSetText "00:00:00";
+			_ctrl ctrlSetBackgroundColor [0.0,0.6,0,0.4];
+		};
+		_ctrl ctrlCommit 0;	
+		sleep 1;
+	};
+};
+
+dzn_fnc_showWinTimer = {
+	1015 cutRsc ["winTimerTitle", "PLAIN"];
+};
+
+// win Timer Handler
+[] spawn {
+	waitUntil { !isNil "dzn_captureTimer" && !isNil "dzn_inCapture" };
+	dzn_winTimerIsShown = false;	
+	{
+		if (dzn_inCapture) then {
+			if !(dzn_winTimerIsShown) then {
+				call dzn_fnc_showWinTimer;
+				dzn_winTimerIsShown = true;
+			};
+		} else {
+			1015 cutText ["","PLAIN"];
+			dzn_winTimerIsShown = false;
+		};	
+	} call KK_fnc_onEachFrame;
+};

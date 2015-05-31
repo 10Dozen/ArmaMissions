@@ -23,7 +23,16 @@
 			<English>Capture &lt;marker name='mrk_task'&gt;marked point&lt;/marker&gt; and then hold it until countdown will end.</English>
 		</Key>
 		
-		
+		<Key ID='STR_timer_captureIn'>
+			<Original>Захват</Original>
+			<Russian>Захват</Russian>
+			<English>Capture in</English>
+		</Key>
+		<Key ID='STR_timer_end'>
+			<Original>Время</Original>
+			<Russian>Время</Russian>
+			<English>Time left</English>
+		</Key>
 		
 <!-- *********** Markers ************* -->
 		<Key ID='STR_marker_taskText'>
@@ -481,6 +490,43 @@
 			<Russian>Кеширование AI юнитов вне дальности (м)</Russian>
 			<English>Cache AI outside distance (m)</English>
 		</Key>
+		
+		
+<!--- Mission Ends -->
+	<!-- LOSE -->
+		<Key ID='STR_endTitle_lose'>
+			<Original>Миссия Провалена</Original>
+			<Russian>Миссия Провалена</Russian>
+			<English>Mission Failed</English>
+		</Key>
+		<Key ID='STR_endSubtitle_lose'>
+			<Original>Точка не захвачена</Original>
+			<Russian>Точка не захвачена</Russian>
+			<English>Control point is not captured</English>
+		</Key>
+		<Key ID='STR_endDesc_lose'>
+			<Original>Точка не захвачена</Original>
+			<Russian>Точка не захвачена</Russian>
+			<English>Control point is not captured</English>
+		</Key>	
+		
+	<!-- WIN -->	
+		<Key ID='STR_endTitle_win'>
+			<Original>Успех!</Original>
+			<Russian>Успех!</Russian>
+			<English>SUCCESS!</English>
+		</Key>
+		<Key ID='STR_endSubtitle_win'>
+			<Original>Точка захвачена!</Original>
+			<Russian>Точка захвачена!</Russian>
+			<English>Control point is captured!</English>
+		</Key>
+		<Key ID='STR_endDesc_win'>
+			<Original>Точка была захвачена - все молодцы!</Original>
+			<Russian>Точка была захвачена - все молодцы!</Russian>
+			<English>Control point is captured - good job!</English>
+		</Key>
+		
 	 </Container>
   </Package>
 </Project>

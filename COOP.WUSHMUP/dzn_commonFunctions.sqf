@@ -145,7 +145,6 @@ dzn_fnc_setDateTime = {
 dzn_fnc_cache = {};
 
 
-
 dzn_fnc_ra_getSquadLeader = {
 	// "squadId" call dzn_fnc_ra_getSquadLeader
 	if (isNil "dzn_assignedSquads") exitWith {
@@ -163,4 +162,22 @@ dzn_fnc_ra_getSquadLeader = {
 	if (isNil {_squad select 0}) exitWith { player globalChat "dzn_fnc_ra_getSquadLeader: No squad leader"; objNull };
 	
 	_squad select 0
+};
+
+
+dzn_fnc_convertToTimestring = {
+	// Time to string function
+	//time(seconds) call dzn_fnc_convertToTimestring
+	private ["_minutes","_seconds"];
+	_minutes = floor(_this / 60);
+	_seconds = _this - _minutes * 60;
+	_output = "";
+	
+	#define DZN_TODOUBLEDIGIT(X)	if (count str(X) == 2) then { str(X) } else { "0" + str(X) }	
+	if (_minutes > 0) then {
+		_output = "00:" + (DZN_TODOUBLEDIGIT(_minutes)) + ":" + (DZN_TODOUBLEDIGIT(_seconds));
+	} else {
+		_output = "00:00:" + (DZN_TODOUBLEDIGIT(_seconds));
+	};
+	_output
 };

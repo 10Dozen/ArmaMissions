@@ -65,7 +65,10 @@ kit_NATO_RAT = 	[[NATO_UNIFORM,"V_PlateCarrier1_rgr","B_AssaultPack_mcamo",NATO_
 kit_NATO_Random = ["kit_NATO_SL","kit_NATO_M","kit_NATO_FTL","kit_NATO_AR","kit_NATO_AAR","kit_NATO_G","kit_NATO_RAT"];
 
 
-kit_CSAT_Random = ["kit_NATO_SL","kit_NATO_M","kit_NATO_FTL","kit_NATO_AR","kit_NATO_AAR","kit_NATO_G","kit_NATO_RAT"];
+kit_CSAT = [["U_O_CombatUniform_ocamo","V_HarnessO_brn","","H_HelmetLeaderO_ocamo",""],["arifle_Katiba_F","","","",""],["","","","",""],["","","","",""],["ItemMap","ItemCompass","ItemWatch","ItemRadio"],[["30Rnd_65x39_caseless_green",9],["",0],["",0],["",0],["",0],["",0],["",0],["",0],["",0]],[["FirstAidKit",3],["",0],["",0],["",0],["",0],["",0]],[]];
+
+
+kit_CSAT_Random = ["kit_CSAT"];
 kit_AAF_Random = ["kit_NATO_SL","kit_NATO_M","kit_NATO_FTL","kit_NATO_AR","kit_NATO_AAR","kit_NATO_G","kit_NATO_RAT"];
 
 /*

@@ -32,6 +32,12 @@ if (isServer || isDedicated) then {
 	
 	// Selecting all DYNAI zones
 	[] execVM "taskController\tcDynaiZonesSetUp.sqf";
+	
+	// Start to watch for Capturing zone
+	[] spawn { 
+		waitUntil { (time > 10) && !isNil "dzn_captureTimerDefault" };
+		[] execFSM "taskController\tcCaptureZone.fsm";
+	};
 };
 
 // ********** Set Marker *****************
@@ -43,14 +49,6 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 
 "mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
 "mrk_taskArea" setMarkerDir (direction tc_completeArea);
-
-
-// ********* Task Completion *************
-{
-	if (getPosASL player in tc_completeArea) then {
-		[tc_activeTask, "SUCCEEDED", true] call BIS_fnc_taskSetState;
-	};
-} call KK_fnc_onEachFrame;
 
 
 // ********* Get Positions For Squad Deployment ***

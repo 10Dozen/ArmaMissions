@@ -198,32 +198,16 @@ class CfgDebriefing
 {
 	class End1
 	{
-		title = "Ending #1";
-		subtitle = "";
-		description = "*** Insert debriefing #1 here. ***";
-		// pictureBackground = "";
-		// picture = "";
-		// pictureColor[] = {0.0,0.3,0.6,1};
-	};
-
-	class End2
+		title = $STR_endTitle_win;
+		subtitle = $STR_endSubtitle_win;
+		description = $STR_endDesc_win;
+	};	
+	
+	class Lose
 	{
-		title = "Ending #2";
-		subtitle = "";
-		description = "*** Insert debriefing #2 here. ***";
-		// pictureBackground = "";
-		// picture = "";
-		// pictureColor[] = {0.0,0.3,0.6,1};
-	};
-
-	class End3
-	{
-		title = "Ending #3";
-		subtitle = "";
-		description = "*** Insert debriefing #3 here. ***";
-		// pictureBackground = "";
-		// picture = "";
-		// pictureColor[] = {0.0,0.3,0.6,1};
+		title = $STR_endTitle_lose;
+		subtitle = $STR_endSubtitle_lose;
+		description = $STR_endDesc_lose;
 	};
 };
 
@@ -289,7 +273,7 @@ class RscTitles
 				sizeEx = 0.1;
 				colorBackground[] = {0,0,0,1};
 				colorText[] = {.87,.835,.807,1};
-				text = "";
+				text = $STR_assignmentDisplay;
 			}; 
 			
 			class assignmentPicControl
@@ -340,5 +324,91 @@ class RscTitles
 				text = "";
 			}; 
 		};
+	};
+	
+	class endTimerTitle
+	{
+		idd = -1;
+		duration = 450;
+		onLoad = "_this spawn dzn_fnc_onEndTimerTitleLoad"; 
+		class controls
+		{
+			class endTimerTextControl
+			{    
+				idc = 1010;				
+				type = 0;				
+				style = 2;
+				x = 0; 	
+				y = 0;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0.6,0,0,1};
+				colorText[] = {1,1,1,0.8};
+				text = $STR_timer_end;
+			}; 
+			
+			class endTimerTimeControl
+			{    
+				idc = 1011;				
+				type = 0;				
+				style = 2;
+				x = 0; 	
+				y = 0.04;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0,0,0,.4};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+			
+			
+			
+		};		
+	};
+	
+	
+	class winTimerTitle
+	{
+		idd = -1;
+		duration = 450;
+		onLoad = "_this spawn dzn_fnc_onWinTimerTitleLoad"; 
+		class controls
+		{
+			class winTimerTextControl
+			{    
+				idc = 1012;				
+				type = 0;				
+				style = 2;
+				x = 0.175; 	
+				y = 0;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0.3,0.6,0,1};
+				colorText[] = {1,1,1,0.8};
+				text = $STR_timer_captureIn;
+			}; 
+			
+			class winTimerTimeControl
+			{    
+				idc = 1013;				
+				type = 0;				
+				style = 2;
+				x = 0.175; 	
+				y = 0.04;
+				w = 0.174999;		
+				h = 0.04;
+				font = "puristaMedium";
+				sizeEx = 0.035;
+				colorBackground[] = {0,0,0,.4};
+				colorText[] = {1,1,1,0.8};
+				text = "";
+			}; 
+		};		
 	};
 };
