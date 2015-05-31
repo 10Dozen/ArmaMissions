@@ -3202,7 +3202,7 @@ class Mission
 		};
 		class Item3
 		{
-			position[]={2128.5625,6.4285936,5477.8145};
+			position[]={2131.2617,6.4215646,5476.8506};
 			name="mrk_startPos_0";
 			type="mil_start";
 			colorName="ColorWEST";
@@ -3217,7 +3217,7 @@ class Mission
 	};
 	class Sensors
 	{
-		items=5;
+		items=9;
 		class Item0
 		{
 			position[]={4373.0039,226.94589,3818.7222};
@@ -3289,6 +3289,72 @@ class Mission
 			};
 			synchronizations[]={11};
 			syncId=19;
+		};
+		class Item5
+		{
+			position[]={2115.3076,7.1958799,5444.0239};
+			a=10;
+			b=10;
+			rectangular=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="End Time Music";
+			expCond="time > (par_endTime*60)";
+			expActiv="player sideChat ""END""; endTimerTriggered = true;";
+			class Effects
+			{
+			};
+		};
+		class Item6
+		{
+			position[]={2121.9314,8.2946157,5437.3037};
+			a=0;
+			b=0;
+			rectangular=1;
+			timeoutMin=15;
+			timeoutMid=15;
+			timeoutMax=15;
+			interruptable=1;
+			age="UNKNOWN";
+			text="End Time";
+			expCond="endTimerTriggered";
+			expActiv="0=[] spawn { if (isServer) then { sleep 1; }; ""lose"" call BIS_fnc_endMission };";
+			class Effects
+			{
+			};
+		};
+		class Item7
+		{
+			position[]={2116.1001,6.5533447,5469.0776};
+			a=10;
+			b=10;
+			rectangular=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Win Time Music";
+			expCond="dzn_captureTimer < 1";
+			expActiv="player sideChat ""WIN""; winTimerTriggered = true;";
+			class Effects
+			{
+			};
+		};
+		class Item8
+		{
+			position[]={2122.9502,6.6294522,5462.187};
+			a=0;
+			b=0;
+			rectangular=1;
+			timeoutMin=15;
+			timeoutMid=15;
+			timeoutMax=15;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Win Time";
+			expCond="winTimerTriggered";
+			expActiv="0= [] spawn { if (isServer) then { sleep 1; }; ""end1"" call BIS_fnc_endMission };";
+			class Effects
+			{
+			};
 		};
 	};
 };
