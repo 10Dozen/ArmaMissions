@@ -55,16 +55,17 @@
 	};
 	
 	// end Timer Handler
+	call dzn_fnc_addEndTimerSubject;
 	[] spawn {
 		waitUntil { !isNil "dzn_fnc_showEndTimer" };
 		
 		waitUntil { time > (par_endTime*60)/2 };
 		20 spawn dzn_fnc_showEndTimer;
 		
-		waitUntil { time > (par_endTime - 1)*60 };
+		waitUntil { time > (par_endTime - dzn_endTimerLimitValue)*60 };
 		[] spawn dzn_fnc_showEndTimer;	
 		
-		waitUntil { time > par_endTime*60 };
+		waitUntil { time > (par_endTime*60 + 3)	};
 		[tc_activeTask, "Failed"] call BIS_fnc_taskSetState;
 		// ["TaskFailed",["",localize "STR_taskTitle"]] call BIS_fnc_showNotification;
 	};
