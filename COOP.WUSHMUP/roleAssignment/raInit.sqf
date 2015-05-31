@@ -1,34 +1,4 @@
 waitUntil { time > 1 };
-if (isPlayer player) then { 
-	[] spawn dzn_fnc_showAssignment;
-	[] spawn {
-		waitUntil { !isNil {player getVariable "raRoleId"} };
-		sleep 1;
-		[
-			player,
-			format [
-				"kit_%1_%2",
-				[dzn_kitToFactionMapping, par_playableFaction] call dzn_fnc_getValueByKey,
-				[dzn_kitToRoleMapping, player getVariable "raRoleId"] call dzn_fnc_getValueByKey
-			],
-			false
-		] call dzn_fnc_gear_assignKit;		
-	};
-	
-	[] spawn {
-		waitUntil { !isNil "dzn_ra_assignmentComplete" };
-		
-		call dzn_fnc_addORBATSubject;		
-		call dzn_fnc_addCommandPersonnelSubject;
-		
-		sleep 4;
-		call dzn_fnc_showCommandingStaffHint;
-		sleep 6;		
-		call dzn_fnc_showORBATHint;
-	};
-	
-};
-
 
 if !(isServer || isDedicated) exitWith {};
 private["_unit","_squad","_group","_i","_j"];
