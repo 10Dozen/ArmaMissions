@@ -5,7 +5,7 @@ class Header
 	maxPlayers = 70;
 };
 
-onLoadName 			= "WarmUp Shoot'Em Up!";
+onLoadName 			= "WarmUp! SHMUP!";
 onLoadMission 		= $STR_onLoadMission;
 author 				= "10Dozen [MFOR]";
 //loadScreen 		= "loadLogo.jpg";
@@ -22,6 +22,8 @@ class Params
 	class paramEmptyDelimiter0 
 	{
 		title = "$STR_delimi_misCond";
+		values[] = {""};
+		default = "";
 	}
 	
 	class par_endTime
@@ -35,6 +37,8 @@ class Params
 	class paramEmptyDelimiter1
 	{
 		title = "$STR_delimi_envCond";
+		values[] = {""};
+		default = "";
 	}	
 
 	class par_weather	
@@ -110,6 +114,8 @@ class Params
 	class paramEmptyDelimiter2 
 	{
 		title = "$STR_delimi_faction";
+		values[] = {""};
+		default = "";
 	}	
 	
 	class par_playableFaction
@@ -127,6 +133,8 @@ class Params
 	class paramEmptyDelimiter3 
 	{
 		title = "$STR_delimi_hostileFaction";
+		values[] = {""};
+		default = "";
 	}	
 	
 	class par_hostileFaction
@@ -178,17 +186,19 @@ class Params
 		default = 1;
 	}
 	
-	class paramEmptyDelimiter4
-	{
-		title = "$STR_delimi_caching";
-	}	
+	// class paramEmptyDelimiter4
+	// {
+		// title = "$STR_delimi_caching";
+		// values[] = {""};
+		// default = "";
+	// }	
 
-	class par_caching
-	{
-		title = "$STR_par_caching";
-		values[] = {0,600,800,1000,1500,2000};
-		default = 800;
-	};
+	// class par_caching
+	// {
+		// title = "$STR_par_caching";
+		// values[] = {0,600,800,1000,1500,2000};
+		// default = 800;
+	// };
 };
 
 
