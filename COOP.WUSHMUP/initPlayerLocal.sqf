@@ -1,10 +1,13 @@
-
-// Role Assignement: Display
-[] spawn dzn_fnc_showAssignment;
+// Start simulations
+player enableSimulation true; 
+player hideObjectGlobal false;
 
 // Role Assignement: Gear
 [] spawn {
-	waitUntil { !isNil {player getVariable "raRoleId"} };
+	waitUntil { !isNil {player getVariable "raRoleId"}};
+	// Role Assignement: Display
+	[] spawn dzn_fnc_showAssignment;
+	
 	sleep 1;
 	[
 		player,
@@ -20,7 +23,7 @@
 // Mission Flow
 [] spawn {
 	waitUntil { !isNil "dzn_ra_assignmentComplete" };
-	
+
 	call dzn_fnc_addORBATSubject;		
 	call dzn_fnc_addCommandPersonnelSubject;
 	
