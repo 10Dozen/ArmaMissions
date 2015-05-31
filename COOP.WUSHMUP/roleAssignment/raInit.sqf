@@ -37,18 +37,14 @@ dzn_allPlayers = [];
 dzn_assignedPlayers = [];
 _unit = objNull;
 
-
 waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
-
+publicVariable "dzn_allPlayers";
 
 // ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
-
-for "_i" from 1 to 16 do {
-	call compile format ["dzn_allPlayers pushBack man_%1",_i];
-};
-
-dzn_debug = dzn_allPlayers;
+// for "_i" from 1 to 16 do {
+	// call compile format ["dzn_allPlayers pushBack man_%1",_i];
+// };
 
 dzn_squadCount = floor ((count dzn_allPlayers)/10);
 dzn_assignedSquads = [];
@@ -124,8 +120,9 @@ switch (true) do {
 		};
 	};
 };
-
+publicVariable "dzn_assignedSquads";
 
 
 // ********* End Of Role Assignement ************
 dzn_ra_assignmentComplete = true;
+publicVariable "dzn_ra_assignmentComplete";
