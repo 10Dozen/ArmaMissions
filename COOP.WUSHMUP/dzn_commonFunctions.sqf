@@ -173,10 +173,7 @@ dzn_fnc_convertToTimestring = {
 	_seconds = _this - _minutes * 60;
 	_output = "";
 	
-	#define DZN_TODOUBLEDIGIT(X)	if (count str(X) == 2) then { str(X) } else { "0" + str(X) }
-	
-	
-	
+	#define DZN_TODOUBLEDIGIT(X)	if (count str(X) == 2) then { str(X) } else { "0" + str(X) }	
 	if (_minutes > 0) then {
 		_output = "00:" + (DZN_TODOUBLEDIGIT(_minutes)) + ":" + (DZN_TODOUBLEDIGIT(_seconds));
 	} else {
