@@ -50,6 +50,7 @@
 		} call KK_fnc_onEachFrame;
 		
 		waitUntil { !(dzn_captureTimer > 0) };
+		sleep 3;
 		[tc_activeTask, "Succeeded"] call BIS_fnc_taskSetState;
 		// ["TaskSucceeded",["",localize "STR_taskTitle"]] call BIS_fnc_showNotification;
 	};
@@ -65,7 +66,8 @@
 		waitUntil { time > (par_endTime - dzn_endTimerLimitValue)*60 };
 		[] spawn dzn_fnc_showEndTimer;	
 		
-		waitUntil { time > (par_endTime*60 + 3)	};
+		waitUntil { time > (par_endTime*60)	};
+		sleep 3;
 		[tc_activeTask, "Failed"] call BIS_fnc_taskSetState;
 		// ["TaskFailed",["",localize "STR_taskTitle"]] call BIS_fnc_showNotification;
 	};
