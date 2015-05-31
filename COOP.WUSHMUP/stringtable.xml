@@ -87,6 +87,17 @@
 			<English>ORBAT</English>
 		</Key>
 		
+		<Key ID='STR_assignment_endTimerTopic'>
+			<Original>Остаток времени</Original>
+			<Russian>Остаток времени</Russian>
+			<English>End mission timer</English>
+		</Key>
+		<Key ID='STR_assignment_showEndTimer'>
+			<Original>ПОКАЗАТЬ ОСТАТОК ВРЕМЕНИ</Original>
+			<Russian>ПОКАЗАТЬ ОСТАТОК ВРЕМЕНИ</Russian>
+			<English>SHOW END MISSION TIMER</English>
+		</Key>
+		
 	<!-- Squads -->
 		
 		<Key ID='STR_assignmentCO'>
@@ -187,6 +198,40 @@
 
 
 
+<!--- *********** Mission Ends *********** -->
+	<!-- LOSE -->
+		<Key ID='STR_endTitle_lose'>
+			<Original>Миссия Провалена</Original>
+			<Russian>Миссия Провалена</Russian>
+			<English>Mission Failed</English>
+		</Key>
+		<Key ID='STR_endSubtitle_lose'>
+			<Original>Точка не захвачена</Original>
+			<Russian>Точка не захвачена</Russian>
+			<English>Control point is not captured</English>
+		</Key>
+		<Key ID='STR_endDesc_lose'>
+			<Original>Точка не захвачена</Original>
+			<Russian>Точка не захвачена</Russian>
+			<English>Control point is not captured</English>
+		</Key>	
+		
+	<!-- WIN -->	
+		<Key ID='STR_endTitle_win'>
+			<Original>Успех!</Original>
+			<Russian>Успех!</Russian>
+			<English>SUCCESS!</English>
+		</Key>
+		<Key ID='STR_endSubtitle_win'>
+			<Original>Точка захвачена!</Original>
+			<Russian>Точка захвачена!</Russian>
+			<English>Control point is captured!</English>
+		</Key>
+		<Key ID='STR_endDesc_win'>
+			<Original>Точка была захвачена - все молодцы!</Original>
+			<Russian>Точка была захвачена - все молодцы!</Russian>
+			<English>Control point is captured - good job!</English>
+		</Key>
 
 
 
@@ -492,40 +537,6 @@
 		</Key>
 		
 		
-<!--- Mission Ends -->
-	<!-- LOSE -->
-		<Key ID='STR_endTitle_lose'>
-			<Original>Миссия Провалена</Original>
-			<Russian>Миссия Провалена</Russian>
-			<English>Mission Failed</English>
-		</Key>
-		<Key ID='STR_endSubtitle_lose'>
-			<Original>Точка не захвачена</Original>
-			<Russian>Точка не захвачена</Russian>
-			<English>Control point is not captured</English>
-		</Key>
-		<Key ID='STR_endDesc_lose'>
-			<Original>Точка не захвачена</Original>
-			<Russian>Точка не захвачена</Russian>
-			<English>Control point is not captured</English>
-		</Key>	
-		
-	<!-- WIN -->	
-		<Key ID='STR_endTitle_win'>
-			<Original>Успех!</Original>
-			<Russian>Успех!</Russian>
-			<English>SUCCESS!</English>
-		</Key>
-		<Key ID='STR_endSubtitle_win'>
-			<Original>Точка захвачена!</Original>
-			<Russian>Точка захвачена!</Russian>
-			<English>Control point is captured!</English>
-		</Key>
-		<Key ID='STR_endDesc_win'>
-			<Original>Точка была захвачена - все молодцы!</Original>
-			<Russian>Точка была захвачена - все молодцы!</Russian>
-			<English>Control point is captured - good job!</English>
-		</Key>
 		
 	 </Container>
   </Package>
