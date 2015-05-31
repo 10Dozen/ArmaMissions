@@ -342,14 +342,14 @@ class RscTitles
 		};
 	};
 	
-	class endTimerLayerTitle
+	class endTimerTitle
 	{
 		idd = -1;
-		duration = 1;
-		onLoad = "_this call dzn_fnc_onEndTimerLayerTitleLoad"; 
+		duration = 1000;
+		onLoad = "_this spawn dzn_fnc_onEndTimerTitleLoad"; 
 		class controls
 		{
-			class endTimerLayerTextContrl
+			class endTimerTextContrl
 			{    
 				idc = 1010;				
 				type = 0;				
@@ -365,7 +365,7 @@ class RscTitles
 				text = "";
 			}; 
 			
-			class endTimerLayerTimeControl
+			class endTimerTimeControl
 			{    
 				idc = 1011;				
 				type = 0;				
@@ -380,42 +380,21 @@ class RscTitles
 				colorText[] = {1,1,1,0.8};
 				text = "";
 			}; 
+			
+			
+			
 		};		
 	};
 	
-	class endTimerTitle
-	{
-		idd = -1;
-		duration = 1;
-		onLoad = "_this call dzn_fnc_onEndTimerTitleLoad"; 
-		class controls
-		{			
-			class endTimerControl
-			{    
-				idc = 1012;				
-				type = 0;				
-				style = 2;
-				x = 0; 	
-				y = 0.04;
-				w = 0.174999;		
-				h = 0.04;
-				font = "puristaMedium";
-				sizeEx = 0.035;
-				colorBackground[] = {0,0,0,0};
-				colorText[] = {1,1,1,0.8};
-				text = "";
-			}; 
-		};		
-	};
 	
-	class winTimerLayerTitle
+	class winTimerTitle
 	{
 		idd = -1;
 		duration = 1;
 		onLoad = "_this call dzn_fnc_onWinTimerTitleLoad"; 
 		class controls
 		{
-			class winTimerLayerTextContrl
+			class winTimerTextContrl
 			{    
 				idc = 1012;				
 				type = 0;				
