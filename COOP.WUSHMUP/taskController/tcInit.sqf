@@ -7,7 +7,7 @@ tc_taskDescription		= localize "STR_taskDescription";
 
 if (isServer || isDedicated) then {
 	private ["_taskList"];
-	_taskList = entities "ModuleTaskCreate_F";
+	_taskList = entities "ModuleTaskSetState_F";
 
 	tc_activeTaskModule = _taskList call BIS_fnc_selectRandom;
 	tc_activeTaskTrigger = synchronizedObjects tc_activeTaskModule select 0;
@@ -159,4 +159,9 @@ for "_i" from 0 to 2 do {
 	]
 };
 
-if (!isNil "dzn_ra_co") then { dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0]; };
+// Moving CO to the first start pos
+if (!isNil "dzn_ra_co") then {
+	if (isServer || isDedicated || (hasInterface && {player == dzn_ra_co} )) then {
+		dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0];
+	};
+};

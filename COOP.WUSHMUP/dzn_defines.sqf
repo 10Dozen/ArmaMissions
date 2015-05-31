@@ -1,5 +1,7 @@
 // Timer to capture zone
 dzn_captureTimerDefault = 60;
+dzn_endTimerLimitValue = 5;
+
 
 dzn_weatherSettingsMapping = [
 	[1, 0],

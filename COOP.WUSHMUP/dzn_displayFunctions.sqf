@@ -76,7 +76,7 @@ dzn_fnc_showCommandingStaffHint = {
 			lineBreak
 			,parseText (format [_strText_CO_H, [dzn_squadsMapping, "CO"] call dzn_fnc_getValueByKey])
 			,lineBreak
-			,parseText (format [_strText_CO, name dzn_ra_co])
+			,parseText (format [_strText_CO, if (alive dzn_ra_co) then { name dzn_ra_co } else { "KIA" }])
 			,lineBreak
 		];	
 	};
@@ -89,7 +89,7 @@ dzn_fnc_showCommandingStaffHint = {
 				,parseText (format [
 					if (leader group player == _sl) then {_strText_mySL} else {_strText_SL}, 
 					[dzn_squadsMapping, _forEachIndex] call dzn_fnc_getValueByKey, 
-					name _sl
+					if (alive _sl) then { name _sl } else { "KIA" }
 				])
 			];
 		};
@@ -147,13 +147,14 @@ dzn_fnc_showORBATHint = {
 			lineBreak
 			,parseText (format [
 				_strText_line, 
-				_strText_color_CO, _strText_color_base,
-				[dzn_roleMappingShort, 0] call dzn_fnc_getValueByKey, name dzn_ra_co,
+				_strText_color_CO, 
+				_strText_color_base,
+				[dzn_roleMappingShort, 0] call dzn_fnc_getValueByKey, 
+				if (alive dzn_ra_co) then { name dzn_ra_co } else { "KIA" },
 				"1.18"
 			])			
 		];
-	};
-	
+	};	
 	
 	_squadUnits = if (!isNil "dzn_ra_co" && { player == dzn_ra_co }) then {
 		[]
@@ -181,7 +182,7 @@ dzn_fnc_showORBATHint = {
 				if (_forEachIndex in [0,1]) then { _strText_color_SL } else { if (_forEachIndex in [2,3,4,5]) then { _strText_color_RT } else { _strText_color_BT }},
 				if (_x == player) then {"#FFFFFF" } else {_strText_color_base},
 				_roleName,
-				name _x,
+				if (alive _x) then { name _x } else { "KIA" },
 				if (_x == player) then { "1.2" } else { "1.15" }
 			])
 		];
@@ -202,7 +203,7 @@ dzn_fnc_onEndTimerTitleLoad = {
 	
 	_ctrl = _display displayCtrl 1010;
 	_ctrl ctrlSetBackgroundColor (
-		if (time > (par_endTime - 1)*60) then { [0.6,0,0,1] } else { [0,0,0,1] }
+		if (time > (par_endTime - dzn_endTimerLimitValue)*60) then { [0.6,0,0,1] } else { [0,0,0,1] }
 	);
 	_ctrl ctrlCommit 0;
 	
@@ -221,7 +222,7 @@ dzn_fnc_onEndTimerTitleLoad = {
 
 dzn_fnc_showEndTimer = {
 	1010 cutRsc ["endTimerTitle", "PLAIN",0];	
-	if (typename _this != "ARRAY") then {
+	if (typename _this != "ARRAY" && (time < (par_endTime - dzn_endTimerLimitValue)*60)) then {
 		private ["_timer"];
 		_timer = time + _this;
 		waitUntil { time > _timer };
@@ -229,20 +230,29 @@ dzn_fnc_showEndTimer = {
 	};
 };
 
-// end Timer Handler
-[] spawn {
-	waitUntil { time > (par_endTime*60)/2 };
-	20 spawn dzn_fnc_showEndTimer;
+dzn_fnc_addEndTimerSubject = {
+	private ["_topic"];
 	
-	waitUntil { time > (par_endTime - 1)*60 };
-	[] spawn dzn_fnc_showEndTimer;	
+	_topic = localize "STR_assignment_endTimerTopic";
+
+	player createDiarySubject [_topic,_topic];
+	player createDiaryRecord [
+		_topic,
+		[
+			_topic,
+			format [
+				"<font color='#B0E84F'><execute expression='10 spawn dzn_fnc_showEndTimer'>%1</execute></font>"
+				, localize "STR_assignment_showEndTimer"
+			]
+		]
+	];
 };
+
 
 // **********************
 // Show Capture timer
 // (maybe Display?)
 // **********************
-
 dzn_fnc_onWinTimerTitleLoad = {
 	private ["_display", "_ctrl"];
 	disableSerialization;
@@ -270,19 +280,4 @@ dzn_fnc_showWinTimer = {
 	1015 cutRsc ["winTimerTitle", "PLAIN"];
 };
 
-// win Timer Handler
-[] spawn {
-	waitUntil { !isNil "dzn_captureTimer" && !isNil "dzn_inCapture" };
-	dzn_winTimerIsShown = false;	
-	{
-		if (dzn_inCapture) then {
-			if !(dzn_winTimerIsShown) then {
-				call dzn_fnc_showWinTimer;
-				dzn_winTimerIsShown = true;
-			};
-		} else {
-			1015 cutText ["","PLAIN"];
-			dzn_winTimerIsShown = false;
-		};	
-	} call KK_fnc_onEachFrame;
-};
+
