@@ -12,6 +12,8 @@ dzn_fnc_ra_setRoleAttributes = {
 	_unit setVariable ["raRoleId", _roleId, true];
 	_unit setVariable ["raRole", [dzn_roleMapping, _roleId] call dzn_fnc_getValueByKey, true];
 	_unit setVariable ["raPic", [dzn_rolePicMapping, _roleId] call dzn_fnc_getValueByKey, true];
+	
+	_unit call dzn_fnc_ra_setRoleAssingedByUnit;
 };
 
 dzn_fnc_ra_setRoleAssingedByUnit = {
@@ -19,7 +21,7 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 	// unit call dzn_fnc_ra_setRoleAssingedByUnit;
 	
 	private["_squad","_role","_squadArray"];
-	
+	if ( isNil { _this getVariable "raSquadId" } || isNil { _this getVariable "raRoleId" } ) exitWith { false };
 	_squad = _this getVariable "raSquadId";
 	_role = _this getVariable "raRoleId";
 	
@@ -31,6 +33,7 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 	};
 	
 	publicVariable "dzn_assignedRoles";
+	
 	true
 };
 
@@ -52,13 +55,7 @@ dzn_fnc_ra_getNearestUnusedRole = {
 	} forEach dzn_assignedRoles;
 	
 	[_squad - 1, _role]
-}
-
-//dzn_fnc_ra_getUnitByRoleFromSquad = {
-	// [ ROLE ID, SQUAD ] call dzn_fnc_ra_getUnitByRoleFromSquad
-//};
-
-
+};
 
 
 waitUntil { time > 1 };
@@ -184,9 +181,9 @@ switch (true) do {
 		};
 	};
 };
-publicVariable "dzn_assignedSquads";
-
 
 // ********* End Of Role Assignement ************
+publicVariable "dzn_assignedSquads";
+
 dzn_ra_assignmentComplete = true;
 publicVariable "dzn_ra_assignmentComplete";
