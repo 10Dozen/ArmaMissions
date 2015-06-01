@@ -35,6 +35,22 @@ dzn_ra_fnc_setRoleAttributes = {
 // ********* Wait for players to come ********
 dzn_allPlayers = [];
 dzn_assignedPlayers = [];
+dzn_assignedRoles = [
+	/* CO */
+	[ 0 ]
+	/* Alpha */
+	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
+	/* Bravo */
+	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
+	/* Charlie */
+	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
+	/* Delta */
+	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
+	/* Foxtrot */
+	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
+	/* Echo */
+	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
+];
 _unit = objNull;
 
 waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
