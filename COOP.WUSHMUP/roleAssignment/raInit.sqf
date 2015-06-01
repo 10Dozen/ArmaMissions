@@ -18,7 +18,7 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 	// Update dzn_assignedRoles with given unit at unit's role
 	// unit call dzn_fnc_ra_setRoleAssingedByUnit;
 	
-	private["_squad","_role"];
+	private["_squad","_role","_squadArray"];
 	
 	_squad = _this getVariable "raSquadId";
 	_role = _this getVariable "raRoleId";
@@ -26,7 +26,8 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 	if (_squad == "CO") then {
 		dzn_assignedRoles set [ 0, [0, _this] ];
 	} else {
-		dzn_assignedRoles set [ _squadId + 1, [ _roleId, _this ] ];
+		_squadArray = dzn_assignedRoles select (_squad + 1);
+		dzn_assignedRoles set [ _squadId + 1, [_squadArray, _roleId, _unit ] call BIS_fnc_setToPairs ];
 	};
 	
 	true
