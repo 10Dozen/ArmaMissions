@@ -55,18 +55,18 @@ dzn_fnc_ra_getNearestUnusedRole = {
 
 dzn_fnc_ra_getUnitBySquadAndRole = {
 	//  [@SuqadId, @RoleId] call dzn_fnc_ra_getUnitBySquadAndRole
-	private["_unit","_squad","_role"];
+	private["_unit","_squadId","_roleId"];
 	
 	_squadId = _this select 0;
 	_roleId = _this select 1;
 	_unit = objNull;
 	
-	if (typename _squadId == STRING && { _squadId == "CO" }) then {
+	if (typename _squadId == "STRING" && { _squadId == "CO" }) then {
 		_unit = dzn_assignedRoles select 0 select 1;
 	} else {
 		_unit = [dzn_assignedRoles select (_squadId + 1), _roleId] call dzn_fnc_getValueByKey;
 	};
-
+	
 	_unit
 }; 
 
