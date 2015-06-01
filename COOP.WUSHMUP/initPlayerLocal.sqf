@@ -11,11 +11,12 @@ player hideObjectGlobal false;
 		[player, _assignement select 0, _assignement select 1] call dzn_fnc_ra_setRoleAttributes
 		player call dzn_fnc_ra_setRoleAssingedByUnit;
 		
-		
-		
+		_leader = [_assignement select 0, 10] call dzn_fnc_ra_getUnitBySquadAndRole;
 		// Add to group
+		[player] joinSiletn (group _leader);
 		
 		// Set pos of leader
+		player setPosASL (getPosASL _leader);
 	};
 };
 
