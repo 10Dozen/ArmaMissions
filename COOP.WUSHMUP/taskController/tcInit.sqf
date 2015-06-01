@@ -58,7 +58,7 @@ if (hasInterface && !isServer) then {
 waitUntil { !isNil "tc_activeTaskTrigger" };
 tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
 {
-	if (_x isKindOf "ModuleTaskCreate_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
+	if (_x isKindOf "ModuleTaskSetState_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
 } forEach tc_deploymentPoints;
 
 if (tc_deploymentPoints isEqualTo []) exitWith { hint "tcIit: No deployment points found!"; };
