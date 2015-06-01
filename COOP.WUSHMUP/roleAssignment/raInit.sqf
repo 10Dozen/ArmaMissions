@@ -26,8 +26,8 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 	if (_squad == "CO") then {
 		dzn_assignedRoles set [ 0, [0, _this] ];
 	} else {
-		_squadArray = dzn_assignedRoles select (_squad + 1);
-		dzn_assignedRoles set [ _squadId + 1, [_squadArray, _roleId, _unit ] call BIS_fnc_setToPairs ];
+		_squadArray = dzn_assignedRoles select (_squad + 1); // [ [10], [100],[101], ... ]
+		dzn_assignedRoles set [ _squadId + 1, [_squadArray, _roleId, _unit ] call BIS_fnc_setToPairs ]; // Update with [ [10, UNIT], [100],[101] ... ]
 	};
 	
 	true
