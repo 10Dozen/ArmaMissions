@@ -69,6 +69,28 @@ dzn_fnc_getValueByKey = {
 	_output
 };
 
+dzn_fnc_setValueByKey = {
+	//[@Array, @Key, @NewValue] call dzn_fnc_setValueByKey	
+	private ["_array","_key","_value","_default"];
+	
+	_array = _this select 0;
+	_key = _this select 1;
+	_value = _this select 2;
+	_default = false;
+	{
+		if ( [_key, _x select 0] call BIS_fnc_areEqual ) exitWith {
+			_array set [ _forEachIndex, [_key, _value] ];
+			_default = true;
+		};
+	} forEach _array;
+	
+	if !(_default) exitWith {
+		hintSilent format ["dzn_fnc_setValueByKey :: Failed to find %1 key. Array is not updated.", str(_key)];
+		diag_log format ["dzn_fnc_setValueByKey :: Failed to find %1 key. Array is not updated.", str(_key)];
+	};
+	
+	true
+};
 
 dzn_fnc_getAllPlayers = {
 	// [@SP/MP/Both, (ExcludeArray)] call dzn_fnc_getAllPlayers
