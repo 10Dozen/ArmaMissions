@@ -38,7 +38,19 @@ if (isServer || isDedicated) then {
 		waitUntil { (time > 10) && !isNil "dzn_captureTimerDefault" };
 		[] execFSM "taskController\tcCaptureZone.fsm";
 	};
+		
+	// ********* Get Positions For Squad Deployment ***
+	waitUntil { !isNil "tc_activeTaskTrigger" };
+	tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
+	{
+		if (_x isKindOf "ModuleTaskSetState_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
+	} forEach tc_deploymentPoints;
+
+	if (tc_deploymentPoints isEqualTo []) exitWith { hint "tcIit: No deployment points found!"; };
+	publicVariable "tc_deploymentPoints";
 };
+
+
 
 // ********** Set Marker *****************
 
@@ -53,18 +65,8 @@ if (hasInterface && !isServer) then {
 "mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
 "mrk_taskArea" setMarkerDir (direction tc_completeArea);
 
-
-// ********* Get Positions For Squad Deployment ***
-waitUntil { !isNil "tc_activeTaskTrigger" };
-tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
-{
-	if (_x isKindOf "ModuleTaskCreate_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
-} forEach tc_deploymentPoints;
-
-if (tc_deploymentPoints isEqualTo []) exitWith { hint "tcIit: No deployment points found!"; };
-
 // *********** Assigning Squads for Points ******
-waitUntil { !isNil "dzn_ra_assignmentComplete" };
+waitUntil { !isNil "dzn_ra_assignmentComplete" && !isNil "tc_deploymentPoints" };
 sleep 2;
 
 if (dzn_assignedSquads isEqualTo []) exitWith {};
@@ -142,13 +144,15 @@ switch (true) do {
 	};	
 	
 	{
-		_unitPosASL = [
-			(_posASL select 0) + _forEachIndex*1.2,
-			(_posASL select 1) + _squadStep - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
-			_posASL select 2
-		];
-		_x setPosASL _unitPosASL;
-		_x setVelocity [0,0,0];
+		if (hasInterface && { player == -x }) then {
+			_unitPosASL = [
+				(_posASL select 0) + _forEachIndex*1.2,
+				(_posASL select 1) + _squadStep - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
+				_posASL select 2
+			];
+			_x setPosASL _unitPosASL;
+			_x setVelocity [0,0,0];
+		};
 	} forEach (_x select 1);
 } forEach dzn_assignedSquads;
 
@@ -165,7 +169,7 @@ for "_i" from 0 to 2 do {
 
 // Moving CO to the first start pos
 if (!isNil "dzn_ra_co") then {
-	if (isServer || isDedicated || (hasInterface && {player == dzn_ra_co} )) then {
+	if (hasInterface && {player == dzn_ra_co} ) then {
 		dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0];
 	};
 };
