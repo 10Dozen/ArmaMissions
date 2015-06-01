@@ -88,8 +88,6 @@ dzn_fnc_setValueByKey = {
 		hintSilent format ["dzn_fnc_setValueByKey :: Failed to find %1 key. Array is not updated.", str(_key)];
 		diag_log format ["dzn_fnc_setValueByKey :: Failed to find %1 key. Array is not updated.", str(_key)];
 	};
-	
-	true
 };
 
 dzn_fnc_getAllPlayers = {
