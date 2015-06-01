@@ -38,23 +38,25 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 };
 
 dzn_fnc_ra_getNearestUnusedRole = {
-	// call dzn_fnc_ra_getNearestUnusedRole
-	// OUTPUT: [squadId, roleId]
+	// [@Squad, @Role] = call dzn_fnc_ra_getNearestUnusedRole
 	
-	private["_squad", "_role"];
+	private["_squad", "_squadId", "_role"];
 	
-	_squad = -1;
+	_squadId = -1;
 	_role = -1;
 	{
+		player sideChat str[_x];
 		if (_forEachIndex > 0) then {
 			_squad = _x;
+			_squadId = _forEachIndex;
 			{
 				if (count _x < 2) exitWith { _role = _x select 0; };
 			} forEach _squad;
 		};
+		if (_squadId != -1) exitWith {};
 	} forEach dzn_assignedRoles;
 	
-	[_squad - 1, _role]
+	[_squadId - 1, _role]
 };
 
 dzn_fnc_ra_getUnitBySquadAndRole = {
