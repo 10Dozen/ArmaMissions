@@ -1,6 +1,6 @@
 // Functions
 dzn_fnc_ra_setRoleAttributes = {
-	// [@Unit, @SquadID, @RoleID] call dzn_fnc_ra_setRoleAttributes
+	// [@Unit, @SquadID, @RoleID] call dzn_fnc_ra_setRoleAssingedByUnit
 	private["_unit","_squadId","_roleId"];
 	
 	_unit = _this select 0;
@@ -13,43 +13,38 @@ dzn_fnc_ra_setRoleAttributes = {
 	_unit setVariable ["raRole", [dzn_roleMapping, _roleId] call dzn_fnc_getValueByKey, true];
 	_unit setVariable ["raPic", [dzn_rolePicMapping, _roleId] call dzn_fnc_getValueByKey, true];
 	
-	_unit call dzn_fnc_ra_setRoleAssingedByUnit;
+	[_unit,_squadId,_roleId] call dzn_fnc_ra_setRoleAssingedByUnit;
 };
 
 dzn_fnc_ra_setRoleAssingedByUnit = {
-	// Update dzn_assignedRoles with given unit at unit's role
-	// unit call dzn_fnc_ra_setRoleAssingedByUnit;
+	// [@Unit, @SquadID, @RoleID] call dzn_fnc_ra_setRoleAssingedByUnit
+	private["_unit","_squadId","_roleId","_squadArray"];
 	
-	private["_squad","_role","_squadArray"];
-	if ( isNil { _this getVariable "raSquadId" } || isNil { _this getVariable "raRoleId" } ) exitWith { false };
-	_squad = _this getVariable "raSquadId";
-	_role = _this getVariable "raRoleId";
+	_unit = _this select 0;
+	_squadId = _this select 1;
+	_roleId = _this select 2;
 	
-	if (_squad == "CO") then {
-		dzn_assignedRoles set [ 0, [0, _this] ];
+	if (typename _squadId == "STRING" && { _squadId == "CO" } ) then {		
+		[dzn_assignedRoles, 0,_unit] call dzn_fnc_setValueByKey;
 	} else {
-		_squadArray = dzn_assignedRoles select (_squad + 1); // [ [10], [100],[101], ... ]
-		dzn_assignedRoles set [ _squadId + 1, [_squadArray, _roleId, _unit ] call BIS_fnc_setToPairs ]; // Update with [ [10, UNIT], [100],[101] ... ]
-	};
-	
+		[dzn_assignedRoles select (_squadId + 1), _roleId,_unit] call dzn_fnc_setValueByKey;
+	};	
 	publicVariable "dzn_assignedRoles";
-	
-	true
 };
 
 dzn_fnc_ra_getNearestUnusedRole = {
-	// [@Squad, @Role] = call dzn_fnc_ra_getNearestUnusedRole
-	
+	// call dzn_fnc_ra_getNearestUnusedRole
 	private["_squad", "_squadId", "_role"];
 	
 	_squadId = -1;
 	_role = -1;
 	{
+		player sideChat str[_x];
 		if (_forEachIndex > 0) then {
 			_squad = _x;
 			_squadId = _forEachIndex;
 			{
-				if (count _x < 2) exitWith { _role = _x select 0; };
+				if ( isNull (_x select 1) ) exitWith { _role = _x select 0; };
 			} forEach _squad;
 		};
 		if (_squadId != -1) exitWith {};
@@ -59,24 +54,21 @@ dzn_fnc_ra_getNearestUnusedRole = {
 };
 
 dzn_fnc_ra_getUnitBySquadAndRole = {
-	// [@Squad, @Role] call dzn_fnc_ra_getUnitBySquadAndRole
-	// OUTPUT: @Unit
-	
+	//  [@SuqadId, @RoleId] call dzn_fnc_ra_getUnitBySquadAndRole
 	private["_unit","_squad","_role"];
 	
-	_squad = _this select 0;
-	_role = _this select 1;
+	_squadId = _this select 0;
+	_roleId = _this select 1;
 	_unit = objNull;
 	
-	if (typename _squad == STRING && { _squad == "CO" } then {
+	if (typename _squadId == STRING && { _squadId == "CO" }) then {
 		_unit = dzn_assignedRoles select 0 select 1;
 	} else {
-		_squadArray = dzn_assignedRoles select (_squad + 1); // [ [10, unit] ... ]
-		_unit = [_squadArray, _role] call BIS_fnc_getFromPairs;
+		_unit = [dzn_assignedRoles select (_squadId + 1), _roleId] call dzn_fnc_getValueByKey;
 	};
 
 	_unit
-};
+}; 
 
 
 waitUntil { time > 1 };
@@ -101,22 +93,12 @@ dzn_ra_roleID_SQ = 100;
 // ********* Wait for players to come ********
 dzn_allPlayers = [];
 dzn_assignedPlayers = [];
-dzn_assignedRoles = [
-	/* CO */
-	[ 0 ]
-	/* Alpha */
-	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
-	/* Bravo */
-	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
-	/* Charlie */
-	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
-	/* Delta */
-	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
-	/* Foxtrot */
-	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
-	/* Echo */
-	,[[10],[100], [101],[102],[103],[104], [105],[106],[107],[108]]
-];
+dzn_assignedRoles = [ [0, objNull] ];
+for "_i" from 1 to 6 do {
+	dzn_assignedRoles pushBack [
+		[10, objNull],[100, objNull], [101, objNull],[102, objNull],[103, objNull],[104, objNull], [105, objNull],[106, objNull],[107, objNull],[108, objNull]
+	];
+};
 _unit = objNull;
 
 waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
