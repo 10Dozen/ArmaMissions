@@ -57,6 +57,19 @@ dzn_fnc_ra_getNearestUnusedRole = {
 	[_squad - 1, _role]
 };
 
+dzn_fnc_ra_getUnitBySquadAndRole = {
+	// [@Squad, @Role] call dzn_fnc_ra_getUnitBySquadAndRole
+	// OUTPUT: @Unit
+	private["_unit","_squad","_role"];
+	_squad = _this select 0;
+	_role = _this select 1;
+	_unit = objNull;
+	
+	
+
+	_unit
+};
+
 
 waitUntil { time > 1 };
 
