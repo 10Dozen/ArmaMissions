@@ -34,7 +34,7 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 
 dzn_fnc_ra_getNearestUnusedRole = {
 	// call dzn_fnc_ra_getNearestUnusedRole
-	private["_squad", "_squadId", "_role"];
+	private["_squad","_squadId","_id","_role"];
 	
 	_squadId = -1;
 	_role = -1;
@@ -42,14 +42,18 @@ dzn_fnc_ra_getNearestUnusedRole = {
 		player sideChat str[_x];
 		if (_forEachIndex > 0) then {
 			_squad = _x;
-			_squadId = _forEachIndex;
+			_id = _forEachIndex;
 			{
-				if ( isNull (_x select 1) ) exitWith { _role = _x select 0; };
-			} forEach _squad;
+				if ( isNull (_x select 1) ) exitWith { 
+					_role = _x select 0;
+					_squadId = _id;
+				};
+			} forEach _squad;			
 		};
 		if (_squadId != -1) exitWith {};
 	} forEach dzn_assignedRoles;
 	
+	if ( _squadId < 0 && _role < 0) exitWith {};
 	[_squadId - 1, _role]
 };
 
