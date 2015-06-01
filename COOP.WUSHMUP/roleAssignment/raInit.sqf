@@ -1,6 +1,6 @@
 // Functions
-dzn_ra_fnc_setRoleAttributes = {
-	// [@Unit, @SquadID, @RoleID] call dzn_ra_fnc_setRoleAttributes
+dzn_fnc_ra_setRoleAttributes = {
+	// [@Unit, @SquadID, @RoleID] call dzn_fnc_ra_setRoleAttributes
 	private["_unit","_squadId","_roleId"];
 	
 	_unit = _this select 0;
@@ -74,8 +74,8 @@ dzn_ra_roleID_SQ = 100;
 #define EXIT_IF_NO_UNITS		if (dzn_allPlayers isEqualTo []) exitWith {};
 #define ADD_UNIT_TO_CURRENT_SQUAD	_squad pushBack _unit;
 
-#define ASSIGN_SQUADLEADER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleId_SL] call dzn_ra_fnc_setRoleAttributes;	ADD_UNIT_TO_CURRENT_SQUAD			
-#define	ASSIGN_SQUADMEMBER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleID_SQ + _j] call dzn_ra_fnc_setRoleAttributes; ADD_UNIT_TO_CURRENT_SQUAD
+#define ASSIGN_SQUADLEADER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleId_SL] call dzn_fnc_ra_setRoleAttributes;	ADD_UNIT_TO_CURRENT_SQUAD			
+#define	ASSIGN_SQUADMEMBER		PULL_RANDOM_PLAYER(_unit,true) [_unit, _i, dzn_ra_roleID_SQ + _j] call dzn_fnc_ra_setRoleAttributes; ADD_UNIT_TO_CURRENT_SQUAD
 #define NEW_SQUAD			_squad = [];
 #define CREATE_NEW_GRPOUP		_group = group _unit;
 #define JOIN_UNITS_TO_GROUP		_squad joinSilent _group;
@@ -116,7 +116,7 @@ dzn_assignedSquads = [];
 // ********* Choosing CO *********************
 if ((count dzn_allPlayers) > 14) then {
 	PULL_RANDOM_PLAYER(_unit,true)	
-	[_unit, "CO", dzn_ra_roleId_CO] call dzn_ra_fnc_setRoleAttributes;
+	[_unit, "CO", dzn_ra_roleId_CO] call dzn_fnc_ra_setRoleAttributes;
 
 	dzn_ra_co = _unit;
 	publicVariable "dzn_ra_co";	// Initiate Notification about CO
