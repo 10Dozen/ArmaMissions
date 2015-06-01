@@ -1,3 +1,49 @@
+// Functions
+dzn_ra_fnc_setRoleAttributes = {
+	// [@Unit, @SquadID, @RoleID] call dzn_ra_fnc_setRoleAttributes
+	private["_unit","_squadId","_roleId"];
+	
+	_unit = _this select 0;
+	_squadId = _this select 1;
+	_roleId = _this select 2;
+	
+	_unit setVariable ["raSquadId", _squadId, true];
+	_unit setVariable ["raSquad", [dzn_squadsMapping, _squadId] call dzn_fnc_getValueByKey, true];
+	_unit setVariable ["raRoleId", _roleId, true];
+	_unit setVariable ["raRole", [dzn_roleMapping, _roleId] call dzn_fnc_getValueByKey, true];
+	_unit setVariable ["raPic", [dzn_rolePicMapping, _roleId] call dzn_fnc_getValueByKey, true];
+};
+
+dzn_fnc_ra_setRoleAssingedByUnit = {
+	// Update dzn_assignedRoles with given unit at unit's role
+	// unit call dzn_fnc_ra_setRoleAssingedByUnit;
+	
+	private["_squad","_role"];
+	
+	_squad = _this getVariable "raSquadId";
+	_role = _this getVariable "raRoleId";
+	
+	if (_squad == "CO") then {
+		dzn_assignedRoles set [ 0, [0, _this] ];
+	} else {
+		dzn_assignedRoles set [ _squadId + 1, [ _roleId, _this ] ];
+	};
+	
+	true
+};
+
+
+dzn_fnc_ra_getUnusedRole = {
+
+}
+
+//dzn_fnc_ra_getUnitByRoleFromSquad = {
+	// [ ROLE ID, SQUAD ] call dzn_fnc_ra_getUnitByRoleFromSquad
+//};
+
+
+
+
 waitUntil { time > 1 };
 
 if !(isServer || isDedicated) exitWith {};
@@ -16,21 +62,6 @@ dzn_ra_roleID_SQ = 100;
 #define NEW_SQUAD			_squad = [];
 #define CREATE_NEW_GRPOUP		_group = group _unit;
 #define JOIN_UNITS_TO_GROUP		_squad joinSilent _group;
-
-dzn_ra_fnc_setRoleAttributes = {
-	// [@Unit, @SquadID, @RoleID] call dzn_ra_fnc_setRoleAttributes
-	private["_unit","_squadId","_roleId"];
-	
-	_unit = _this select 0;
-	_squadId = _this select 1;
-	_roleId = _this select 2;
-	
-	_unit setVariable ["raSquadId", _squadId, true];
-	_unit setVariable ["raSquad", [dzn_squadsMapping, _squadId] call dzn_fnc_getValueByKey, true];
-	_unit setVariable ["raRoleId", _roleId, true];
-	_unit setVariable ["raRole", [dzn_roleMapping, _roleId] call dzn_fnc_getValueByKey, true];
-	_unit setVariable ["raPic", [dzn_rolePicMapping, _roleId] call dzn_fnc_getValueByKey, true];
-};
 
 // ********* Wait for players to come ********
 dzn_allPlayers = [];
