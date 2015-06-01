@@ -30,12 +30,28 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 		dzn_assignedRoles set [ _squadId + 1, [_squadArray, _roleId, _unit ] call BIS_fnc_setToPairs ]; // Update with [ [10, UNIT], [100],[101] ... ]
 	};
 	
+	publicVariable "dzn_assignedRoles";
 	true
 };
 
-
-dzn_fnc_ra_getUnusedRole = {
-
+dzn_fnc_ra_getNearestUnusedRole = {
+	// call dzn_fnc_ra_getNearestUnusedRole
+	// OUTPUT: [squadId, roleId]
+	
+	private["_squad", "_role"];
+	
+	_squad = -1;
+	_role = -1;
+	{
+		if (_forEachIndex > 0) then {
+			_squad = _x;
+			{
+				if (count _x < 2) exitWith { _role = _x select 0; };
+			} forEach _squad;
+		};
+	} forEach dzn_assignedRoles;
+	
+	[_squad - 1, _role]
 }
 
 //dzn_fnc_ra_getUnitByRoleFromSquad = {
