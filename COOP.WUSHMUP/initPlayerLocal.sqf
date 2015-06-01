@@ -8,10 +8,10 @@ player hideObjectGlobal false;
 	if ( isNil {player getVariable "raRoleId" } then {
 		private["_assignement"];
 		_assignement = call dzn_fnc_ra_getNearestUnusedRole;
-		[player, _assignement select 0, _assignement select 1] call dzn_fnc_ra_setRoleAttributes
-		player call dzn_fnc_ra_setRoleAssingedByUnit;
+		[player, _assignement select 0, _assignement select 1] call dzn_fnc_ra_setRoleAttributes;
 		
 		_leader = [_assignement select 0, 10] call dzn_fnc_ra_getUnitBySquadAndRole;
+		
 		// Add to group
 		[player] joinSiletn (group _leader);
 		
