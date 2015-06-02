@@ -164,6 +164,13 @@ dzn_fnc_setDateTime = {
 
 dzn_fnc_cache = {};
 
+dzn_unhideUnit = {
+	// call dzn_unhideUnit
+	{
+		_x enableSimulationGlobal true; 
+		_x hideObjectGlobal false;
+	} forEach (call BIS_fnc_listPlayers);
+};
 
 dzn_fnc_ra_getSquadLeader = {
 	// "squadId" call dzn_fnc_ra_getSquadLeader
