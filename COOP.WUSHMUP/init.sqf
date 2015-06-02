@@ -20,7 +20,7 @@ par_fog call dzn_fnc_setFog;
 // dzn_gear and dzn_dynai modules
 [false] execVM "dzn_gear\dzn_gear_init.sqf";
 [] execVM "dzn_dynai\dzn_dynai_init.sqf";
-
+//[] execVM "dzn_jtac\dzn_jtac_init.sqf";
 
 
 

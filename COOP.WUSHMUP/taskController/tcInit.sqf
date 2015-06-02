@@ -42,7 +42,10 @@ if (isServer || isDedicated) then {
 
 // ********** Set Marker *****************
 
-waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
+waitUntil { !isNil "tc_activeTask" && !isNil "tc_activeTaskTrigger" && time > 0 };
+if (hasInterface && !isServer) then {
+	tc_completeArea = [tc_activeTaskTrigger, false] call dzn_fnc_convertTriggerToLocation;	
+};
 
 "mrk_task" setMarkerPosLocal (position tc_completeArea);
 "mrk_task" setMarkerText (localize "STR_marker_taskText");
@@ -52,9 +55,10 @@ waitUntil { !isNil "tc_activeTask" && !isNil "tc_completeArea" };
 
 
 // ********* Get Positions For Squad Deployment ***
+waitUntil { !isNil "tc_activeTaskTrigger" };
 tc_deploymentPoints = synchronizedObjects tc_activeTaskTrigger;
 {
-	if (_x isKindOf "ModuleTaskCreate_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
+	if (_x isKindOf "ModuleTaskSetState_F") exitWith { tc_deploymentPoints = tc_deploymentPoints - [_x]; };
 } forEach tc_deploymentPoints;
 
 if (tc_deploymentPoints isEqualTo []) exitWith { hint "tcIit: No deployment points found!"; };

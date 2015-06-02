@@ -245,9 +245,9 @@
 			<English> :: Mission Conditions ::</English>
 		</Key>
 		<Key ID='STR_par_endTime'>
-			<Original> Время на выполнение</Original>
-			<Russian> Время на выполнение</Russian>
-			<English> Mission End Timer</English>
+			<Original> Время на выполнение (мин.)</Original>
+			<Russian> Время на выполнение (мин.)</Russian>
+			<English> Mission End Timer (min.)</English>
 		</Key>
 
 <!-- Enviroment Conditions -->
@@ -293,7 +293,7 @@
 		<Key ID='STR_par_weatherOption5'>
 			<Original>Гроза</Original>
 			<Russian>Гроза</Russian>
-			<English>Strom</English>
+			<English>Storm</English>
 		</Key>
 		
 <!-- Fog -->		
