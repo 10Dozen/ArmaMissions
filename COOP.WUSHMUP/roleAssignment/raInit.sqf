@@ -14,6 +14,24 @@ dzn_fnc_ra_setRoleAttributes = {
 	_unit setVariable ["raPic", [dzn_rolePicMapping, _roleId] call dzn_fnc_getValueByKey, true];
 	
 	[_unit,_squadId,_roleId] call dzn_fnc_ra_setRoleAssingedByUnit;
+	[_unit,_squadId] call dzn_fnc_ra_updateAssignedSquads;
+	
+	// dzn_assignedSquads
+};
+
+dzn_fnc_ra_updateAssignedSquads = {
+	// [@Unit, @Squad] call dzn_fnc_ra_updateAssignedSquads
+	private["_unit","_squadId","_currentSquad"];
+	
+	_unit = _this select 0;
+	_squadId = _this select 1;
+	
+	if (isNil {dzn_assignedSquads select (_squadId)}) then {
+		dzn_assignedSquads pushBack [_squadId, [_unit]];	
+	} else {
+		_currentSquad = dzn_assignedSquads select _squadId select 1;
+		_currentSquad pushBack _unit;	
+	};
 };
 
 dzn_fnc_ra_setRoleAssingedByUnit = {
@@ -28,8 +46,7 @@ dzn_fnc_ra_setRoleAssingedByUnit = {
 		[dzn_assignedRoles, 0,_unit] call dzn_fnc_setValueByKey;
 	} else {
 		[dzn_assignedRoles select (_squadId + 1), _roleId,_unit] call dzn_fnc_setValueByKey;
-	};	
-	publicVariable "dzn_assignedRoles";
+	};
 };
 
 dzn_fnc_ra_getNearestUnusedRole = {
@@ -75,9 +92,10 @@ dzn_fnc_ra_getUnitBySquadAndRole = {
 }; 
 
 
-waitUntil { time > 1 };
+waitUntil { time > 2 };
 
 if !(isServer || isDedicated) exitWith {};
+
 private["_unit","_squad","_group","_i","_j"];
 
 dzn_ra_roleId_CO = 0;
@@ -96,7 +114,10 @@ dzn_ra_roleID_SQ = 100;
 
 // ********* Wait for players to come ********
 dzn_allPlayers = [];
-dzn_assignedPlayers = [];
+
+dzn_assignedSquads = [];
+
+
 dzn_assignedRoles = [ [0, objNull] ];
 for "_i" from 1 to 6 do {
 	dzn_assignedRoles pushBack [
@@ -105,8 +126,18 @@ for "_i" from 1 to 6 do {
 };
 _unit = objNull;
 
-waitUntil { ["All", dzn_assignedPlayers] call dzn_fnc_getAllPlayers; count dzn_allPlayers > 0};
+// *********** Wait Until players exists *************
+waitUntil { dzn_allPlayers = call BIS_fnc_listPlayers; !(dzn_allPlayers isEqualTo []) };
 publicVariable "dzn_allPlayers";
+
+dzn_squadCount = floor ((count dzn_allPlayers)/10);
+if ((count dzn_allPlayers) > 14) then {
+	PULL_RANDOM_PLAYER(_unit,true)	
+	[_unit, "CO", dzn_ra_roleId_CO] call dzn_fnc_ra_setRoleAttributes;
+
+	dzn_ra_co = _unit;
+	publicVariable "dzn_ra_co";
+};
 
 // ******* Assignement to Squads *********
 // dzn_allPlayers pushBack player;
@@ -114,64 +145,43 @@ publicVariable "dzn_allPlayers";
 	// call compile format ["dzn_allPlayers pushBack man_%1",_i];
 // };
 
-dzn_squadCount = floor ((count dzn_allPlayers)/10);
-dzn_assignedSquads = [];
-
-// ********* Choosing CO *********************
-if ((count dzn_allPlayers) > 14) then {
-	PULL_RANDOM_PLAYER(_unit,true)	
-	[_unit, "CO", dzn_ra_roleId_CO] call dzn_fnc_ra_setRoleAttributes;
-
-	dzn_ra_co = _unit;
-	publicVariable "dzn_ra_co";	// Initiate Notification about CO
-};
-
 // ********* Choosing SLs and SquadMembers **********
 switch (true) do {
 	case ( (count dzn_allPlayers) % 10 == 0): {
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
-			ASSIGN_SQUADLEADER
-			
+			ASSIGN_SQUADLEADER			
 			CREATE_NEW_GRPOUP
 			EXIT_IF_NO_UNITS
 			for "_j" from 0 to 8 do {
 				ASSIGN_SQUADMEMBER			
-			};
-			
+			};			
 			JOIN_UNITS_TO_GROUP
-			dzn_assignedSquads pushBack [_i, _squad];
 		};
-	};	
+	};
 	case ( (count dzn_allPlayers) % 10 > 4): {
 		for "_i" from 0 to dzn_squadCount do {
 			EXIT_IF_NO_UNITS
 			NEW_SQUAD
-			ASSIGN_SQUADLEADER
-			
+			ASSIGN_SQUADLEADER			
 			CREATE_NEW_GRPOUP
 			EXIT_IF_NO_UNITS			
 			if (_i != dzn_squadCount) then {
 				for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };
 			} else {
 				for "_j" from 0 to ((count dzn_allPlayers) % 10 - 1) do { ASSIGN_SQUADMEMBER };
-			};
-			
+			};			
 			JOIN_UNITS_TO_GROUP
-			dzn_assignedSquads pushBack [_i, _squad];
 		};
 	};	
 	case ( (count dzn_allPlayers) % 10 < 5 && (count dzn_allPlayers) % 10 != 0 ): {
 		for "_i" from 0 to dzn_squadCount do {
-			EXIT_IF_NO_UNITS
-			
+			EXIT_IF_NO_UNITS			
 			NEW_SQUAD
-			ASSIGN_SQUADLEADER
-			
+			ASSIGN_SQUADLEADER			
 			CREATE_NEW_GRPOUP
 			EXIT_IF_NO_UNITS
-
 			if (_i == dzn_squadCount) then {
 				_unitsLeft = count dzn_allPlayers - 1;				
 				for "_j" from 0 to _unitsLeft do { ASSIGN_SQUADMEMBER };
@@ -181,16 +191,17 @@ switch (true) do {
 				} else {
 					for "_j" from 0 to 8 do { ASSIGN_SQUADMEMBER };				
 				};
-			};
-			
+			};			
 			JOIN_UNITS_TO_GROUP
-			dzn_assignedSquads pushBack [_i, _squad];
 		};
-	};
+	};		
 };
 
 // ********* End Of Role Assignement ************
+private ["_squadRoles","_squad"];
+
 publicVariable "dzn_assignedSquads";
+publicVariable "dzn_assignedRoles";
 
 dzn_ra_assignmentComplete = true;
 publicVariable "dzn_ra_assignmentComplete";
