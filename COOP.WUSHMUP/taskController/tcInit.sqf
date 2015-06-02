@@ -2,6 +2,9 @@
 tc_taskTitle 			= localize "STR_taskTitle";
 tc_taskDescription		= localize "STR_taskDescription";
 
+// ***************************************
+// ********** Server Side ****************
+// ***************************************
 
 // ********** Choose Task ****************
 
@@ -48,22 +51,8 @@ if (isServer || isDedicated) then {
 
 	if (tc_deploymentPoints isEqualTo []) exitWith { hint "tcIit: No deployment points found!"; };
 	publicVariable "tc_deploymentPoints";
-};
 
 
-
-// ********** Set Marker *****************
-
-waitUntil { !isNil "tc_activeTask" && !isNil "tc_activeTaskTrigger" && time > 0 };
-if (hasInterface && !isServer) then {
-	tc_completeArea = [tc_activeTaskTrigger, false] call dzn_fnc_convertTriggerToLocation;	
-};
-
-"mrk_task" setMarkerPosLocal (position tc_completeArea);
-"mrk_task" setMarkerText (localize "STR_marker_taskText");
-
-"mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
-"mrk_taskArea" setMarkerDir (direction tc_completeArea);
 
 // *********** Assigning Squads for Points ******
 waitUntil { !isNil "dzn_ra_assignmentComplete" && !isNil "tc_deploymentPoints" };
@@ -72,7 +61,7 @@ sleep 2;
 if (dzn_assignedSquads isEqualTo []) exitWith {};
 
 private[
-	"_getMarkerText","_getPoint","_markerId","_markerText","_markersInitialPositions",
+	"_getMarkerText","_getPoint","_markerId","_markerText",
 	"_posASL","_squadStep","_unitPosASL","_deploymentPoint"
 ];
 
@@ -80,11 +69,11 @@ tc_deploymentAssignment = [];
 _getMarkerText = "";
 _getPoint = "";
 _getMarkerId = 0;
-_markersInitialPositions = [];
+dzn_tc_markersInitialPositions = [];
 for "_i" from 0 to 2 do {
-	_markersInitialPositions = _markersInitialPositions + [ call compile format ["getMarkerPos 'mrk_startPos_%1'",_i] ];
+	dzn_tc_markersInitialPositions = dzn_tc_markersInitialPositions + [ call compile format ["getMarkerPos 'mrk_startPos_%1'",_i] ];
 };
-
+publicVariable "dzn_tc_markersInitialPositions";
 
 switch (true) do {
 	case (count dzn_assignedSquads < 4): { 
@@ -108,11 +97,11 @@ switch (true) do {
 {	
 	// Assign deployment point for [squadId, object]
 	_deploymentPoint = call compile _getPoint;	
-	tc_deploymentAssignment pushBack [_x select 0, _deploymentPoint];
+	
 	
 	// Move units to point
 	_posASL = getPosASL _deploymentPoint;
-	_squadStep = if (_forEachIndex % 2 == 0) then { 8 } else { 0 };	
+	
 	_markerId = _forEachIndex call _getMarkerId;
 	
 	if (markerText (format ["mrk_startPos_%1", _markerId]) == "") then {		
@@ -141,35 +130,74 @@ switch (true) do {
 			_markerId,
 			_markerText
 		];	
+		
+		tc_deploymentAssignment pushBack [_x select 0, _deploymentPoint, format ["mrk_startPos_%1", _markerId], _markerText];
 	};	
-	
-	{
-		if (hasInterface && { player == -x }) then {
-			_unitPosASL = [
-				(_posASL select 0) + _forEachIndex*1.2,
-				(_posASL select 1) + _squadStep - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
-				_posASL select 2
-			];
-			_x setPosASL _unitPosASL;
-			_x setVelocity [0,0,0];
-		};
-	} forEach (_x select 1);
 } forEach dzn_assignedSquads;
 
-// Hide unused markers
-for "_i" from 0 to 2 do {
-	call compile format [
-		"if ((getMarkerPos 'mrk_startPos_%1') in _markersInitialPositions) then {
-			'mrk_startPos_%1' setMarkerAlpha 0;
-		}
-		"
-		,_i
-	]
+publicVariable "tc_deploymentAssignment";
+
+
 };
 
-// Moving CO to the first start pos
-if (!isNil "dzn_ra_co") then {
-	if (hasInterface && {player == dzn_ra_co} ) then {
+// ***************************************
+// ************* Client Side *************
+// ***************************************
+
+if (hasInterface) then {
+	// ********** Set Marker *****************
+
+	waitUntil {!isNil "tc_activeTaskTrigger" && time > 0 };
+	
+	if (isNil "tc_completeArea") then { tc_completeArea = [tc_activeTaskTrigger, false] call dzn_fnc_convertTriggerToLocation; };
+	
+	"mrk_task" setMarkerPosLocal (position tc_completeArea);
+	"mrk_task" setMarkerText (localize "STR_marker_taskText");
+
+	"mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
+	"mrk_taskArea" setMarkerDir (direction tc_completeArea);
+
+	waitUntil { !isNil "tc_deploymentAssignment" };
+
+	{
+		// @Squad, @Point, @Marker, @MarkerText
+		_squadOnPointId = 0;
+		
+		_unitPosASL = [];
+		_posASL = _x select 1;		
+		_squad = [dzn_assignedSquads, _x select 0] call dzn_fnc_getValueByKey;
+		
+		{
+			_unitPosASL = [
+				(_posASL select 0) + _forEachIndex*1.2,
+				(_posASL select 1) + _squadOnPointId*8 - (_forEachIndex call {if (_this > 1) then { 2.5 } else { 0 }}),
+				_posASL select 2
+			];		
+		} forEach _squad;
+		
+		
+		player setPosASL _unitPosASL;
+		player setVelocity [0,0,0];
+	} forEach tc_deploymentAssignment;
+	
+	
+	
+	
+	
+	// Hide unused markers
+	for "_i" from 0 to 2 do {
+		call compile format [
+			"if ((getMarkerPos 'mrk_startPos_%1') in dzn_tc_markersInitialPositions) then {
+				'mrk_startPos_%1' setMarkerAlpha 0;
+			}
+			"
+			,_i
+		]
+	};
+
+	// Moving CO to the first start pos
+	if (!isNil "dzn_ra_co" && { player == dzn_ra_co } ) then {		
 		dzn_ra_co setPos [(getMarkerPos "mrk_startPos_0" select 0), (getMarkerPos "mrk_startPos_0" select 1) - 10, 0];
 	};
+
 };
