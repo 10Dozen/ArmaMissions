@@ -18,10 +18,11 @@
 		if !(isNull _leader) then {
 			[player] joinSilent (group _leader);
 			
-			// Set pos of leader
-			player setPosASL (getPosASL _leader);
+			// Set pos of leader			
+			player setPosASL ([getPos _leader, 180, 8] call dzn_fnc_getPosOnGivenDir);
 		} else {
 			// Without leader
+			player setPos (getMarkerPos "mrk_startPos_0");
 		};
 	};
 };
