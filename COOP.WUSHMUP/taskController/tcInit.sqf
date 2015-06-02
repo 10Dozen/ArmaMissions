@@ -59,10 +59,10 @@ if (hasInterface && !isServer) then {
 	tc_completeArea = [tc_activeTaskTrigger, false] call dzn_fnc_convertTriggerToLocation;	
 };
 
-"mrk_task" setMarkerPosLocal (position tc_completeArea);
+"mrk_task" setMarkerPos (position tc_completeArea);
 "mrk_task" setMarkerText (localize "STR_marker_taskText");
 
-"mrk_taskArea" setMarkerPosLocal (position tc_completeArea);
+"mrk_taskArea" setMarkerPos (position tc_completeArea);
 "mrk_taskArea" setMarkerDir (direction tc_completeArea);
 
 // *********** Assigning Squads for Points ******
