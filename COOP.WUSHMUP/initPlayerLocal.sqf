@@ -48,7 +48,26 @@
 		false
 	] call dzn_fnc_gear_assignKit;	
 	
-	
+	// Set radios
+	switch (par_radioMod) do {
+		case 0: {};
+		case 1: {
+			// If LR - set LR freq
+			if ( typename (player getVariable "raRoleId") != "STRING" && {player getVariable "raRoleId" == 10} ) then {
+				[
+					(call TFAR_fnc_activeLrRadio) select 0, 
+					(call TFAR_fnc_activeLrRadio) select 1, 
+					dzn_TFAR_lrFreq
+				] call TFAR_fnc_setLrFrequency;
+			};
+			
+			// Set SW Freq
+			[
+				(call TFAR_fnc_activeSwRadio), 
+				[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_getValueByKey;
+			] call TFAR_fnc_setSwFrequency;
+		};
+	};
 };
 
 // Mission Flow
