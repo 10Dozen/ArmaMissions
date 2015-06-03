@@ -27,12 +27,16 @@
 	};
 };
 
-// Role Assignement: Gear
+// Role Assignement
 [] spawn {
 	waitUntil { !isNil {player getVariable "raRoleId"}};
 	// Role Assignement: Display
 	[] spawn dzn_fnc_showAssignment;
 	
+	// Group ID
+	(group player) setGroupId (player getVariable "raSquad");
+	
+	// Gear
 	sleep 1;
 	[
 		player,
@@ -42,7 +46,9 @@
 			[dzn_kitToRoleMapping, player getVariable "raRoleId"] call dzn_fnc_getValueByKey
 		],
 		false
-	] call dzn_fnc_gear_assignKit;		
+	] call dzn_fnc_gear_assignKit;	
+	
+	
 };
 
 // Mission Flow
