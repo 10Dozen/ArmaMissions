@@ -1,48 +1,5 @@
 // Gear Kits
-/*
-"kit_" + dzn_factionMapping + "_" + dzn_kitToRoleMapping
-
-// ************************
-// NATO Kits
-// ************************
-
-kit_NATO_CO
-kit_NATO_SL
-kit_NATO_M
-kit_NATO_FTL
-kit_NATO_AR
-kit_NATO_AAR
-kit_NATO_G
-kit_NATO_RAT
-
-// ************************
-// CSAT Kits
-// ************************
-
-kit_CSAT_CO
-kit_CSAT_SL
-kit_CSAT_Medic
-kit_CSAT_FTL
-kit_CSAT_AR
-kit_CSAT_AAR
-kit_CSAT_Grenadier
-kit_CSAT_RAT
-
-// ************************
-// AAF Kits
-// ************************
-
-kit_AAF_CO
-kit_AAF_SL
-kit_AAF_Medic
-kit_AAF_FTL
-kit_AAF_AR
-kit_AAF_AAR
-kit_AAF_Grenadier
-kit_AAF_RAT
-
-*/
-
+//  "kit_" + dzn_factionMapping + "_" + dzn_kitToRoleMapping
 
 #define NIGHT_ITEM(X)	if (daytime < 9 || daytime > 18) then { X } else { "" }
 
