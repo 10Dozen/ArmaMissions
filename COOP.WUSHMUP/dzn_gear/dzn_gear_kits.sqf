@@ -3,8 +3,8 @@
 
 #define NIGHT_ITEM(X)	if (daytime < 9 || daytime > 18) then { X } else { "" }
 
-_SW_SL_RADIO =  ([dzn_swRadioMapping, par_radioMod] call dzn_fnc_getValueByKey) select 0;
-_SW_RADIO =([dzn_swRadioMapping, par_radioMod] call dzn_fnc_getValueByKey) select 1;
+_SW_SL_RADIO = ([dzn_swRadioMapping, par_radioMod] call dzn_fnc_getValueByKey) select 0;
+_SW_RADIO = ([dzn_swRadioMapping, par_radioMod] call dzn_fnc_getValueByKey) select 1;
 _LR_RADIO = [dzn_lrRadioMapping , par_radioMod] call dzn_fnc_getValueByKey;
 
 // ************************
