@@ -193,10 +193,27 @@
 			<English>Rifleman AT (Blue)</English>
 		</Key>
 
-
-
-
-
+	<!-- Radios -->
+		<Key ID='STR_radio_LR'>
+			<Original>Частота ДВ:</Original>
+			<Russian>Частоа ДВ:</Russian>
+			<English>LR Freq.:</English>
+		</Key>
+		<Key ID='STR_radio_SW'>
+			<Original>Частота КВ:</Original>
+			<Russian>Частота КВ:</Russian>
+			<English>SW Freq.:</English>
+		</Key>
+		<Key ID='STR_radio_mhz'>
+			<Original>МГц</Original>
+			<Russian>МГц</Russian>
+			<English>MHz</English>
+		</Key>
+		<Key ID='STR_radio_topic'>
+			<Original>Частоты КВ отрядов:</Original>
+			<Russian>Частоты КВ отрядов:</Russian>
+			<English>Squads SW Frequencies:</English>
+		</Key>
 
 <!--- *********** Mission Ends *********** -->
 	<!-- LOSE -->
