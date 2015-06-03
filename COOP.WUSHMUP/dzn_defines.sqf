@@ -26,7 +26,7 @@ dzn_TFAR_swFreqs = [
 ];
 
 // TFAR_fnc_setLrFrequency
-dzn_TFAR_lrFreq = 50;
+dzn_TFAR_lrFreq = "50";
 
 
 dzn_weatherSettingsMapping = [
