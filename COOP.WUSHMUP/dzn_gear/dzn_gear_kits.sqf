@@ -71,6 +71,7 @@ kit_AAF_Random = ["kit_AAF_SL","kit_AAF_M","kit_AAF_FTL","kit_AAF_AR","kit_AAF_A
 // Default Vehicle Kits
 // ************************
 
+kitVeh_empty = [ [],[],[],[] ];
 
 
 // ****************
