@@ -393,9 +393,9 @@
 
 <!-- Factions -->
 		<Key ID='STR_delimi_faction'>
-			<Original> :: Фракция ::</Original>
-			<Russian> :: Фракция ::</Russian>
-			<English> :: Faction :: </English>
+			<Original> :: Фракция Игроков ::</Original>
+			<Russian> :: Фракция Игроков ::</Russian>
+			<English> :: Players Faction :: </English>
 		</Key>
 
 
