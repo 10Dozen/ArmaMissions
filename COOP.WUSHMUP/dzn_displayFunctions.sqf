@@ -100,8 +100,9 @@ dzn_fnc_showCommandingStaffHint = {
 		case 1: {
 			_stringsToShow = _stringsToShow + [
 				lineBreak
+				,lineBreak
 				,parseText (format [
-					"<t color='#EDB81A' size='1.25' align='center'>%1 %2 %3</t>", 
+					"<t color='#EDB81A' size='1.25' align='center'>%1 <t color='#DDDDDD'>%2</t> %3</t>", 
 					localize "STR_radio_LR", 
 					dzn_TFAR_lrFreq,
 					localize "STR_radio_mhz"
@@ -137,21 +138,24 @@ dzn_fnc_addRadioSubject = {
 	private ["_topic","_text"];
 	
 	_topic = localize "STR_assignment_ORBAT";
-
-	_text = [localize "STR_radio_topic"];
+	_text = format [
+		"%1 -- %2 %3<br /><br />%4"
+		,localize "STR_radio_topic_lr"
+		,dzn_TFAR_lrFreq
+		,localize "STR_radio_mhz"
+		,localize "STR_radio_topic"
+	];	
 	
 	{
-		_text = _text + [
-			lineBreak
-			,format[
-				"%1 -- %2 %3",
-				_x select 1
-				,[dzn_TFAR_swFreqs , _forEachIndex] call dzn_fnc_getValueByKey
-				,localize "STR_radio_mhz"
-			]
+		_text = format[
+			"%1<br />%2 -- %3 %4"
+			,_text
+			,_x select 1
+			,[dzn_TFAR_swFreqs , _x select 0] call dzn_fnc_getValueByKey
+			,localize "STR_radio_mhz"
 		];
 	} forEach dzn_squadsMapping;
-
+	
 	player createDiarySubject [_topic,_topic];
 	player createDiaryRecord [
 		_topic,
@@ -237,8 +241,9 @@ dzn_fnc_showORBATHint = {
 		case 1: {
 			_stringsToShow = _stringsToShow + [
 				lineBreak
+				,lineBreak
 				,parseText (format [
-					"<t color='#EDB81A' size='1.25' align='center'>%1 %2 %3</t>", 
+					"<t color='#EDB81A' size='1.25' align='center'>%1 <t color='#DDDDDD'>%2</t> %3</t>", 
 					localize "STR_radio_SW", 
 					[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_fnc_getValueByKey,
 					localize "STR_radio_mhz"
@@ -338,3 +343,5 @@ dzn_fnc_onWinTimerTitleLoad = {
 dzn_fnc_showWinTimer = {
 	1015 cutRsc ["winTimerTitle", "PLAIN"];
 };
+
+
