@@ -101,7 +101,7 @@ dzn_fnc_showCommandingStaffHint = {
 			_stringsToShow = _stringsToShow + [
 				lineBreak
 				,parseText (format [
-					<t color='#EDB81A' size='1.25' align='center'>%1 %2 %3</t>, 
+					"<t color='#EDB81A' size='1.25' align='center'>%1 %2 %3</t>", 
 					localize "STR_radio_LR", 
 					dzn_TFAR_lrFreq,
 					localize "STR_radio_mhz"
@@ -148,7 +148,7 @@ dzn_fnc_addRadioSubject = {
 				_x select 1
 				,[dzn_TFAR_swFreqs , _forEachIndex] call dzn_fnc_getValueByKey
 				,localize "STR_radio_mhz"
-			];
+			]
 		];
 	} forEach dzn_squadsMapping;
 
@@ -238,7 +238,7 @@ dzn_fnc_showORBATHint = {
 			_stringsToShow = _stringsToShow + [
 				lineBreak
 				,parseText (format [
-					<t color='#EDB81A' size='1.25' align='center'>%1 %2 %3</t>, 
+					"<t color='#EDB81A' size='1.25' align='center'>%1 %2 %3</t>", 
 					localize "STR_radio_SW", 
 					[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_fnc_getValueByKey,
 					localize "STR_radio_mhz"
@@ -338,5 +338,3 @@ dzn_fnc_onWinTimerTitleLoad = {
 dzn_fnc_showWinTimer = {
 	1015 cutRsc ["winTimerTitle", "PLAIN"];
 };
-
-
