@@ -34,7 +34,7 @@
 	[] spawn dzn_fnc_showAssignment;
 	
 	// Group ID
-	(group player) setGroupId (player getVariable "raSquad");
+	(group player) setGroupId [player getVariable "raSquad"];
 	
 	// Gear
 	sleep 1;
@@ -64,7 +64,7 @@
 			// Set SW Freq
 			[
 				(call TFAR_fnc_activeSwRadio), 
-				[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_getValueByKey;
+				[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_fnc_getValueByKey
 			] call TFAR_fnc_setSwFrequency;
 		};
 	};
