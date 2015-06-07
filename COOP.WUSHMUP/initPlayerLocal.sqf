@@ -6,22 +6,29 @@
 	waitUntil { !isNil "dzn_ra_assignmentComplete" };
 	if ( isNil {player getVariable "raRoleId" }) then {
 		dzn_playerIsJIP = true;
-		private["_assignement"];
+		private["_assignement","_leader"];
 		_assignement = call dzn_fnc_ra_getNearestUnusedRole;
 		[player, _assignement select 0, _assignement select 1] call dzn_fnc_ra_setRoleAttributes;
 		publicVariable "dzn_assignedRoles";
 		publicVariable "dzn_assignedSquads";
 		
+		sleep 1;
 		_leader = [_assignement select 0, 10] call dzn_fnc_ra_getUnitBySquadAndRole;
+		// diag_log format["DZN_DUMP: JIP: initPlayerLocal: _leader = %1", str[_leader]];
 		
 		// Add to group
-		if !(isNull _leader) then {
+		if (_leader != player) then {
 			[player] joinSilent (group _leader);
 			
 			// Set pos of leader			
 			player setPosASL ([getPos _leader, 180, 8] call dzn_fnc_getPosOnGivenDir);
+			
+			// diag_log format["DZN_DUMP: JIP: initPlayerLocal: Player is member of group of %1", str[_leader]];
 		} else {
 			// Without leader
+			waitUntil {getMarkerPos "mrk_startPos_0" select 0 > 0};
+			
+			// diag_log format["DZN_DUMP: JIP: initPlayerLocal: Player is Leader of group of %1", str[_leader]];
 			player setPos (getMarkerPos "mrk_startPos_0");
 		};
 	};
