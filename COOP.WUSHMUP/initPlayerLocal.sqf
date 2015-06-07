@@ -59,8 +59,10 @@
 	switch (par_radioMod) do {
 		case 0: {};
 		case 1: {
+			sleep 5;
 			// If LR - set LR freq
 			if ( typename (player getVariable "raRoleId") != "STRING" && {player getVariable "raRoleId" == 10} ) then {
+				waitUntil { !isNil {call TFAR_fnc_activeLrRadio} }; 
 				[
 					(call TFAR_fnc_activeLrRadio) select 0, 
 					(call TFAR_fnc_activeLrRadio) select 1, 
@@ -69,6 +71,7 @@
 			};
 			
 			// Set SW Freq
+			waitUntil { !isNil {call TFAR_fnc_activeSwRadio} }; 
 			[
 				(call TFAR_fnc_activeSwRadio), 
 				[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_fnc_getValueByKey
