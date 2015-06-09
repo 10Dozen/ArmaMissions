@@ -1,10 +1,49 @@
+// Start simulations
+[[], "dzn_unhideUnit", true] call BIS_fnc_MP;
 
-// Role Assignement: Display
-[] spawn dzn_fnc_showAssignment;
-
-// Role Assignement: Gear
+// JIP 
 [] spawn {
-	waitUntil { !isNil {player getVariable "raRoleId"} };
+	waitUntil { !isNil "dzn_ra_assignmentComplete" };
+	if ( isNil {player getVariable "raRoleId" }) then {
+		dzn_playerIsJIP = true;
+		private["_assignement","_leader"];
+		_assignement = call dzn_fnc_ra_getNearestUnusedRole;
+		[player, _assignement select 0, _assignement select 1] call dzn_fnc_ra_setRoleAttributes;
+		publicVariable "dzn_assignedRoles";
+		publicVariable "dzn_assignedSquads";
+		
+		sleep 1;
+		_leader = [_assignement select 0, 10] call dzn_fnc_ra_getUnitBySquadAndRole;
+		// diag_log format["DZN_DUMP: JIP: initPlayerLocal: _leader = %1", str[_leader]];
+		
+		// Add to group
+		if (_leader != player) then {
+			[player] joinSilent (group _leader);
+			
+			// Set pos of leader			
+			player setPosASL ([getPos _leader, 180, 8] call dzn_fnc_getPosOnGivenDir);
+			
+			// diag_log format["DZN_DUMP: JIP: initPlayerLocal: Player is member of group of %1", str[_leader]];
+		} else {
+			// Without leader
+			waitUntil {getMarkerPos "mrk_startPos_0" select 0 > 0};
+			
+			// diag_log format["DZN_DUMP: JIP: initPlayerLocal: Player is Leader of group of %1", str[_leader]];
+			player setPos (getMarkerPos "mrk_startPos_0");
+		};
+	};
+};
+
+// Role Assignement
+[] spawn {
+	waitUntil { !isNil {player getVariable "raRoleId"}};
+	// Role Assignement: Display
+	[] spawn dzn_fnc_showAssignment;
+	
+	// Group ID
+	(group player) setGroupId [player getVariable "raSquad"];
+	
+	// Gear
 	sleep 1;
 	[
 		player,
@@ -14,13 +53,37 @@
 			[dzn_kitToRoleMapping, player getVariable "raRoleId"] call dzn_fnc_getValueByKey
 		],
 		false
-	] call dzn_fnc_gear_assignKit;		
+	] call dzn_fnc_gear_assignKit;	
+	
+	// Set radios
+	switch (par_radioMod) do {
+		case 0: {};
+		case 1: {
+			sleep 5;
+			// If LR - set LR freq
+			if ( typename (player getVariable "raRoleId") != "STRING" && {player getVariable "raRoleId" == 10} ) then {
+				waitUntil { !isNil {call TFAR_fnc_activeLrRadio} }; 
+				[
+					(call TFAR_fnc_activeLrRadio) select 0, 
+					(call TFAR_fnc_activeLrRadio) select 1, 
+					dzn_TFAR_lrFreq
+				] call TFAR_fnc_setLrFrequency;
+			};
+			
+			// Set SW Freq
+			waitUntil { !isNil {call TFAR_fnc_activeSwRadio} }; 
+			[
+				(call TFAR_fnc_activeSwRadio), 
+				[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_fnc_getValueByKey
+			] call TFAR_fnc_setSwFrequency;
+		};
+	};
 };
 
 // Mission Flow
 [] spawn {
 	waitUntil { !isNil "dzn_ra_assignmentComplete" };
-	
+
 	call dzn_fnc_addORBATSubject;		
 	call dzn_fnc_addCommandPersonnelSubject;
 	

@@ -193,10 +193,27 @@
 			<English>Rifleman AT (Blue)</English>
 		</Key>
 
-
-
-
-
+	<!-- Radios -->
+		<Key ID='STR_radio_LR'>
+			<Original>Частота ДВ:</Original>
+			<Russian>Частоа ДВ:</Russian>
+			<English>LR Freq.:</English>
+		</Key>
+		<Key ID='STR_radio_SW'>
+			<Original>Частота КВ:</Original>
+			<Russian>Частота КВ:</Russian>
+			<English>SW Freq.:</English>
+		</Key>
+		<Key ID='STR_radio_mhz'>
+			<Original>МГц</Original>
+			<Russian>МГц</Russian>
+			<English>MHz</English>
+		</Key>
+		<Key ID='STR_radio_topic'>
+			<Original>Частоты КВ отрядов:</Original>
+			<Russian>Частоты КВ отрядов:</Russian>
+			<English>Squads SW Frequencies:</English>
+		</Key>
 
 <!--- *********** Mission Ends *********** -->
 	<!-- LOSE -->
@@ -245,9 +262,9 @@
 			<English> :: Mission Conditions ::</English>
 		</Key>
 		<Key ID='STR_par_endTime'>
-			<Original> Время на выполнение</Original>
-			<Russian> Время на выполнение</Russian>
-			<English> Mission End Timer</English>
+			<Original> Время на выполнение (мин.)</Original>
+			<Russian> Время на выполнение (мин.)</Russian>
+			<English> Mission End Timer (min.)</English>
 		</Key>
 
 <!-- Enviroment Conditions -->
@@ -293,7 +310,7 @@
 		<Key ID='STR_par_weatherOption5'>
 			<Original>Гроза</Original>
 			<Russian>Гроза</Russian>
-			<English>Strom</English>
+			<English>Storm</English>
 		</Key>
 		
 <!-- Fog -->		
@@ -393,9 +410,9 @@
 
 <!-- Factions -->
 		<Key ID='STR_delimi_faction'>
-			<Original> :: Фракция ::</Original>
-			<Russian> :: Фракция ::</Russian>
-			<English> :: Faction :: </English>
+			<Original> :: Фракция Игроков ::</Original>
+			<Russian> :: Фракция Игроков ::</Russian>
+			<English> :: Players Faction :: </English>
 		</Key>
 
 
@@ -536,8 +553,27 @@
 			<English>Cache AI outside distance (m)</English>
 		</Key>
 		
+<!-- Radio -->
+		<Key ID='STR_delimi_radio'>
+			<Original> :: Радио ::</Original>
+			<Russian> :: Радио ::</Russian>
+			<English> :: Radio ::</English>
+		</Key>
 		
+		<Key ID='STR_par_radio'>
+			<Original>Использовать мод радио</Original>
+			<Russian>Использовать мод радио</Russian>
+			<English>Use radio mod</English>
+		</Key>
 		
+		<Key ID='STR_par_radioOption0'>
+			<Original>Нет (Ванилла)</Original>
+			<Russian>Нет (Ванилла)</Russian>
+			<English>No (Vanilla)</English>
+		</Key>
+		<Key ID='STR_par_radioOption1'>
+			<Original>TFAR</Original>
+		</Key>
 	 </Container>
   </Package>
 </Project>

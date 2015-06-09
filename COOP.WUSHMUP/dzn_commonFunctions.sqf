@@ -69,6 +69,26 @@ dzn_fnc_getValueByKey = {
 	_output
 };
 
+dzn_fnc_setValueByKey = {
+	//[@Array, @Key, @NewValue] call dzn_fnc_setValueByKey	
+	private ["_array","_key","_value","_default"];
+	
+	_array = _this select 0;
+	_key = _this select 1;
+	_value = _this select 2;
+	_default = false;
+	{
+		if ( [_key, _x select 0] call BIS_fnc_areEqual ) exitWith {
+			_array set [ _forEachIndex, [_key, _value] ];
+			_default = true;
+		};
+	} forEach _array;
+	
+	if !(_default) exitWith {
+		hintSilent format ["dzn_fnc_setValueByKey :: Failed to find %1 key. Array is not updated.", str(_key)];
+		diag_log format ["dzn_fnc_setValueByKey :: Failed to find %1 key. Array is not updated.", str(_key)];
+	};
+};
 
 dzn_fnc_getAllPlayers = {
 	// [@SP/MP/Both, (ExcludeArray)] call dzn_fnc_getAllPlayers
@@ -144,6 +164,13 @@ dzn_fnc_setDateTime = {
 
 dzn_fnc_cache = {};
 
+dzn_unhideUnit = {
+	// call dzn_unhideUnit
+	{
+		_x enableSimulationGlobal true; 
+		_x hideObjectGlobal false;
+	} forEach (call BIS_fnc_listPlayers);
+};
 
 dzn_fnc_ra_getSquadLeader = {
 	// "squadId" call dzn_fnc_ra_getSquadLeader
@@ -180,4 +207,28 @@ dzn_fnc_convertToTimestring = {
 		_output = "00:00:" + (DZN_TODOUBLEDIGIT(_seconds));
 	};
 	_output
+};
+
+
+dzn_fnc_getPosOnGivenDir = {
+	/*
+		Return position on given direction and distance from base point
+		EXAMPLE: [getPos player, 270, 1000] call dzn_fnc_getPosOnGivenDir
+		INPUT:
+			0: Pos3d 		- StartPos
+			1: Number 		- Direction from start pos
+			2: Number		- Distance from start pos
+		OUTPUT:	ARRAY Pos3d
+	*/
+	private ["_pos", "_dir", "_dist", "_newPos"];
+	_pos = _this select 0;
+	_dir = _this select 1;
+	_dist = _this select 2;
+	_newPos = [
+		(_pos select 0) + ((sin _dir) * _dist),
+		(_pos select 1) + ((cos _dir) * _dist),
+		_pos select 2
+	];
+	
+	_newPos
 };

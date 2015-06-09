@@ -5,7 +5,7 @@ class Header
 	maxPlayers = 70;
 };
 
-onLoadName 			= "WarmUp Shoot'Em Up!";
+onLoadName 			= "WarmUp! SHMUP!";
 onLoadMission 		= $STR_onLoadMission;
 author 				= "10Dozen [MFOR]";
 //loadScreen 		= "loadLogo.jpg";
@@ -22,6 +22,8 @@ class Params
 	class paramEmptyDelimiter0 
 	{
 		title = "$STR_delimi_misCond";
+		values[] = {""};
+		default = "";
 	}
 	
 	class par_endTime
@@ -35,6 +37,8 @@ class Params
 	class paramEmptyDelimiter1
 	{
 		title = "$STR_delimi_envCond";
+		values[] = {""};
+		default = "";
 	}	
 
 	class par_weather	
@@ -110,7 +114,9 @@ class Params
 	class paramEmptyDelimiter2 
 	{
 		title = "$STR_delimi_faction";
-	}	
+		values[] = {""};
+		default = "";
+	};
 	
 	class par_playableFaction
 	{
@@ -122,12 +128,14 @@ class Params
 			$STR_par_faction3
 		};
 		default = 0;
-	}
+	};
 
 	class paramEmptyDelimiter3 
 	{
 		title = "$STR_delimi_hostileFaction";
-	}	
+		values[] = {""};
+		default = "";
+	};
 	
 	class par_hostileFaction
 	{
@@ -139,7 +147,7 @@ class Params
 			$STR_par_faction3
 		};
 		default = 1;
-	}
+	};
 	class par_hostileSkill
 	{
 		title = "$STR_par_hostileSkill";
@@ -150,7 +158,7 @@ class Params
 			$STR_par_hostileSkill3
 		};
 		default = 1;
-	}
+	};
 	class par_hostileAmount
 	{
 		title = "$STR_par_hostileAmount";
@@ -163,7 +171,7 @@ class Params
 			$STR_par_hostileAmount5
 		};
 		default = 2;
-	}
+	};
 	class par_hostileVehicles
 	{
 		title = "$STR_par_hostileVehicles";
@@ -176,18 +184,38 @@ class Params
 			$STR_par_hostileVehicles5
 		};
 		default = 1;
-	}
+	};
 	
-	class paramEmptyDelimiter4
-	{
-		title = "$STR_delimi_caching";
-	}	
+	// class paramEmptyDelimiter4
+	// {
+		// title = "$STR_delimi_caching";
+		// values[] = {""};
+		// default = "";
+	// }	
 
-	class par_caching
+	// class par_caching
+	// {
+		// title = "$STR_par_caching";
+		// values[] = {0,600,800,1000,1500,2000};
+		// default = 800;
+	// };
+	
+	class paramEmptyDelimiter5 
 	{
-		title = "$STR_par_caching";
-		values[] = {0,600,800,1000,1500,2000};
-		default = 800;
+		title = "$STR_delimi_radio";
+		values[] = {""};
+		default = "";
+	};	
+	
+	class par_radioMod
+	{
+		title = "$STR_par_radio";
+		values[] = {0,1};
+		texts[] = {
+			$STR_par_radioOption0,
+			$STR_par_radioOption1
+		};
+		default = 0;
 	};
 };
 

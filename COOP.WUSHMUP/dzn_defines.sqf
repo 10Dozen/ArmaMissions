@@ -2,6 +2,32 @@
 dzn_captureTimerDefault = 60;
 dzn_endTimerLimitValue = 5;
 
+// Mode radious
+dzn_swRadioMapping = [
+	[0, ["ItemRadio","ItemRadio"]],
+	[1, ["tf_anprc152","tf_rf7800str"]]
+];
+
+dzn_lrRadioMapping = [
+	[0, ""],
+	[1, "tf_rt1523g"]
+];
+
+// Frequensies
+// TFAR_fnc_setSwFrequency 
+dzn_TFAR_swFreqs = [
+	["CO", "100"],
+	[0, "101"],
+	[1, "102"],
+	[2, "103"],
+	[3, "104"],
+	[4, "105"],
+	[5, "106"]
+];
+
+// TFAR_fnc_setLrFrequency
+dzn_TFAR_lrFreq = "50";
+
 
 dzn_weatherSettingsMapping = [
 	[1, 0],

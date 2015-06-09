@@ -9,8 +9,15 @@
 	par_hostileVehicles	=	0,1,2,3,4
 */
 
-private["_vehicleGroups"];
+private["_vehicleGroups","_mainZone_pointClass","_indoorZone_pointClass","_reinfZone_pointClass"];
 
+// ******************
+// Defines (Points of zones)
+// ******************
+
+_mainZone_pointClass = "";
+_indoorZone_pointClass = "LocationCamp_F";
+_reinfZone_pointClass = "LocationResupplyPoint_F";
 
 // ******************
 // Defines
@@ -25,6 +32,10 @@ dzn_hostileVehicle_class_Heavy =  dzn_hstileVehicle_classes select 3;
 
 dzn_hostileInfantryKit = format ["kit_%1_Random", [dzn_kitToFactionMapping ,par_hostileFaction] call dzn_fnc_getValueByKey];
 dzn_hostileVehicle_gearKit = "";
+
+// ******************
+// Assign zone
+// ******************
 
 dzn_vehicleClasses = switch (par_hostileVehicles) do {
 	case 0: { [] };
@@ -231,6 +242,7 @@ dzn_dynaiZonesSetUp = true;
 // Dynai Zones Set Up
 // ****************
 
+
 waitUntil { 
 	!isNil {hostile_mainArea getVariable "initialized"} 
 	&& !isNil {hostile_indoorArea getVariable "initialized"}  
@@ -240,10 +252,10 @@ tc_indoorsPosition = [];
 tc_reinfPositions = [];
 tc_areasPositions = synchronizedObjects tc_activeTaskTrigger;
 {
-	if (_x isKindOf "LocationCamp_F") then { 
+	if (_x isKindOf _indoorZone_pointClass) then { 
 		tc_indoorsPosition = getPosASL _x;
 	} else {
-		if (_x isKindOf "LocationResupplyPoint_F") exitWith { 
+		if (_x isKindOf _reinfZone_pointClass) exitWith { 
 			tc_reinfPositions = tc_reinfPositions + [getPosASL _x];
 		};
 	};

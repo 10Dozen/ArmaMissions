@@ -95,6 +95,22 @@ dzn_fnc_showCommandingStaffHint = {
 		};
 	} forEach dzn_assignedSquads;
 	
+	switch (par_radioMod) do {
+		case 0: {};
+		case 1: {
+			_stringsToShow = _stringsToShow + [
+				lineBreak
+				,lineBreak
+				,parseText (format [
+					"<t color='#EDB81A' size='1.25' align='center'>%1 <t color='#DDDDDD'>%2</t> %3</t>", 
+					localize "STR_radio_LR", 
+					dzn_TFAR_lrFreq,
+					localize "STR_radio_mhz"
+				])
+			];
+		};
+	};
+	
 	hintSilent (composeText _stringsToShow);
 };
 
@@ -114,6 +130,38 @@ dzn_fnc_addORBATSubject = {
 				"<font color='#B0E84F'><execute expression='call dzn_fnc_showORBATHint'>%1</execute></font>"
 				, localize "STR_assignment_showORBAT"
 			]
+		]
+	];
+};
+
+dzn_fnc_addRadioSubject = {
+	private ["_topic","_text"];
+	
+	_topic = localize "STR_assignment_ORBAT";
+	_text = format [
+		"%1 -- %2 %3<br /><br />%4"
+		,localize "STR_radio_topic_lr"
+		,dzn_TFAR_lrFreq
+		,localize "STR_radio_mhz"
+		,localize "STR_radio_topic"
+	];	
+	
+	{
+		_text = format[
+			"%1<br />%2 -- %3 %4"
+			,_text
+			,_x select 1
+			,[dzn_TFAR_swFreqs , _x select 0] call dzn_fnc_getValueByKey
+			,localize "STR_radio_mhz"
+		];
+	} forEach dzn_squadsMapping;
+	
+	player createDiarySubject [_topic,_topic];
+	player createDiaryRecord [
+		_topic,
+		[
+			_topic,
+			_text
 		]
 	];
 };
@@ -187,6 +235,22 @@ dzn_fnc_showORBATHint = {
 			])
 		];
 	} forEach _squadUnits;	
+	
+	switch (par_radioMod) do {
+		case 0: {};
+		case 1: {
+			_stringsToShow = _stringsToShow + [
+				lineBreak
+				,lineBreak
+				,parseText (format [
+					"<t color='#EDB81A' size='1.25' align='center'>%1 <t color='#DDDDDD'>%2</t> %3</t>", 
+					localize "STR_radio_SW", 
+					[dzn_TFAR_swFreqs, player getVariable "raSquadId"] call dzn_fnc_getValueByKey,
+					localize "STR_radio_mhz"
+				])
+			];
+		};
+	};
 	
 	hintSilent (composeText _stringsToShow);
 };
