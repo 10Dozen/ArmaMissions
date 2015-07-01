@@ -79,21 +79,23 @@ dzn_fnc_market_invTotals = {
 			,parseText (format ["<t color='#FFFFFF' align='right'>+%1</t>", _itemPrice])			
 			,lineBreak
 		];
-	} forEach _sell;	
-	
+	} forEach _sell;		
 	
 	// TOTAL COST	
 	_stringsToShow = _stringsToShow + [
-		if (_sellCost <= _addCost) then {
-			parseText (format ["<t color='#F5BC6C' size='1.3' align='center'>%1</t>", "TOTAL COST:"])
-		} else {
-			parseText (format ["<t color='#F5BC6C' size='1.3' align='center'>%1</t>", "INCOME:"])			
-		}
+		parseText (format [
+			"<t color='#F5BC6C' size='1.3' align='center'>%1</t>", 
+			if (_sellCost <= _addCost) then {"TOTAL COST:"} else {"INCOME:"}
+		])
 		,lineBreak
 		,if (_sellCost <= _addCost) then {
-			parseText (format ["<t color='#D62B48' size='1.1' align='center'>$%1</t>", _addCost - _sellCost])
+			parseText (format ["<t color='#F2D2A5' size='1.1' align='center'>$%1</t>", _addCost - _sellCost])
 		} else {
 			parseText (format ["<t color='#B8F53C' size='1.1' align='center'>+$%1</t>", _sellCost - _addCost])
+		}
+		,if ((dzn_market_accountCash - _addCost + _sellCost) < 0) then { lineBreak }	
+		,if ((dzn_market_accountCash - _addCost + _sellCost) < 0) then {	
+			parseText (format ["<t color='#F5322F' align='center'>Overfund: $%1</t>", (-1)*(dzn_market_accountCash - _addCost + _sellCost)])
 		}
 	];	
 
@@ -116,7 +118,7 @@ dzn_fnc_market_setPurchaseDialogText = {
 				"Do you want to change your inventory\n and purchase $%1 for selected items?"
 				,_cost		
 			];
-			_ctrl ctrlSetBackgroundColor [0.6, 0.4, 0.4, 0.8];
+			_ctrl ctrlSetBackgroundColor [0.95, 0.82, 0.65, 0.8];
 		} else {
 			_ctrl ctrlSetText format [
 				"Not enough money to buy all selected items\n (total cost $%1, you have $%2)"
@@ -138,14 +140,13 @@ dzn_fnc_market_setPurchaseDialogText = {
 	
 	if (_cost > 0) then {
 		if (_cost <= dzn_market_accountCash) then {
-			_ctrl ctrlSetTextColor [0.8, 0.2, 0.2, 1];
+			_ctrl ctrlSetTextColor [0.95, 0.82, 0.65, 1];
 			_ctrl ctrlSetText "PURCHASE";
 		} else {
 			_ctrl ctrlSetTextColor [1,1,1, 1];
 			_ctrl ctrlSetText "OK";
 		};
 	} else {
-
 		_ctrl ctrlSetTextColor [0.2, 0.8, 0.2, 1];
 		_ctrl ctrlSetText "SELL";
 	};
