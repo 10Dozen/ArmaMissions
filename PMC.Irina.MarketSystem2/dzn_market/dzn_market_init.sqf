@@ -37,7 +37,7 @@ player setVariable ["ArsenalTimer",time + 1];
 				_diff = [_currentInv, player getVariable "BaseInv"] call dzn_fnc_getChangedInvItems;
 				
 				if !(_diff isEqualTo []) then {
-					hint format ["STRUCTURED TEXT\n CHANGED: %1 \n REMOVED: %2", str[_diff select 0], str[_diff select 1]];			
+					_diff call dzn_fnc_showInvTotals;			
 				};
 			};
 		} else {
