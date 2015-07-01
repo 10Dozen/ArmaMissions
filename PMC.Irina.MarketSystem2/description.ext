@@ -1,0 +1,29 @@
+#include "defines.hpp"
+#include "dialogs.hpp"
+
+class Header
+{
+	gameType = Coop;
+	minPlayers = 1;
+	maxPlayers = 70;
+};
+
+onLoadName 			= "Market System";
+
+enableDebugConsole = 2;
+respawn = 0;
+
+// ============================================================================================
+
+class Params
+{
+	class par_dzn_notepad
+	{
+		title = "DZN Notepad";
+		values[] = {0,1};
+		texts[] = {"Disabled","Enabled"};
+		default = 0;
+	};
+};
+
+
