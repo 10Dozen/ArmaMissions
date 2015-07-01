@@ -1,5 +1,26 @@
+// PAYMENT functions
+dzn_fnc_market_doPayment = {
+	// @Value call dzn_fnc_market_doPayment
+	dzn_market_accountCash = dzn_market_accountCash - _this;
+};
+
+dzn_fnc_market_getCurrentBalance = {
+	if (dzn_market_accountCash > 0) then {
+		hint parseText format ["<t color='#99CC00' align='center'>BALANCE:</t><br /><t color='#99CC00'>%1 $</t>", dzn_market_accountCash];
+	} else {
+		hint parseText format ["<t color='#99CC00' align='center'>BALANCE:</t><t color='#CC3300'>%1 $</t>", dzn_market_accountCash];
+	};
+};
+
+dzn_fnc_market_showAccount = {
+	hint parseText format [
+		"<t color='#99CC00' align='center'>ACCOUNT  #414ce-860b96c-331<br />Expires: 10/2025<br />Owner: John Doe<br /><br />Balance: %1</t>",
+		dzn_market_accountCash
+	];
+};
+
 // DISPLAY functions
-dzn_fnc_showInvTotals = {
+dzn_fnc_market_invTotals = {
 	// @ArrayOfTotals call dzn_fnc_showInvTotals
 	
 	_add = _this select 0;
@@ -45,7 +66,7 @@ dzn_fnc_showInvTotals = {
 	};
 
 	{
-		_itemPrice = ((_x select 0) call dzn_fnc_market_getItemPrice) * (_x select 1);
+		_itemPrice = round(((_x select 0) call dzn_fnc_market_getItemPrice) * (_x select 1) * dzn_market_sellCoefficient);
 		_itemName = (_x select 0) call dzn_fnc_getItemName;
 		
 		_sellCost = _sellCost + _itemPrice;
@@ -74,16 +95,93 @@ dzn_fnc_showInvTotals = {
 		} else {
 			parseText (format ["<t color='#B8F53C' size='1.1' align='center'>+$%1</t>", _sellCost - _addCost])
 		}
-	];
+	];	
+
+	player setVariable ["ArsenalInventoryCost", (_addCost - _sellCost)];
+	hintSilent (composeText _stringsToShow);
+};
+
+dzn_fnc_market_setPurchaseDialogText = {
+	disableSerialization;
+	private ["_display", "_idc", "_ctrl"];
+	_display = _this select 0;
 	
+	_idc = 1100;	
+	_ctrl = _display displayCtrl _idc;
 	
-	hint (composeText _stringsToShow);
+	_cost = player getVariable "ArsenalInventoryCost";	
+	if (_cost > 0) then {
+		if (_cost <= dzn_market_accountCash) then {
+			_ctrl ctrlSetText format [
+				"Do you want to change your inventory\n and purchase $%1 for selected items?"
+				,_cost		
+			];
+			_ctrl ctrlSetBackgroundColor [0.6, 0.4, 0.4, 0.8];
+		} else {
+			_ctrl ctrlSetText format [
+				"Not enough money to buy all selected items\n (total cost $%1, you have $%2)"
+				,_cost
+				,dzn_market_accountCash	
+			];
+			_ctrl ctrlSetBackgroundColor [0.6, 0.2, 0.2, 0.8];
+		};
+	} else {
+		_ctrl ctrlSetText format [
+			"Do you want to change your inventory\n and sell selected items for $%1?"
+			,_cost * (-1)
+		];
+		_ctrl ctrlSetBackgroundColor [0.4, 0.6, 0.4, 0.8];
+	};
+	
+	_idc = 1600;	
+	_ctrl = _display displayCtrl _idc;
+	
+	if (_cost > 0) then {
+		if (_cost <= dzn_market_accountCash) then {
+			_ctrl ctrlSetTextColor [0.8, 0.2, 0.2, 1];
+			_ctrl ctrlSetText "PURCHASE";
+		} else {
+			_ctrl ctrlSetTextColor [1,1,1, 1];
+			_ctrl ctrlSetText "OK";
+		};
+	} else {
+
+		_ctrl ctrlSetTextColor [0.2, 0.8, 0.2, 1];
+		_ctrl ctrlSetText "SELL";
+	};
+	
+	_ctrl ctrlCommit 0;	
+};
+
+dzn_fnc_market_buttonYes = {
+	closeDialog 0;
+	
+	if (player getVariable "ArsenalInventoryCost" >= 0) then {		
+		if (player getVariable "ArsenalInventoryCost" <= dzn_market_accountCash) then {
+			[player, player getVariable "NewGear"] spawn dzn_fnc_gear_assignGear;
+			(player getVariable "ArsenalInventoryCost") call dzn_fnc_market_doPayment;
+			call dzn_fnc_market_getCurrentBalance;
+		};	
+	} else {
+		[player, player getVariable "NewGear"] spawn dzn_fnc_gear_assignGear;
+		(player getVariable "ArsenalInventoryCost") call dzn_fnc_market_doPayment;
+		call dzn_fnc_market_getCurrentBalance;
+	};
+	player setVariable ["NewGear", nil];
+	player setVariable ["CurrentGear", nil];
+};
+
+dzn_fnc_market_buttonNo = {
+	closeDialog 0;
+	
+	player setVariable ["NewGear", nil];
+	player setVariable ["CurrentGear", nil];
 };
 
 
 
 // ITEM LIST MANAGEMENT functions
-dzn_fnc_updateMarketBox = {
+dzn_fnc_market_updateMarketBox = {
 	// [ @Box, @ItemList] call dzn_fnc_addItemsToMarketBox;
 	private["_box","_itemsToAdd"];
 	
