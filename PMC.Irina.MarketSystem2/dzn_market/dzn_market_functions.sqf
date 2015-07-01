@@ -1,4 +1,88 @@
+// DISPLAY functions
+dzn_fnc_showInvTotals = {
+	// @ArrayOfTotals call dzn_fnc_showInvTotals
+	
+	_add = _this select 0;
+	_sell = _this select 1;
+	_addCost = 0;
+	_sellCost = 0;
+	
+	_stringsToShow = [
+		parseText (format ["<t color='#FFFFFF' size='1.4' align='center'>%1</t>", "TOTALS"])
+		,lineBreak
+	];
+	
+	// ADDED
+	if !(_add isEqualTo []) then {
+		_stringsToShow = _stringsToShow + [
+			parseText (format ["<t color='#F5322F' size='1.1' align='center'>%1</t>", "BUY:"])
+			,lineBreak
+		];
+	};
 
+	{
+		_itemPrice = ((_x select 0) call dzn_fnc_market_getItemPrice) * (_x select 1);
+		_itemName = (_x select 0) call dzn_fnc_getItemName;
+
+		_addCost = _addCost + _itemPrice;
+		_stringsToShow = _stringsToShow + [
+			if (_x select 1 > 1) then {
+				parseText (format ["<t color='#AAAAAA' align='left'>x%1 %2</t>", _x select 1, _itemName])
+			} else {
+				parseText (format ["<t color='#AAAAAA' align='left'>%1</t>", _itemName])
+			}
+			,parseText (format ["<t color='#FFFFFF' align='right'>%1</t>", _itemPrice])			
+			,lineBreak
+		];
+	} forEach _add;	
+	
+	// REMOVED
+	if !(_sell isEqualTo []) then {
+		_stringsToShow = _stringsToShow + [
+			parseText (format ["<t color='#C7F56C' size='1.1' align='center'>%1</t>", "SELL:"])
+			,lineBreak
+		];
+	};
+
+	{
+		_itemPrice = ((_x select 0) call dzn_fnc_market_getItemPrice) * (_x select 1);
+		_itemName = (_x select 0) call dzn_fnc_getItemName;
+		
+		_sellCost = _sellCost + _itemPrice;
+		_stringsToShow = _stringsToShow + [
+			if (_x select 1 > 1) then {
+				parseText (format ["<t color='#AAAAAA' align='left'>x%1 %2</t>", _x select 1, _itemName])
+			} else {
+				parseText (format ["<t color='#AAAAAA' align='left'>%1</t>", _itemName])
+			}
+			,parseText (format ["<t color='#FFFFFF' align='right'>+%1</t>", _itemPrice])			
+			,lineBreak
+		];
+	} forEach _sell;	
+	
+	
+	// TOTAL COST	
+	_stringsToShow = _stringsToShow + [
+		if (_sellCost <= _addCost) then {
+			parseText (format ["<t color='#F5BC6C' size='1.3' align='center'>%1</t>", "TOTAL COST:"])
+		} else {
+			parseText (format ["<t color='#F5BC6C' size='1.3' align='center'>%1</t>", "INCOME:"])			
+		}
+		,lineBreak
+		,if (_sellCost <= _addCost) then {
+			parseText (format ["<t color='#D62B48' size='1.1' align='center'>$%1</t>", _addCost - _sellCost])
+		} else {
+			parseText (format ["<t color='#B8F53C' size='1.1' align='center'>+$%1</t>", _sellCost - _addCost])
+		}
+	];
+	
+	
+	hint (composeText _stringsToShow);
+};
+
+
+
+// ITEM LIST MANAGEMENT functions
 dzn_fnc_updateMarketBox = {
 	// [ @Box, @ItemList] call dzn_fnc_addItemsToMarketBox;
 	private["_box","_itemsToAdd"];
@@ -69,6 +153,7 @@ dzn_fnc_market_isItemAvailable = {
 
 
 
+// CHECK INVENTORY during arsenal
 dzn_fnc_convertInventoryToLine = {
 	// @InventoryArray call dzn_fnc_convertInventoryToLine
 	private["_line","_cat","_subCat"];
@@ -97,36 +182,59 @@ dzn_fnc_convertInventoryToLine = {
 
 dzn_fnc_getChangedInvItems = {
 	// [@InvToCheck, @BaseInv] call dzn_fnc_getChangedInvItems;
-	_curInv = _this select 0;
-	_baseInv = _this select 1;
+	private["_curInv","_baseInv","_changed","_removed","_cItems","_rItems","_item","_itemCount","_rItemCount"];
+	
+	_curInv = (_this select 0) call BIS_fnc_consolidateArray;
+	_baseInv = (_this select 1) call BIS_fnc_consolidateArray;
 	
 	if (_curInv isEqualTo _baseInv) exitWith { [] };
+
+	_changed = _curInv - _baseInv;
+	_removed = _baseInv - _curInv;
 	
-	_changedItems = [];
-	_removedItems = [];
+	_cItems = [];
+	_rItems = [];
 	
-	_changedItems = _curInv - _baseInv;
-	_removedItems = _baseInv - _curInv;
+	{
+		_item = _x select 0;
+		_itemCount = _x select 1;
+		_rItemCount = [_removed, _item] call dzn_fnc_getValueByKey;
+		if (typename _rItemCount != "BOOL") then {
+			if (_itemCount > _rItemCount) then {
+				_cItems pushBack [_item, _itemCount - _rItemCount];
+			} else {
+				_rItems pushBack [_item, _rItemCount - _itemCount];
+			};
+		} else {
+			_cItems pushBack _x;
+		};
+	} forEach _changed;
 	
-	[_changedItems, _removedItems]
+	{
+		if (typename ([_changed, _x select 0] call dzn_fnc_getValueByKey) == "BOOL") then {
+			_rItems pushBack _x;
+		};			
+	} forEach _removed;
+	
+	[_cItems, _rItems]
 };
 
 
 
 // DISPLAY NAME iof Weapon or Gear
-dzn_fnc_getWeaponDisplayName = {
-	private ["_cfgWeapons","_output","_item"];
-	_cfgWeapons = ("isclass _x && getnumber (_x >> 'scope') == 2 ") configclasses (configfile >> "cfgWeapons");
+dzn_fnc_getItemName = {
+	// @Classname call dzn_fnc_getItemName
+	private["_name"];
 	
-	_output = "";
-	for "_i" from 0 to (count _cfgWeapons)-1 do {
-		_item = _cfgWeapons select _i;			
-		if (  configName(_item) == _this ) then {
-			_output = getText(configFile >> "cfgWeapons" >> configName(_item) >> "displayName");
+	_name = _this call dzn_fnc_getEquipDisplayName;
+	if (_name == "") then {
+		_name = _this call dzn_fnc_getMagazineDisplayName;
+		if (_name == "") then {
+			_name = _this call dzn_fnc_getBackpackDisplayName;
 		};
 	};
-	
-	_output
+
+	_name	
 };
 
 dzn_fnc_getMagazineDisplayName = {
@@ -144,7 +252,7 @@ dzn_fnc_getMagazineDisplayName = {
 	_output
 };
 
-dzn_fnc_getEuipDisplayName = {
+dzn_fnc_getEquipDisplayName = {
 	private ["_cfgWeapon","_cfgGlasses","_output","_item"];	
 	_cfgWeapon = ("isclass _x && getnumber (_x >> 'scope') == 2 ") configclasses (configfile >> "cfgWeapons");
 	_cfgGlasses = ("isclass _x && getnumber (_x >> 'scope') == 2 ") configclasses (configfile >> "CfgGlasses");
@@ -168,7 +276,6 @@ dzn_fnc_getEuipDisplayName = {
 
 	_output
 };
-
 dzn_fnc_getBackpackDisplayName = {
 	private ["_cfg","_output","_item"];		
 	_cfgVehicles = ("isclass _x && !(getArray (_x >> 'allowedSlots') isEqualTo [])") configclasses (configfile >> "cfgVehicles");
@@ -182,10 +289,23 @@ dzn_fnc_getBackpackDisplayName = {
 	};
 	_output
 };
+dzn_fnc_getWeaponDisplayName = {
+	private ["_cfgWeapons","_output","_item"];
+	_cfgWeapons = ("isclass _x && getnumber (_x >> 'scope') == 2 ") configclasses (configfile >> "cfgWeapons");
+	
+	_output = "";
+	for "_i" from 0 to (count _cfgWeapons)-1 do {
+		_item = _cfgWeapons select _i;			
+		if (  configName(_item) == _this ) then {
+			_output = getText(configFile >> "cfgWeapons" >> configName(_item) >> "displayName");
+		};
+	};
+	
+	_output
+};
 
 
-
-//
+// GET VALUE BY KEY
 dzn_fnc_getValueByKey = {
 	// [@Array, @Key] call dzn_fnc_getValueByKey
 	private["_output","_default"];
@@ -197,8 +317,8 @@ dzn_fnc_getValueByKey = {
 	} forEach (_this select 0);
 	
 	if (typename _output == typename _default && {_output == _default}) then { 
-		hintSilent format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
-		diag_log format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
+		// hintSilent format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
+		// diag_log format ["dzn_fnc_getValueByKey :: Failed to find %1 key. Will return FALSE.", str(_this select 1)];
 		_output = false;
 	};
 	
