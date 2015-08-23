@@ -1,4 +1,4 @@
 **Arma 2 CO
 Chernarus**
 
-[tt]ACE, ACEX, ACEX_SM, ACEX_RU[/tt]
+ACE, ACEX, ACEX_USNavy, ACEX_RU
