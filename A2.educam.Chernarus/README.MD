@@ -1,4 +1,4 @@
-Arma2
-Chernarus
+**Arma 2 CO
+Chernarus**
 
-ACE, ACEX, ACEX_SM, ACEX_RU
+[tt]ACE, ACEX, ACEX_SM, ACEX_RU[/tt]
