@@ -1,0 +1,135 @@
+/*%FSM<COMPILE "D:\GMZ\BI Toolz\FSM Editor Personal Edition\scriptedFSM.cfg, iedTrigger">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,0.000000,-1000.000000,100.000000,-950.000000,0.000000,"Start"};
+item1[] = {"true",4,218,0.000000,-925.000000,100.000000,-875.000000,0.000000,"true"};
+item2[] = {"Do_nothing",2,250,0.000000,-850.000000,100.000000,-800.000000,0.000000,"Do nothing"};
+item3[] = {"Check_for_trigge",4,218,0.000000,-750.000000,100.000000,-700.000000,2.000000,"Check for trigger"};
+item4[] = {"Ka_Boom_",2,4346,0.000000,-650.000000,100.000000,-600.000000,0.000000,"Ka-Boom!"};
+item5[] = {"Inactivated",4,218,-125.000000,-750.000000,-25.000000,-700.000000,4.000000,"Inactivated"};
+item6[] = {"End",1,250,-125.000000,-650.000000,-25.000000,-600.000000,0.000000,"End"};
+item7[] = {"Triggered",4,218,125.000000,-750.000000,225.000000,-700.000000,0.000000,"Triggered"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,1};
+link3[] = {2,3};
+link4[] = {2,5};
+link5[] = {2,7};
+link6[] = {3,4};
+link7[] = {5,6};
+link8[] = {7,4};
+globals[] = {25.000000,1,0,0,16777215,640,480,1,285,6316128,1,-203.842728,341.910339,-478.743774,-990.993286,619,581,1};
+window[] = {0,-1,-1,-1,-1,951,225,1321,225,1,637};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "iedTrigger";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"private[""_timer"",""_ied""];" \n
+       "" \n
+       "_ied = _this select 0;" \n
+       "_timer = time + 10;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Do_nothing";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Do_nothing">*/
+    class Do_nothing
+    {
+      name = "Do_nothing";
+      init = /*%FSM<STATEINIT""">*/"_timer = time + 5;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Inactivated">*/
+        class Inactivated
+        {
+          priority = 4.000000;
+          to="End";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isNil ""_ied""  || isNull _ied || { (_ied getVariable ""isIED"") in [0,1] }"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Check_for_trigge">*/
+        class Check_for_trigge
+        {
+          priority = 2.000000;
+          to="Ka_Boom_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timer && { [ EAST, getPosASL _ied, 25 ] call fnc_s_ied_vehiclesNear; }"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Triggered">*/
+        class Triggered
+        {
+          priority = 0.000000;
+          to="Ka_Boom_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_ied getVariable ""isIED"" == 4"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Do_nothing";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Ka_Boom_">*/
+    class Ka_Boom_
+    {
+      name = "Ka_Boom_";
+      init = /*%FSM<STATEINIT""">*/"""HelicopterExploSmall"" createVehicle (getPos _ied);" \n
+       "deleteVehicle _ied; " \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End">*/
+    class End
+    {
+      name = "End";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "End",
+  };
+};
+/*%FSM</COMPILE>*/
