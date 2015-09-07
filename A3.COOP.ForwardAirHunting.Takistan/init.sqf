@@ -116,3 +116,12 @@ tf_no_auto_long_range_radio = true;
 		};
 	} forEach (synchronizedObjects cas_placement);	
 };
+
+// Mission Flow
+[] spawn {
+	_truckLotsList =  (synchronizedObjects misFlow_truckLots);
+	for "_i" from 0 to 3 do {
+	
+	
+	};
+};
