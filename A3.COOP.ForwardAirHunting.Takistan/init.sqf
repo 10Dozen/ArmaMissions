@@ -135,8 +135,8 @@ if (hasInterface && !isServer) exitWith {};
 	};
 	
 	
-	private["_truckLotsList","_vPosSelection","_v"]
-	truck_classname = "B_Truck_01_ammo_F";
+	private["_truckLotsList","_vPosSelection","_v"];
+	truck_classname = "rhs_ural_chdkz";
 	truck_list = [];
 	_truckLotsList =  (synchronizedObjects misFlow_truckLots);
 	for "_i" from 0 to 3 do {
@@ -164,8 +164,8 @@ if (hasInterface && !isServer) exitWith {};
 		_r
 	};
 	
-	private["_aaaLotsList","_vPosSelection","_v"]
-	aaa_classname = "B_Truck_01_ammo_F";
+	private["_aaaLotsList","_vPosSelection","_v","_g","_u"];
+	aaa_classname = "LOP_UA_NSV_TriPod";
 	aaa_list = [];
 	_aaaLotsList =  (synchronizedObjects misFlow_aaaLots);
 	for "_i" from 0 to 3 do {
@@ -173,12 +173,18 @@ if (hasInterface && !isServer) exitWith {};
 		_aaaLotsList = _aaaLotsList - [_vPosSelection];
 		_v = aaa_classname createVehicle (getPos _vPosSelection);
 		_v setDir (getDir _vPosSelection);
-		truck_list pushBack _v;
+		_g = createGroup east;
+		
+		_u = _g createUnit ["O_Soldier_F", (getPos _vPosSelection), [], 0, "NONE"];
+		_u assignAsGunner _v;
+		_u moveInGunner _v;
+		
+		aaa_list pushBack _v;
 	};
 	
 	[west,["task_aaaTrucks"],["Find and destroy AAA in the valley","Destroy AAA",""],objNull,1,8,true,"",true] call BIS_fnc_taskCreate;
 	
-	waitUntil { sleep 20; (call fnc_aaaAlive) < 2  };
+	waitUntil { sleep 20; (call fnc_aaaAliveCounter) < 2  };
 	task_aaaDestoyed = true;
 	publicVariable "task_aaaDestoyed";
 };
