@@ -117,11 +117,69 @@ tf_no_auto_long_range_radio = true;
 	} forEach (synchronizedObjects cas_placement);	
 };
 
+
+
 // Mission Flow
+if (hasInterface && !isServer) exitWith {};
+
+// Trucks
+
 [] spawn {
+	fnc_trucksAlive = {
+		private["_r"];
+		_r = false;
+		{
+			if (alive _x) exitWith { _r = true; };
+		} forEach truck_list;
+		_r
+	};
+	
+	
+	private["_truckLotsList","_vPosSelection","_v"]
+	truck_classname = "B_Truck_01_ammo_F";
+	truck_list = [];
 	_truckLotsList =  (synchronizedObjects misFlow_truckLots);
 	for "_i" from 0 to 3 do {
-	
-	
+		_vPosSelection = _truckLotsList call BIS_fnc_selectRandom;
+		_truckLotsList = _truckLotsList - [_vPosSelection];
+		_v = truck_classname createVehicle (getPos _vPosSelection);
+		_v setDir (getDir _vPosSelection);
+		truck_list pushBack _v;
 	};
+	
+	[west,["task_destroyTrucks"],["Destroy 2-4 enemy ammo trucks in the valley","Destroy trucks",""],objNull,1,8,true,"",true] call BIS_fnc_taskCreate;
+	waitUntil { sleep 20; call fnc_trucksAlive };
+	task_trucksDestoyed = true;
+	publicVariable "task_trucksDestoyed";
 };
+
+// AAA
+[] spawn {
+	fnc_aaaAlive = {
+		private["_r"];
+		_r = false;
+		{
+			if (alive _x) exitWith { _r = true; };
+		} forEach aaa_list;
+		_r
+	};
+	
+	private["_aaaLotsList","_vPosSelection","_v"]
+	aaa_classname = "B_Truck_01_ammo_F";
+	aaa_list = [];
+	_aaaLotsList =  (synchronizedObjects misFlow_aaaLots);
+	for "_i" from 0 to 3 do {
+		_vPosSelection = _aaaLotsList call BIS_fnc_selectRandom;
+		_aaaLotsList = _aaaLotsList - [_vPosSelection];
+		_v = aaa_classname createVehicle (getPos _vPosSelection);
+		_v setDir (getDir _vPosSelection);
+		truck_list pushBack _v;
+	};
+	
+	[west,["task_aaaTrucks"],["Find and destroy AAA in the valley","Destroy AAA",""],objNull,1,8,true,"",true] call BIS_fnc_taskCreate;
+	
+	waitUntil { sleep 20; call fnc_aaaAlive };
+	task_aaaDestoyed = true;
+	publicVariable "task_aaaDestoyed";
+};
+
