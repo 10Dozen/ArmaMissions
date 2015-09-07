@@ -125,11 +125,11 @@ if (hasInterface && !isServer) exitWith {};
 // Trucks
 
 [] spawn {
-	fnc_trucksAlive = {
+	fnc_trucksAliveCounter = {
 		private["_r"];
-		_r = false;
+		_r = 0;
 		{
-			if (alive _x) exitWith { _r = true; };
+			if (alive _x) then { _r = _r + 1; };
 		} forEach truck_list;
 		_r
 	};
@@ -148,19 +148,19 @@ if (hasInterface && !isServer) exitWith {};
 	};
 	
 	[west,["task_destroyTrucks"],["Destroy 2-4 enemy ammo trucks in the valley","Destroy trucks",""],objNull,1,8,true,"",true] call BIS_fnc_taskCreate;
-	waitUntil { sleep 20; call fnc_trucksAlive };
+	waitUntil { sleep 20; (call fnc_trucksAliveCounter) < 2 };
 	task_trucksDestoyed = true;
 	publicVariable "task_trucksDestoyed";
 };
 
 // AAA
 [] spawn {
-	fnc_aaaAlive = {
+	fnc_aaaAliveCounter = {
 		private["_r"];
-		_r = false;
+		_r = 0;
 		{
-			if (alive _x) exitWith { _r = true; };
-		} forEach aaa_list;
+			if (alive _x) then { _r = _r + 1; };
+		} forEach truck_list;
 		_r
 	};
 	
@@ -178,8 +178,29 @@ if (hasInterface && !isServer) exitWith {};
 	
 	[west,["task_aaaTrucks"],["Find and destroy AAA in the valley","Destroy AAA",""],objNull,1,8,true,"",true] call BIS_fnc_taskCreate;
 	
-	waitUntil { sleep 20; call fnc_aaaAlive };
+	waitUntil { sleep 20; (call fnc_aaaAlive) < 2  };
 	task_aaaDestoyed = true;
 	publicVariable "task_aaaDestoyed";
+};
+
+[] spawn {
+	waitUntil { time > 30 };
+	hitman = group ((synchronizedObjects hitmanSquad) select 0);
+	
+	[] spawn { 
+		while { true } do {
+			sleep 30;
+			"respawn_west" setMarkerPos (getPos (leader hitman));
+		};
+	};
+/*
+	fnc_reconUnitRetreated = {
+		{
+			
+		} forEach (units hitman);
+	};
+	waitUntil { };
+*/
+
 };
 
