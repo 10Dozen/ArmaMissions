@@ -8,70 +8,96 @@ tf_no_auto_long_range_radio = true;
 
 [] execVM "dzn_dynai\dzn_dynai_init.sqf";
 
+// Pilots
 [] spawn {
 	if !(player isKindOf "B_Pilot_F") exitWith {};
 	private["_v"];
 	
 	cas_rrrs = [];
-	if (isNil {player getVariable "cas_rrr_servicing"}) then { player setVariable ["cas_rrr_servicing",false,true]; };
-	
-	fnc_checkIfInRRR = {
-		private["_r"];
-		_r = false;
+	if (hasInterface && {local player}) then {
+		if (isNil {player getVariable "cas_rrr_servicing"}) then { player setVariable ["cas_rrr_servicing",false,true]; };
+		
+		player addAction [
+			"<t color='#FC883F'>View Distance +1 km</t>"
+			, {
+				setViewDistance (viewDistance + 1000);
+				setObjectViewDistance [getObjectViewDistance select 0 + 400, getObjectViewDistance select 1];
+			}
+		];
+		
+		player addAction [
+			"<t color='#FCE63F'>View Distance -1 km</t>"
+			, {
+				if (viewDistance > 1000) then {
+					setViewDistance (viewDistance - 1000);
+					setObjectViewDistance [getObjectViewDistance select 0 - 400, getObjectViewDistance select 1];
+				};
+			}
+		];		
+		
+		fnc_checkIfInRRR = {
+			private["_r"];
+			_r = false;
+			{
+				if (player distance _x < 25) exitWith { _r = true };
+			} forEach cas_rrrs;
+			_r	
+		};
+		
 		{
-			if (player distance _x < 25) exitWith { _r = true };
-		} forEach cas_rrrs;
-		_r	
-	};
-	
-	{
-		if (["cas_rrr",str(_x),false] call BIS_fnc_inString) then {
-			cas_rrrs pushBack _x;
-			if (isNil {player getVariable "cas_rrr_action"}) then { 
-				player setVariable ["cas_rrr_action", player addAction [
-					"<t color='#3333FF' size='1.3'>Service Vehicle</t>"
-					, {
-						_v = vehicle player;
-						player setVariable ["cas_rrr_servicing",true,true];
-						1000 cutText ["Vehicle Servicing", "PLAIN"];
-						
-						sleep 1;
-						_v engineOn false;
-						[_v] spawn { waitUntil { isEngineOn (_this select 0) }; player setVariable ["cas_rrr_servicing",false,true]; };
-						
-						while {player getVariable "cas_rrr_servicing" && (damage _v > 0)} do {
-							_v setDamage (damage _v - 0.1);
+			if (["cas_rrr",str(_x),false] call BIS_fnc_inString) then {
+				cas_rrrs pushBack _x;
+				if (isNil {player getVariable "cas_rrr_action"}) then { 
+					player setVariable ["cas_rrr_action", player addAction [
+						"<t color='#3333FF' size='1.3'>Service Vehicle</t>"
+						, {
+							_v = vehicle player;
+							player setVariable ["cas_rrr_servicing",true,true];
+							1000 cutText ["Vehicle Servicing", "PLAIN"];
+							
 							sleep 1;
-						};
-						_v setDamage 0;
-						
-						while {player getVariable "cas_rrr_servicing" && (fuel _v < 1)} do {
-							_v setFuel (fuel _v + 0.1);
-							sleep 1;
-						};
-						
-						{
-							if !(_x in magazines _v) then {
-								_v addmagazine _x;
+							_v engineOn false;
+							[_v] spawn { waitUntil { isEngineOn (_this select 0) }; player setVariable ["cas_rrr_servicing",false,true]; };
+							
+							while {player getVariable "cas_rrr_servicing" && (damage _v > 0)} do {
+								_v setDamage (damage _v - 0.1);
 								sleep 1;
 							};
-						}foreach (_v getVariable "cas_rrr_magazines");
-						_v setVehicleAmmo 1;
-						
-						1000 cutText ["Vehicle Servicing - Done", "PLAIN"];
-						player setVariable ["cas_rrr_servicing",false,true];
-					}
-					,[],6,true,true,""
-					, "(call fnc_checkIfInRRR)
-					&& !(player getVariable 'cas_rrr_servicing') 
-					&& !(vehicle player == player)
-					&& alive player"
-				]
-				, true];
+							_v setDamage 0;
+							
+							while {player getVariable "cas_rrr_servicing" && (fuel _v < 1)} do {
+								_v setFuel (fuel _v + 0.1);
+								sleep 1;
+							};
+							
+							{
+								if !(_x in magazines _v) then {
+									_v addmagazine _x;
+									sleep 1;
+								};
+							}foreach (_v getVariable "cas_rrr_magazines");
+							_v setVehicleAmmo 1;
+							
+							1000 cutText ["Vehicle Servicing - Done", "PLAIN"];
+							player setVariable ["cas_rrr_servicing",false,true];
+						}
+						,[],6,true,true,""
+						, "(call fnc_checkIfInRRR)
+						&& !(player getVariable 'cas_rrr_servicing') 
+						&& !(vehicle player == player)
+						&& alive player"
+					]
+					, true];
+				};
 			};
+		} forEach (synchronizedObjects cas_placement);
+		
+		player setVariable ["pilot_respawn", getPos player];
+		[] spawn {
+			waitUntil {player distance (getMarkerPos "respawn_west") < 5};
+			player setPos (player getVariable "pilot_respawn");
 		};
-	} forEach (synchronizedObjects cas_placement);
-	
+	};
 	
 	if (hasInterface && !isServer) exitWith {};
 
