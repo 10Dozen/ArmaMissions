@@ -66,8 +66,8 @@ kit_recon_mm =
 
 kit_recon_vehicle = [
 	[],
-	[["rhs_200rnd_556x45_M_SAW",2],["B_IR_Grenade",5],["Chemlight_green",5],["Chemlight_red",5],["SmokeShell",5],["HandGrenade",5],["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red",5],["Laserbatteries",2],["rhs_mag_30Rnd_556x45_Mk318_Stanag",5]],
-	[["FirstAidKit",4]],
+	[["rhs_200rnd_556x45_M_SAW",2],["B_IR_Grenade",5],["Chemlight_green",5],["Chemlight_red",5],["SmokeShell",5],["HandGrenade",5],["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red",5],["Laserbatteries",2],["rhs_mag_30Rnd_556x45_Mk318_Stanag",5],["SatchelCharge_Remote_Mag",2]],
+	[["FirstAidKit",4],["ACE_Clacker",2]],
 	[]
 ];
 
@@ -77,7 +77,7 @@ kit_recon_vehicle = [
 // **************
 kit_pilot =
 	[
-	["<EQUIPEMENT >>  ","CUP_U_B_USMC_PilotOverall","CUP_V_B_PilotVest","","CUP_H_USMC_Helmet_Pilot",""],
+	["<EQUIPEMENT >>  ","CUP_U_B_USMC_PilotOverall","CUP_V_B_PilotVest","ACE_NonSteerableParachute","CUP_H_USMC_Helmet_Pilot",""],
 	["<PRIMARY WEAPON >>  ","","",["","","",""]],
 	["<LAUNCHER WEAPON >>  ","","",["","","",""]],
 	["<HANDGUN WEAPON >>  ","CUP_hgun_M9","CUP_15Rnd_9x19_M9",["","","",""]],
@@ -88,7 +88,37 @@ kit_pilot =
 ];
 
 
+kit_blufor_common =
+	[
+	["<EQUIPEMENT >>  ","rhs_uniform_cu_ucp","rhsusf_iotv_ucp_Rifleman","","rhsusf_ach_bare_tan_headset",""],
+	["<PRIMARY WEAPON >>  ","rhs_weap_m4_grip","rhs_mag_30Rnd_556x45_Mk318_Stanag",["","CUP_acc_ANPEQ_2","rhsusf_acc_compm4",""]],
+	["<LAUNCHER WEAPON >>  ","","",["","","",""]],
+	["<HANDGUN WEAPON >>  ","","",["","","",""]],
+	["<ASSIGNED ITEMS >>  ","rhsusf_ANPVS_15"],
+	["<UNIFORM ITEMS >> ",[["PRIMARY MAG",4]]],
+	["<VEST ITEMS >> ",[["ACE_fieldDressing",10],["ACE_morphine",1],["ACE_epinephrine",1],["ACE_tourniquet",2],["ACE_packingBandage",5],["HandGrenade",3],["SmokeShell",3]]],
+	["<BACKPACK ITEMS >> ",[]]
+];
 
 // **************
 // INSURGENTS
 // **************
+
+
+#define INS_UNIFORMS	["LOP_U_AM_Fatigue_01","LOP_U_AM_Fatigue_02","LOP_U_AM_Fatigue_03","LOP_U_AM_Fatigue_04","LOP_U_AFR_Fatigue_02","U_BG_leader","LOP_U_ISTS_Fatigue_01","LOP_U_ISTS_Fatigue_02","LOP_U_ISTS_Fatigue_04","LOP_U_TAK_Civ_Fatigue_01"] 
+#define INS_HEADGEAR	["LOP_U_AM_Fatigue_01","LOP_H_Turban","rhs_tsh4","H_ShemagOpen_tan","LOP_H_Shemag_BLK","LOP_H_Pakol","rhs_beanie","H_Bandanna_sand","LOP_H_Worker_cap","rhs_beanie_green","H_Bandanna_cbr"]
+#define INS_VESTS		["rhs_6sh92"]
+#define INS_WEAPON 	["rhs_weap_akms","CUP_arifle_AK74","rhs_weap_akm","CUP_arifle_AKS74","CUP_srifle_LeeEnfield","rhs_weap_m16a4_carryhandle","rhs_weap_m4a1_carryhandle_grip","CUP_arifle_RPK74_45","rhs_weap_pkm"]
+#define INS_MAGZ 		["rhs_30Rnd_762x39mm","CUP_30Rnd_545x39_AK_M","rhs_30Rnd_762x39mm","CUP_30Rnd_545x39_AK_M","CUP_10x_303_M","rhs_mag_30Rnd_556x45_Mk318_Stanag","rhs_mag_30Rnd_556x45_Mk318_Stanag","CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M","rhs_100Rnd_762x54mmR"]
+
+kit_ins_common =
+	[
+	["<EQUIPEMENT >>  ", INS_UNIFORMS,INS_VESTS,"",INS_HEADGEAR,""],
+	["<PRIMARY WEAPON >>  ",INS_WEAPON,INS_MAGZ,["","","",""]],
+	["<LAUNCHER WEAPON >>  ","","",["","","",""]],
+	["<HANDGUN WEAPON >>  ","","",["","","",""]],
+	["<ASSIGNED ITEMS >>  "],
+	["<UNIFORM ITEMS >> ",[["PRIMARY MAG",3]]],
+	["<VEST ITEMS >> ",[["ACE_fieldDressing",10],["ACE_tourniquet",1],["PRIMARY MAG",4],["CUP_HandGrenade_RGD5",3],["SmokeShell",2]]],
+	["<BACKPACK ITEMS >> ",[]]
+];
