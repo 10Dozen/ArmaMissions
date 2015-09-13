@@ -1,6 +1,11 @@
-if (player == leader group player) then {
-	player addAction ["<t color='#AA3122'>Set Rallypoint</t>", {
-		dzn_rallypoint setPosATL (player modelToWorld [0, +3, 0]);
-		"respawn_east" setMarkerPos (getPosASL dzn_rallypoint);
-	}];
+if (player == leader group player && !(player isKindOf "O_crew_F")) then {
+	player addAction [
+		"<t color='#AA3122'>Set Rallypoint</t>"
+		, {
+		rallypoint setPosATL (player modelToWorld [0, +3, 0]);
+		"respawn_east" setMarkerPos (getPosASL rallypoint);
+		}
+		, [],6,true,true,""
+		, "alive player && !(vehicle player == player)"
+	];	
 };

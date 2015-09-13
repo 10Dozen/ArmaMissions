@@ -11,9 +11,6 @@
 #define	AREA_FUNCTIONS		true
 // Base functions are useful to recreate military bases/outposts and compositions using scripts
 #define 	BASE_FUNCTIONS		true
-#define	ENV_FUNCTIONS		true
-#define	MAP_FUNCTIONS		true
-#define	INV_FUNCTIONS		true
 
 class CfgFunctions
 {
@@ -22,7 +19,7 @@ class CfgFunctions
 		#ifdef COMMON_FUNCTIONS
 		class commonFunctions
 		{
-			file = "dzn_commonFunctions\functions\commonFunctions";
+			file = "dzn_commonFunctions\functions";
 			
 			class getMissionParametes {};
 			class getValueByKey {};			
@@ -37,7 +34,7 @@ class CfgFunctions
 		#ifdef AREA_FUNCTIONS
 		class areaFunctions
 		{
-			file = "dzn_commonFunctions\functions\areaFunctions";
+			file = "dzn_commonFunctions\functions";
 			
 			class convertTriggerToLocation {};
 			class isInLocation {};
@@ -55,41 +52,11 @@ class CfgFunctions
 		#endif
 		
 		#ifdef BASE_FUNCTIONS
-		class baseFunctions
+		class baseFunction
 		{
-			file = "dzn_commonFunctions\functions\baseFunctions";
+			file = "dzn_commonFunctions\functions";
 			
 			class deployVehiclesAtBasepoint {};
-		};
-		#endif
-		
-		#ifdef MAP_FUNCTIONS
-		class mapFunctions
-		{
-			file = "dzn_commonFunctions\functions\mapFunctions";
-			
-			class createMarkerIcon {};
-		};
-		#endif
-		
-		#ifdef ENV_FUNCTIONS
-		class envFunctions
-		{
-			file = "dzn_commonFunctions\functions\envFunctions";
-			
-			class setDateTime {};
-			class setFog {};
-			class setWeather {};
-		};
-		#endif
-		
-		#ifdef INV_FUNCTIONS
-		class invFunctions
-		{
-			file = "dzn_commonFunctions\functions\invFunctions";
-			
-			class getItemDisplayName {};
-			class getVehicleDisplayName {};
 		};
 		#endif
 	};
