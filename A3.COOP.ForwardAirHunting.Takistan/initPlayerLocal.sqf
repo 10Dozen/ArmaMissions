@@ -1,8 +1,11 @@
 // DIary 
 [] spawn {
+	player createDiaryRecord ["Diary", ["View Distance", "<font color='#A0DB65'><execute expression='[] call dzn_fnc_addViewDistance;'>INCREASE VIEW DISTANCE</execute>
+	<br /><br /><execute expression='[] call dzn_fnc_reduceViewDistance;'>DECREASE VIEW DISTANCE</execute></font>"]];
+	
 	player createDiaryRecord ["Diary", ["JTAC Helper", "To help pilot with targeting, Recon team can use Laser designator to mark the target. In addition to original Arma3 laser marker target, enabled 'Use JTAC Helper' will draw 3D icon for pilots to provide visualisation of laser marker via HUD. Marker will be visible in distance of 4000 m (direct distance between marker and aircarft - so high altitude will affect).
 	<br /><br />* Find target<br />* Aim to it<br />* Turn Laser On
-	<br /><br /><br />If 3d icon isn't drawn or you forgot to turn option on in Mission Parameters - you may <executeClose expression='[] execVM ""dzn_jtac\dzn_jtac_init.sqf""'>ENABLE</executeClose> it here."]];
+	<br /><br /><br />If 3d icon isn't drawn or you forgot to turn option on in Mission Parameters - you may <font color='#A0DB65'><executeClose expression='[] execVM ""dzn_jtac\dzn_jtac_init.sqf""'>ENABLE</executeClose></font> it here."]];
 
 	player createDiaryRecord ["Diary", ["Note", "* Mission will end only when Recon team reachs Retreat zone. All tasks will be resolved at mission end, so don't wait for notification during the game."]];
 	player createDiaryRecord ["Diary", ["CAS 9-Liner", 
@@ -78,24 +81,12 @@
 	if (isNil {player getVariable "cas_rrr_servicing"}) then { player setVariable ["cas_rrr_servicing",false,true]; };
 	
 	player addAction [
-		"<t color='#FC883F'>View Distance +1 km</t>"
-		, {
-			setViewDistance (viewDistance + 1000);
-			setObjectViewDistance [(getObjectViewDistance select 0) + 400, getObjectViewDistance select 1];
-		}
+		"<t color='#FC883F'>View Distance +1 km</t>", {[] call dzn_fnc_addViewDistance;}
 	];
 	
 	player addAction [
-		"<t color='#FCE63F'>View Distance -1 km</t>"
-		, {
-			if (viewDistance > 1000) then {
-				setViewDistance (viewDistance - 1000);
-				setObjectViewDistance [(getObjectViewDistance select 0) - 400, getObjectViewDistance select 1];
-			};
-		}
+		"<t color='#FCE63F'>View Distance -1 km</t>", {[] call reduceViewDistance;}
 	];
-		
-	
 	
 	if (isNil {player getVariable "cas_rrr_action"}) then { 
 		player setVariable ["cas_rrr_action", player addAction [
@@ -119,14 +110,7 @@
 					_v setFuel (fuel _v + 0.1);
 					sleep 1;
 				};
-				/*
-				{
-					if !(_x in magazines _v) then {
-						_v addmagazine _x;
-						sleep 1;
-					};
-				} foreach (_v getVariable "cas_rrr_magazines");
-				*/
+				
 				sleep 3;
 				_v setVehicleAmmo 0.7;
 
