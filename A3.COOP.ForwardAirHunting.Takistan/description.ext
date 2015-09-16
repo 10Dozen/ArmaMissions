@@ -36,6 +36,13 @@ class Params
 		texts[] = {"No", "Yes"};
 		default = 1;
 	};
+	class par_modDependency
+	{
+		title = "  Mod dependency";
+		values[] = {0,1};
+		texts[] = {"Vanilla", "RHS + CUP + LOP"};
+		default = 1;
+	};
 	class par_casclass	
 	{
 		title = "  CAS aircraft";
