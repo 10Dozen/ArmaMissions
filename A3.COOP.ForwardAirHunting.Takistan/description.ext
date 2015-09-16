@@ -40,7 +40,7 @@ class Params
 	{
 		title = "  Mod dependency";
 		values[] = {0,1};
-		texts[] = {"Vanilla + ACE", "RHS + CUP + LOP"};
+		texts[] = {"Vanilla + ACE", "ACE + RHS + CUP + LOP"};
 		default = 1;
 	};
 	class par_casclass	
