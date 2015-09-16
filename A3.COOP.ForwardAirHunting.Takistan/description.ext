@@ -42,20 +42,20 @@ class Params
 		values[] = {0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 		texts[] = {
 			"Random"
-			,"A-10A Thunderbolt II"
+			,"A-10A Thunderbolt II (RHS)"
 			,"A-10D Thunderbolt II"
-			,"Su-25"
+			,"Su-25 (RHS)"
 			,"Yak-130"
-			,"AH-64D (Ground suppress)"
-			,"AH-64D (CAS)"
-			,"AH-1Z Viper (Ground suppress)"
-			,"AH-1Z Viper (CAS)"
+			,"AH-64D (Ground suppress) (RHS)"
+			,"AH-64D (CAS) (RHS)"
+			,"AH-1Z Viper (Ground suppress) (RHS)"
+			,"AH-1Z Viper (CAS) (RHS)"
 			,"RAH-66 Commanche"
-			,"Mi-24V Hind"
-			,"Mi-24P Hind"
-			,"Ka-52"
+			,"Mi-24V Hind (RHS)"
+			,"Mi-24P Hind (RHS)"
+			,"Ka-52 (RHS)"
 			,"Mi-48 Kajman"
-			,"UH-1Y Venom"
+			,"UH-1Y Venom (RHS)"
 		};
 		default = 1		
 	};
