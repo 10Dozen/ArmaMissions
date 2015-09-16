@@ -40,7 +40,7 @@ par_weather call dzn_fnc_setWeather;
 		_v = (_this select 0) createVehicle (getPos (_this select 1));
 		_v setDir (getDir (_this select 1));		
 		_v
-	};
+	};	
 	
 	{
 		switch (true) do {
@@ -51,11 +51,22 @@ par_weather call dzn_fnc_setWeather;
 			case (["cas_rrr",str(_x), false] call BIS_fnc_inString): {				
 				{
 					switch (true) do {
-						case (["cas_rrr_comp_chemlight",str(_x), false] call BIS_fnc_inString): {
-							"Chemlight_blue" createVehicle (_x modelToWorld [0, 8, 0]);
-							"Chemlight_blue" createVehicle (_x modelToWorld [8, 8, 0]);
-							"Chemlight_blue" createVehicle (_x modelToWorld [8, 0, 0]);
-							"Chemlight_blue" createVehicle (_x modelToWorld [0, 0, 0]);
+						case (["cas_rrr_comp_chemlight",str(_x), false] call BIS_fnc_inString): {							
+							_x spawn {
+								waitUntil { time > 0 };
+								while {true} do {
+									"Chemlight_blue" createVehicle (_this modelToWorld [0, 8, 0]);
+									"Chemlight_blue" createVehicle (_this modelToWorld [8, 8, 0]);
+									"Chemlight_blue" createVehicle (_this modelToWorld [8, 0, 0]);
+									"Chemlight_blue" createVehicle (_this modelToWorld [0, 0, 0]);
+									
+									"Chemlight_green" createVehicle (_this modelToWorld [50, 0, 0]);
+									"Chemlight_red" createVehicle (_this modelToWorld [75, 0, 0]);
+									"Chemlight_green" createVehicle (_this modelToWorld [105, 0, 0]);
+									"Chemlight_red" createVehicle (_this modelToWorld [135, 0, 0]);
+									sleep 600;
+								};
+							};
 						};
 						case (["cas_rrr_comp_fuel",str(_x), false] call BIS_fnc_inString): {
 							["B_Truck_01_fuel_F", _x] call _spawnVehicle;

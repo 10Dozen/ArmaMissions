@@ -6,14 +6,14 @@ dzn_jtac_casVehicles = [
 ];
 
 waitUntil {!isNil "cas_className"};
-dzn_jtac_casVehicles pushBack cas_className;
+`````` pushBack cas_className;
 
 dzn_jtac_drawLaserTargets = {
 	if (isNull _this) exitWith {};
 	
 	if JTAC_CHECK_VEHICLE then {
 		private ["_laserTargets","_posV","_text","_textPos"];
-		_laserTargets = _this nearEntities [["LaserTarget"], 3000];
+		_laserTargets = _this nearEntities [["LaserTarget"], 4000];
 		{
 			if !(terrainIntersectASL [getPosASL _x, getPosASL player]) then {
 				_posV = getPosATL _x;

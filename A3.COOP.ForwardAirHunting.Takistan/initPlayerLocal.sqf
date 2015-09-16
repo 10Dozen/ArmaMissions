@@ -1,7 +1,26 @@
 // DIary 
 [] spawn {
-	player createDiaryRecord ["Diary", ["Intel", "Several days age we got an inforamtion about weapon truck convoy at Takistan border. We suppose that these trucks are going to cross border somewhere near Chaman.<br />Today we got an message from our contact, that trucks arrive in two hours and will bring heavy weapons, including MANPADs, to insurgetns."]];
-	player createDiaryRecord ["Diary", ["Mission", "We have no time and ability to intercept these trucks on the route, so Recon team should infiltrate Chaman area, find all these trucks and bring our CAS to it. <br />Be aware of insurgent's AAA, there should be at least 1 Shilka and several heavy machine guns somewhere it the valley."]];
+	player createDiaryRecord ["Diary", ["Note", "* Mission will end only when Recon team reachs Retreat zone. All tasks will be resolved at mission end, so don't wait for notification during the game."]];
+	player createDiaryRecord ["Diary", ["CAS 9-Liner", 
+		"<font color='#12C4FF' size='14'>COLT-__(1 or 2) , this is HITMAN-1-1, TYPE ___(1,2,3) in effect, call when ready for 9-line</font>
+		<br /><font color='#5E5E5E'>wait for pilot answer, then provide 9-liner</font>
+		<br />
+		<br />CONTROL > <font color='#9E9E9E'>1 (direct attack on position), 2 (find and attack in given area), 3 (find and attack any)</font>
+		<br />1. IP/BP > <font color='#9E9E9E'>IP Eagle (North), IP Hawk (East), IP Crow (South), IP Raven (West)</font>
+		<br />2. HEADING > <font color='#9E9E9E'>0...359 degrees (from IP to target)</font>
+		<br />3. DISTANCE > <font color='#9E9E9E'>in meters (from IP to target)</font>
+		<br />4. TARGET ELEVATION > <font color='#9E9E9E'>in meters</font>
+		<br />5. TARGET DESCRIPTION > <font color='#9E9E9E'>(e.g. 'one APC', 'infantry squad')</font>
+		<br />6. TARGET LOCATION > <font color='#9E9E9E'>XXXX YYYY (e.g. 0349 0120)</font>
+		<br />7. TYPE MARKER > <font color='#9E9E9E'>None, Smoke, Laser</font>
+		<br />8. FRIENDLIES > <font color='#9E9E9E'>Heading and distance from target</font>
+		<br />9. EGRESS > <font color='#9E9E9E'>Direction of leaving AO</font>
+		<br />
+		<br /><font color='#5E5E5E'>Do not transmit line numbers and headers (e.g. say '400 meters' instead of '3. Distance 400 meteres').
+		</font>"
+	]];
+	player createDiaryRecord ["Diary", ["Mission", "We have no time and ability to intercept these trucks on the route, so Recon team should infiltrate Chaman area, find all these trucks and bring our CAS to it. <br />Be aware of insurgent's AAA, there should be at least 1 Shilka and several heavy machine guns somewhere in the valley."]];
+	player createDiaryRecord ["Diary", ["Intel", "Several days ago we got an information about weapon truck convoy near Takistan border. We supposed, that these trucks were going to cross border somewhere near Chaman.<br />Today we got a message from our contact, that trucks will arrive in two hours and will bring heavy weapons, including MANPADs, to insurgetns."]];
 
 	if !(player isKindOf "B_Pilot_F") then {	
 		waitUntil {"task_destroyTrucks" call BIS_fnc_taskExists && "task_destroyAAA" call BIS_fnc_taskExists};
@@ -13,9 +32,35 @@
 
 // Mission End
 [] spawn {
-	waitUntil {!isNil "missionEnd" && { missionEnd isEqualTo [] }};	
+	waitUntil {!isNil "missionEnd" && { !(missionEnd isEqualTo []) }};	
 	sleep 3;
 	missionEnd spawn BIS_fnc_endMission;
+};
+
+// Recon Team
+[] spawn {
+	if (player isKindOf "B_Pilot_F") exitWith {};
+	recon_team_respawn = getPos player;
+	
+	waitUntil { time > 10 };
+	if !(leader group player == player) exitWith {};
+	
+	player addAction [
+		"<t color='#FF8B26'>Deploy as Rally point</t>"
+		, {
+			recon_team_respawn = getPos player;
+			publicVariable "recon_team_respawn";
+			hint format ["Rally point set at grid %1", mapGridPosition player];
+		}
+		, [],6,true,true,""
+		, "!isNull cursorTarget
+		&& {
+			alive player
+			&& (vehicle player == player)
+			&& (cursorTarget isKindOf 'B_Quadbike_01_F')	
+			&& (cursorTarget distance player < 8)
+		}"		
+	];
 };
 
 // Pilots
@@ -46,16 +91,7 @@
 		}
 	];
 		
-	/*	
-	fnc_checkIfInRRR = {
-		private["_r"];
-		_r = false;
-		{
-			if (player distance _x < 25) exitWith { _r = true };
-		} forEach cas_rrrs;
-		_r	
-	};
-	*/
+	
 	
 	if (isNil {player getVariable "cas_rrr_action"}) then { 
 		player setVariable ["cas_rrr_action", player addAction [

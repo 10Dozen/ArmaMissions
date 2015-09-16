@@ -34,7 +34,7 @@ kit_recon_jtac =
 	["<PRIMARY WEAPON >>  ","rhs_weap_m4a1_carryhandle_grip","rhs_mag_30Rnd_556x45_Mk318_Stanag",["rhsusf_acc_nt4_black","rhsusf_acc_anpeq15A","",""]],
 	["<LAUNCHER WEAPON >>  ","","",["","","",""]],
 	["<HANDGUN WEAPON >>  ","","",["","","",""]],
-	["<ASSIGNED ITEMS >>  ","ItemMap","ItemCompass","tf_microdagr","tf_rf7800str_2","rhsusf_ANPVS_15","CUP_SOFLAM"],
+	["<ASSIGNED ITEMS >>  ","ItemMap","ItemCompass","tf_microdagr","tf_rf7800str_2","rhsusf_ANPVS_15","Laserdesignator"],
 	["<UNIFORM ITEMS >> ",[["ACE_DAGR",1],["ACE_quikclot",4],["ACE_morphine",1],["ACE_epinephrine",1],["ACE_tourniquet",2],["ACE_fieldDressing",5],["ACE_packingBandage",3],["ACE_MapTools",1],["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red",1]]],
 	["<VEST ITEMS >> ",[["SmokeShell",2],["HandGrenade",2],["Chemlight_green",2],["Chemlight_red",1],["B_IR_Grenade",2],["PRIMARY MAG",7],["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red",1]]],
 	["<BACKPACK ITEMS >> ",[["Laserbatteries",3],["ACE_EarPlugs",1]]]
@@ -105,8 +105,8 @@ kit_pilot =
 	["<PRIMARY WEAPON >>  ","","",["","","",""]],
 	["<LAUNCHER WEAPON >>  ","","",["","","",""]],
 	["<HANDGUN WEAPON >>  ","CUP_hgun_M9","CUP_15Rnd_9x19_M9",["","","",""]],
-	["<ASSIGNED ITEMS >>  ","ItemMap","tf_rf7800str_1","ItemGPS","rhsusf_ANPVS_15"],
-	["<UNIFORM ITEMS >> ",[["ACE_EarPlugs",1],["ACE_fieldDressing",10],["ACE_packingBandage",5],["ACE_tourniquet",2],["ACE_morphine",1],["ACE_epinephrine",1],["ACE_quikclot",5]]],
+	["<ASSIGNED ITEMS >>  ","ItemMap","ItemCompass","tf_rf7800str_1","ItemGPS","rhsusf_ANPVS_15"],
+	["<UNIFORM ITEMS >> ",[["ACE_MapTools",1],["ACE_EarPlugs",1],["ACE_fieldDressing",10],["ACE_packingBandage",5],["ACE_tourniquet",2],["ACE_morphine",1],["ACE_epinephrine",1],["ACE_quikclot",5]]],
 	["<VEST ITEMS >> ",[["HANDGUN MAG",3],["Chemlight_green",4],["Chemlight_red",2],["B_IR_Grenade",2]]],
 	["<BACKPACK ITEMS >> ",[]]
 ];
