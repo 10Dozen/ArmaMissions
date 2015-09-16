@@ -73,6 +73,7 @@
 // Pilots
 [] spawn {
 	if !(player isKindOf "B_Pilot_F") exitWith {};
+	waitUntil {!isNil "par_usejtac"};
 	if (par_usejtac == 1) then { [] execVM "dzn_jtac\dzn_jtac_init.sqf"; };
 	
 	private["_v"];
