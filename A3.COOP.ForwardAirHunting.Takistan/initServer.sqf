@@ -137,6 +137,30 @@ par_weather call dzn_fnc_setWeather;
 		_u assignAsGunner _v;
 		_u moveInGunner _v;
 		
+		_u spawn {
+			private["_u","_t"];
+			_u = _this;
+			waitUntil {!isNil "cas_className"};
+			while {true} do {
+				sleep 30;
+				if ({ _x distance _u < 1000} count (entities cas_className)) then {
+					_t = objNull;
+					{
+						if (_x distance _u < 1000) then { _t = _x };
+					} forEach (entities cas_className);
+					if !(isNull _t) then {
+						_u doWatch (getPosASL _t);
+						sleep 0.5;
+						_u doTarget _t;
+						sleep 2;
+						_u doFire _t;
+					} else {
+						_u doTarget _t;
+					};
+				};
+			};
+		};
+		
 		aaa_list pushBack _v;
 	};
 	
