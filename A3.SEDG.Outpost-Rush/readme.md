@@ -6,8 +6,7 @@ Recon and attack hostile outposts to bother enemy in region.
 
 ─
 
-ArmA 3 Co-op
-
+	ArmA 3 Co-op
 	Side: 		MisPar defined side 
 	Terrain: 	Any terrain
 	Mods: 		Vanilla / Modded 
