@@ -30,18 +30,28 @@ Players start near the area. No arsenal is available.
 Task is find and capture outposts. After outpost is captured or players are detected - reinforcements will arrive. 
 
 ####Player Forces
+
 2x Squad ( 1xSL, 1xM, 2xTL, 2xAR, 2xG, 2xRAT )
+
 1x Weapon Squad ( 1xSL, 1xAG, 1xAAGM )
 
 ####Hostile Forces 
 Outposts:
+
 1x Squad per Outpost
+
 	1x HMG or GMG MRAP per Outpost
+	
 	1x Static gun per Outpost
+	
 Reinforcement:
+
 2x Squad
+
 	1x Armed MRAP/APC
+	
 	1x MRAP
+	
 
 ####Additional gear / Arsenal 
 Arsenal is not available.
