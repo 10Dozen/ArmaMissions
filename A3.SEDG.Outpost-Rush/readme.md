@@ -8,11 +8,9 @@ Recon and attack hostile outposts to bother enemy in region.
 
 ArmA 3 Co-op
 
-Side: 		MisPar defined side 
-
-Terrain: 	Any terrain
-
-Mods: 		Vanilla / Modded 
+	Side: 		MisPar defined side 
+	Terrain: 	Any terrain
+	Mods: 		Vanilla / Modded 
 
 
 ##Overview
@@ -31,27 +29,21 @@ Task is find and capture outposts. After outpost is captured or players are dete
 
 ####Player Forces
 
-2x Squad ( 1xSL, 1xM, 2xTL, 2xAR, 2xG, 2xRAT )
-
-1x Weapon Squad ( 1xSL, 1xAG, 1xAAGM )
+	2x Squad ( 1xSL, 1xM, 2xTL, 2xAR, 2xG, 2xRAT )
+	1x Weapon Squad ( 1xSL, 1xAG, 1xAAGM )
 
 ####Hostile Forces 
 Outposts:
 
-1x Squad per Outpost
-
+	1x Squad per Outpost
 	1x HMG or GMG MRAP per Outpost
-	
 	1x Static gun per Outpost
 	
 Reinforcement:
 
-2x Squad
-
+	2x Squad
 	1x Armed MRAP/APC
-	
 	1x MRAP
-	
 
 ####Additional gear / Arsenal 
 Arsenal is not available.
