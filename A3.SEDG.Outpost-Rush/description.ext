@@ -152,3 +152,31 @@ class Params
 };
 
 // ======== END OF MISSION PARAMETERS =============
+
+
+// ======== DEBRIEFING =============
+class CfgDebriefing
+{  
+	class RetreatEnd
+	{
+		title = "Retreated";
+		subtitle = "";
+		description = "Allied forces retreated.";
+		pictureBackground = "";
+	};
+	class PartSuccessEnd
+	{
+		title = "Partial Success";
+		subtitle = "";
+		description = "Allied forces captured one of two outposts.";
+		pictureBackground = "";
+	};
+	class SuccessEnd
+	{
+		title = "Success";
+		subtitle = "";
+		description = "Allied forces captured all outposts.";
+		pictureBackground = "";
+	};
+};
+// ======== END OF DEBRIEFING =============
