@@ -11,3 +11,8 @@
 	par_fog call dzn_fnc_setFog;
 	par_weather call dzn_fnc_setWeather;
 };
+
+// Tasks
+[] spawn {
+	[west,["task_destroyAAA"],["Find and destroy AAA in the valley","Destroy AAA",""],objNull,1,8,true,"",true] call BIS_fnc_taskCreate;
+};
