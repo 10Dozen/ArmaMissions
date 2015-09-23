@@ -1,3 +1,5 @@
+#include "dzn_commonFunctions\dzn_commonFunctions.hpp"
+
 class Header {
 	gameType = Coop;
 	minPlayers = 1;
