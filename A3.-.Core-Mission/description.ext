@@ -122,3 +122,39 @@ class Params
 };
 
 // ======== END OF MISSION PARAMETERS =============
+
+
+
+// ======== DEBRIEFING =============
+class CfgDebriefing
+{  
+	class RetreatEnd
+	{
+		title = "Retreated";
+		subtitle = "";
+		description = "Recon team retreated.";
+		pictureBackground = "";
+	};
+	class TrucksDestroyedEnd
+	{
+		title = "Success!";
+		subtitle = "";
+		description = "Trucks was successfully destroyed. Insurgents failed with achiving MANPADs and our air forces can feel safe.";
+		pictureBackground = "";
+	};
+	class AAADestroyedEnd
+	{
+		title = "Retreated";
+		subtitle = "";
+		description = "Recon team retreated, but insurgent's AAA suffered a great losses.";
+		pictureBackground = "";
+	};
+	class AllCompleteEnd
+	{
+		title = "Complete Success!";
+		subtitle = "";
+		description = "Trucks was successfully destroyed. Insurgents failed with achiving MANPADs and our air forces can feel safe. Also insurgent's AAA suffered a great losses.";
+		pictureBackground = "";
+	};
+};
+// ======== END OF DEBRIEFING =============
