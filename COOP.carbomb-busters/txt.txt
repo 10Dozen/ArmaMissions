@@ -8,6 +8,8 @@ Objectives:
 Groups of 2 men in several patrols
 Several Outpost of 3-5 men
 
+Position of cars and outpost should be get from gamelogic positions placed to map.
+Same for cache.
 
 Mission FLow:
 1 Player reach site
