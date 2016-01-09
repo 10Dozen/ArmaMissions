@@ -72,7 +72,7 @@
 ,"H_Booniehat_tan"
 ,"H_Booniehat_khk_hs"
 ,"H_Watchcap_blk"
-,"LOP_H_6B27M_UN
+,"LOP_H_6B27M_UN"
 
 
 
@@ -239,7 +239,7 @@
 ,"rhs_VG40MD_Green"
 ,"rhs_VG40MD_Red"
 ,"rhs_GDM40"
-,"rhs_weap_akms
+,"rhs_weap_akms"
 ,"rhs_acc_2dpZenit"
 ,"rhs_acc_pbs1"
 ,"rhs_weap_ak74m_gp25_npz"
@@ -247,3 +247,4 @@
 ,"rhs_acc_tgpa"
 ,"rhs_weap_ak74m_desert_npz"
 ,"rhs_acc_dtk"
+
