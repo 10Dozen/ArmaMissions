@@ -6,7 +6,7 @@ private["_boxClass","_boxPosition","_whitelist","_box"];
 /* 	Settings	*/
 _boxClass	= "Land_PaperBox_open_full_F";
 _boxPosition	= [1000,1000,0];
-_whitelist	= call compile preProcessFileLineNumbers "inventory\whitelist.sqf";
+_whitelist	= call compile ("[" + preProcessFile "inventory\whitelist.sqf" + "]");
 
 /*	Assigning Whitelisted Arsenal		*/
 _box = createVehicle [_boxClass, _boxPosition, [], 0, "NONE"];
