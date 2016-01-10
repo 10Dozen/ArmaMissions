@@ -46,7 +46,8 @@
 ,"LOP_V_6Sh92_Radio_OLV"
 ,"LOP_V_6Sh92_Vog_OLV"
 ,"CUP_V_B_PilotVest"
-
+,"LOP_V_CarrierLite_TAN"
+,"LOP_V_CarrierRig_TAN"
 
 /* Headgear */
 
@@ -74,6 +75,11 @@
 ,"H_Watchcap_blk"
 ,"LOP_H_6B27M_UN"
 
+/* Goggles */
+
+,"G_Bandanna_khk"
+,"CUP_TK_NeckScarf"
+,"G_Spectacles_Tinted"
 
 
 /* Backpack */
