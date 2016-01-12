@@ -9,7 +9,8 @@ _boxPosition		= [4000,4000,0];
 _whitelist		= call compile ("[" + preProcessFile "inventory\whitelist.sqf" + "]");
 
 /*	Assigning Whitelisted Arsenal		*/
-_box = createVehicle [_boxClass, _boxPosition, [], 0, "NONE"];
+_box = myBoxNameFromEditor;
+// createVehicle [_boxClass, _boxPosition, [], 0, "NONE"];
 
 _weapons	= [];
 _magazines 	= [];
