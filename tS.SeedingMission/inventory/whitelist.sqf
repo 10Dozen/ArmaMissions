@@ -99,6 +99,7 @@
 ,"ItemMap"
 ,"ItemCompass"
 ,"ItemWatch"
+,"ItemRadio"
 ,"Laserdesignator_03"
 ,"ItemcTab"
 ,"ACE_Vector"
