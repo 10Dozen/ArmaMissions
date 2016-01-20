@@ -61,15 +61,17 @@ if (isServer || isDedicated) then {
 
 waitUntil { !isNil "tc_activeTask" && !isNil "tc_activeTaskTrigger" };
 
+
 if (hasInterface && !isServer) then {
 	tc_completeArea = [tc_activeTaskTrigger, false] call dzn_fnc_convertTriggerToLocation;	
 };
 
+waitUntil {!isNil "tc_completeArea"};
 "mrk_task" setMarkerPos (position tc_completeArea);
-"mrk_task" setMarkerText (localize "STR_marker_taskText");
-
+"mrk_task" setMarkerTextLocal (localize "STR_marker_taskText");
 "mrk_taskArea" setMarkerPos (position tc_completeArea);
 "mrk_taskArea" setMarkerDir (direction tc_completeArea);
+
 
 // *********** Assigning Squads for Points ******
 waitUntil { !isNil "dzn_ra_assignmentComplete" && !isNil "tc_deploymentPoints" };
@@ -110,7 +112,6 @@ switch (true) do {
 #define	GET_SQNAME_BY_ID(X)	[dzn_squadsMapping, X] call dzn_fnc_getValueByKey
 
 private["_squads","_index"];
-player sideChat "X";
 {		
 	if (_forEachIndex > 0 && { !isNull (_x select 0 select 1) }) then {	
 		_index = _forEachIndex - 1;
@@ -169,9 +170,11 @@ player sideChat "X";
 // Hide unused markers
 for "_i" from 0 to 2 do {
 	call compile format [
-		"if ((getMarkerPos 'mrk_startPos_%1') in _markersInitialPositions) then {
+		"if (((getMarkerPos 'mrk_startPos_%1') select 0 > 500) && ((getMarkerPos 'mrk_startPos_%1') select 1 > 500)) then {
+			'mrk_startPos_%1' setMarkerAlpha 1;
+		} else {
 			'mrk_startPos_%1' setMarkerAlpha 0;
-		}
+		};
 		"
 		,_i
 	]
