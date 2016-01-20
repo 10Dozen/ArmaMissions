@@ -4,250 +4,269 @@
   <Package ID="Missions">
 	 <Container ID="">
 <!-- ********* Mission ********* -->
+		<Key ID='STR_onLoadName'>
+			<!--<Original>Разомнись и приготвься к драке!</Original>-->
+			<Original>WUSUP!</Original>			
+		</Key>		
 		<Key ID='STR_onLoadMission'>
-			<Original>Разомнись и приготвься к драке!</Original>
+			<!--<Original>Разомнись и приготвься к драке!</Original>-->
 			<Russian>Разомнись и приготвься к драке!</Russian>	
-			<English>Warm Up and prerpare to fight!</English>			
+			<Original>Warm Up and prerpare to fight!</Original>			
+		</Key>		
+		<Key ID='STR_overviewText'>
+			<!--<Original>Разомнись и приготвься к драке!</Original>-->
+			<Russian>Разомнись и приготовься к драке! Ваша задача - захват и удержание точки на базе противника. Главная ваша трудность - отряды будут собраны случайным образом, потому кто окажется на месте командира - неизвестно.</Russian>	
+			<Original>Warm Up and prerpare to fight! Your goal - capture and hold point at enemy base. Your main difficulty - squads will be mixed randomly, so who will get commanding roles - unknown.</Original>			
 		</Key>	
+		
+		
 	
 <!-- ********* Task ********* -->	
 		<Key ID='STR_taskTitle'>
-			<Original>Захватить и Удержать</Original>
+			<!--<Original>Захватить и Удержать</Original>-->
 			<Russian>Захватить и Удержать</Russian>	
-			<English>Capture and Hold</English>			
+			<Original>Capture and Hold</Original>			
 		</Key>	
 		
 		<Key ID='STR_taskDescription'>
-			<Original>Захватите &lt;marker name='mrk_task'&gt;точку&lt;/marker&gt; и удерживайте ее до окончания отсчета времени.</Original>
+			<!--<Original>Захватите &lt;marker name='mrk_task'&gt;точку&lt;/marker&gt; и удерживайте ее до окончания отсчета времени.</Original>-->
 			<Russian>Захватите &lt;marker name='mrk_task'&gt;точку&lt;/marker&gt; и удерживайте ее до окончания отсчета времени.</Russian>	
-			<English>Capture &lt;marker name='mrk_task'&gt;marked point&lt;/marker&gt; and then hold it until countdown will end.</English>
+			<Original>Capture &lt;marker name='mrk_task'&gt;marked point&lt;/marker&gt; and then hold it until countdown ends.</Original>
 		</Key>
 		
 		<Key ID='STR_timer_captureIn'>
-			<Original>Захват</Original>
+			<!--<Original>Захват</Original>-->
 			<Russian>Захват</Russian>
-			<English>Capture in</English>
+			<Original>Capture in</Original>
 		</Key>
 		<Key ID='STR_timer_end'>
-			<Original>Время</Original>
+			<!--<Original>Время</Original>-->
 			<Russian>Время</Russian>
-			<English>Time left</English>
+			<Original>Time left</Original>
 		</Key>
 		
 <!-- *********** Markers ************* -->
 		<Key ID='STR_marker_taskText'>
-			<Original>Захватить и Удержать</Original>
+			<!--<Original>Захватить и Удержать</Original>-->
 			<Russian>Захватить и Удержать</Russian>
-			<English>Capture and Hold</English>			
+			<Original>Capture and Hold</Original>			
 		</Key>
 		
 		<Key ID='STR_marker_deploymentText'>
-			<Original>Позиция</Original>
+			<!--<Original>Позиция</Original>-->
 			<Russian>Позиция</Russian>
-			<English>Deployment of</English>			
+			<Original>Deployment of</Original>			
 		</Key>
 
 		<Key ID='STR_marker_deploymentAndText'>
-			<Original>и</Original>
+			<!--<Original>и</Original>-->
 			<Russian>и</Russian>
-			<English>and</English>			
+			<Original>and</Original>			
 		</Key>
 	
 <!-- *********** Displays ************* -->	
 		<Key ID='STR_assignmentDisplay'>
-			<Original>Ваше Назначение</Original>
+			<!--<Original>Ваше Назначение</Original>-->
 			<Russian>Ваше Назначение</Russian>	
-			<English>Your Assignment is</English>			
+			<Original>Your Assignment is</Original>			
 		</Key>
 		
 	<!-- Diary and Hints -->
 		<Key ID='STR_assignment_CommandPersonnelUpCase'>
-			<Original>КОМАНДНЫЙ СОСТАВ</Original>
+			<!--<Original>КОМАНДНЫЙ СОСТАВ</Original>-->
 			<Russian>КОМАНДНЫЙ СОСТАВ</Russian>
-			<English>COMMAND PERSONNEL</English>
+			<Original>COMMAND PERSONNEL</Original>
 		</Key>
 		<Key ID='STR_assignment_CommandPersonnel'>
-			<Original>Комсостав</Original>
+			<!--<Original>Комсостав</Original>-->
 			<Russian>Комсостав</Russian>
-			<English>Command Personnel</English>
+			<Original>Command Personnel</Original>
 		</Key>
 		<Key ID='STR_assignment_showCommandPersonnel'>
-			<Original>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Original>
+			<!--<Original>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Original>-->
 			<Russian>ПОКАЗАТЬ КОМАНДНЫЙ СОСТАВ</Russian>
-			<English>SHOW COMMAND PERSONNEL</English>
+			<Original>SHOW COMMAND PERSONNEL</Original>
 		</Key>
 		<Key ID='STR_assignment_showORBAT'>
-			<Original>SHOW ORBAT</Original>
+			<!--<Original>SHOW ORBAT</Original>-->
 			<Russian>SHOW ORBAT</Russian>
-			<English>SHOW ORBAT</English>
+			<Original>SHOW ORBAT</Original>
 		</Key>
 		<Key ID='STR_assignment_ORBAT'>
-			<Original>ORBAT</Original>
+			<!--<Original>ORBAT</Original>-->
 			<Russian>ORBAT</Russian>
-			<English>ORBAT</English>
+			<Original>ORBAT</Original>
 		</Key>
 		
 		<Key ID='STR_assignment_endTimerTopic'>
-			<Original>Остаток времени</Original>
+			<!--<Original>Остаток времени</Original>-->
 			<Russian>Остаток времени</Russian>
-			<English>End mission timer</English>
+			<Original>End mission timer</Original>
 		</Key>
 		<Key ID='STR_assignment_showEndTimer'>
-			<Original>ПОКАЗАТЬ ОСТАТОК ВРЕМЕНИ</Original>
+			<!--<Original>ПОКАЗАТЬ ОСТАТОК ВРЕМЕНИ</Original>-->
 			<Russian>ПОКАЗАТЬ ОСТАТОК ВРЕМЕНИ</Russian>
-			<English>SHOW END MISSION TIMER</English>
+			<Original>SHOW END MISSION TIMER</Original>
 		</Key>
 		
 	<!-- Squads -->
 		
 		<Key ID='STR_assignmentCO'>
-			<Original>ШТАБ</Original>
+			<!--<Original>ШТАБ</Original>-->
 			<Russian>ШТАБ</Russian>
-			<English>HQ</English>
+			<Original>HQ</Original>
 		</Key>
 		<Key ID='STR_assignmentAlpha'>
-			<Original>АЛЬФА</Original>
+			<!--<Original>АЛЬФА</Original>-->
 			<Russian>АЛЬФА</Russian>
-			<English>ALPHA</English>
+			<Original>ALPHA</Original>
 		</Key>
 		<Key ID='STR_assignmentBravo'>
-			<Original>БРАВО</Original>
+			<!--<Original>БРАВО</Original>-->
 			<Russian>БРАВО</Russian>
-			<English>BRAVO</English>
+			<Original>BRAVO</Original>
 		</Key>
 		<Key ID='STR_assignmentCharlie'>
-			<Original>ЧАРЛИ</Original>
+			<!--<Original>ЧАРЛИ</Original>-->
 			<Russian>ЧАРЛИ</Russian>
-			<English>CHARLIE</English>
+			<Original>CHARLIE</Original>
 		</Key>
 		<Key ID='STR_assignmentDelta'>
-			<Original>ДЕЛЬТА</Original>
+			<!--<Original>ДЕЛЬТА</Original>-->
 			<Russian>ДЕЛЬТА</Russian>
-			<English>DELTA</English>
+			<Original>DELTA</Original>
 		</Key>
 		<Key ID='STR_assignmentFoxtrot'>
-			<Original>ФОКСТРОТ</Original>
+			<!--<Original>ФОКСТРОТ</Original>-->
 			<Russian>ФОКСТРОТ</Russian>
-			<English>FOXTROT</English>
+			<Original>FOXTROT</Original>
 		</Key>
 		<Key ID='STR_assignmentEcho'>
-			<Original>ЭХО</Original>
+			<!--<Original>ЭХО</Original>-->
 			<Russian>ЭХО</Russian>
-			<English>ECHO</English>
+			<Original>ECHO</Original>
 		</Key>
 	
 	<!-- Role -->	
 		<Key ID='STR_assignmentRole_CO'>
-			<Original>Командир стороны</Original>
+			<!--<Original>Командир стороны</Original>-->
 			<Russian>Командир стороны</Russian>
-			<English>Commanding officer</English>
+			<Original>Commanding officer</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_SL'>
-			<Original>Командир отделения</Original>
+			<!--<Original>Командир отделения</Original>-->
 			<Russian>Командир отделения</Russian>
-			<English>Squad Leader</English>
+			<Original>Squad Leader</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_M'>
-			<Original>Медик</Original>
+			<!--<Original>Медик</Original>-->
 			<Russian>Медик</Russian>
-			<English>Medic</English>
+			<Original>Medic</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_FTL_R'>
-			<Original>Лидер звена (Красный)</Original>
+			<!--<Original>Лидер звена (Красный)</Original>-->
 			<Russian>Лидер звена (Красный)</Russian>
-			<English>Fireteam Leader (Red)</English>
+			<Original>Fireteam Leader (Red)</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_AR_R'>
-			<Original>Пулеметчик (Красный)</Original>
+			<!--<Original>Пулеметчик (Красный)</Original>-->
 			<Russian>Пулеметчик (Красный)</Russian>
-			<English>Automatic Rifleman (Red)</English>
-		</Key>
-		<Key ID='STR_assignmentRole_AAR_R'>
-			<Original>Помощник пулеметчика (Красный)</Original>
-			<Russian>Помощник пулеметчика (Красный)</Russian>
-			<English>Assistant Automatic Rifleman (Red)</English>
+			<Original>Automatic Rifleman (Red)</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_G_R'>
-			<Original>Гренадер (Красный)</Original>
+			<!--<Original>Гренадер (Красный)</Original>-->
 			<Russian>Гренадер (Красный)</Russian>
-			<English>Grenadier (Red)</English>
+			<Original>Grenadier (Red)</Original>
 		</Key>
+		<Key ID='STR_assignmentRole_R_R'>
+			<!--<Original>Помощник пулеметчика (Красный)</Original>-->
+			<Russian>Стрелок (Красный)</Russian>
+			<Original>Rifleman (Red)</Original>
+		</Key>
+		
 		<Key ID='STR_assignmentRole_FTL_B'>
-			<Original>Лидер звена (Синий)</Original>
+			<!--<Original>Лидер звена (Синий)</Original>-->
 			<Russian>Лидер звена (Синий)</Russian>
-			<English>Fireteam Leader (Blue)</English>
+			<Original>Fireteam Leader (Blue)</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_AR_B'>
-			<Original>Пулеметчик (Синий)</Original>
+			<!--<Original>Пулеметчик (Синий)</Original>-->
 			<Russian>Пулеметчик (Синий)</Russian>
-			<English>Automatic Rifleman (Blue)</English>
+			<Original>Automatic Rifleman (Blue)</Original>
 		</Key>
-		<Key ID='STR_assignmentRole_AAR_B'>
-			<Original>Помощник пулеметчика (Синий)</Original>
-			<Russian>Помощник пулеметчика (Синий)</Russian>
-			<English>Assistant Automatic Rifleman (Blue)</English>
+		<Key ID='STR_assignmentRole_G_B'>
+			<!--<Original>Помощник пулеметчика (Синий)</Original>-->
+			<Russian>Гренадер (Синий)</Russian>
+			<Original>Grenadier (Blue)</Original>
 		</Key>
 		<Key ID='STR_assignmentRole_AT_B'>
-			<Original>Гранатометчик (Синий)</Original>
+			<!--<Original>Гранатометчик (Синий)</Original>-->
 			<Russian>Гранатометчик (Синий)</Russian>
-			<English>Rifleman AT (Blue)</English>
+			<Original>Rifleman AT (Blue)</Original>
 		</Key>
 
 	<!-- Radios -->
 		<Key ID='STR_radio_LR'>
-			<Original>Частота ДВ:</Original>
-			<Russian>Частоа ДВ:</Russian>
-			<English>LR Freq.:</English>
+			<!--<Original>Частота ДВ:</Original>-->
+			<Russian>Частота ДВ:</Russian>
+			<Original>LR Freq:</Original>
 		</Key>
 		<Key ID='STR_radio_SW'>
-			<Original>Частота КВ:</Original>
+			<!--<Original>Частота КВ:</Original>-->
 			<Russian>Частота КВ:</Russian>
-			<English>SW Freq.:</English>
+			<Original>SW Freq:</Original>
 		</Key>
 		<Key ID='STR_radio_mhz'>
-			<Original>МГц</Original>
+			<!--<Original>МГц</Original>-->
 			<Russian>МГц</Russian>
-			<English>MHz</English>
+			<Original>MHz</Original>
 		</Key>
 		<Key ID='STR_radio_topic'>
-			<Original>Частоты КВ отрядов:</Original>
+			<!--<Original>Частоты КВ отрядов:</Original>-->
 			<Russian>Частоты КВ отрядов:</Russian>
-			<English>Squads SW Frequencies:</English>
+			<Original>Squads SW Frequencies:</Original>
 		</Key>
+		<Key ID='STR_radio_topic_lr'>
+			<!--<Original>Частота ДВ отрядов</Original>-->
+			<Russian>Частота ДВ отрядов</Russian>
+			<Original>Squads LR Frequency</Original>
+		</Key>
+		
+		
 
 <!--- *********** Mission Ends *********** -->
 	<!-- LOSE -->
 		<Key ID='STR_endTitle_lose'>
-			<Original>Миссия Провалена</Original>
+			<!--<Original>Миссия Провалена</Original>-->
 			<Russian>Миссия Провалена</Russian>
-			<English>Mission Failed</English>
+			<Original>Mission Failed</Original>
 		</Key>
 		<Key ID='STR_endSubtitle_lose'>
-			<Original>Точка не захвачена</Original>
+			<!--<Original>Точка не захвачена</Original>-->
 			<Russian>Точка не захвачена</Russian>
-			<English>Control point is not captured</English>
+			<Original>Control point is not captured</Original>
 		</Key>
 		<Key ID='STR_endDesc_lose'>
-			<Original>Точка не захвачена</Original>
+			<!--<Original>Точка не захвачена</Original>-->
 			<Russian>Точка не захвачена</Russian>
-			<English>Control point is not captured</English>
+			<Original>Control point is not captured</Original>
 		</Key>	
 		
 	<!-- WIN -->	
 		<Key ID='STR_endTitle_win'>
-			<Original>Успех!</Original>
+			<!--<Original>Успех!</Original>-->
 			<Russian>Успех!</Russian>
-			<English>SUCCESS!</English>
+			<Original>SUCCESS!</Original>
 		</Key>
 		<Key ID='STR_endSubtitle_win'>
-			<Original>Точка захвачена!</Original>
+			<!--<Original>Точка захвачена!</Original>-->
 			<Russian>Точка захвачена!</Russian>
-			<English>Control point is captured!</English>
+			<Original>Control point is captured!</Original>
 		</Key>
 		<Key ID='STR_endDesc_win'>
-			<Original>Точка была захвачена - все молодцы!</Original>
+			<!--<Original>Точка была захвачена - все молодцы!</Original>-->
 			<Russian>Точка была захвачена - все молодцы!</Russian>
-			<English>Control point is captured - good job!</English>
+			<Original>Control point is captured - good job!</Original>
 		</Key>
 
 
@@ -257,321 +276,322 @@
 <!-- *********** Mission Params ************* -->	
 <!-- Mission Conditions -->
 		<Key ID='STR_delimi_misCond'>
-			<Original> :: Условия Миссии ::</Original>
+			<!--<Original> :: Условия Миссии ::</Original>-->
 			<Russian> :: Условия Миссии ::</Russian>
-			<English> :: Mission Conditions ::</English>
+			<Original> :: Mission Conditions ::</Original>
 		</Key>
 		<Key ID='STR_par_endTime'>
-			<Original> Время на выполнение (мин.)</Original>
+			<!--<Original> Время на выполнение (мин.)</Original>-->
 			<Russian> Время на выполнение (мин.)</Russian>
-			<English> Mission End Timer (min.)</English>
+			<Original> Mission End Timer (min.)</Original>
 		</Key>
 
 <!-- Enviroment Conditions -->
 		<Key ID='STR_delimi_envCond'>
-			<Original> :: Условия Окружения ::</Original>
+			<!--<Original> :: Условия Окружения ::</Original>-->
 			<Russian> :: Условия Окружения ::</Russian>
-			<English> :: Enviroment Conditions ::</English>
+			<Original> :: Enviroment Conditions ::</Original>
 		</Key>
 				
 		<Key ID='STR_par_optionRandom'>
-			<Original>Случайно</Original>
+			<!--<Original>Случайно</Original>-->
 			<Russian>Случайно</Russian>
-			<English>Random</English>
+			<Original>Random</Original>
 		</Key>
 		
 <!-- Weather -->
 		<Key ID='STR_par_weather'>
-			<Original> Погода</Original>
+			<!--<Original> Погода</Original>-->
 			<Russian> Погода</Russian>
-			<English> Weather</English>
+			<Original> Weather</Original>
 		</Key>
 		
 		<Key ID='STR_par_weatherOption1'>
-			<Original>Ясно</Original>
+			<!--<Original>Ясно</Original>-->
 			<Russian>Ясно</Russian>
-			<English>Clear</English>
+			<Original>Clear</Original>
 		</Key>
 		<Key ID='STR_par_weatherOption2'>
-			<Original>Облачно</Original>
+			<!--<Original>Облачно</Original>-->
 			<Russian>Облачно</Russian>
-			<English>Cloudy</English>
+			<Original>Cloudy</Original>
 		</Key>
 		<Key ID='STR_par_weatherOption3'>
-			<Original>Пасмурно</Original>
+			<!--<Original>Пасмурно</Original>-->
 			<Russian>Пасмурно</Russian>
-			<English>Overcast</English>
+			<Original>Overcast</Original>
 		</Key>
 		<Key ID='STR_par_weatherOption4'>
-			<Original>Дождь</Original>
+			<!--<Original>Дождь</Original>-->
 			<Russian>Дождь</Russian>
-			<English>Rain</English>
+			<Original>Rain</Original>
 		</Key>
 		<Key ID='STR_par_weatherOption5'>
-			<Original>Гроза</Original>
+			<!--<Original>Гроза</Original>-->
 			<Russian>Гроза</Russian>
-			<English>Storm</English>
+			<Original>Storm</Original>
 		</Key>
 		
 <!-- Fog -->		
 		<Key ID='STR_par_fog'>
-			<Original> Туман</Original>
+			<!--<Original> Туман</Original>-->
 			<Russian> Туман</Russian>
-			<English> Fog</English>
+			<Original> Fog</Original>
 		</Key>
 		
 		<Key ID='STR_par_fogOption1'>
-			<Original>Нет</Original>
+			<!--<Original>Нет</Original>-->
 			<Russian>Нет</Russian>
-			<English>No</English>
+			<Original>No</Original>
 		</Key>
 		<Key ID='STR_par_fogOption2'>
-			<Original>Легкий</Original>
+			<!--<Original>Легкий</Original>-->
 			<Russian>Легкий</Russian>
-			<English>Light</English>
+			<Original>Light</Original>
 		</Key>
 		<Key ID='STR_par_fogOption3'>
-			<Original>Густой</Original>
+			<!--<Original>Густой</Original>-->
 			<Russian>Густой</Russian>
-			<English>Heavy</English>
+			<Original>Heavy</Original>
 		</Key>
 		
 <!-- Daytime -->
 
 		<Key ID='STR_par_daytime'>
-			<Original> Время дня</Original>
+			<!--<Original> Время дня</Original>-->
 			<Russian> Время дня</Russian>
-			<English> Daytime</English>
+			<Original> Daytime</Original>
 		</Key>
 	
 <!-- Months -->
 		<Key ID='STR_par_month'>
-			<Original> Месяц</Original>
+			<!--<Original> Месяц</Original>-->
 			<Russian> Месяц</Russian>
-			<English> Month</English>
+			<Original> Month</Original>
 		</Key>
 
 		<Key ID="STR_par_month1">
-			<Original>Январь</Original>
+			<!--<Original>Январь</Original>-->
 			<Russian>Январь</Russian>
-			<English>January</English>	
+			<Original>January</Original>	
 		</Key> <Key ID="STR_par_month2">
-			<Original>Февраль</Original>
+			<!--<Original>Февраль</Original>-->
 			<Russian>Февраль</Russian>
-			<English>February</English>	
+			<Original>February</Original>	
 		</Key> <Key ID="STR_par_month3">
-			<Original>Март</Original>
+			<!--<Original>Март</Original>-->
 			<Russian>Март</Russian>
-			<English>March</English>	
+			<Original>March</Original>	
 		</Key> <Key ID="STR_par_month4">
-			<Original>Апрель</Original>
+			<!--<Original>Апрель</Original>-->
 			<Russian>Апрель</Russian>
-			<English>April</English>	
+			<Original>April</Original>	
 		</Key> <Key ID="STR_par_month5">
-			<Original>Май</Original>
+			<!--<Original>Май</Original>-->
 			<Russian>Май</Russian>
-			<English>May</English>	
+			<Original>May</Original>	
 		</Key> <Key ID="STR_par_month6">
-			<Original>Июнь</Original>
+			<!--<Original>Июнь</Original>-->
 			<Russian>Июнь</Russian>
-			<English>June</English>	
+			<Original>June</Original>	
 		</Key> <Key ID="STR_par_month7">
-			<Original>Июль</Original>
+			<!--<Original>Июль</Original>-->
 			<Russian>Июль</Russian>
-			<English>July</English>	
+			<Original>July</Original>	
 		</Key> <Key ID="STR_par_month8">
-			<Original>Август</Original>
+			<!--<Original>Август</Original>-->
 			<Russian>Август</Russian>
-			<English>August</English>	
+			<Original>August</Original>	
 		</Key> <Key ID="STR_par_month9">
-			<Original>Сентябрь</Original>
+			<!--<Original>Сентябрь</Original>-->
 			<Russian>Сентябрь</Russian>
-			<English>September</English>	
+			<Original>September</Original>	
 		</Key> <Key ID="STR_par_month10">
-			<Original>Октябрь</Original>
+			<!--<Original>Октябрь</Original>-->
 			<Russian>Октябрь</Russian>
-			<English>October</English>	
+			<Original>October</Original>	
 		</Key> <Key ID="STR_par_month11">
-			<Original>Ноябрь</Original>
+			<!--<Original>Ноябрь</Original>-->
 			<Russian>Ноябрь</Russian>
-			<English>November</English>	
+			<Original>November</Original>	
 		</Key> <Key ID="STR_par_month12">
-			<Original>Декабрь</Original>
+			<!--<Original>Декабрь</Original>-->
 			<Russian>Декабрь</Russian>
-			<English>December</English>				
+			<Original>December</Original>				
 		</Key>
 		
 <!-- Year -->
 		<Key ID='STR_par_year'>
-			<Original> Год</Original>
+			<!--<Original> Год</Original>-->
 			<Russian> Год</Russian>
-			<English> Year</English>
+			<Original> Year</Original>
 		</Key>
 
 <!-- Factions -->
 		<Key ID='STR_delimi_faction'>
-			<Original> :: Фракция Игроков ::</Original>
+			<!--<Original> :: Фракция Игроков ::</Original>-->
 			<Russian> :: Фракция Игроков ::</Russian>
-			<English> :: Players Faction :: </English>
+			<Original> :: Players Faction :: </Original>
 		</Key>
 
 
 		<Key ID="STR_par_faction">
-			<Original> Фракция</Original>
+			<!--<Original> Фракция</Original>-->
 			<Russian> Фракция</Russian>
-			<English> Faction</English>   
+			<Original> Faction</Original>   
 		</Key>
 		
 		<Key ID='STR_delimi_hostileFaction'>
-			<Original> :: Фракция Противника ::</Original>
+			<!--<Original> :: Фракция Противника ::</Original>-->
 			<Russian> :: Фракция Противника ::</Russian>
-			<English> :: Hostile Faction :: </English>
+			<Original> :: Hostile Faction :: </Original>
 		</Key>
 
 		
 		<Key ID="STR_par_hostileFaction">
-			<Original> Фракция Противника</Original>
+			<!--<Original> Фракция Противника</Original>-->
 			<Russian> Фракция  Противника</Russian>
-			<English> Hostile Faction</English>   
+			<Original> Hostile Faction</Original>   
 		</Key>
 		
 		<Key ID="STR_par_faction1">
-			<Original>NATO</Original>
+			<!--<Original>NATO</Original>-->
 			<Russian>NATO</Russian>
-			<English>NATO</English>   
+			<Original>NATO</Original>   
 		</Key>
 		<Key ID="STR_par_faction2">
-			<Original>CSAT</Original>
+			<!--<Original>CSAT</Original>-->
 			<Russian>CSAT</Russian>
-			<English>CSAT</English>   
+			<Original>CSAT</Original>   
 		</Key>
 		<Key ID="STR_par_faction3">
-			<Original>AAF</Original>
+			<!--<Original>AAF</Original>-->
 			<Russian>AAF</Russian>
-			<English>AAF</English>   
+			<Original>AAF</Original>   
 		</Key>
 
 <!-- Hostile skill -->
 		<Key ID="STR_par_hostileSkill">
-			<Original> Фракция Противника - Навык</Original>
+			<!--<Original> Фракция Противника - Навык</Original>-->
 			<Russian> Фракция  Противника - Навык</Russian>
-			<English> Hostile Faction - Skill</English>   
+			<Original> Hostile Faction - Skill</Original>   
 		</Key>
 		
 		<Key ID="STR_par_hostileSkill1">
-			<Original>Новичок</Original>
+			<!--<Original>Новичок</Original>-->
 			<Russian>Новичок</Russian>
-			<English>Newbie</English>	
+			<Original>Newbie</Original>	
 		</Key>
 		</Key> <Key ID="STR_par_hostileSkill2">
-			<Original>Обычный</Original>
+			<!--<Original>Обычный</Original>-->
 			<Russian>Обычный</Russian>
-			<English>Average</English>	
+			<Original>Average</Original>	
 		</Key> 
 		</Key> <Key ID="STR_par_hostileSkill3">
-			<Original>Умелый</Original>
+			<!--<Original>Умелый</Original>-->
 			<Russian>Умелый</Russian>
-			<English>Skilled</English>	
+			<Original>Skilled</Original>	
 		</Key>
 
 <!-- Hostile Amount -->
 		<Key ID="STR_par_hostileAmount">
-			<Original> Фракция Противника - Количество сил</Original>
+			<!--<Original> Фракция Противника - Количество сил</Original>-->
 			<Russian> Фракция  Противника - Количество сил</Russian>
-			<English> Hostile Faction - Amount</English>   
+			<Original> Hostile Faction - Amount</Original>   
 		</Key>
 		
 		<Key ID="STR_par_hostileAmount1">
-			<Original>Немного</Original>
+			<!--<Original>Немного</Original>-->
 			<Russian>Немного</Russian>
-			<English>Few</English>	
+			<Original>Few</Original>	
 		</Key>
 		<Key ID="STR_par_hostileAmount2">
-			<Original>Мало</Original>
+			<!--<Original>Мало</Original>-->
 			<Russian>Мало</Russian>
-			<English>Small</English>	
+			<Original>Small</Original>	
 		</Key>
 		<Key ID="STR_par_hostileAmount3">
-			<Original>Средне</Original>
+			<!--<Original>Средне</Original>-->
 			<Russian>Средне</Russian>
-			<English>Normal</English>	
+			<Original>Normal</Original>	
 		</Key>
 		<Key ID="STR_par_hostileAmount4">
-			<Original>Много</Original>
+			<!--<Original>Много</Original>-->
 			<Russian>Много</Russian>
-			<English>Many</English>	
+			<Original>Many</Original>	
 		</Key>
 		<Key ID="STR_par_hostileAmount5">
-			<Original>Значительно</Original>
+			<!--<Original>Значительно</Original>-->
 			<Russian>Значительно</Russian>
-			<English>Large</English>	
+			<Original>Large</Original>	
 		</Key> 
 
 <!-- Hostile Vehicles -->
 		<Key ID="STR_par_hostileVehicles">
-			<Original> Фракция Противника - Техника</Original>
+			<!--<Original> Фракция Противника - Техника</Original>-->
 			<Russian> Фракция  Противника - Техника</Russian>
-			<English> Hostile Faction - Vehicles</English>   
+			<Original> Hostile Faction - Vehicles</Original>   
 		</Key>
 
 		<Key ID="STR_par_hostileVehicles1">
-			<Original>Нет</Original>
+			<!--<Original>Нет</Original>-->
 			<Russian>Нет</Russian>
-			<English>No</English>	
+			<Original>No</Original>	
 		</Key>
 		<Key ID="STR_par_hostileVehicles2">
-			<Original>Технички</Original>
+			<!--<Original>Технички</Original>-->
 			<Russian>Технички</Russian>
-			<English>Technicans</English>	
+			<Original>Technicans</Original>	
 		</Key>
 		<Key ID="STR_par_hostileVehicles3">
-			<Original>Легкая броня (машины и БТР)</Original>
+			<!--<Original>Легкая броня (машины и БТР)</Original>-->
 			<Russian>Легкая броня (машины и БТР)</Russian>
-			<English>Light armor (armored cars and APC)</English>	
+			<Original>Light armor (armored cars and APC)</Original>	
 		</Key>
 		<Key ID="STR_par_hostileVehicles4">
-			<Original>Средняя броня (БТР и БМП)</Original>
+			<!--<Original>Средняя броня (БТР и БМП)</Original>-->
 			<Russian>Средняя броня (БТР и БМП)</Russian>
-			<English>Medium Armor (APC, IFV)</English>	
+			<Original>Medium Armor (APC, IFV)</Original>	
 		</Key>
 		<Key ID="STR_par_hostileVehicles5">
-			<Original>Тяжелая броня (танки, БМП и БТР)</Original>
+			<!--<Original>Тяжелая броня (танки, БМП и БТР)</Original>-->
 			<Russian>Тяжелая броня (танки, БМП и БТР)</Russian>
-			<English>Heavy Armor (tanks, APC, IFV)</English>   
+			<Original>Heavy Armor (tanks, APC, IFV)</Original>   
 		</Key>
 
 <!-- Caching -->
 		<Key ID='STR_delimi_caching'>
-			<Original> :: Кеширование AI ::</Original>
+			<!--<Original> :: Кеширование AI ::</Original>-->
 			<Russian> :: Кеширование AI ::</Russian>
-			<English> :: AI Caching ::</English>
+			<Original> :: AI Caching ::</Original>
 		</Key>
 
 		<Key ID='STR_par_caching'>
-			<Original>Кеширование AI юнитов вне дальности (м)</Original>
+			<!--<Original>Кеширование AI юнитов вне дальности (м)</Original>-->
 			<Russian>Кеширование AI юнитов вне дальности (м)</Russian>
-			<English>Cache AI outside distance (m)</English>
+			<Original>Cache AI outside distance (m)</Original>
 		</Key>
 		
 <!-- Radio -->
 		<Key ID='STR_delimi_radio'>
-			<Original> :: Радио ::</Original>
+			<!--<Original> :: Радио ::</Original>-->
 			<Russian> :: Радио ::</Russian>
-			<English> :: Radio ::</English>
+			<Original> :: Radio ::</Original>
 		</Key>
 		
 		<Key ID='STR_par_radio'>
-			<Original>Использовать мод радио</Original>
+			<!--<Original>Использовать мод радио</Original>-->
 			<Russian>Использовать мод радио</Russian>
-			<English>Use radio mod</English>
+			<Original>Use radio mod</Original>
 		</Key>
 		
 		<Key ID='STR_par_radioOption0'>
-			<Original>Нет (Ванилла)</Original>
+			<!--<Original>Нет (Ванилла)</Original>-->
 			<Russian>Нет (Ванилла)</Russian>
-			<English>No (Vanilla)</English>
+			<Original>No (Vanilla)</Original>
 		</Key>
 		<Key ID='STR_par_radioOption1'>
+			<!--<Original>TFAR</Original>-->
 			<Original>TFAR</Original>
 		</Key>
 	 </Container>
