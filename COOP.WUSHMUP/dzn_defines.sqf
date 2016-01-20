@@ -61,13 +61,13 @@ dzn_roleMapping = [
 	[100, localize "STR_assignmentRole_M"],
 	
 	[101, localize "STR_assignmentRole_FTL_R"],
-	[102, localize "STR_assignmentRole_AR_R"],
-	[103, localize "STR_assignmentRole_AAR_R"],
-	[104, localize "STR_assignmentRole_G_R"],
+	[102, localize "STR_assignmentRole_AR_R"],	
+	[103, localize "STR_assignmentRole_G_R"],
+	[104, localize "STR_assignmentRole_R_R"],
 	
 	[105, localize "STR_assignmentRole_FTL_B"],
 	[106, localize "STR_assignmentRole_AR_B"],
-	[107, localize "STR_assignmentRole_AAR_B"],
+	[107, localize "STR_assignmentRole_G_B"],
 	[108, localize "STR_assignmentRole_AT_B"]
 ];
 
@@ -79,12 +79,12 @@ dzn_roleMappingShort = [
 	
 	[101, "FTL"],
 	[102, "AR"],
-	[103, "AAR"],
-	[104, "GR"],
+	[103, "GR"],
+	[104, "R"],
 	
 	[105, "FTL"],
 	[106, "AR"],
-	[107, "AAR"],
+	[107, "GR"],
 	[108, "RAT"]
 ];
 
@@ -96,12 +96,12 @@ dzn_rolePicMapping = [
 	
 	[101, "img\FTL_R.jpg"],
 	[102, "img\AR_R.jpg"],
-	[103, "img\AAR_R.jpg"],
-	[104, "img\G_R.jpg"],
+	[103, "img\G_R.jpg"],
+	[104, "img\R_R.jpg"],
 	
 	[105, "img\FTL_B.jpg"],
 	[106, "img\AR_B.jpg"],
-	[107, "img\AAR_B.jpg"],
+	[107, "img\G_B.jpg"],
 	[108, "img\AT_B.jpg"]
 ];
 
@@ -125,18 +125,18 @@ dzn_kitToRoleMapping = [
 	
 	[101, "FTL"],
 	[102, "AR"],
-	[103, "AAR"],
-	[104, "G"],
+	[103, "G"],
+	[104, "R"],
 	
 	[105, "FTL"],
 	[106, "AR"],
-	[107, "AAR"],
+	[107, "G"],
 	[108, "RAT"]
 ];
 
 dzn_vehicleToFactionMapping = [
 	[
-		0,	
+		0,	// NATO
 		[
 			[/*Tech*/ "B_G_Offroad_01_armed_F"],
 			[/*Light*/ "B_MRAP_01_hmg_F" ],
@@ -145,7 +145,7 @@ dzn_vehicleToFactionMapping = [
 		]
 	],
 	[
-		1,	
+		1,	// CSAT
 		[
 			[/*Tech*/ "O_G_Offroad_01_armed_F"],
 			[/*Light*/ "O_MRAP_02_hmg_F"],
@@ -154,7 +154,7 @@ dzn_vehicleToFactionMapping = [
 		]
 	],
 	[
-		2,	
+		2,	// AAF
 		[
 			[/*Tech*/ "I_G_Offroad_01_armed_F"],
 			[/*Light*/ "I_MRAP_03_hmg_F"],
