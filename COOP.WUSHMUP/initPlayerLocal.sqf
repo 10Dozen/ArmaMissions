@@ -60,6 +60,8 @@
 		case 0: {};
 		case 1: {
 			sleep 5;
+			call dzn_fnc_addRadioSubject;
+			
 			// If LR - set LR freq
 			if ( typename (player getVariable "raRoleId") != "STRING" && {player getVariable "raRoleId" == 10} ) then {
 				waitUntil { !isNil {call TFAR_fnc_activeLrRadio} }; 
