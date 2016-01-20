@@ -56,7 +56,6 @@ dzn_fnc_ra_getNearestUnusedRole = {
 	_squadId = -1;
 	_role = -1;
 	{
-		player sideChat str[_x];
 		if (_forEachIndex > 0) then {
 			_squad = _x;
 			_id = _forEachIndex;
