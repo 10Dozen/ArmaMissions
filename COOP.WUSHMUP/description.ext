@@ -5,13 +5,14 @@ class Header
 	maxPlayers = 70;
 };
 
-onLoadName 			= "WarmUp! SHMUP!";
+onLoadName 			= $STR_onLoadName;
 onLoadMission 		= $STR_onLoadMission;
 author 				= "10Dozen [MFOR]";
-//loadScreen 		= "loadLogo.jpg";
-//overviewPicture 	= "overviewLogo.jpg";
+loadScreen 		= "load.jpg";
+overviewPicture 	= "overview.jpg";
+overviewText = $STR_overviewText;
 
-enableDebugConsole = 2;
+enableDebugConsole = 1;
 respawn = 0;
 
 // ============================================================================================
@@ -29,7 +30,7 @@ class Params
 	class par_endTime
 	{
 		title = "$STR_par_endTime";
-		values[] = {15,30,45,60,75,90,105,120};
+		values[] = {15,30,45,60};
 		default = 30;
 	}
 	
