@@ -36,9 +36,20 @@ dzn_fnc_selectTask = {
 	[ _presets select 0, _taskPos, _presets select 2 ]
 };
 
+dzn_fnc_createTaskSimpleLocation = {
+	// @Location = [@Pos, @Radius, (@Direction), (@IsSquare)] call dzn_fnc_createTaskSimpleLocation
+	private["_loc"];
+	params["_pos","_size", ["_dir", 0], ["_isSquare",false]];
+	
+	_loc = createLocation ["Name", _pos, _size, _size];
+	_loc setDirection _dir;
+	if (_isSquare) then { _loc setRectangular true; };
+	
+	_loc
+};
 
 dzn_fnc_createTaskEntity = {
-	// [@TaskId, @pos, @radius, @Params] call dzn_fnc_createTaskEntity;
+	// [@TaskId, @pLocation, @Params] call dzn_fnc_createTaskEntity;
 	
 	missionNamespace setVariable [
 		_this select 0
@@ -46,9 +57,8 @@ dzn_fnc_createTaskEntity = {
 			["end", false]
 			,["state","init"]
 			,["composition",[]]
-			,["pos", _this select 1]
-			,["radius", _this select 2]
-		] + _this select 3
+			,["location", _this select 1]
+		] + _this select 2
 		, true
 	];
 };
