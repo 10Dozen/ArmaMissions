@@ -45,11 +45,15 @@ if (_serverExec) exitWith {
 	_taskID = format[
 		_presets select 0 select 0
 		, round(serverTime)
-	];	
-	missionNamespace setVariable [_taskID, [["end",false], ["state","init"]], true];
-
+	];
+	_taskSide = _presets select 0 select 1;
+	_taskReward = _presets select 2 select 0;	
 	_taskPos = _presets select 1 select 0;
 	_taskRadius =  _presets select 1 select 1;
+	_taskGroups = _presets select 2 select 1;
+	_taskZonesProperties = _presets select 2 select 2;
+	
+	[_taskID, _taskPos, _taskRadius, []] call dzn_fnc_createTaskEntity;
 	
 	// 1. Get nearest houses
 	_buildings = [_taskPos, _taskRadius, ["House"], []] call dzn_fnc_getHousesNear;
@@ -73,30 +77,50 @@ if (_serverExec) exitWith {
 	_cacheObject spawn { sleep 5; _this allowDamage true; };	
 	
 	// 4. Spawn thread - waitUntil { !alive crate };
-	[_taskID, _cacheObject] spawn {
-		// 4.1. taskState = completed
+	[_taskID, _cacheObject] spawn {		
 		waitUntil { !alive (_this select 1) };
 		
+		// 4.1. taskState = completed
 		[(_this select 0), "completed"] call dzn_fnc_setTaskState;
-		(_this select 0) call dzn_fnc_endTask;
-	};
-	
-	
-	
 		
 		// 4.2. taskEnd = true
+		(_this select 0) call dzn_fnc_endTask;
+	};
+		
 	// 5. Spawn general task thread - waitUntil { taskEnd };
-		// 5.1. if taskState = completed
+	[_taskID] spawn {
+		waitUntil { _this call dzn_fnc_isTaskEnded };		
+		if (_this call dzn_fnc_getTaskState == "completed") then {
+			// 5.1. if taskState = completed
 			// 5.1.1.	Success message
-		// 5.2. if taskState != completed
-			// 5.1.2.	Failed message
-		// 5.3. waitUntil { !players in 1km of task }
+			hint "Completed!";			
+		} else {
+			// 5.3. waitUntil { !players in 1km of task }
+			waitUntil { true };
 			// 5.3.1. Remove task composition
+			_this call dzn_fnc_clearTaskPos;
+		};
+	};
+		
 	// 6. Add Dynai zone:
 		// - 2-3 indoor men
 		// - 2x2 patrol men
+	{
+		_zoneSide = _taskZonesProperties select 0;
+		_zoneWP = _taskZonesProperties select 1;
+		_zoneBehavior = _taskZonesProperties select 2;	
 	
+		[_taskID, _zoneSide, false, [loc], _zoneWP, (_taskGroups select _forEachIndex), _zoneBehavior] call dzn_fnc_dynai_addNewZone;
+		
+	} forEach _taskZonesProperties;
 	
+	// 0	@Name, 
+		// 1	@Side, 
+		// 2	@IsActive, 
+		// 3	@ArrayOfLocations or Triggers or [Center, X, Y, DIR, IsSquare], 
+		// 4	@ArrayOfPos3d or "randomize"
+		// 5	@References,
+		// 6	@Behavior	
 	
 	
 	
@@ -114,8 +138,7 @@ if (_serverExec) exitWith {
 		_presets select 0 select 2
 		, mapGridPosition (_presets select 1 select 0 select 0)
 	];
-	_taskSide = _presets select 0 select 1;
-	_taskReward = _presets select 2;
+	
 };
 
 // *******************************************************
