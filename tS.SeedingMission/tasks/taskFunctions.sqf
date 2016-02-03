@@ -36,6 +36,28 @@ dzn_fnc_selectTask = {
 	[ _presets select 0, _taskPos, _presets select 2 ]
 };
 
+
+dzn_fnc_createTaskEntity = {
+	// [@TaskId, @pos, @radius, @Params] call dzn_fnc_createTaskEntity;
+	
+	missionNamespace setVariable [
+		_this select 0
+		, [ 
+			["end", false]
+			,["state","init"]
+			,["composition",[]]
+			,["pos", _this select 1]
+			,["radius", _this select 2]
+		] + _this select 3
+		, true
+	];
+};
+
+dzn_fnc_addObjectsToTask = {
+	// [@Task, @Objects] call dzn_fnc_addObjectsToTask
+
+};
+
 dzn_fnc_setTaskState = {
 	// [@Task, @State] call dzn_fnc_setTaskState
 
@@ -48,5 +70,15 @@ dzn_fnc_endTask = {
 
 dzn_fnc_clearTaskPos = {
 	// @Task call dzn_fnc_clearTaskPos
+
+};
+
+dzn_fnc_getTaskState = {
+	// @Task call dzn_fnc_getTaskState
+
+};
+
+dzn_fnc_isTaskEnded= {
+	// @Task call dzn_fnc_isTaskEnded
 
 };
