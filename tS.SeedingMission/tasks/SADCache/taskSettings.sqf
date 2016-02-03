@@ -1,17 +1,24 @@
+
 // *********************************
 // TASK SETTINGS
 // *********************************
-_taskName = format["task_%1_destroyCache_%2", _squad getVariable "squadName", round(serverTime)];
+_taskName = "task_SADCache_%2";
 _taskSide = west;
-_taskReward = 5000;
-_taskDisplayName = format["Weapon cache at %1", _aoi getVariable "displayName"];
-_taskDesc = format[
-	"Find and destroy enemy weapon cache at %1.<br /><br />Reward:   $%2</t>"
-	, _aoi getVariable "displayName"
-	, _taskReward
-];
+_taskSafetyReward = 100;
+_taskDisplayName = "Weapon cache at %1";
+_taskDesc = "Find and destroy enemy weapon cache at grid %1.";
 
 // *********************************
 // TASK AVAILABLE PLACES
 // *********************************
-//	@Pos [ [ gridX, gridY, gridZ ], radius ]
+_positions = [
+	[ [ 1000, 1000, 0 ], 100 ]
+	, [ [ 2000, 2000, 0 ], 150 ]
+];
+
+
+[
+	[_taskName, _taskDisplayName, _taskDesc] 
+	, _positions
+	, _taskSafetyReward
+]
