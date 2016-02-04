@@ -1,5 +1,3 @@
-//	@Pos [ [ gridX, gridY, gridZ ], radius ]
-
 // [ @Preses, @ServerExec ] execVM "task.sqf";
 /*
 		[
@@ -7,6 +5,18 @@
 			, [@position, @Radius ]
 			, _taskSafetyReward
 		]
+		
+	[
+		["task_SADCache_%2","Weapon cache at %1","Find and destroy enemy weapon cache at grid %1."]
+		, [
+			[4000,4000,0],150
+		],
+		[
+			100
+			,[[[1,[["I_soldier_F",["indoors"],""],["I_soldier_F",["indoors"],""],["I_soldier_F",["indoors"],""]]],[2,[["I_soldier_F",[],""],["I_soldier_F",[],""]]]]]
+			,[["RESISTANCE","randomize",["LIMITED","SAFE","YELLOW","COLUMN"]]]
+		]
+	]
 */
 
 /*
@@ -50,6 +60,7 @@ if (_serverExec) exitWith {
 	_taskReward = _presets select 2 select 0;	
 	
 	_taskPos = _presets select 1 select 0;
+	player setPos _taskPos;
 	_taskRadius =  _presets select 1 select 1;
 	_taskLocation = [_taskPos, _taskRadius] call dzn_fnc_createTaskSimpleLocation;
 	
@@ -72,7 +83,7 @@ if (_serverExec) exitWith {
 	_taskBuilding = _enterableBuildings call BIS_fnc_selectRandom;
 
 	// 2.3. Spawn crate
-	_cacheObject = _cacheObjectClass createVehicle (getPos _taskPos);
+	_cacheObject = _cacheObjectClass createVehicle (_taskPos);
 	_cacheObject allowDamage false;	
 	
 	// 3. Place crate at building pos

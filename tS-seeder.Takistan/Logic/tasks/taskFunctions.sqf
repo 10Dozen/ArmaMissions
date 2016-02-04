@@ -6,7 +6,7 @@ dzn_task_tasks = {
 
 dzn_task_getDisplayName = {
 	switch (_this) do {
-		case 0: { ["SAD Cache", "Search and Destroy Weapon Cache"] };
+		case 0: { ["SAD Weapon Cache", "Search and Destroy Weapon Cache"] };
 	};
 
 };
@@ -32,6 +32,8 @@ dzn_fnc_TaskManager_init = {
 		player createDiarySubject [taskPage, "Rapier Tasks"];
 	};
 	
+	["hq_service", "HQ", { [] spawn dzn_fnc_requestTask; }, {true}] call dzn_fnc_addRadioService;
+	
 	if !(isServer) exitWith {};	
 	
 	// @ActiveExist, @Type, @Presets, @TaskID
@@ -44,7 +46,7 @@ dzn_fnc_TaskManager_init = {
 	"TaskManager_NewTask" addPublicVariableEventHandler {		
 		if (TaskManager_NewTask) then {
 			_taskSettings = missionNamespace getVariable "dzn_taskManager";
-			(_taskSettings select 2) call compile preProcessFileLineNumbers format ["Logic\tasks\%1\task.sqf", (_taskSettings select 1) call dzn_task_tasks];	
+			[(_taskSettings select 2), true] call compile preProcessFileLineNumbers format ["Logic\tasks\%1\task.sqf", (_taskSettings select 1) call dzn_task_tasks];	
 		};
 	};	
 };
@@ -75,26 +77,28 @@ dzn_fnc_requestTask = {
 	// If Active task exist already -- show AAR task dialog
 
 	if !( call dzn_fnc_TaskManager_isTaskActive ) then {
+		player sideChat "1'6, this is 1'1, requesting new mission. Over.";
 		_dialogResult =	[
 			"HQ - Request Task",
 			[
-				["Task", ["SAD Weaopn Cache"]]
+				["Task", ["SAD Weapon Cache"]]
 				,["Location", ["All", "Near", "Medium", "Far"]]
 			]
 		] call dzn_fnc_ShowChooseDialog;
-		if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
-	
+		if (count _dialogResult == 0) exitWith { player sideChat "1'6, this is 1'1, cancel. Out."; };
+		
 		_dialogResult call dzn_fnc_selectTask;
 	} else {
+		player sideChat "1'6, this is 1'1, reporting mission result. Over.";
 		_dialogResult =	[
 			"HQ - Report Task Result",
 			[
-				["Task", [dzn_fnc_TaskManager_taskType call dzn_task_tasks]]
+				["Task", [ ( (call dzn_fnc_TaskManager_taskType) call dzn_task_getDisplayName ) select 0 ]]
 				,["Result", ["Completed", "Parial Completed", "Not completed", "Cancelled"]]
 				,["AAR", []]
 			]
 		] call dzn_fnc_ShowChooseDialog;
-		if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+		if (count _dialogResult == 0) exitWith { player sideChat "1'6, this is 1'1, cancel. Out."; };
 		
 		_dialogResult call dzn_fnc_cancelTask;
 	};
@@ -119,14 +123,12 @@ dzn_fnc_selectTask = {
 			};		
 		} forEach (_presets select 1);
 	};
-	hint str[_listOfTasksInRange];
+	
 	if (_listOfTasksInRange isEqualTo []) exitWith { [west, "HQ"] sideChat "This is 1-6, We have no missions in your area. Out." };
 	
 	_taskPos = _listOfTasksInRange call BIS_fnc_selectRandom;
-	hint format ["%1", _taskPos];
+	
 	[_type, [ _presets select 0, _taskPos, _presets select 2 ], nil ] call dzn_fnc_TaskManager_create;
-
-	_taskPos
 };
 
 dzn_fnc_cancelTask = {	
