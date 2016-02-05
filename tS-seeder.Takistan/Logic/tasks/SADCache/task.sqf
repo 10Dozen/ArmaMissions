@@ -45,13 +45,12 @@
 #define DEBUG	true
 params ["_presets",["_serverExec", false]];
 
-_cacheObjectClass = "O_CargoNet_01_ammo_F";
-
-
 // *********************************************
 // TASK Server Init (called from Task Generator)
 // *********************************************
 if (_serverExec) exitWith {	
+	_cacheObjectClass = "O_CargoNet_01_ammo_F";
+	
 	_taskID = format[
 		_presets select 0 select 0
 		, round(serverTime)
@@ -60,14 +59,16 @@ if (_serverExec) exitWith {
 	_taskReward = _presets select 2 select 0;	
 	
 	_taskPos = _presets select 1 select 0;
-	player setPos _taskPos;
+	
+	player setPos _taskPos;  // DEBUUUUUG
+	
 	_taskRadius =  _presets select 1 select 1;
 	_taskLocation = [_taskPos, _taskRadius] call dzn_fnc_createTaskSimpleLocation;
 	
 	_taskGroups = _presets select 2 select 1;
 	_taskZonesProperties = _presets select 2 select 2;	
 	
-	[_taskID, _taskLocation, []] call dzn_fnc_createTaskEntity;
+	[_taskID, _taskLocation] call dzn_fnc_task_create;
 	
 	// 1. Get nearest houses
 	_buildings = [_taskPos, _taskRadius, ["House"], []] call dzn_fnc_getHousesNear;
@@ -90,29 +91,31 @@ if (_serverExec) exitWith {
 	[_cacheObject, [_taskBuilding], nil, nil, false] spawn dzn_fnc_assignInBuilding;
 	_cacheObject spawn { sleep 5; _this allowDamage true; };	
 	
+	_cacheObject
+	
 	// 4. Spawn thread - waitUntil { !alive crate };
 	[_taskID, _cacheObject] spawn {		
 		waitUntil { !alive (_this select 1) };
 		
 		// 4.1. taskState = completed
-		[(_this select 0), "completed"] call dzn_fnc_setTaskState;
+		[(_this select 0), "completed"] call dzn_fnc_task_setState;
 		
 		// 4.2. taskEnd = true
-		(_this select 0) call dzn_fnc_endTask;
+		// (_this select 0) call dzn_fnc_endTask;
 	};
 		
 	// 5. Spawn general task thread - waitUntil { taskEnd };
 	[_taskID] spawn {
-		waitUntil { _this call dzn_fnc_isTaskEnded };		
-		if (_this call dzn_fnc_getTaskState == "completed") then {
+		waitUntil { !(_this call dzn_fnc_task_active) };		
+		if (_this call dzn_fnc_task_state == "completed") then {
 			// 5.1. if taskState = completed
 			// 5.1.1.	Success message
 			hint "Completed!";			
 		} else {
 			// 5.3. waitUntil { !players in 1km of task }
-			waitUntil { true };
+			// waitUntil { true };
 			// 5.3.1. Remove task composition
-			_this call dzn_fnc_clearTaskPos;
+			// _this call dzn_fnc_clearTaskPos;
 		};
 	};
 		
