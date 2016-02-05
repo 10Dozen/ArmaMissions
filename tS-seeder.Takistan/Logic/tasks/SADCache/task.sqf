@@ -91,7 +91,7 @@ if (_serverExec) exitWith {
 	[_cacheObject, [_taskBuilding], nil, nil, false] spawn dzn_fnc_assignInBuilding;
 	_cacheObject spawn { sleep 5; _this allowDamage true; };	
 	
-	_cacheObject
+	[ _taskId, "objects", [_cacheObject] ] call dzn_fnc_task_setProperty;	
 	
 	// 4. Spawn thread - waitUntil { !alive crate };
 	[_taskID, _cacheObject] spawn {		
