@@ -51,10 +51,13 @@ params ["_presets",["_serverExec", false]];
 if (_serverExec) exitWith {	
 	_cacheObjectClass = "O_CargoNet_01_ammo_F";
 	
-	_taskID = format[
+	_taskId = format[
 		_presets select 0 select 0
 		, round(serverTime)
 	];
+	
+	["task", _taskID] call dzn_fnc_TaskManager_setProperty;
+	
 	_taskSide = _presets select 0 select 1;
 	_taskReward = _presets select 2 select 0;	
 	
@@ -68,7 +71,7 @@ if (_serverExec) exitWith {
 	_taskGroups = _presets select 2 select 1;
 	_taskZonesProperties = _presets select 2 select 2;	
 	
-	[_taskID, _taskLocation] call dzn_fnc_task_create;
+	[_taskId, _taskLocation] call dzn_fnc_task_create;
 	
 	// 1. Get nearest houses
 	_buildings = [_taskPos, _taskRadius, ["House"], []] call dzn_fnc_getHousesNear;
@@ -94,7 +97,7 @@ if (_serverExec) exitWith {
 	[ _taskId, "objects", [_cacheObject] ] call dzn_fnc_task_setProperty;	
 	
 	// 4. Spawn thread - waitUntil { !alive crate };
-	[_taskID, _cacheObject] spawn {		
+	[_taskId, _cacheObject] spawn {		
 		waitUntil { !alive (_this select 1) };
 		
 		// 4.1. taskState = completed
@@ -105,7 +108,7 @@ if (_serverExec) exitWith {
 	};
 		
 	// 5. Spawn general task thread - waitUntil { taskEnd };
-	[_taskID] spawn {
+	[_taskId] spawn {
 		waitUntil { !(_this call dzn_fnc_task_active) };		
 		if (_this call dzn_fnc_task_state == "completed") then {
 			// 5.1. if taskState = completed
@@ -128,7 +131,7 @@ if (_serverExec) exitWith {
 		_zoneBehavior = _x select 2;	
 	
 		[
-			_taskID
+			_taskId
 			, _zoneSide
 			, false
 			, [_taskLocation]
