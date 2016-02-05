@@ -47,9 +47,41 @@ dzn_fnc_TaskManager_init = {
 		if (TaskManager_NewTask) then {
 			_taskSettings = missionNamespace getVariable "dzn_taskManager";
 			[(_taskSettings select 2), true] call compile preProcessFileLineNumbers format ["Logic\tasks\%1\task.sqf", (_taskSettings select 1) call dzn_task_tasks];	
+		} else {
+			// End task		
 		};
 	};	
 };
+
+dzn_fnc_TaskManager_setProperty = {
+	// [@Property, @Value] call dzn_fnc_TaskManager_setProperty
+	params["_prop","_val"];
+	private "_id";
+	
+	_id = switch (_prop) do {
+		case "active": { 0 };
+		case "type": { 1 };
+		case "presets": { 2 };
+		case "task": { 3 };	
+	};
+	
+	(missionNamespace getVariable "dzn_taskManager") set [_id, _val];
+	missionNamespace setVariable ["dzn_taskManager", missionNamespace getVariable _taskId, true];
+}
+
+dzn_fnc_TaskManager_getProperty = {
+	// @Property call dzn_fnc_TaskManager_getProperty
+	params["_prop"];
+	private "_id";	
+	_id = switch (_prop) do {
+		case "active": { 0 };
+		case "type": { 1 };
+		case "presets": { 2 };
+		case "task": { 3 };	
+	};
+	(missionNamespace getVariable "dzn_taskManager") select _id
+}
+
 
 dzn_fnc_TaskManager_create = {
 	// [@TaskType, @Presets] call dzn_fnc_TaskManager_create
@@ -95,8 +127,10 @@ dzn_fnc_requestTask = {
 			[
 				["Task", [ ( (call dzn_fnc_TaskManager_taskType) call dzn_task_getDisplayName ) select 0 ]]
 				,["Result", ["Completed", "Parial Completed", "Not completed", "Cancelled"]]
-				,["AAR", []]
-			]
+				,["Hostile forces", []]
+				,["Allied forces", []]
+				,["Notes", []]
+			]			
 		] call dzn_fnc_ShowChooseDialog;
 		if (count _dialogResult == 0) exitWith { player sideChat "1'6, this is 1'1, cancel. Out."; };
 		
@@ -211,161 +245,3 @@ dzn_fnc_task_active = {
 // INIT
 waitUntil { !isNil "dzn_dynai_initialized" && { dzn_dynai_initialized  } };
 call dzn_fnc_TaskManager_init;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-// TASK MANAGER
-dzn_fnc_TaskManager_init = {
-	TaskManager = round(serverTime);
-
-	
-	if !(isServer) exitWith {};	
-	"PVsetFuel" addPublicVariableEventHandler {
-		
-		
-		(_this select 1) call KK_fnc_setFuel;
-	};
-	
-	missionNamespace setVariable [
-		"dzn_taskManager"
-		,  [
-			["activeTaskExists", false]
-			, ["activeTaskId", nil]
-			, ["presets", nil]
-		]
-		, true
-	];
-};
-
-dzn_fnc_TaskManager_update = {
-	// [@TaskId, @IsActive, @Presets] call dzn_fnc_updateTaskManager
-
-	missionNamespace setVariable [
-		"dzn_taskManager"
-		,  [
-			["activeTaskExists", _this select 1]
-			, ["activeTaskId", _this select 0]
-			, ["presets", _this select 2]
-		]
-		, true
-	];
-};
-dzn_fnc_TaskManager_isActive = {
-	((missionNamespace getVariable "dzn_taskManager") select 0) select 1
-}
-dzn_fnc_TaskManager_getActive = {
-	((missionNamespace getVariable "dzn_taskManager") select 1) select 1
-}
-
-// TASK CONTROLS
-dzn_fnc_selectTask = {
-	// ["TaskType", "RangeCategory"] call dzn_fnc_selectTaskPlaceByRange;
-	private["_userPos","_rangeLimit","_listOfTasksInRange","_taskPos"];
-	params["_type","_range"];
-	
-	_presets = call compile preProcessFileLineNumbers format ["tasks/%1/taskSettings.sqf", _type call dzn_task_tasks];
-	_rangeLimit = _range call dzn_task_ranges;
-	
-	_userPos = getPosASL player;
-	_listOfTasksInRange = [];
-	if (_rangeLimit == 0) then {
-		_listOfTasksInRange = _presets select 1;
-	} else {		
-		{		
-			if (_userPos distance2d (_x select 0) <= _rangeLimit) then {
-				_listOfTasksInRange	pushBack _x;
-			};		
-		} forEach (_presets select 1);
-	};
-	
-	if (_listOfTasksInRange isEqualTo []) exitWith { "No task in given range." };
-	
-	_taskPos = _listOfTasksInRange call BIS_fnc_selectRandom;
-	[nil, true, [ _presets select 0, _taskPos, _presets select 2 ] ] call dzn_fnc_updateTaskManager;	
-};
-
-dzn_fnc_createTaskSimpleLocation = {
-	// @Location = [@Pos, @Radius, (@Direction), (@IsSquare)] call dzn_fnc_createTaskSimpleLocation
-	private["_loc"];
-	params["_pos","_size", ["_dir", 0], ["_isSquare",false]];
-	
-	_loc = createLocation ["Name", _pos, _size, _size];
-	_loc setDirection _dir;
-	if (_isSquare) then { _loc setRectangular true; };
-	
-	_loc
-};
-
-dzn_fnc_createTaskEntity = {
-	// [@TaskId, @pLocation, @Params] call dzn_fnc_createTaskEntity;
-	
-	missionNamespace setVariable [
-		_this select 0
-		, [ 
-			["end", false]
-			,["state","init"]
-			,["composition",[]]
-			,["location", _this select 1]
-		] + _this select 2
-		, true
-	];
-};
-
-dzn_fnc_addObjectsToTask = {
-	// [@Task, @Objects] call dzn_fnc_addObjectsToTask
-
-};
-
-dzn_fnc_setTaskState = {
-	// [@Task, @State] call dzn_fnc_setTaskState
-
-};
-
-dzn_fnc_endTask = {
-	// @Task call dzn_fnc_setTaskState
-
-};
-
-dzn_fnc_clearTaskPos = {
-	// @Task call dzn_fnc_clearTaskPos
-
-};
-
-dzn_fnc_getTaskState = {
-	// @Task call dzn_fnc_getTaskState
-
-};
-
-dzn_fnc_isTaskEnded= {
-	// @Task call dzn_fnc_isTaskEnded
-
-};
-
-
-// Initialization
-//call dzn_fnc_TaskManager_init;
