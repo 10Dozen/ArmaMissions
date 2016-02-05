@@ -152,6 +152,7 @@ if (_serverExec) exitWith {
 		, mapGridPosition (_presets select 1 select 0 select 0)
 	];
 	
+	[_taskSide, _taskDisplayName, _taskDesc, objNull, 1, 8, true, "", true] call BIS_fnc_taskCreate;	
 };
 
 // *******************************************************
