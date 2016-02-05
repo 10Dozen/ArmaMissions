@@ -138,8 +138,78 @@ dzn_fnc_cancelTask = {
 };
 
 
+// TASK ENTITY
+dzn_fnc_createTaskSimpleLocation = {
+	// @Location = [@Pos, @Radius, (@Direction), (@IsSquare)] call dzn_fnc_createTaskSimpleLocation
+	private["_loc"];
+	params["_pos","_size", ["_dir", 0], ["_isSquare",false]];
+	
+	_loc = createLocation ["Name", _pos, _size, _size];
+	_loc setDirection _dir;
+	if (_isSquare) then { _loc setRectangular true; };
+	
+	_loc
+};
+
+dzn_fnc_task_create = {
+	// [@TaskId, @Location] call dzn_fnc_task_create;	
+	
+	// @TaskID, [ @TaskState, @TaskActive, @TaskLocation, @TaskObjects, @TaskItem, @TaskDynaiZone ]
+	missionNamespace setVariable [
+		_this select 0
+		, [ "incomplete", true, _this select 1, [], nil, nil ]
+		, true
+	];
+};
+
+dzn_fnc_task_setProperty = {
+	// [@TaskId, @Property, @Value] call dzn_fnc_task_setProperty
+	params["_taskId", "_prop", "_val"];
+	private "_id";
+	_id = switch (_prop) do {
+		case "state": { 0 };
+		case "active": { 1 };
+		case "location": { 2 };
+		case "objects": { 3 };
+	};
+	
+	(missionNamespace getVariable _taskId) set [_id, _val];
+	missionNamespace setVariable [_taskId, missionNamespace getVariable _taskId, true];
+};
+
+// [ @TaskState, @TaskActive, @TaskLocation, @TaskObjects, @TaskItem, @TaskDynaiZone ]
+dzn_fnc_task_getProperty = {
+	// [@TaskId, @Property] call dzn_fnc_task_getProperty	
+	params["_taskId", "_prop"];
+	private "_id";
+	_id = switch (_prop) do {
+		case "state": { 0 };
+		case "active": { 1 };
+		case "location": { 2 };
+		case "objects": { 3 };
+	};
+
+	(missionNamespace getVariable _taskId) select _id
+};
+
+dzn_fnc_task_setState = {
+	// [@TaskId, @State] call dzn_fnc_task_setState;
+	[_this select 0, "state", _this select 1] call dzn_fnc_task_setProperty;
+};
+
+dzn_fnc_task_state = {
+	// @TaskId call dzn_fnc_task_state;	
+	[_this select 0, "state"] call dzn_fnc_task_getProperty
+};
+
+dzn_fnc_task_active = {
+	// @TaskId call dzn_fnc_task_end;	
+	[_this select 0, "active"] call dzn_fnc_task_getProperty
+};
+
 
 // INIT
+waitUntil { !isNil "dzn_dynai_initialized" && { dzn_dynai_initialized  } };
 call dzn_fnc_TaskManager_init;
 
 
