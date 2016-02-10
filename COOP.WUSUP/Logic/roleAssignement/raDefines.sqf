@@ -26,10 +26,19 @@ ra_squadGroupMapping = [
 	, "N-PL-NON"
 
 ra_roleIdMapping = [
-	["SL",		"Squad Leader"]
+	,["PL",		"Platoon Leader"]
+	,["SL",		"Squad Leader"]
 	,["FTL",	"Fireteam Leader"]
 	,["AR",		"Automatic Rifleman"]
 	,["G",		"Grenadier"]
+	,["R",		"Rifleman"]
 ];
 
-ra_rolePicMapping = [];
+ra_rolePicMapping = [
+	,["PL",		"img\PL.jpg"]
+	,["SL",		"img\SL.jpg"]
+	,["FTL",	"img\FTL_%1.jpg"]
+	,["AR",		"img\AR_%1.jpg"]
+	,["G",		"img\G_%1.jpg"]
+	,["R",		"img\R_%1.jpg"]
+];
