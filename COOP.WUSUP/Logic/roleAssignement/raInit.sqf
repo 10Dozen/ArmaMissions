@@ -23,6 +23,11 @@ ra_roles = [
 	, "B-SL-NON"
 	, "N-PL-NON"
 ];
+ra_groups = [
+	createGroup west
+	, createGroup west
+	, createGroup west
+];
 
 ra_usedRoles = [];
 ra_assignedPlayers = [];
