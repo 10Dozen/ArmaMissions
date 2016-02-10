@@ -12,7 +12,7 @@ ra_fnc_assignRole = {
 };
 
 ra_fnc_resolveRole = {
-	// @Resolved = @Role("A-FTL-RED") call ra_fnc_resolveRole
+	// @Resolved("A","FTL","RED") = @Role("A-FTL-RED") call ra_fnc_resolveRole
 	private["_squad", "_role", "_team"];
 	
 	_squad = _this select [0,1];
@@ -36,15 +36,23 @@ ra_fnc_assignRolePlayer = {
 	player setVariable ["raSquadName", _squadName];
 	player setVariable ["raTeamName", _teamName];
 	player setVariable ["raRoleName", _roleName];
-	player setVariable ["raRolePic", _rolePic;
+	player setVariable ["raFullRoleName", format["%1 - %2", _roleName, raTeamName]];
+	player setVariable ["raRolePic", _rolePic];
 	
+	if ((_roleProps select 1) == "SL" ) then {
+		player joinAsSilent [(ra_groups select _squadGroupId), 0];
+	} else {
+		player joinSilent (ra_groups select _squadGroupId);
+	};
 	player setVariable ["raRoleAssigned", true, true];
+	
 };
 
 ra_fnc_showRole = {
 	1000 cutRsc ["assignementBlackTitle", "PLAIN"];
 	sleep 1;
 	1001 cutRsc ["assignementTopTitle","PLAIN"];
+	
 	{
 		call compile format [
 			"_idc = %1;
@@ -57,8 +65,39 @@ ra_fnc_showRole = {
 	} forEach [
 		[1002, "raPic"],
 		[1003, "raSquad"],
-		[1004, "raRole"]
+		[1004, "raFullRoleName"]
 	];
 };
-ra_fnc_showOrbat = {};
-ra_fnc_showSquad = {};
+
+ra_fnc_showOrbat = {
+	_hqList = [];
+	{
+		_role = (_x getVariable "ra_role") call ra_fnc_resolveRole; //("A","SL","NON")
+		if ( (_role select 1) in ["SL","PL"] ) then {
+			_hqList pushBack [_role select 0, _role select 1]; // ["A","SL"]
+		};
+	} forEach (call BIS_fnc_listPlayers);
+	
+	
+	//
+	_strText_CO_H	= "<t color='#EDB81A' size='1.25' align='center'>%1</t>";
+	_strText_CO	= "<t color='#FFFFFF' size='1.25' align='center'>%1</t>";
+	
+	_strText_SL 	= "<t color='#AAAAAA' size='1.15' align='left'>%1</t><t color='#FFFFFF' size='1.15' align='right'>%2</t>";
+	_strText_mySL 	= "<t color='#FFCC00' size='1.2' align='left'>%1</t><t color='#FFFFFF' size='1.2' align='right'>%2</t>";
+
+	_stringsToShow = [
+		parseText (format ["<t color='#FFFFFF' size='1.5' align='center'>%1</t>", localize "STR_assignment_CommandPersonnelUpCase"])
+		,lineBreak
+	];
+	
+	
+	hint format [
+		
+	
+	];
+};
+ra_fnc_showSquad = {
+
+};
+
