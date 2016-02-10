@@ -16,19 +16,10 @@ ra_squadGroupMapping = [
 	,["N",	2]
 ];
 
- = [
-	"A-FTL-RED", "A-AR-RED", "A-G-RED", "A-R-RED"
-	, "A-FTL-BLU", "A-AR-BLU", "A-G-BLU", "A-R-BLU"
-	, "A-SL-NON"
-	, "B-FTL-RED", "B-AR-RED", "B-G-RED", "B-R-RED"
-	, "B-FTL-BLU", "B-AR-BLU", "B-G-BLU", "B-R-BLU"
-	, "B-SL-NON"
-	, "N-PL-NON"
-
 ra_roleIdMapping = [
 	,["PL",		"Platoon Leader"]
 	,["SL",		"Squad Leader"]
-	,["FTL",	"Fireteam Leader"]
+	,["FTL",		"Fireteam Leader"]
 	,["AR",		"Automatic Rifleman"]
 	,["G",		"Grenadier"]
 	,["R",		"Rifleman"]
