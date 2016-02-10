@@ -1,5 +1,5 @@
 call compile preProcessFileLineNumbers "Logic\roleAssignement\raFunctions.sqf";
-
+call compile preProcessFileLineNumbers "Logic\roleAssignement\raDefines.sqf";
 if (hasInterface && !isServer) exitWith {
 	[] spawn {
 		waitUntil { local player && !isNil "ra_unassignedPlayer" };
@@ -34,6 +34,9 @@ ra_assignedPlayers = [];
 ra_unassignedPlayer = [];
 publicVariable "ra_unassignedPlayer";
 roleAssignementDone = false;
+
+
+
 
 [] spawn {
 	"ra_unassignedPlayer" addPublicVariableEventHandler {		
