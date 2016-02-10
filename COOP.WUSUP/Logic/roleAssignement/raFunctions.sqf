@@ -41,6 +41,24 @@ ra_fnc_assignRolePlayer = {
 	player setVariable ["raRoleAssigned", true, true];
 };
 
-ra_fnc_showRole = {};
+ra_fnc_showRole = {
+	1000 cutRsc ["assignementBlackTitle", "PLAIN"];
+	sleep 1;
+	1001 cutRsc ["assignementTopTitle","PLAIN"];
+	{
+		call compile format [
+			"_idc = %1;
+			_ctrl = (findDisplay 1001) displayCtrl _idc;
+			_ctrl ctrlSetText (player getVariable '%2');
+			_ctrl ctrlCommit 0;",
+			_x select 0,
+			_x select 1
+		];
+	} forEach [
+		[1002, "raPic"],
+		[1003, "raSquad"],
+		[1004, "raRole"]
+	];
+};
 ra_fnc_showOrbat = {};
 ra_fnc_showSquad = {};
