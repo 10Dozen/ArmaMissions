@@ -33,6 +33,8 @@ ra_usedRoles = [];
 ra_assignedPlayers = [];
 ra_unassignedPlayer = [];
 publicVariable "ra_unassignedPlayer";
+publicVariable "ra_groups";
+
 roleAssignementDone = false;
 
 
