@@ -1,4 +1,4 @@
-call compile preProcessFileLineNumbers "Logic\roleAssignement\raInit.sqf";
+call compile preProcessFileLineNumbers "Logic\roleAssignement\raFunctions.sqf";
 
 if (hasInterface && !isServer) exitWith {
 	[] spawn {
