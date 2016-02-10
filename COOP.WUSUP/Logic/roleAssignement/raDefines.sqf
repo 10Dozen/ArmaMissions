@@ -28,7 +28,7 @@ ra_roleIdMapping = [
 ra_rolePicMapping = [
 	,["PL",		"img\PL.jpg"]
 	,["SL",		"img\SL.jpg"]
-	,["FTL",	"img\FTL_%1.jpg"]
+	,["FTL",		"img\FTL_%1.jpg"]
 	,["AR",		"img\AR_%1.jpg"]
 	,["G",		"img\G_%1.jpg"]
 	,["R",		"img\R_%1.jpg"]
