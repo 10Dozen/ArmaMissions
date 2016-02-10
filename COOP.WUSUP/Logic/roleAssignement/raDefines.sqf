@@ -1,7 +1,7 @@
 ra_squadIdMapping = [
 	["A",	"1'1"]
 	,["B",	"1'2"]
-	,["N",	"CO"]
+	,["N",	"Commanding Officer"]
 ];
 
 ra_teamIdMapping = [
