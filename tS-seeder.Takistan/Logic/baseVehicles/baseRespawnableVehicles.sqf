@@ -1,14 +1,14 @@
 
 respawnableVehicles = [
-	[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]	
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
-	,[objNull, 'rhsusf_m998_d_s_4dr_fulltop', [[5843.53,11323.8,0], 0]]
+	[objNull, 'rhsusf_m998_d_s_4dr_fulltop',	[[5843.53,11323.8,0], 0]]
+	,[objNull, 'rhsusf_m1025_d_s', 			[[5841.13,11326.9,0], 0]]
+	,[objNull, 'rhsusf_m1025_d_s_Mk19', 		[[5836.49,11332.1,0], 0]]
+	,[objNull, 'rhsusf_m1025_d_s_Mk19'		[[5833.67,11335,0], 0]]
+	,[objNull, 'rhsusf_m113d_usarmy_MK19', 		[[5850.55,11344.1,0], 0]]	
+	,[objNull, 'rhsusf_m1025_d_s_m2', 		[[5828.79,11338.7,0], 0]]
+	,[objNull, 'rhsusf_m113d_usarmy', 		[[5847.04,11347.5,0], 0]]
+	,[objNull, 'rhsusf_m1025_d_s_m2', 		[[5826.05,11341.2,0], 0]]
+	,[objNull, 'rhsusf_m998_d_s_4dr', 		[[5817.61,11346.4,0], 0]]
 ];
 
 dzn_fnc_spawnRespawnableVehicle = {
