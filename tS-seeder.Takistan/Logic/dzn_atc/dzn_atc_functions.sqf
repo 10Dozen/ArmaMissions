@@ -157,7 +157,7 @@ dzn_atc_fnc_callAirTaxi = {
 		
 		["dzn_atc_clickForSpawn", "onMapSingleClick", {
 			if (_pos distance (getPosASL player) < dzn_atc_customPlacementMinDist) exitWith {
-				player sideChat format ["Air Taxi Request Cancelled: Too close to player position! Place start point out of %1 m raidus.", dzn_atc_customPlacementMinDist];
+				player sideChat format ["Air Taxi Request Cancelled: Too close to player position! Place start point out of %1 m radius.", dzn_atc_customPlacementMinDist];
 			};
 			
 			private ["_veh","_allowed"];
