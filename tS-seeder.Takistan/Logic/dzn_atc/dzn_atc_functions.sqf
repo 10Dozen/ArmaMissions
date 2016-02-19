@@ -1,5 +1,34 @@
 // FUNCTIONS
 
+dzn_atc_fnc_showRequestMenu = {
+	// @Unit call dzn_fnc_rp_showRequestMenu
+	_menu = [
+		[format ["Evac called by %1", name (player getVariable 'atcRequestBy')] ,false],
+		["Accept", [2], "", -5, [["expression", "(player getVariable 'atcRequestBy') setVariable ['atcRequestAccepted', true, true];"]], "1", "1"],
+		["Decline", [3], "", -5, [["expression", "(player getVariable 'atcRequestBy')  setVariable ['atcRequestAccepted', false, true];"]], "1", "1"]
+	];
+	
+	player setVariable ["atcRequested", false, true];
+	player setVariable ["atcRequestBy", objNull, true];
+};
+
+dzn_atc_callFromAction = {
+	// Exit if leader already have request
+	if ((leader player) getVariable "atcRequested") exitWith {};
+	
+	// Show comanding menu
+	player setVariable ["atcRequestAccepted", false];
+	(leader player) setVariable ["atcRequested", true, true];
+	(leader player) setVariable ["atcRequestBy", player, true];
+};
+
+dzn_atc_showVehicleMenu = {
+	showCommandingMenu "#USER:dzn_atc_menu";
+};
+
+
+
+
 dzn_atc_fnc_getVehicleDisplayName = {
 	// Return display name of given classname of vehicle
 	// "B_Heli_Transport_01_camo_F" call dzn_atc_fnc_getVehicleDisplayName
