@@ -7,7 +7,8 @@ if (isDedicated || !hasInterface) exitWith {};
 #define	dzn_atc_CONDITION_BEFORE_INIT	true
 
 
-dzn_atc_onlyLeader 		= 		true;	// Allow AirTaxi for leaders only
+dzn_atc_onlyLeader 		= 		false;	// Allow AirTaxi for leaders only
+dzn_atc_needLeaderApprove	=		true;
 
 dzn_atc_exitPoint			= 		[ 6688, 14431, 46];	// Pos3d of vehicle exit point (where to vehicles will fly from player). It can be an object - use (getPosASL OBJECT) instead
 
@@ -56,8 +57,34 @@ if (dzn_atc_onlyLeader) then {
 		["dzn_radioServices_atc_action", "Evac Service", { showCommandingMenu "#USER:dzn_atc_menu";}, {true}] call dzn_fnc_addRadioService;
 	};
 } else {
-	["dzn_radioServices_atc_action", "Evac Service", { showCommandingMenu "#USER:dzn_atc_menu";}, {true}] call dzn_fnc_addRadioService;
+	if (dzn_atc_needLeaderApprove) then {
+		player setVariable ["atcRequested", false, true];
+		player setVariable ["atcRequestBy", objNull, true];
+		player setVariable ['atcRequestAccepted', false];
+		
+		// Leader requests loop
+		["ATC_Leader_Menu_Check", "onEachFrame", {
+			if (player == (leader player) && {player getVariable "atcRequested"} ) then {		
+				[] call dzn_atc_fnc_showRequestMenu;
+			};
+		}] call BIS_fnc_addStackedEventHandler;
+		
+		// Player accepted loops
+		["ATC_Request_Check", "onEachFrame", {
+			if (player getVariable "atcRequestAccepted") then {
+				[] call dzn_atc_showVehicleMenu;
+				player setVariable ['atcRequestAccepted', false];
+			};
+		}] call BIS_fnc_addStackedEventHandler;
+		
+		["dzn_radioServices_atc_action", "Evac Service", { 
+			[] call dzn_atc_callFromAction;
+		}, {true}] call dzn_fnc_addRadioService;
+	} else {
+		["dzn_radioServices_atc_action", "Evac Service", { showCommandingMenu "#USER:dzn_atc_menu";}, {true}] call dzn_fnc_addRadioService;
+	};
 };
+
 
 if (!dzn_atc_useCustomPlacement && dzn_atc_placementPointMarker) then {call dzn_atc_fnc_showIPMarker;};
 
