@@ -108,6 +108,7 @@ dzn_fnc_mev_callDialog = {
 };
 
 dzn_fnc_mev_addRequestTopic = { hint "MEV topic added"; };
+dzn_fnc_mev_resolveGrid = {};
 dzn_fnc_mev_callMEV = {
 	if (isNull MEV_unit) exitWith { _this call dzn_fnc_mev_spawnMEV; };
 	
@@ -118,8 +119,8 @@ dzn_fnc_mev_callMEV = {
 		4. Add Action (?)
 		5. Return to base
 		6. 
-	
 	*/
+	
 
 	
 };
