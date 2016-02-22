@@ -27,6 +27,15 @@ if (isServer) then {
 		(group MEV_unit) setGroupdId [MEV_callsign];
 		MEV_unit setVariable ["mevRequested", false, true];
 		MEV_unit setVariable ["mevRequestedLines", [], true];
+		
+		{
+			_x disableAI "TARGET";
+			_x disableAI "AUTOTARGET";
+			_x disableAI "SUPPRESSION";
+			_x disableAI "AIMINGERROR";
+			_x disableAI "COVER";
+			_x disableAI "AUTOCOMBAT";
+		} forEach (units (group MEV_unit));
 	};
 
 
@@ -42,6 +51,13 @@ if (isServer) then {
 };
 
 if !(hasInterface) exitWith {};
+[] spawn {
+	if (isNull MEV_unit) exitWith {};
+	MEV_unit addAction [
+		"Talk to Pilot"
+		, { hint "Pilot is talked"; }
+	];
+};
 
 // SET UP MENU CHECKER
 [] spawn {
