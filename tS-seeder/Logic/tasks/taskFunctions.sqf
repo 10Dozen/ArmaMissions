@@ -30,7 +30,7 @@ dzn_fnc_TaskManager_init = {
 	
 	if (isNil "taskPage") then {
 		taskPage = "taskPage";
-		player createDiarySubject [taskPage, "Rapier Tasks"];
+		player createDiarySubject [taskPage, "Rapier Mission Reports"];
 		"TaskManager_CompleteReport" addPublicVariableEventHandler {
 			TaskManager_CompleteReport call dzn_fnc_TaskManager_report;
 		};
