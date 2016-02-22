@@ -37,3 +37,15 @@
 		},"",6,true,true,"","_this distance2d _target < 1.6"
 	];	
 };
+
+[] spawn {
+	waitUntil { time > 0 };
+	1000 cutText ["DEPLOYMENT IN PROGRESS","BLACK OUT",0];
+	sleep 5; 1000 cutText ["Signing of a contract.","BLACK OUT",0];
+	sleep 0.5; 1000 cutText ["Signing of a contract..","BLACK OUT",0];
+	sleep 0.5; 1000 cutText ["Signing of a contract...","BLACK OUT",0];
+	sleep 2; 1000 cutText ["Medical insurance registration.","BLACK OUT",0];
+	sleep 0.5; 1000 cutText ["Medical insurance registration..","BLACK OUT",0];
+	sleep 0.5; 1000 cutText ["Medical insurance registration...","BLACK OUT",0];
+	sleep 4; 1000 cutText ["WELCOME TO TAKISTAN", "BLACK IN",1];
+};
