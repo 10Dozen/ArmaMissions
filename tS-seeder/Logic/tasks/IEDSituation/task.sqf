@@ -12,6 +12,21 @@
 #define DEBUG	true
 params ["_presets",["_serverExec", false]];
 
+private _iedSteps = [
+	[0, "Cut red wire"]
+	,[1, "Cut green wire"]
+	,[2, "Unplug detonator"]
+	,[3, "Unplug battery"]
+	,[4, "Unplug timer/receiver"]
+];
+private _iedStepsPerType = [
+	[0, 	[0,3,4,1,2]]
+	,[1,	[3,1,4,0,2]]
+	,[2,	[1,3,0,2,4]]
+];
+
+if (isNil "Task_iedObject") then { Task_iedObject = objNull; };
+
 // *********************************************
 // TASK Server Init (called from Task Generator)
 // *********************************************
@@ -43,10 +58,11 @@ if (_serverExec) exitWith {
 		_newObject allowDamage true;
 		_taskObjects pushBack _newObject;
 	};
-	[ _taskId, "objects", _taskObjects ] call dzn_fnc_task_setProperty;	
-	private _iedObject = _taskObjects call BIS_fnc_selectRandom;
-
-//	[_iedObject] remoteExec ["command", targets, jip];
+	[ _taskId, "objects", _taskObjects ] call dzn_fnc_task_setProperty;
+	
+	Task_iedObject = _taskObjects call BIS_fnc_selectRandom;
+	publicVariable "Task_iedObject";
+	Task_iedObject setVariable ["iedType", floor(count(_iedStepsPerType)), true];
 	
 	// Add Dynai zone:
 	{
@@ -97,3 +113,54 @@ if (_serverExec) exitWith {
 // TASK Client Init (called from Player's Task Listener)
 // *******************************************************
 if (DEBUG) then {};
+
+waitUntil { !isNull { Task_iedObject } };
+private _iedSteps = [
+	[0, "Cut red wire"]
+	,[1, "Cut green wire"]
+	,[2, "Unplug detonator"]
+	,[3, "Unplug battery"]
+	,[4, "Unplug timer/receiver"]
+];
+private _iedStepsPerType = [
+	[0, 	[0,3,4,1,2]]
+	,[1,	[3,1,4,0,2]]
+	,[2,	[1,3,0,2,4]]
+];
+
+_disarmIedDialog = {
+	private _dialogOptions = [];
+	{
+		_dialogOptions pushBack [
+			format ["Step %1", _forEachIndex + 1]
+			, [ _x select 1 ]
+		];
+	} forEach _iedSteps;
+	private _dialogResult =	["Disarming IED...", _dialogOptions] call dzn_fnc_ShowChooseDialog;
+	if (count _dialogResult == 0) exitWith { hint "Cancelled"; };
+	
+	private _correctPath = [_iedStepsPerType, Task_iedObject getVariable "iedType"] call dzn_fnc_getValueByKey;
+	private _detonate = false;
+	private _failedStep = 0;
+	{
+		if !( _x isEqualTo (_correctPath select _forEachIndex) ) exitWith { _detonate = true; _failedStep = _forEachIndex; };
+	} forEach _dialogResult;
+	
+	if (_detonate) then {
+		if (_failedStep < 3) then {
+			hint "BOOOOM";
+		} else {
+			hint "RUN BABYY!!! ... BOOM!!!";
+		};
+	} else {
+		hint "DISARMED";
+	};
+};
+
+Task_iedObject addAction [
+	"<t color='#FFE240'>Disarm IED</t>"
+	,{
+		
+	},"",6,true,true,"","_this distance2d _target < 1.6"
+];	
+
