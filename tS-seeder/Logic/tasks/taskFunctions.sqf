@@ -1,23 +1,21 @@
-dzn_task_tasks = {
-	switch (_this) do {
-		case 0: { "SADCache" };
-	};
+dzn_task_list = [
+	[0,	["SAD Weapon Cache", "SADCache"]]
+];
+
+dzn_task_range = [
+	[0, 0]
+	,[1, 1500]
+	,[2, 4000]
+	,[3, 8000]
+];
+
+dzn_fnc_getTaskById = {
+	[dzn_task_list, _this] call dzn_fnc_getValueByKey
+};
+dzn_fnc_getTaskByRange = {
+	[dzn_task_range, _this] call dzn_fnc_getValueByKey
 };
 
-dzn_task_getDisplayName = {
-	switch (_this) do {
-		case 0: { "SAD Weapon Cache" };
-	};
-};
-
-dzn_task_ranges = {
-	switch (_this) do {
-		case 0: { 0 }; //Anyrange
-		case 1: { 1500 }; // Near		
-		case 2: { 4000 };// Medium
-		case 3: { 8000 };// Far
-	};
-};
 
 //
 //	**********************
@@ -25,12 +23,19 @@ dzn_task_ranges = {
 //	**********************
 
 dzn_fnc_TaskManager_init = {
-	TaskManager_NewTask = false;
-	TaskManager_CompleteReport = [];
+	if (isNil "TaskManager_NewTask") then { TaskManager_NewTask = false; };
+	if (isNil "TaskManager_CompleteReport") then { TaskManager_CompleteReport = [];  };	
 	
 	if (isNil "taskPage") then {
 		taskPage = "taskPage";
-		player createDiarySubject [taskPage, "Rapier Mission Reports"];
+		player createDiarySubject [taskPage, "Rapier Mission Reports"];		
+		
+		if (!isNil "TaskManager_FullReportList" && {!(TaskManager_FullReportList isEqualTo [])}) then {
+			{
+				_x call dzn_fnc_TaskManager_report;
+			} forEach TaskManager_FullReportList;
+		};
+		
 		"TaskManager_CompleteReport" addPublicVariableEventHandler {
 			TaskManager_CompleteReport call dzn_fnc_TaskManager_report;
 		};
@@ -38,6 +43,9 @@ dzn_fnc_TaskManager_init = {
 	
 	["hq_service", "HQ", { [] spawn dzn_fnc_requestTask; }, {true}] call dzn_fnc_addRadioService;
 	if !(isServer) exitWith {};	
+	
+	TaskManager_FullReportList = [];
+	publicVariable "TaskManager_FullReportList";
 	
 	// @ActiveExist, @Type, @Presets, @TaskID
 	missionNamespace setVariable [
@@ -48,17 +56,18 @@ dzn_fnc_TaskManager_init = {
 	
 	"TaskManager_NewTask" addPublicVariableEventHandler {		
 		if (TaskManager_NewTask) then {
-			_taskSettings = missionNamespace getVariable "dzn_taskManager";
-			
-			[(_taskSettings select 2), true] execVM format ["Logic\tasks\%1\task.sqf", (_taskSettings select 1) call dzn_task_tasks];	
-			// [(_taskSettings select 2), true] call compile preProcessFileLineNumbers format ["Logic\tasks\%1\task.sqf", (_taskSettings select 1) call dzn_task_tasks];	
-	
-		} else {
-			// End task		
+			[
+				"presets" call dzn_fnc_TaskManager_getProperty
+				, true
+			] execVM format [
+				"Logic\tasks\%1\task.sqf"
+				, ((call dzn_fnc_TaskManager_taskType) call dzn_fnc_getTaskById) select 1
+			];	
 		};
 	};	
 };
 
+//	**********************
 dzn_fnc_TaskManager_setProperty = {
 	// [@Property, @Value] call dzn_fnc_TaskManager_setProperty
 	params["_prop","_val"];
@@ -90,32 +99,31 @@ dzn_fnc_TaskManager_getProperty = {
 	(missionNamespace getVariable "dzn_taskManager") select _id
 };
 
+dzn_fnc_TaskManager_isTaskActive = {
+	"active" call dzn_fnc_TaskManager_getProperty
+};
+
+dzn_fnc_TaskManager_taskType = {
+	"type" call dzn_fnc_TaskManager_getProperty
+};
 
 dzn_fnc_TaskManager_create = {
 	// [@TaskType, @Presets] call dzn_fnc_TaskManager_create
+	params["_taskType","_presets"];
 	missionNamespace setVariable [
 		"dzn_taskManager"
-		, [ true, _this select 0, _this select 1, nil, nil ]
+		, [ true, _taskType, _presets, nil, nil ]
 		, true
 	];	
 	TaskManager_NewTask = true;
 	publicVariableServer "TaskManager_NewTask";
 };
 
-dzn_fnc_TaskManager_isTaskActive = {
-	(missionNamespace getVariable "dzn_taskManager") select 0
-};
-
-dzn_fnc_TaskManager_taskType = {
-	(missionNamespace getVariable "dzn_taskManager") select 1
-};
-
 dzn_fnc_TaskManager_report = {
-	// Client Side
 	
 	// [ 0@TaskNameId, 1@ResultId, 2@AlliedText, 3@HostilesText, 4@Notes, 5@TaskDisplayName, 6@TaskDesc, 7@TaskId ]
 	private["_rVal","_title","_resultLabel","_taskDesc","_alliedForces","_hostileForces","_notes"];
-	_rVal = TaskManager_CompleteReport;	
+	_rVal = if (isNil {_this}) then { TaskManager_CompleteReport } else { _this };	
 	_title = _rVal select 5;
 	_resultLabel = switch (_rVal select 1) do {
 		case 0: { "Completed" };
@@ -162,25 +170,28 @@ dzn_fnc_TaskManager_report = {
 
 // TASK CONTROLS
 dzn_fnc_requestTask = {
-	private["_dialogResult"];
 	// If NO Active Task -- show select task dialog
 	// If Active task exist already -- show AAR task dialog
 
 	if !( call dzn_fnc_TaskManager_isTaskActive ) then {
 		player sideChat "1'6, this is 1'1, requesting new mission. Over.";
-		_dialogResult =	[
+		private _taskList = [];
+		{
+			_taskList pushBack (_x select 1 select 0);
+		} forEach dzn_task_list;
+		
+		private _dialogResult =	[
 			"HQ - Request Task",
 			[
-				["Task", ["SAD Weapon Cache"]]
+				["Task", _taskList]
 				,["Location", ["All", "Near", "Medium", "Far"]]
 			]
 		] call dzn_fnc_ShowChooseDialog;
-		if (count _dialogResult == 0) exitWith { player sideChat "1'6, this is 1'1, cancel. Out."; };
-		
+		if (count _dialogResult == 0) exitWith { player sideChat "1'6, this is 1'1, cancel. Out."; };		
 		_dialogResult call dzn_fnc_selectTask;
 	} else {
 		player sideChat "1'6, this is 1'1, reporting mission result. Over.";
-		_dialogResult =	[
+		private _dialogResult =	[
 			"HQ - Report Task Result",
 			[
 				["Task", [ ("info" call dzn_fnc_TaskManager_getProperty) select 0 ]]
@@ -191,45 +202,51 @@ dzn_fnc_requestTask = {
 			]			
 		] call dzn_fnc_ShowChooseDialog;
 		if (count _dialogResult == 0) exitWith { player sideChat "1'6, this is 1'1, cancel. Out."; };
-		// hint str[_dialogResult];
-		_dialogResult call dzn_fnc_cancelTask;
+		_dialogResult call dzn_fnc_endTask;
 	};
+};
+
+dzn_fnc_selectByRangeType = {
+	// [@Position1, @Position2, @Range] call dzn_fnc_selectByRangeType
+	if (_this select 2 == 0) exitWith { true };
+	if ((_this select 0) distance2d (_this select 1) <= (_this select 2)) exitWith { true };
+	
+	false
 };
 
 dzn_fnc_selectTask = {
 	// ["TaskType", "RangeCategory"] call dzn_fnc_selectTask;
-	private["_userPos","_rangeLimit","_listOfTasksInRange","_taskPos"];
+	private["_userPos","_listOfTasksInRange","_taskPos"];
 	params["_type","_range"];
 	
-	_presets = call compile preProcessFileLineNumbers format ["Logic\tasks\%1\taskSettings.sqf", _type call dzn_task_tasks];
-	_rangeLimit = _range call dzn_task_ranges;
+	private _rangeLimit = _range call dzn_fnc_getTaskByRange;
+	/*
+		Presets: 
+			0 - [0 - Task Name, 1 - Task Display Name, 2 - Task Description
+			1 - Allowed Task Presets
+			2 - [0 - Task Safety Reward, 1 - Task Dynai Groups, 2 - Task Dynai Properties]
+	*/	
+	private _presets = [_rangeLimit] call compile preProcessFileLineNumbers format [
+		"Logic\tasks\%1\taskSettings.sqf"
+		, (_type call dzn_fnc_getTaskById) select 1
+	];
 	
-	_userPos = getPosASL player;
-	_listOfTasksInRange = [];
-	if (_rangeLimit == 0) then {
-		_listOfTasksInRange = _presets select 1;
-	} else {		
-		{		
-			if (_userPos distance2d (_x select 0) <= _rangeLimit) then {
-				_listOfTasksInRange	pushBack _x;
-			};		
-		} forEach (_presets select 1);
-	};
+	if ((_presets select 1) isEqualTo []) exitWith { [west, "HQ"] sideChat "This is 1-6, We have no missions in your area. Out." };
 	
-	if (_listOfTasksInRange isEqualTo []) exitWith { [west, "HQ"] sideChat "This is 1-6, We have no missions in your area. Out." };
+	private _taskObjectsPreset = (_presets select 1) call BIS_fnc_selectRandom;
 	
-	_taskPos = _listOfTasksInRange call BIS_fnc_selectRandom;
-	
-	[_type, [ _presets select 0, _taskPos, _presets select 2 ], nil ] call dzn_fnc_TaskManager_create;
+	[_type, [ _presets select 0, _taskObjectsPreset, _presets select 2 ], nil ] call dzn_fnc_TaskManager_create;
 };
 
-dzn_fnc_cancelTask = {
+dzn_fnc_endTask = {
 	// [ @TaskNameId, @ResultId, @AlliedText,  @HostilesText, @Notes, @TaskDisplayName, @TaskDesc, @TaskId ]
 	TaskManager_CompleteReport = _this 
 		+ ("info" call dzn_fnc_TaskManager_getProperty)
 		+ ["task" call dzn_fnc_TaskManager_getProperty];
 	TaskManager_CompleteReport call dzn_fnc_TaskManager_report;
 	publicVariable "TaskManager_CompleteReport";
+	TaskManager_FullReportList pushBack TaskManager_CompleteReport;
+	publicVariable "TaskManager_FullReportList";
 	
 	missionNamespace setVariable ["dzn_taskManager",  [ false, nil, nil, nil ], true];
 	TaskManager_NewTask = false;
@@ -319,7 +336,6 @@ dzn_fnc_task_active = {
 	// @TaskId call dzn_fnc_task_end;	
 	[_this, "active"] call dzn_fnc_task_getProperty
 };
-
 
 // INIT
 waitUntil { !isNil "dzn_dynai_initialized" && { dzn_dynai_initialized  } };

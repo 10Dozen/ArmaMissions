@@ -96,3 +96,18 @@ _newObject = createVehicle ['LOP_TKA_Mi24V_AT', [5937.99,11484.5,-0.503876], [],
  _newObject setVectorDirAndUp [[-0.657964,0.749898,0.0688161], [0.0453555,-0.0517546,0.997629]];
  
  
+ // LIGHTS
+_newObject = createVehicle ['Land_PortableLight_single_F', [5877.57,11339.4,0], [], 0, 'CAN_COLLIDE'];
+_newObject setPosASL [5877.54,11339.5,83.04];
+_newObject setVectorDirAndUp [[0.250713,-0.968061,0], [0,0,1]];
+_newObject enableSimulation true;
+
+_newObject = createVehicle ['Land_PortableLight_single_F', [5864.59,11348.7,0], [], 0, 'CAN_COLLIDE'];
+_newObject setPosASL [5864.62,11348.8,83.04];
+_newObject setVectorDirAndUp [[-0.31423,-0.949347,0], [0,0,1]];
+_newObject enableSimulation true;
+
+_newObject = createVehicle ['Land_PortableLight_double_F', [5821.34,11346.1,0], [], 0, 'CAN_COLLIDE'];
+_newObject setPosASL [5821.46,11346.1,83.04];
+_newObject setVectorDirAndUp [[-0.99633,0.0855922,0], [0,0,1]];
+_newObject enableSimulation true;

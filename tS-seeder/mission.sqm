@@ -26,7 +26,7 @@ class Mission
 	randomSeed=2652490;
 	class Intel
 	{
-		briefingName="Rapier Brigade (RB1B)";
+		briefingName="Rapier Brigade (RB1C)";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.39999998;
@@ -45,7 +45,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=28;
+		items=29;
 		class Item0
 		{
 			side="WEST";
@@ -264,7 +264,7 @@ class Mission
 					skill=0.60000002;
 					text="dzn_civen_core";
 					syncId=1;
-					synchronizations[]={12,13,15,14,16,17,18,19,20,21,22,24,23};
+					synchronizations[]={12,13,15,14,16,17,18,19,20,21,22,24,23,25};
 				};
 			};
 		};
@@ -284,7 +284,7 @@ class Mission
 					skill=0.60000002;
 					text="mainBase_eastOutpost";
 					syncId=2;
-					synchronizations[]={25,0};
+					synchronizations[]={26,0};
 				};
 			};
 		};
@@ -304,7 +304,7 @@ class Mission
 					skill=0.60000002;
 					text="mainBase_westOutpost";
 					syncId=3;
-					synchronizations[]={26,0};
+					synchronizations[]={27,0};
 				};
 			};
 		};
@@ -324,7 +324,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_Garmsar";
 					syncId=4;
-					synchronizations[]={27,28,42,47,0};
+					synchronizations[]={28,29,43,48,0};
 				};
 			};
 		};
@@ -344,7 +344,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_Timurkalay";
 					syncId=5;
-					synchronizations[]={30,29,0};
+					synchronizations[]={31,30,0};
 				};
 			};
 		};
@@ -364,7 +364,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_LoyManara";
 					syncId=6;
-					synchronizations[]={33,31,32,0};
+					synchronizations[]={34,32,33,0};
 				};
 			};
 		};
@@ -384,7 +384,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_Chaman";
 					syncId=7;
-					synchronizations[]={34,35,36,0};
+					synchronizations[]={35,36,37,0};
 				};
 			};
 		};
@@ -404,7 +404,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_FeruzAbad";
 					syncId=8;
-					synchronizations[]={37,38,44,0};
+					synchronizations[]={38,39,45,0};
 				};
 			};
 		};
@@ -424,7 +424,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_Nur";
 					syncId=9;
-					synchronizations[]={39,40,0};
+					synchronizations[]={40,41,0};
 				};
 			};
 		};
@@ -444,7 +444,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_Falar";
 					syncId=10;
-					synchronizations[]={41,43,0};
+					synchronizations[]={42,44,0};
 				};
 			};
 		};
@@ -464,7 +464,7 @@ class Mission
 					skill=0.60000002;
 					text="insArea_Zavarak";
 					syncId=11;
-					synchronizations[]={46,45,0};
+					synchronizations[]={47,46,0};
 				};
 			};
 		};
@@ -484,7 +484,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=12;
-					synchronizations[]={48,1};
+					synchronizations[]={49,1};
 				};
 			};
 		};
@@ -496,7 +496,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5804.7422,95.62603,8811.0762};
+					position[]={6026.3755,120.26241,9119.252};
 					azimut=30;
 					id=24;
 					side="LOGIC";
@@ -504,7 +504,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=13;
-					synchronizations[]={49,1,54};
+					synchronizations[]={50,1};
 				};
 			};
 		};
@@ -524,7 +524,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=14;
-					synchronizations[]={50,1};
+					synchronizations[]={51,1};
 				};
 			};
 		};
@@ -544,7 +544,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=15;
-					synchronizations[]={51,1};
+					synchronizations[]={52,1};
 				};
 			};
 		};
@@ -564,7 +564,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=16;
-					synchronizations[]={52,1};
+					synchronizations[]={53,1};
 				};
 			};
 		};
@@ -584,7 +584,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=17;
-					synchronizations[]={53,1};
+					synchronizations[]={54,1};
 				};
 			};
 		};
@@ -604,7 +604,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=18;
-					synchronizations[]={55,1};
+					synchronizations[]={56,1};
 				};
 			};
 		};
@@ -624,7 +624,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=19;
-					synchronizations[]={56,1};
+					synchronizations[]={57,1};
 				};
 			};
 		};
@@ -644,7 +644,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=20;
-					synchronizations[]={57,1};
+					synchronizations[]={58,1};
 				};
 			};
 		};
@@ -664,7 +664,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=21;
-					synchronizations[]={58,1};
+					synchronizations[]={59,1};
 				};
 			};
 		};
@@ -684,7 +684,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=22;
-					synchronizations[]={59,1};
+					synchronizations[]={60,1};
 				};
 			};
 		};
@@ -704,7 +704,7 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=23;
-					synchronizations[]={60,1};
+					synchronizations[]={61,1};
 				};
 			};
 		};
@@ -724,7 +724,27 @@ class Mission
 					leader=1;
 					skill=0.60000002;
 					syncId=24;
-					synchronizations[]={61,1};
+					synchronizations[]={62,1};
+				};
+			};
+		};
+		class Item28
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={6240.9912,95.678741,9926.3066};
+					azimut=30;
+					id=36;
+					side="LOGIC";
+					vehicle="LocationCity_F";
+					leader=1;
+					skill=0.60000002;
+					syncId=25;
+					synchronizations[]={1,55};
 				};
 			};
 		};
@@ -794,7 +814,7 @@ class Mission
 			{
 			};
 			synchronizations[]={2};
-			syncId=25;
+			syncId=26;
 		};
 		class Item2
 		{
@@ -837,7 +857,7 @@ class Mission
 			{
 			};
 			synchronizations[]={3};
-			syncId=26;
+			syncId=27;
 		};
 		class Item5
 		{
@@ -850,7 +870,7 @@ class Mission
 			{
 			};
 			synchronizations[]={4};
-			syncId=27;
+			syncId=28;
 		};
 		class Item6
 		{
@@ -863,7 +883,7 @@ class Mission
 			{
 			};
 			synchronizations[]={4};
-			syncId=28;
+			syncId=29;
 		};
 		class Item7
 		{
@@ -876,7 +896,7 @@ class Mission
 			{
 			};
 			synchronizations[]={5};
-			syncId=29;
+			syncId=30;
 		};
 		class Item8
 		{
@@ -889,7 +909,7 @@ class Mission
 			{
 			};
 			synchronizations[]={5};
-			syncId=30;
+			syncId=31;
 		};
 		class Item9
 		{
@@ -903,7 +923,7 @@ class Mission
 			{
 			};
 			synchronizations[]={6};
-			syncId=31;
+			syncId=32;
 		};
 		class Item10
 		{
@@ -917,7 +937,7 @@ class Mission
 			{
 			};
 			synchronizations[]={6};
-			syncId=32;
+			syncId=33;
 		};
 		class Item11
 		{
@@ -931,7 +951,7 @@ class Mission
 			{
 			};
 			synchronizations[]={6};
-			syncId=33;
+			syncId=34;
 		};
 		class Item12
 		{
@@ -944,7 +964,7 @@ class Mission
 			{
 			};
 			synchronizations[]={7};
-			syncId=34;
+			syncId=35;
 		};
 		class Item13
 		{
@@ -957,7 +977,7 @@ class Mission
 			{
 			};
 			synchronizations[]={7};
-			syncId=35;
+			syncId=36;
 		};
 		class Item14
 		{
@@ -970,7 +990,7 @@ class Mission
 			{
 			};
 			synchronizations[]={7};
-			syncId=36;
+			syncId=37;
 		};
 		class Item15
 		{
@@ -983,7 +1003,7 @@ class Mission
 			{
 			};
 			synchronizations[]={8};
-			syncId=37;
+			syncId=38;
 		};
 		class Item16
 		{
@@ -996,7 +1016,7 @@ class Mission
 			{
 			};
 			synchronizations[]={8};
-			syncId=38;
+			syncId=39;
 		};
 		class Item17
 		{
@@ -1009,7 +1029,7 @@ class Mission
 			{
 			};
 			synchronizations[]={9};
-			syncId=39;
+			syncId=40;
 		};
 		class Item18
 		{
@@ -1022,7 +1042,7 @@ class Mission
 			{
 			};
 			synchronizations[]={9};
-			syncId=40;
+			syncId=41;
 		};
 		class Item19
 		{
@@ -1035,7 +1055,7 @@ class Mission
 			{
 			};
 			synchronizations[]={10};
-			syncId=41;
+			syncId=42;
 		};
 		class Item20
 		{
@@ -1048,7 +1068,7 @@ class Mission
 			{
 			};
 			synchronizations[]={4};
-			syncId=42;
+			syncId=43;
 		};
 		class Item21
 		{
@@ -1061,7 +1081,7 @@ class Mission
 			{
 			};
 			synchronizations[]={10};
-			syncId=43;
+			syncId=44;
 		};
 		class Item22
 		{
@@ -1074,7 +1094,7 @@ class Mission
 			{
 			};
 			synchronizations[]={8};
-			syncId=44;
+			syncId=45;
 		};
 		class Item23
 		{
@@ -1087,7 +1107,7 @@ class Mission
 			{
 			};
 			synchronizations[]={11};
-			syncId=45;
+			syncId=46;
 		};
 		class Item24
 		{
@@ -1100,7 +1120,7 @@ class Mission
 			{
 			};
 			synchronizations[]={11};
-			syncId=46;
+			syncId=47;
 		};
 		class Item25
 		{
@@ -1113,7 +1133,7 @@ class Mission
 			{
 			};
 			synchronizations[]={4};
-			syncId=47;
+			syncId=48;
 		};
 		class Item26
 		{
@@ -1127,7 +1147,7 @@ class Mission
 			{
 			};
 			synchronizations[]={12};
-			syncId=48;
+			syncId=49;
 		};
 		class Item27
 		{
@@ -1141,7 +1161,7 @@ class Mission
 			{
 			};
 			synchronizations[]={13};
-			syncId=49;
+			syncId=50;
 		};
 		class Item28
 		{
@@ -1155,7 +1175,7 @@ class Mission
 			{
 			};
 			synchronizations[]={14};
-			syncId=50;
+			syncId=51;
 		};
 		class Item29
 		{
@@ -1169,7 +1189,7 @@ class Mission
 			{
 			};
 			synchronizations[]={15};
-			syncId=51;
+			syncId=52;
 		};
 		class Item30
 		{
@@ -1183,7 +1203,7 @@ class Mission
 			{
 			};
 			synchronizations[]={16};
-			syncId=52;
+			syncId=53;
 		};
 		class Item31
 		{
@@ -1197,7 +1217,7 @@ class Mission
 			{
 			};
 			synchronizations[]={17};
-			syncId=53;
+			syncId=54;
 		};
 		class Item32
 		{
@@ -1210,8 +1230,8 @@ class Mission
 			class Effects
 			{
 			};
-			synchronizations[]={13};
-			syncId=54;
+			synchronizations[]={25};
+			syncId=55;
 		};
 		class Item33
 		{
@@ -1225,7 +1245,7 @@ class Mission
 			{
 			};
 			synchronizations[]={18};
-			syncId=55;
+			syncId=56;
 		};
 		class Item34
 		{
@@ -1239,7 +1259,7 @@ class Mission
 			{
 			};
 			synchronizations[]={19};
-			syncId=56;
+			syncId=57;
 		};
 		class Item35
 		{
@@ -1253,7 +1273,7 @@ class Mission
 			{
 			};
 			synchronizations[]={20};
-			syncId=57;
+			syncId=58;
 		};
 		class Item36
 		{
@@ -1267,7 +1287,7 @@ class Mission
 			{
 			};
 			synchronizations[]={21};
-			syncId=58;
+			syncId=59;
 		};
 		class Item37
 		{
@@ -1281,7 +1301,7 @@ class Mission
 			{
 			};
 			synchronizations[]={22};
-			syncId=59;
+			syncId=60;
 		};
 		class Item38
 		{
@@ -1295,7 +1315,7 @@ class Mission
 			{
 			};
 			synchronizations[]={23};
-			syncId=60;
+			syncId=61;
 		};
 		class Item39
 		{
@@ -1309,7 +1329,7 @@ class Mission
 			{
 			};
 			synchronizations[]={24};
-			syncId=61;
+			syncId=62;
 		};
 	};
 };

@@ -1,3 +1,5 @@
+params["_range"];
+
 // *********************************
 // TASK SETTINGS
 // *********************************
@@ -5,7 +7,6 @@ _taskName = "task_SADCache_%1";
 _taskSafetyReward = 100;
 _taskDisplayName = "Weapon cache at %1";
 _taskDesc = "Find and destroy enemy weapon cache at grid %1.";
-
 
 // *********************************
 // TASK DYNAI UNITS
@@ -116,8 +117,17 @@ _positions = [
 	,[[6643.45,7400.33,0.0228119], 100]
 ];
 
+private _inRangePosition = [];
+private _userPos = getPosASL player;
+{
+	if ([_userPos, _x select 0, _range] call dzn_fnc_selectByRangeType) then {
+		_inRangePosition pushBack _x;	
+	};
+} forEach _positions;
+
+
 [
 	[_taskName, _taskDisplayName, _taskDesc] 
-	, _positions
+	, _inRangePosition
 	, [_taskSafetyReward, _taskGroups, _taskZonesProperties]
 ]

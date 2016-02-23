@@ -27,19 +27,10 @@ if (isServer) then {
 		(group MEV_unit) setGroupdId [MEV_callsign];
 		MEV_unit setVariable ["mevRequested", false, true];
 		MEV_unit setVariable ["mevRequestedLines", [], true];
-		
-		{
-			_x disableAI "TARGET";
-			_x disableAI "AUTOTARGET";
-			_x disableAI "SUPPRESSION";
-			_x disableAI "AIMINGERROR";
-			_x disableAI "COVER";
-			_x disableAI "AUTOCOMBAT";
-		} forEach (units (group MEV_unit));
 	};
 
-
 	MEV_Land_Position = [5864.39,11351.1,0];
+	
 	publicVariable "MEV_Land_Position";
 	mevObject = createVehicle  ["Land_HelipadSquare_F", MEV_Land_Position, [], 0, "NONE"];
 	mevObject enableSimulation false;
@@ -51,13 +42,6 @@ if (isServer) then {
 };
 
 if !(hasInterface) exitWith {};
-[] spawn {
-	if (isNull MEV_unit) exitWith {};
-	MEV_unit addAction [
-		"Talk to Pilot"
-		, { hint "Pilot is talked"; }
-	];
-};
 
 // SET UP MENU CHECKER
 [] spawn {
@@ -96,45 +80,21 @@ dzn_fnc_mev_showRequestMenu = {
 };
 
 dzn_fnc_mev_callDialog = {
-
-		private _dialogOptions = []
-		for "_i" from 1 to 9 do { _dialogOptions pushBacl ([MEV_nineline_mapping, _i] call dzn_fnc_getValueByKey) };
-		private _dialogResult =	["MEV - Request", _dialogOptions] call dzn_fnc_ShowChooseDialog;
+	private _dialogOptions = []
+	for "_i" from 1 to 9 do { _dialogOptions pushBacl ([MEV_nineline_mapping, _i] call dzn_fnc_getValueByKey) };
+	private _dialogResult =	["MEV - Request", _dialogOptions] call dzn_fnc_ShowChooseDialog;
 	
-		if (count _dialogResult == 0) exitWith { player sideChat format ["%1, this is 1'1, cancel. Out.", MEV_callsign]; };
-		
-		_dialogResult call dzn_fnc_mev_addRequestTopic;
-		_dialogResult call dzn_fnc_mev_callMEV;
+	if (count _dialogResult == 0) exitWith { player sideChat format ["%1, this is 1'1, cancel. Out.", MEV_callsign]; };
+	_dialogResult call dzn_fnc_mev_addRequestTopic;
+	_dialogResult call dzn_fnc_mev_callMEV;
 };
 
 dzn_fnc_mev_addRequestTopic = { hint "MEV topic added"; };
-dzn_fnc_mev_resolveGrid = {};
+
 dzn_fnc_mev_callMEV = {
-	if (isNull MEV_unit) exitWith { _this call dzn_fnc_mev_spawnMEV; };
-	
-	/*
-		1. Set WP
-		2. DoMove
-		3. Land
-		4. Add Action (?)
-		5. Return to base
-		6. 
-	*/
-	
 
-	
+
 };
-
-
-
-
-
-
-
-
-
-
-
 
 
 
