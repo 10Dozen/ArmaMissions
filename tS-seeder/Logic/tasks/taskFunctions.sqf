@@ -25,7 +25,8 @@ dzn_fnc_getTaskByRange = {
 
 dzn_fnc_TaskManager_init = {
 	if (isNil "TaskManager_NewTask") then { TaskManager_NewTask = false; };
-	if (isNil "TaskManager_CompleteReport") then { TaskManager_CompleteReport = [];  };	
+	if (isNil "TaskManager_CompleteReport") then { TaskManager_CompleteReport = [];  };
+	if (isNil "TaskManager_NewTaskClient") then { TaskManager_NewTaskClient = false };
 	
 	if (isNil "taskPage") then {
 		taskPage = "taskPage";
@@ -43,8 +44,11 @@ dzn_fnc_TaskManager_init = {
 	};
 	
 	["hq_service", "HQ", { [] spawn dzn_fnc_requestTask; }, {true}] call dzn_fnc_addRadioService;
-	"TaskManager_NewTask" addPublicVariableEventHandler {		
-		if (TaskManager_NewTask) then { call dzn_fnc_TaskManager_runTask; };
+	"TaskManager_NewTaskClient" addPublicVariableEventHandler {		
+		if (TaskManager_NewTaskClient) then { 
+			call dzn_fnc_TaskManager_runTask;
+			TaskManager_NewTaskClient = false;
+		};
 	};
 	
 	if !(isServer) exitWith {};
@@ -61,6 +65,8 @@ dzn_fnc_TaskManager_init = {
 	"TaskManager_NewTask" addPublicVariableEventHandler {		
 		if (TaskManager_NewTask) then {
 			call dzn_fnc_TaskManager_runTask;
+			TaskManager_NewTaskClient = true;
+			publicVariable "TaskManager_NewTaskClient";
 		};
 	};	
 };
@@ -115,10 +121,6 @@ dzn_fnc_TaskManager_create = {
 	];	
 	TaskManager_NewTask = true;
 	publicVariableServer "TaskManager_NewTask";
-	[] spawn {
-		sleep 8;
-		call  dzn_fnc_TaskManager_runTask;
-	};
 };
 
 dzn_fnc_TaskManager_runTask = {
