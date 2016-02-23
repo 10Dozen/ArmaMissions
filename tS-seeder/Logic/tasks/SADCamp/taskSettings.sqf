@@ -65,6 +65,15 @@ _positions = [
 	, [ ['Land_TentA_F', [7489.4,7791.12,0.0155792], [], 0, 'CAN_COLLIDE'],[7489.46,7791.2,178.611],[[0.97273,0.192788,-0.128953], [0.105736,0.126253,0.986347]]; ['Land_TentA_F', [7490.69,7795.85,0.015625], [], 0, 'CAN_COLLIDE'],[7490.74,7795.92,177.863],[[-0.373689,0.92751,-0.00907166], [0.156036,0.0725011,0.985087]]; ['Land_TentA_F', [7496.63,7787.81,0.00559998], [], 0, 'CAN_COLLIDE'],[7496.64,7787.88,178.451],[[-0.378943,0.919719,-0.102567], [0.0396451,0.126865,0.991127]]; ['CUP_GuerillaCacheBox_EP1', [7489.15,7794.74,-0.0840912], [], 0, 'CAN_COLLIDE'],[7489.15,7794.74,178.088],[[-0.0761146,0.985882,-0.14914], [-0.0716415,0.14378,0.987013]]]
 ];
 
+private _inRangePosition = [];
+private _userPos = getPosASL player;
+{
+	if ([_userPos, (_x select 1), _range] call dzn_fnc_selectByRangeType) then {
+		_inRangePosition pushBack _x;	
+	};
+} forEach _positions;
+
+
 [
 	[_taskName, _taskDisplayName, _taskDesc] 
 	, _positions
