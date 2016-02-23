@@ -1,45 +1,12 @@
 // [ @Preses, @ServerExec ] execVM "task.sqf";
 /*
-		[
-			[_taskName, _taskDisplayName, _taskDesc] 
-			, [@position, @Radius ]
-			, _taskSafetyReward
-		]
-		
 	[
-		["task_SADCache_%2","Weapon cache at %1","Find and destroy enemy weapon cache at grid %1."]
-		, [
-			[4000,4000,0],150
-		],
-		[
-			100
-			,[[[1,[["I_soldier_F",["indoors"],""],["I_soldier_F",["indoors"],""],["I_soldier_F",["indoors"],""]]],[2,[["I_soldier_F",[],""],["I_soldier_F",[],""]]]]]
-			,[["RESISTANCE","randomize",["LIMITED","SAFE","YELLOW","COLUMN"]]]
-		]
+		[_taskName, _taskDisplayName, _taskDesc] 
+		, @Presets
+		, _taskSafetyReward
 	]
-*/
-
-/*
-	1. Get nearest houses
-	2. Select buildingPos
-		2.1. Select building with position
-		2.2. Get buildingPos
-		2.3. Spawn crate
-	3. Place crate at building pos
-	4. Spawn thread - waitUntil { !alive crate };
-		4.1. taskState = completed
-		4.2. taskEnd = true
-	5. Spawn general task thread - waitUntil { taskEnd };
-		5.1. if taskState = completed
-			5.1.1.	Success message
-		5.2. if taskState != completed
-			5.1.2.	Failed message
-		5.3. waitUntil { !players in 1km of task }
-			5.3.1. Remove task composition
-	6. Add Dynai zone:
-		- 2-3 indoor men
-		- 2x2 patrol men
-	7. Add task description
+	[ ['Land_TentA_F', [7550.49,10539.5,0.0108719], [], 0, 'CAN_COLLIDE'],[7550.43,10539.5,105.014],[[0.973165,0.198442,0.116492], [-0.117576,-0.00635562,0.993044]]; ['Land_TentA_F', [7552.66,10535.8,0.0205383], [], 0, 'CAN_COLLIDE'],[7552.58,10535.9,105.495],[[-0.394528,0.902306,-0.173756], [-0.116446,0.138476,0.983496]]; ['Land_TentA_F', [7544.28,10539.9,0.0120621], [], 0, 'CAN_COLLIDE'],[7544.2,10539.9,104.184],[[0.978611,0.141797,0.149044], [-0.145543,-0.0348038,0.988739]]; ['CUP_GuerillaCacheBox_EP1', [7550.1,10536.6,-0.0869141], [], 0, 'CAN_COLLIDE'],[7550.1,10536.6,105.038],[[0.00155529,0.997029,-0.0770123], [-0.371423,0.0720791,0.925662]]]
+	
 */
 
 #define DEBUG	true
@@ -48,57 +15,38 @@ params ["_presets",["_serverExec", false]];
 // *********************************************
 // TASK Server Init (called from Task Generator)
 // *********************************************
-if (_serverExec) exitWith {	
-	private _cacheObjectClass = "Box_FIA_Support_F";
-	
+if (_serverExec) exitWith {
 	private _taskId = format[
 		_presets select 0 select 0
 		, round(serverTime)
 	];
-	
 	["task", _taskID] call dzn_fnc_TaskManager_setProperty;
 	
 	private _taskSide = west;
 	private _taskReward = _presets select 2 select 0;
 	private _taskPos = _presets select 1 select 0;
-	
-	// player setPos _taskPos;  // DEBUUUUUG
-	
-	private _taskRadius =  _presets select 1 select 1;
+	private _taskRadius =  65;
 	private _taskLocation = [_taskPos, _taskRadius] call dzn_fnc_createTaskSimpleLocation;
 	private _taskGroups = _presets select 2 select 1;
 	private _taskZonesProperties = _presets select 2 select 2;	
 	
 	[_taskId, _taskLocation] call dzn_fnc_task_create;	
 	
-	// 1. Get nearest houses
-	private _buildings = [_taskPos, _taskRadius, ["House"], []] call dzn_fnc_getHousesNear;
+	// Spawn objects
+	private _presetObjects = (_presets select 2);
+	private _taskObjects = [];
+	for "_i" from 0 to count( _presetObjects ) do {
+		private _newObject = createVehicle (_presetObjects select (0 + _i));
+		_newObject allowDamage false;	
+		_newObject setPosASL (_presetObjects select (1 + _i));
+		_newObject setVectorDirAndUp (_presetObjects select (2 + _i));
+		_newObject allowDamage true;
+		_taskObjects pushBack _newObject;
+	};
 	
-	if (_buildings isEqualTo []) exitWith { hint "NO HOUSES. CANCELLED" };
+	[ _taskId, "objects", _taskObjects ] call dzn_fnc_task_setProperty;		
 	
-	// 2. Select buildingPos
-	// 2.1. Select building with position
-	private _enterableBuildings = [ 
-		_buildings
-		, { [_x] call BIS_fnc_isBuildingEnterable }
-	] call BIS_fnc_conditionalSelect;
-	
-	// 2.2. Get buildingPos
-	private _taskBuilding = _enterableBuildings call BIS_fnc_selectRandom;
-
-	// 2.3. Spawn crate
-	private _cacheObject = _cacheObjectClass createVehicle (_taskPos);
-	_cacheObject allowDamage false;	
-	
-	// 3. Place crate at building pos
-	[_cacheObject, [_taskBuilding], nil, nil, false] spawn dzn_fnc_assignInBuilding;
-	_cacheObject spawn { sleep 5; _this allowDamage true; };	
-	
-	[ _taskId, "objects", [_cacheObject] ] call dzn_fnc_task_setProperty;		
-	
-	// 4. Spawn thread - waitUntil { !alive crate };
-	// 5. Spawn general task thread - waitUntil { taskEnd };
-	// 6. Add Dynai zone:
+	// Add Dynai zone:
 	{
 		private _zoneSide = _x select 0;
 		private _zoneWP = _x select 1;
@@ -116,18 +64,21 @@ if (_serverExec) exitWith {
 	} forEach _taskZonesProperties;	
 	sleep 3;	
 	
-	// 7. Add task description
+	// Add task description
 	private _taskName = format[
 		_presets select 0 select 0
 		, round(serverTime)
 	];
+	
+	// Task grid
+	private _taskDisplayPos = [ _taskPos, 200 ] call dzn_fnc_getDisplayTaskPos;
 	private _taskDisplayName = format[
 		_presets select 0 select 1
-		, (_presets select 1 select 0) call dzn_fnc_getMapGrid
+		, _taskDisplayPos call dzn_fnc_getMapGrid
 	];
 	private _taskDesc = format[
 		_presets select 0 select 2
-		, (_presets select 1 select 0) call dzn_fnc_getMapGrid
+		, _taskDisplayPos call dzn_fnc_getMapGrid
 	];
 	
 	[ "info", [_taskDisplayName, _taskDesc] ] call dzn_fnc_TaskManager_setProperty;
