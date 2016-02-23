@@ -43,8 +43,11 @@ dzn_fnc_TaskManager_init = {
 	};
 	
 	["hq_service", "HQ", { [] spawn dzn_fnc_requestTask; }, {true}] call dzn_fnc_addRadioService;
-	if !(isServer) exitWith {};	
+	"TaskManager_NewTask" addPublicVariableEventHandler {		
+		if (TaskManager_NewTask) then { call dzn_fnc_TaskManager_runTask; };
+	};
 	
+	if !(isServer) exitWith {};
 	TaskManager_FullReportList = [];
 	publicVariable "TaskManager_FullReportList";
 	
@@ -57,13 +60,7 @@ dzn_fnc_TaskManager_init = {
 	
 	"TaskManager_NewTask" addPublicVariableEventHandler {		
 		if (TaskManager_NewTask) then {
-			[
-				"presets" call dzn_fnc_TaskManager_getProperty
-				, true
-			] execVM format [
-				"Logic\tasks\%1\task.sqf"
-				, ((call dzn_fnc_TaskManager_taskType) call dzn_fnc_getTaskById) select 1
-			];	
+			call dzn_fnc_TaskManager_runTask;
 		};
 	};	
 };
@@ -118,6 +115,20 @@ dzn_fnc_TaskManager_create = {
 	];	
 	TaskManager_NewTask = true;
 	publicVariableServer "TaskManager_NewTask";
+	[] spawn {
+		sleep 8;
+		call  dzn_fnc_TaskManager_runTask;
+	};
+};
+
+dzn_fnc_TaskManager_runTask = {
+	[
+		"presets" call dzn_fnc_TaskManager_getProperty
+		, true
+	] execVM format [
+		"Logic\tasks\%1\task.sqf"
+		, ((call dzn_fnc_TaskManager_taskType) call dzn_fnc_getTaskById) select 1
+	];
 };
 
 dzn_fnc_TaskManager_report = {
