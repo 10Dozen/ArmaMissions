@@ -255,6 +255,17 @@ dzn_fnc_endTask = {
 
 
 // TASK ENTITY
+dzn_fnc_getDisplayTaskPos = {
+	// @RandomizedPos3d = [@Pos3d or @Pos2d, @RandomizeRange] call dzn_fnc_getDisplayTaskPos
+	params[ "_pos", "_range" ];
+	
+	[ 
+		(_pos select 0) + round(random(_range)) - round(random(_range))
+		, (_pos select 1) + round(random(_range)) - round(random(_range))
+		0
+	]
+};
+
 dzn_fnc_getMapGrid = {
 	// @Pos3d or @Pos2d call dzn_fnc_getMapGrid
 	// [1234.523, 233.33, 0] 
