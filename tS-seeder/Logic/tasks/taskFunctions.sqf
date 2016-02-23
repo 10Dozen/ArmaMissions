@@ -46,7 +46,7 @@ dzn_fnc_TaskManager_init = {
 	["hq_service", "HQ", { [] spawn dzn_fnc_requestTask; }, {true}] call dzn_fnc_addRadioService;
 	"TaskManager_NewTaskClient" addPublicVariableEventHandler {		
 		if (TaskManager_NewTaskClient) then { 
-			call dzn_fnc_TaskManager_runTask;
+			false call dzn_fnc_TaskManager_runTask;
 			TaskManager_NewTaskClient = false;
 		};
 	};
@@ -126,7 +126,7 @@ dzn_fnc_TaskManager_create = {
 dzn_fnc_TaskManager_runTask = {
 	[
 		"presets" call dzn_fnc_TaskManager_getProperty
-		, true
+		, if (isNil {_this}) then { true } else { false }
 	] execVM format [
 		"Logic\tasks\%1\task.sqf"
 		, ((call dzn_fnc_TaskManager_taskType) call dzn_fnc_getTaskById) select 1
