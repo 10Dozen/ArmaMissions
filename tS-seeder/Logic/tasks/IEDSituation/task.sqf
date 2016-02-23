@@ -10,20 +10,29 @@
 */
 
 #define DEBUG	true
-params ["_presets",["_serverExec", false]];
+params ["_presets","_serverExec"];
 
-private _iedSteps = [
+Task_iedSteps = [
 	[0, "Cut red wire"]
 	,[1, "Cut green wire"]
 	,[2, "Unplug detonator"]
 	,[3, "Unplug battery"]
 	,[4, "Unplug timer/receiver"]
 ];
-private _iedStepsPerType = [
+Task_iedStepsPerType = [
 	[0, 	[0,3,4,1,2]]
 	,[1,	[3,1,4,0,2]]
 	,[2,	[1,3,0,2,4]]
 ];
+
+Task_iedDetonate = {
+	params[["_ied", Task_iedObject]];
+	private _pos = [(getPos _ied),1] call dzn_fnc_getDisplayTaskPos;
+	"HelicopterExploSmall" createVehicle _pos;
+	"HelicopterExploSmall" createVehicle _pos;
+	"HelicopterExploSmall" createVehicle _pos;
+	deleteVehicle Task_iedObject;
+};
 
 if (isNil "Task_iedObject") then { Task_iedObject = objNull; };
 
@@ -39,8 +48,8 @@ if (_serverExec) exitWith {
 	
 	private _taskSide = west;
 	private _taskReward = _presets select 2 select 0;
-	private _taskPos = _presets select 1 select 0;
-	private _taskRadius =  65;
+	private _taskPos = _presets select 1 select 1;
+	private _taskRadius =  15;
 	private _taskLocation = [_taskPos, _taskRadius] call dzn_fnc_createTaskSimpleLocation;
 	private _taskGroups = _presets select 2 select 1;
 	private _taskZonesProperties = _presets select 2 select 2;	
@@ -48,23 +57,27 @@ if (_serverExec) exitWith {
 	[_taskId, _taskLocation] call dzn_fnc_task_create;	
 	
 	// Spawn objects
-	private _presetObjects = (_presets select 2);
+	private _presetObjects = (_presets select 1);
 	private _taskObjects = [];
-	for "_i" from 0 to count( _presetObjects ) do {
-		private _newObject = createVehicle (_presetObjects select (0 + _i));
+	for "_i" from 0 to (count(_presetObjects)/3 - 1) do {		
+		private _newObject = createVehicle (_presetObjects select (_i*3));
 		_newObject allowDamage false;	
-		_newObject setPosASL (_presetObjects select (1 + _i));
-		_newObject setVectorDirAndUp (_presetObjects select (2 + _i));
+		_newObject setPosASL (_presetObjects select (1 + _i*3));
+		_newObject setVectorDirAndUp (_presetObjects select (2 + _i*3));
 		_newObject allowDamage true;
+		_newObject lock true;
 		_taskObjects pushBack _newObject;
 	};
-	[ _taskId, "objects", _taskObjects ] call dzn_fnc_task_setProperty;
 	
 	Task_iedObject = _taskObjects call BIS_fnc_selectRandom;
 	publicVariable "Task_iedObject";
-	Task_iedObject setVariable ["iedType", floor(count(_iedStepsPerType)), true];
+	Task_iedObject setVariable ["iedType", (Task_iedStepsPerType call BIS_fnc_selectRandom) select 0, true];	
+	Task_iedObject setVariable ["iedArmed", true, true];
+	
+	[ _taskId, "objects", _taskObjects ] call dzn_fnc_task_setProperty;		
 	
 	// Add Dynai zone:
+	/*
 	{
 		private _zoneSide = _x select 0;
 		private _zoneWP = _x select 1;
@@ -80,7 +93,18 @@ if (_serverExec) exitWith {
 			, _zoneBehavior
 		] call dzn_fnc_dynai_addNewZone;		
 	} forEach _taskZonesProperties;	
+	*/
 	sleep 3;	
+	
+	[_taskLocation,Task_iedObject] spawn {
+		params["_loc","_ied"];
+		while { _ied getVariable "iedArmed" } do {
+			if ( { [getPosASL _x, [_loc]] call dzn_fnc_isInLocation } count (call BIS_fnc_listPlayers) > 1 ) exitWith {
+				[_ied] call Task_iedDetonate;
+			};
+			sleep 1;
+		};
+	};
 	
 	// Add task description
 	private _taskName = format[
@@ -89,7 +113,7 @@ if (_serverExec) exitWith {
 	];
 	
 	// Task grid
-	private _taskDisplayPos = [ _taskPos, 200 ] call dzn_fnc_getDisplayTaskPos;
+	private _taskDisplayPos = [ _taskPos, 10 ] call dzn_fnc_getDisplayTaskPos;
 	private _taskDisplayName = format[
 		_presets select 0 select 1
 		, _taskDisplayPos call dzn_fnc_getMapGrid
@@ -100,13 +124,8 @@ if (_serverExec) exitWith {
 	];
 	
 	[ "info", [_taskDisplayName, _taskDesc] ] call dzn_fnc_TaskManager_setProperty;
-	// hint format [
-		// "Task Side: %1 \nTask Id: %2 \nTask Desc: %3\n Task Display Name: %4"
-		// ,_taskSide, _taskId, _taskDesc, _taskDisplayName
-	// ];
 	[_taskSide, [_taskId], [_taskDesc, _taskDisplayName, ""], objNull, 1, 8, true, "", true] call BIS_fnc_taskCreate;	
-	
-	// hint str[ missionNamespace getVariable _taskId ];
+
 };
 
 // *******************************************************
@@ -114,53 +133,80 @@ if (_serverExec) exitWith {
 // *******************************************************
 if (DEBUG) then {};
 
-waitUntil { !isNull { Task_iedObject } };
-private _iedSteps = [
-	[0, "Cut red wire"]
-	,[1, "Cut green wire"]
-	,[2, "Unplug detonator"]
-	,[3, "Unplug battery"]
-	,[4, "Unplug timer/receiver"]
-];
-private _iedStepsPerType = [
-	[0, 	[0,3,4,1,2]]
-	,[1,	[3,1,4,0,2]]
-	,[2,	[1,3,0,2,4]]
-];
+waitUntil { !isNull Task_iedObject };
 
-_disarmIedDialog = {
-	private _dialogOptions = [];
+Task_disarmIedDialog = {
+	private _dialogSelections = [];
 	{
-		_dialogOptions pushBack [
-			format ["Step %1", _forEachIndex + 1]
-			, [ _x select 1 ]
+		_dialogSelections pushBack (_x select 1);
+	} forEach Task_iedSteps;
+
+	private _dialogOptions = [];  
+	for "_i" from 0 to count(Task_iedSteps) - 1 do {
+		_dialogOptions pushBack [    
+			format ["Step %1", _i + 1]
+			, _dialogSelections
 		];
-	} forEach _iedSteps;
+	};
 	private _dialogResult =	["Disarming IED...", _dialogOptions] call dzn_fnc_ShowChooseDialog;
 	if (count _dialogResult == 0) exitWith { hint "Cancelled"; };
 	
-	private _correctPath = [_iedStepsPerType, Task_iedObject getVariable "iedType"] call dzn_fnc_getValueByKey;
+	private _correctPath = [Task_iedStepsPerType, Task_iedObject getVariable "iedType"] call dzn_fnc_getValueByKey;
 	private _detonate = false;
 	private _failedStep = 0;
 	{
-		if !( _x isEqualTo (_correctPath select _forEachIndex) ) exitWith { _detonate = true; _failedStep = _forEachIndex; };
+		if !( _x isEqualTo (_correctPath select _forEachIndex) ) then { _detonate = true; _failedStep = _failedStep + 1; };
 	} forEach _dialogResult;
 	
 	if (_detonate) then {
-		if (_failedStep < 3) then {
-			hint "BOOOOM";
+		if (_failedStep > 1) then {
+			[] call Task_iedDetonate;
 		} else {
-			hint "RUN BABYY!!! ... BOOM!!!";
+			hint "Something gone wrong. RUN!!!";
+			Task_disarmIedDialog spawn {
+				sleep 3;
+				[] call Task_iedDetonate;		
+			};
 		};
 	} else {
-		hint "DISARMED";
+		if (round(random 100) > 99) then {
+			hint "Something gone wrong. RUN!!!";
+			Task_disarmIedDialog spawn {
+				sleep 3;
+				[] call Task_iedDetonate;		
+			};
+		} else {
+			hint "DISARMED";
+			Task_iedObject setVariable ["iedArmed", false, true];
+		};
 	};
+};
+
+Task_examineIed = {
+	hintSilent "Examining";
+	sleep 1; hintSilent "Examining.";
+	sleep 1; hintSilent "Examining..";
+	sleep 1; hintSilent "Examining...";
+	
+	sleep 0.5; 
+	hintSilent format [
+		"IED is looks like Type %1.\n\nLooks %2."
+		, (Task_iedObject getVariable "iedType") + 1
+		, if (Task_iedObject getVariable "iedArmed") then { "armed" } else { "disarmed" }
+	];
 };
 
 Task_iedObject addAction [
 	"<t color='#FFE240'>Disarm IED</t>"
 	,{
-		
-	},"",6,true,true,"","_this distance2d _target < 1.6"
+		[] spawn Task_disarmIedDialog;
+	},"",6,true,true,"","_this distance2d _target < 1.6 && _target getVariable 'iedArmed'"
 ];	
+Task_iedObject addAction [
+	"<t color='#FFE240'>Examine IED</t>"
+	,{
+		[] spawn Task_examineIed;
+	},"",6,true,true,"","_this distance2d _target < 1.6"
+];
+
 

@@ -43,12 +43,12 @@
 */
 
 #define DEBUG	true
-params ["_presets",["_serverExec", false]];
+params ["_presets","_serverExec"];
 
 // *********************************************
 // TASK Server Init (called from Task Generator)
 // *********************************************
-if (_serverExec) exitWith {	
+if (_serverExec) exitWith {
 	private _cacheObjectClass = "Box_FIA_Support_F";
 	
 	private _taskId = format[
@@ -113,8 +113,8 @@ if (_serverExec) exitWith {
 			, (_taskGroups select _forEachIndex)
 			, _zoneBehavior
 		] call dzn_fnc_dynai_addNewZone;		
-	} forEach _taskZonesProperties;	
-	sleep 3;	
+	} forEach _taskZonesProperties;
+	sleep 3;
 	
 	// 7. Add task description
 	private _taskName = format[
@@ -131,13 +131,8 @@ if (_serverExec) exitWith {
 	];
 	
 	[ "info", [_taskDisplayName, _taskDesc] ] call dzn_fnc_TaskManager_setProperty;
-	// hint format [
-		// "Task Side: %1 \nTask Id: %2 \nTask Desc: %3\n Task Display Name: %4"
-		// ,_taskSide, _taskId, _taskDesc, _taskDisplayName
-	// ];
 	[_taskSide, [_taskId], [_taskDesc, _taskDisplayName, ""], objNull, 1, 8, true, "", true] call BIS_fnc_taskCreate;	
-	
-	// hint str[ missionNamespace getVariable _taskId ];
+
 };
 
 // *******************************************************

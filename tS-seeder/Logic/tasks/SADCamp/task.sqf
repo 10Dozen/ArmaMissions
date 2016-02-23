@@ -10,8 +10,8 @@
 */
 
 #define DEBUG	true
-params ["_presets",["_serverExec", false]];
 
+params ["_presets","_serverExec"];
 // *********************************************
 // TASK Server Init (called from Task Generator)
 // *********************************************
@@ -24,7 +24,7 @@ if (_serverExec) exitWith {
 	
 	private _taskSide = west;
 	private _taskReward = _presets select 2 select 0;
-	private _taskPos = _presets select 1 select 0;
+	private _taskPos = _presets select 1 select 1;
 	private _taskRadius =  65;
 	private _taskLocation = [_taskPos, _taskRadius] call dzn_fnc_createTaskSimpleLocation;
 	private _taskGroups = _presets select 2 select 1;
@@ -33,13 +33,14 @@ if (_serverExec) exitWith {
 	[_taskId, _taskLocation] call dzn_fnc_task_create;	
 	
 	// Spawn objects
-	private _presetObjects = (_presets select 2);
+	private _presetObjects = (_presets select 1);
 	private _taskObjects = [];
-	for "_i" from 0 to count( _presetObjects ) do {
-		private _newObject = createVehicle (_presetObjects select (0 + _i));
+	
+	for "_i" from 0 to (count(_presetObjects)/3 - 1) do {		
+		private _newObject = createVehicle (_presetObjects select (_i*3));
 		_newObject allowDamage false;	
-		_newObject setPosASL (_presetObjects select (1 + _i));
-		_newObject setVectorDirAndUp (_presetObjects select (2 + _i));
+		_newObject setPosASL (_presetObjects select (1 + _i*3));
+		_newObject setVectorDirAndUp (_presetObjects select (2 + _i*3));
 		_newObject allowDamage true;
 		_taskObjects pushBack _newObject;
 	};
@@ -82,13 +83,8 @@ if (_serverExec) exitWith {
 	];
 	
 	[ "info", [_taskDisplayName, _taskDesc] ] call dzn_fnc_TaskManager_setProperty;
-	// hint format [
-		// "Task Side: %1 \nTask Id: %2 \nTask Desc: %3\n Task Display Name: %4"
-		// ,_taskSide, _taskId, _taskDesc, _taskDisplayName
-	// ];
 	[_taskSide, [_taskId], [_taskDesc, _taskDisplayName, ""], objNull, 1, 8, true, "", true] call BIS_fnc_taskCreate;	
 	
-	// hint str[ missionNamespace getVariable _taskId ];
 };
 
 // *******************************************************

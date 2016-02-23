@@ -1,6 +1,7 @@
 dzn_task_list = [
 	[0,	["SAD Weapon Cache", "SADCache"]]
 	,[1,	["SAD Insurgent Camp", "SADCamp"]]
+	,[2,	["IED Situation", "IEDSituation"]]
 ];
 
 dzn_task_range = [
@@ -64,7 +65,7 @@ dzn_fnc_TaskManager_init = {
 	
 	"TaskManager_NewTask" addPublicVariableEventHandler {		
 		if (TaskManager_NewTask) then {
-			call dzn_fnc_TaskManager_runTask;
+			true call dzn_fnc_TaskManager_runTask;
 			TaskManager_NewTaskClient = true;
 			publicVariable "TaskManager_NewTaskClient";
 		};
@@ -123,10 +124,10 @@ dzn_fnc_TaskManager_create = {
 	publicVariableServer "TaskManager_NewTask";
 };
 
-dzn_fnc_TaskManager_runTask = {
+dzn_fnc_TaskManager_runTask = {	
 	[
 		"presets" call dzn_fnc_TaskManager_getProperty
-		, if (isNil {_this}) then { true } else { false }
+		, _this
 	] execVM format [
 		"Logic\tasks\%1\task.sqf"
 		, ((call dzn_fnc_TaskManager_taskType) call dzn_fnc_getTaskById) select 1
@@ -276,7 +277,7 @@ dzn_fnc_getDisplayTaskPos = {
 	[ 
 		(_pos select 0) + round(random(_range)) - round(random(_range))
 		, (_pos select 1) + round(random(_range)) - round(random(_range))
-		0
+		,0
 	]
 };
 
