@@ -4,7 +4,7 @@
 _taskName = "task_SADCamp%1";
 _taskSafetyReward = 100;
 _taskDisplayName = "Insurgents camp at %1";
-_taskDesc = "Find and destroy enemy camp at grid %1.";
+_taskDesc = "Find and secure enemy camp site at grid %1.";
 
 
 // *********************************
