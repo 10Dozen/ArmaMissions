@@ -1,5 +1,6 @@
 dzn_task_list = [
 	[0,	["SAD Weapon Cache", "SADCache"]]
+	,[1,	["SAD Insurgent Camp", "SADCamp"]]
 ];
 
 dzn_task_range = [
