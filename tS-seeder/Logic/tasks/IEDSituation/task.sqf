@@ -23,6 +23,7 @@ Task_iedStepsPerType = [
 	[0, 	[0,3,4,1,2]]
 	,[1,	[3,1,4,0,2]]
 	,[2,	[1,3,0,2,4]]
+	,[3,	[1,0,3,2,[2,4]]
 ];
 
 Task_iedDetonate = {
@@ -155,7 +156,13 @@ Task_disarmIedDialog = {
 	private _detonate = false;
 	private _failedStep = 0;
 	{
-		if !( _x isEqualTo (_correctPath select _forEachIndex) ) then { _detonate = true; _failedStep = _failedStep + 1; };
+		private _correctStep = _correctPath select _forEachIndex;
+		private _correctStepAnswer = if (typename _correctStep == "ARRAY") then { 
+			_correctStep call BIS_fnc_selectRandom;
+		} else {
+			_correctStep
+		};
+		if !( _x isEqualTo _correctStep ) then { _detonate = true; _failedStep = _failedStep + 1; };
 	} forEach _dialogResult;
 	
 	if (_detonate) then {
