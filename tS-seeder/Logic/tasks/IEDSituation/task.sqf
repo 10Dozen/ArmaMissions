@@ -29,9 +29,9 @@ Task_iedStepsPerType = [
 Task_iedDetonate = {
 	params[["_ied", Task_iedObject]];
 	private _pos = [(getPos _ied),1] call dzn_fnc_getDisplayTaskPos;
-	"HelicopterExploSmall" createVehicle _pos;
-	"HelicopterExploSmall" createVehicle _pos;
-	"HelicopterExploSmall" createVehicle _pos;
+	for "_i" from 0 to 2 do {
+		"HelicopterExploSmall" createVehicle ([_pos,2] call dzn_fnc_getDisplayTaskPos);
+	};
 	deleteVehicle Task_iedObject;
 };
 
@@ -165,6 +165,14 @@ Task_disarmIedDialog = {
 		if !( _x isEqualTo _correctStep ) then { _detonate = true; _failedStep = _failedStep + 1; };
 	} forEach _dialogResult;
 	
+	if !(call Task_checkDefuseKit) exitWith { 
+		hint "Something gone wrong. RUN!!!";
+		Task_disarmIedDialog spawn {
+			sleep 2.5;
+			[] call Task_iedDetonate;		
+		};
+	};
+	
 	if (_detonate) then {
 		if (_failedStep > 1) then {
 			[] call Task_iedDetonate;
@@ -201,6 +209,10 @@ Task_examineIed = {
 		, (Task_iedObject getVariable "iedType") + 1
 		, if (Task_iedObject getVariable "iedArmed") then { "armed" } else { "disarmed" }
 	];
+};
+
+Task_checkDefuseKit = {
+	true
 };
 
 Task_iedObject addAction [
