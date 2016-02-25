@@ -9,7 +9,7 @@
 ,"rhs_uniform_FROG01_m81"
 ,"rhs_uniform_gorka_r_y"
 ,"CUP_U_B_USMC_PilotOverall"
-
+,"U_bombsuit"
 
 /* Vest */
 
@@ -82,6 +82,7 @@
 ,"CUP_H_PMC_Cap_PRR_Tan"
 ,"CUP_H_PMC_EP_Headset"
 ,"CUP_H_TKI_SkullCap_04"
+,"H_Titan_Helmet"
 
 /* Goggles */
 
@@ -173,6 +174,8 @@
 ,"ACE_Flashlight_KSF1"
 ,"ACE_Flashlight_XL50"
 ,"ACE_EarPlugs"
+,"ACE_RangeCard"
+
 
 /* Handguns */
 

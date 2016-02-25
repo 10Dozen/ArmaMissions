@@ -23,7 +23,7 @@ Task_iedStepsPerType = [
 	[0, 	[0,3,4,1,2]]
 	,[1,	[3,1,4,0,2]]
 	,[2,	[1,3,0,2,4]]
-	,[3,	[1,0,3,2,[2,4]]
+	,[3,	[1,0,3,2,[2,4]]]
 ];
 
 Task_iedDetonate = {
@@ -212,7 +212,7 @@ Task_examineIed = {
 };
 
 Task_checkDefuseKit = {
-	true
+	"ACE_DefusalKit" in (items player)
 };
 
 Task_iedObject addAction [

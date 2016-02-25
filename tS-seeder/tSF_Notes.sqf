@@ -60,6 +60,7 @@ TOPIC(tSF_note_enableViewDistance, "Типы СВУ")
 <br />3) Cut red wire
 <br />4) Unplug detonator
 <br />5) Unplug timer/receiver
+<br />
 <br /><font color='#12C4FF' size='14'>Тип 4 - Порядок разминирования</font>
 <br />1) Cut green wire
 <br />2) Cut red wire
