@@ -17,7 +17,7 @@ _taskGroups = [
 ];
 
 _taskZonesProperties = [
-	["RESISTANCE", "randomize", ["LIMITED","SAFE","YELLOW","STAG COLUMN"]]
+	["EAST", "randomize", ["LIMITED","SAFE","YELLOW","STAG COLUMN"]]
 ];
 
 // *********************************
