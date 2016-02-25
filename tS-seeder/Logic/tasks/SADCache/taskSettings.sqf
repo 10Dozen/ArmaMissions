@@ -13,13 +13,13 @@ _taskDesc = "Find and destroy enemy weapon cache at grid %1.";
 // *********************************
 _taskGroups = [
 	[
-		[1,	[["I_soldier_F",["indoors"],"kit_ins_random"],["I_soldier_F",["indoors"],"kit_ins_random"],["I_soldier_F",["indoors"],"kit_ins_random"]]]
-		, [ceil(random 4), [["I_soldier_F",[],"kit_ins_random"],["I_soldier_F",[],"kit_ins_random"]]]
+		[1,	[["O_Soldier_F",["indoors"],"kit_ins_random"],["O_Soldier_F",["indoors"],"kit_ins_random"],["O_Soldier_F",["indoors"],"kit_ins_random"]]]
+		, [ceil(random 4), [["O_Soldier_F",[],"kit_ins_random"],["O_Soldier_F",[],"kit_ins_random"]]]
 	]
 ];
 
 _taskZonesProperties = [
-	["RESISTANCE", "randomize", ["LIMITED","SAFE","YELLOW","STAG COLUMN"]]
+	["EAST", "randomize", ["LIMITED","SAFE","YELLOW","STAG COLUMN"]]
 ];
 
 // *********************************
