@@ -12,7 +12,7 @@ _taskDesc = "Find and secure enemy camp site at grid %1.";
 // *********************************
 _taskGroups = [
 	[
-		[ceil(random 4), [["I_soldier_F",[],"kit_ins_random"],["I_soldier_F",[],"kit_ins_random"]]]
+		[ceil(random 4), [["O_Soldier_F",[],"kit_ins_random"],["O_Soldier_F",[],"kit_ins_random"]]]
 	]
 ];
 
