@@ -25,8 +25,18 @@ kit_rapier_default =
 	["<BACKPACK ITEMS >> ",[]]
 ];
 
-kit_rapier_HMMWV_Cargo = [];
-kit_rapier_APC_Cargo = [];
+kit_rapier_HMMWV_Cargo = [
+	[["rhs_weap_m4_carryhandle",2],["rhs_weap_M136_hedp",2],["CUP_hgun_M9",1]],
+	[["rhs_mag_30Rnd_556x45_M855A1_Stanag",15],["rhsusf_100Rnd_556x45_soft_pouch",5],["rhs_m136_hedp_mag",2],["CUP_15Rnd_9x19_M9",10]],
+	[["ACE_elasticBandage",20],["ACE_packingBandage",20],["ACE_atropine",5],["ACE_epinephrine",5],["ACE_morphine",5],["ACE_EarPlugs",5],["ACE_salineIV_500",2],["ACE_salineIV",2],["ACE_tourniquet",5],["ACE_DefusalKit",2],["ACE_quikclot",10]],
+	[["B_AssaultPack_cbr",1],["CUP_B_GER_Medic_Desert",1]]
+];
+kit_rapier_APC_Cargo = [
+	[["rhs_weap_m4_carryhandle",2],["rhs_weap_M136_hedp",2],["CUP_hgun_M9",1]],
+	[["rhs_mag_30Rnd_556x45_M855A1_Stanag",15],["rhsusf_100Rnd_556x45_soft_pouch",5],["rhs_m136_hedp_mag",2],["CUP_15Rnd_9x19_M9",10]],
+	[["ACE_elasticBandage",20],["ACE_packingBandage",20],["ACE_atropine",5],["ACE_epinephrine",5],["ACE_morphine",5],["ACE_EarPlugs",5],["ACE_salineIV_500",2],["ACE_salineIV",2],["ACE_tourniquet",5],["ACE_DefusalKit",2],["ACE_quikclot",10]],
+	[["B_AssaultPack_cbr",1],["CUP_B_GER_Medic_Desert",1]]
+];
 
 
 // Security Forces
