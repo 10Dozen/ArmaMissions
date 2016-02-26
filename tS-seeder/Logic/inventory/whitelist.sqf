@@ -134,8 +134,7 @@
 ,"rhs_mag_m7a3_cs"
 ,"ACE_M84"
 ,"SatchelCharge_Remote_Mag"
-,"rhsusf_m112_mag"
-,"rhsusf_m112x4_mag"
+,"DemoCharge_Remote_Mag"
 ,"SLAMDirectionalMine_Wire_Mag"
 
 ,"ToolKit"
