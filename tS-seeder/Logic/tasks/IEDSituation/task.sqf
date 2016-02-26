@@ -32,6 +32,9 @@ Task_iedDetonate = {
 	for "_i" from 0 to 2 do {
 		"HelicopterExploSmall" createVehicle ([_pos,2] call dzn_fnc_getDisplayTaskPos);
 	};
+	
+	Task_iedObject setVariable ["iedType", nil, true];	
+	Task_iedObject setVariable ["iedArmed", nil, true];
 	deleteVehicle Task_iedObject;
 };
 
@@ -106,6 +109,13 @@ if (_serverExec) exitWith {
 			sleep 1;
 		};
 	};
+	
+	// Destroy IED on vehicle destroyed
+	Task_iedObject spawn {
+		waitUntil {!alive _this};
+		[_this] call call Task_iedDetonate;	
+	};
+	
 	
 	// Add task description
 	private _taskName = format[
@@ -215,17 +225,18 @@ Task_checkDefuseKit = {
 	"ACE_DefusalKit" in (items player)
 };
 
+
 Task_iedObject addAction [
 	"<t color='#FFE240'>Disarm IED</t>"
 	,{
 		[] spawn Task_disarmIedDialog;
 	},"",6,true,true,"","_this distance2d _target < 1.6 && _target getVariable 'iedArmed'"
 ];	
+
 Task_iedObject addAction [
 	"<t color='#FFE240'>Examine IED</t>"
 	,{
 		[] spawn Task_examineIed;
 	},"",6,true,true,"","_this distance2d _target < 1.6"
 ];
-
 
