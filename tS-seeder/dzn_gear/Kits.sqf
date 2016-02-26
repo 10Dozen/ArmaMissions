@@ -25,6 +25,8 @@ kit_rapier_default =
 	["<BACKPACK ITEMS >> ",[]]
 ];
 
+kit_rapier_HMMWV_Cargo = [];
+kit_rapier_APC_Cargo = [];
 
 
 // Security Forces
