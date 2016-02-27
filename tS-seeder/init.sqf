@@ -11,8 +11,6 @@ tf_no_auto_long_range_radio = true;
 [] execVM "dzn_dynai\dzn_dynai_init.sqf";
 [] execVM "dzn_civen\dzn_civen_init.sqf";
 
-
-
 // Common Script Stuff
 [] spawn {
 	// Service Logic
@@ -23,4 +21,31 @@ tf_no_auto_long_range_radio = true;
 	
 	// Rally points
 	[] execVM "Logic\rallypoint\rallypointSystem.sqf";
+};
+
+// Common Function
+dzn_fnc_randomACEHit = {			
+	[
+		_this
+		, [
+			"hand_l"
+			,"hand_r"
+			,"leg_l"
+			,"leg_r"
+			,"head"
+			,"body"
+		] call BIS_fnc_selectRandom
+		, 0.4 + random(0.5)
+		, ""
+	] call ace_medical_fnc_addDamageToUnit;
+};
+
+dzn_fnc_ACEHit = {	
+	// [@Unit, @Part, @Damage] call dzn_fnc_ACEHit
+	[
+		_this select 0
+		, _this select 1
+		, _this select 2
+		, ""
+	] call ace_medical_fnc_addDamageToUnit;
 };

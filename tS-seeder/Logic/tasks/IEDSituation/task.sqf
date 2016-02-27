@@ -26,9 +26,66 @@ Task_iedStepsPerType = [
 	,[3,	[1,0,3,2,[2,4]]]
 ];
 
+Task_specialHitNearbyPlayers = {
+	{		
+		if (
+			uniform _x == "U_bombsuit" 
+			&& headgear _x == "H_Titan_Helmet"
+			&& { _x distance Task_iedObject < 50} 
+		) then {
+			private _dist = _x distance Task_iedObject;
+			switch (true) do {
+				case (_dist < 10): {};
+				case (_dist < 20): {
+					[_x] spawn {
+						(_this select 0) allowDamage false;						
+						sleep 0.2;
+						{
+							[(_this select 0), _x select 0, _x select 1] call dzn_fnc_ACEHit;
+							sleep 0.2;		
+						} forEach [ 
+							["leg_l", 0.8]
+							,["hand_r", 0.8]
+							,["torso", 0.7]
+							,["leg_r", 0.8]
+							,["hand_l", 0.8]							
+							,["head", 0.6]
+						];						
+						sleep 0.4;
+						(_this select 0) allowDamage true;
+						
+					};
+				};
+				case (_dist < 35): {
+					[_x] spawn {
+						(_this select 0) allowDamage false;
+						sleep 0.2;
+						{
+							[(_this select 0), _x select 0, _x select 1] call dzn_fnc_ACEHit;
+							sleep 0.2;		
+						} forEach [ 
+							["leg_l", 0.6]
+							,["hand_r", 0.6]
+							,["leg_r", 0.5]
+							,["hand_l", 0.5]
+							,["torso", 0.5]
+							,["head", 0.4]
+						];
+						sleep 0.2;
+						(_this select 0) allowDamage true;
+					};
+				};
+			};
+			
+		};
+	} forEach (call BIS_fnc_listPlayers);
+};
+
 Task_iedDetonate = {
 	params[["_ied", Task_iedObject]];
 	private _pos = [(getPos _ied),1] call dzn_fnc_getDisplayTaskPos;
+	call Task_specialHitNearbyPlayers;
+	
 	for "_i" from 0 to 2 do {
 		"HelicopterExploSmall" createVehicle ([_pos,2] call dzn_fnc_getDisplayTaskPos);
 	};
@@ -113,7 +170,7 @@ if (_serverExec) exitWith {
 	// Destroy IED on vehicle destroyed
 	Task_iedObject spawn {
 		waitUntil {!alive _this};
-		[_this] call call Task_iedDetonate;	
+		[_this] call Task_iedDetonate;	
 	};
 	
 	
@@ -177,7 +234,7 @@ Task_disarmIedDialog = {
 	
 	if !(call Task_checkDefuseKit) exitWith { 
 		hint "Something gone wrong. RUN!!!";
-		Task_disarmIedDialog spawn {
+		[] spawn {
 			sleep 2.5;
 			[] call Task_iedDetonate;		
 		};
@@ -188,7 +245,7 @@ Task_disarmIedDialog = {
 			[] call Task_iedDetonate;
 		} else {
 			hint "Something gone wrong. RUN!!!";
-			Task_disarmIedDialog spawn {
+			[] spawn {
 				sleep 3;
 				[] call Task_iedDetonate;		
 			};
@@ -196,7 +253,7 @@ Task_disarmIedDialog = {
 	} else {
 		if (round(random 100) > 99) then {
 			hint "Something gone wrong. RUN!!!";
-			Task_disarmIedDialog spawn {
+			[] spawn {
 				sleep 3;
 				[] call Task_iedDetonate;		
 			};

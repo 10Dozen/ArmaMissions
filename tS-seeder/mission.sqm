@@ -26,7 +26,7 @@ class Mission
 	randomSeed=2652490;
 	class Intel
 	{
-		briefingName="Rapier Brigade (RB1C)";
+		briefingName="Rapier Brigade (RB1D)";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.39999998;
@@ -37,9 +37,9 @@ class Mission
 		forecastWaves=0.099999994;
 		forecastLightnings=0.099999994;
 		year=2009;
-		day=28;
-		hour=16;
-		minute=20;
+		day=2;
+		hour=12;
+		minute=15;
 		startFogDecay=0.013;
 		forecastFogDecay=0.013;
 	};

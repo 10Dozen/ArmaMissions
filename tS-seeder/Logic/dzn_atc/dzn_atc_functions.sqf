@@ -104,7 +104,8 @@ dzn_atc_fnc_returnAirTaxi = {
 			if (dzn_atc_useCustomerPilotGear) then { _pilot spawn dzn_atc_customPilotsGear; };
 	
 			_pilot assignAsDriver _veh;
-			_pilot moveInDriver _veh;				
+			_pilot moveInDriver _veh;		
+			
 			_pilot doMove dzn_atc_exitPoint;
 			
 			_pilot disableAI "TARGET";
@@ -115,12 +116,20 @@ dzn_atc_fnc_returnAirTaxi = {
 			_pilot disableAI "AUTOCOMBAT";
 			
 			[_ehId, "onEachFrame"] call BIS_fnc_removeStackedEventHandler;
+			[_pilot] spawn {
+				for "_i" from 0 to 10 do {
+					sleep 5;
+					if (!isNil { _this select 0}) then {					
+						(_this select 0) doMove dzn_atc_exitPoint;
+					};
+				};
+			};
 			[_veh, _pilot] spawn {
 				waitUntil { (_this select 0) distance dzn_atc_exitPoint < 300 };
 				moveOut (_this select 1);
 				deleteVehicle (_this select 1);
 				deleteVehicle (_this select 0);			
-			};			
+			};
 		};
 	}, ["dzn_atc_noCrewHandler_" + str(round(time)), _veh]] call BIS_fnc_addStackedEventHandler;	
 };
