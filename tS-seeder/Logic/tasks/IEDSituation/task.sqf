@@ -103,7 +103,7 @@ if (isNil "Task_iedObject") then { Task_iedObject = objNull; };
 if (_serverExec) exitWith {
 	private _taskId = format[
 		_presets select 0 select 0
-		, round(serverTime)
+		, call dzn_fnc_task_generateGUID
 	];
 	["task", _taskID] call dzn_fnc_TaskManager_setProperty;
 	

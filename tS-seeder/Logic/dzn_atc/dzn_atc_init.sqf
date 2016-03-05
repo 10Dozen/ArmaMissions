@@ -23,8 +23,14 @@ dzn_atc_vehiclesList		= [
 							"B_Heli_Light_01_F"
 							,"RHS_UH60M_d"
 							,"RHS_UH60M_MEV2_d"
+							,"CUP_O_UH1H_TKA"
+							,"CUP_O_Mi17_TK"
+							,"CUP_O_Mi24_D_TK"
+							
+							/*
 							,"LOP_TKA_Mi8MT_Cargo"
 							,'LOP_TKA_Mi24V_AT'
+							*/
 ];
 
 dzn_atc_pilotsPerSide 		= [

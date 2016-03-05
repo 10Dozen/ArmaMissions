@@ -363,6 +363,18 @@ dzn_fnc_task_active = {
 	[_this, "active"] call dzn_fnc_task_getProperty
 };
 
+
+dzn_fnc_task_generateGUID = {
+	private ["_i","_guid"];
+	_guid = "";
+	for "_i" from 0 to 6 do {
+		_guid = format ["%1%2", _guid, floor(random 9)];
+	};
+	
+	_guid
+};
+
+
 // INIT
 waitUntil { !isNil "dzn_dynai_initialized" && { dzn_dynai_initialized  } };
 if !(isServer) then { waitUntil { !isNil "dzn_fnc_addRadioService" }; };

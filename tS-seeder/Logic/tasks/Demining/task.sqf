@@ -18,7 +18,7 @@ params ["_presets","_serverExec"];
 if (_serverExec) exitWith {
 	private _taskId = format[
 		_presets select 0 select 0
-		, call dzn_fnc_task_generateGUID
+		, round(serverTime)
 	];
 	["task", _taskID] call dzn_fnc_TaskManager_setProperty;
 	

@@ -37,6 +37,16 @@ dzn_fnc_spawnRespawnableVehicle = {
 		_this allowDamage true;	
 	};
 	
+	_veh spawn {
+		if !( _this getVariable ["tf_hasRadio", false] ) then {
+			_this setVariable ["tf_side", west, true];
+			_this setVariable ["tf_hasRadio", true, true];
+			_this setVariable ["tf_isolatedAmount", 0.5, true];
+			_this setVariable ["tf_range", 30000, true];
+			_this setVariable ["TF_RadioType", "tf_rt1523g", true];
+		};	
+	};
+	
 	_veh
 };
 

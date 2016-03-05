@@ -34,7 +34,7 @@ _newObject = createVehicle ['RHS_UH60M', [5757.81,11254.3,-0.0332947], [], 0, 'C
  _newObject setPosASL [5757.81,11254.3,83.0878];
  _newObject setVectorDirAndUp [[-0.76608,0.642745,-0.000265592], [-0.000200897,0.000173767,1]];
 
-_newObject = createVehicle ['RHS_UH60M', [5801.28,11296.5,-0.0332947], [], 0, 'CAN_COLLIDE'];
+_newObject = createVehicle ['CUP_O_UH1H_TKA', [5801.28,11296.5,-0.0332947], [], 0, 'CAN_COLLIDE'];
  _newObject setPosASL [5801.28,11296.5,83.0878];
  _newObject setVectorDirAndUp [[-0.766092,0.642731,-0.000265246], [-0.000202557,0.000171251,1]];
 
@@ -79,7 +79,7 @@ _newObject = createVehicle ['Land_HelipadRescue_F', [5854.29,11398.9,0], [], 0, 
  _newObject = createVehicle ['Land_HelipadSquare_F', [5882.42,11426.4,0], [], 0, 'CAN_COLLIDE'];
  _newObject setPosASL [5882.42,11426.4,83.04];
  _newObject setVectorDirAndUp [[0.717926,-0.696119,0], [-0,-0,1]];
-_newObject = createVehicle ['LOP_TKA_Mi8MT_Cargo', [5882.58,11426.3,-0.468773], [], 0, 'CAN_COLLIDE'];
+_newObject = createVehicle ['CUP_O_Mi17_TK', [5882.58,11426.3,-0.468773], [], 0, 'CAN_COLLIDE'];
  _newObject setPosASL [5882.58,11426.3,83.0579];
  _newObject setVectorDirAndUp [[-0.738708,0.670239,0.0713508], [0.0525131,-0.0483069,0.997451]];
 _newObject = createVehicle ['RHS_UH60M_MEV2', [5854.41,11397.5,-0.00830078], [], 0, 'CAN_COLLIDE'];
@@ -91,7 +91,7 @@ _newObject = createVehicle ['Land_HelipadSquare_F', [5909.85,11456.3,0], [], 0, 
 _newObject = createVehicle ['Land_HelipadSquare_F', [5937.91,11484.7,0], [], 0, 'CAN_COLLIDE'];
  _newObject setPosASL [5937.91,11484.7,83.04];
  _newObject setVectorDirAndUp [[0.717926,-0.696119,0], [-0,-0,1]];
-_newObject = createVehicle ['LOP_TKA_Mi24V_AT', [5937.99,11484.5,-0.503876], [], 0, 'CAN_COLLIDE'];
+_newObject = createVehicle ['CUP_O_Mi24_D_TK', [5937.99,11484.5,-0.503876], [], 0, 'CAN_COLLIDE'];
  _newObject setPosASL [5937.99,11484.5,83.0805];
  _newObject setVectorDirAndUp [[-0.657964,0.749898,0.0688161], [0.0453555,-0.0517546,0.997629]];
  
