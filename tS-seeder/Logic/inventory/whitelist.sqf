@@ -175,6 +175,8 @@
 ,"ACE_EarPlugs"
 ,"ACE_RangeCard"
 
+,"tf_rt1523g"
+,"tf_rt1523g_big"
 
 /* Handguns */
 
